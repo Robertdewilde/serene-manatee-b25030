@@ -41,10 +41,19 @@
 <nav class="fixed top-0 left-0 right-0 z-50 border-b" style="background:rgba(11,12,16,0.96);border-color:var(--border);backdrop-filter:blur(10px);">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-16">
     <div class="flex items-center gap-2 cursor-pointer" onclick="showView('home')">
-      <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="#6366f1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="filter:drop-shadow(0 0 8px rgba(99,102,241,0.4));">
+      <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="#6366f1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="filter:drop-shadow(0 0 8px rgba(99,102,241,0.4));position:relative;">
+        <style>
+          @keyframes twinkle{0%,100%{opacity:0;transform:scale(0.8);}50%{opacity:1;transform:scale(1.2);}}
+          .star-1{animation:twinkle 1.5s infinite 0s;transform-origin:18px 6px;}
+          .star-2{animation:twinkle 1.5s infinite 0.3s;transform-origin:8px 5px;}
+          .star-3{animation:twinkle 1.5s infinite 0.6s;transform-origin:14px 3px;}
+        </style>
         <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
         <polyline points="9 22 9 12 15 12 15 22"/>
         <circle cx="12" cy="8" r="1.5" fill="#6366f1"/>
+        <circle class="star-1" cx="18" cy="6" r="1.5" fill="#fbbf24"/>
+        <circle class="star-2" cx="8" cy="5" r="1" fill="#fbbf24"/>
+        <circle class="star-3" cx="14" cy="3" r="1" fill="#fbbf24"/>
       </svg>
       <span class="font-bold text-lg" style="color:var(--text);">Social Property Pro</span>
     </div>
@@ -74,8 +83,8 @@
 
 <section id="view-home" class="view active">
   <div class="relative w-full overflow-hidden" style="min-height:100vh;">
-    <img src="https://images.pexels.com/photos/1546168/pexels-photo-1546168.jpeg?auto=compress&cs=tinysrgb&w=1600" alt="Luxury real estate" class="absolute inset-0 w-full h-full object-cover object-center">
-    <div class="absolute inset-0" style="background:linear-gradient(to bottom,rgba(11,12,16,0.75),rgba(11,12,16,0.88));"></div>
+    <img src="https://agent-6a3152dcd7d22f3415c382b--socialpropertypro.netlify.app/assets/hero-header.svg" alt="Social Property Pro hero" class="absolute inset-0 w-full h-full object-cover object-center">
+    <div class="absolute inset-0" style="background:linear-gradient(to bottom,rgba(11,12,16,0.72) 0%,rgba(11,12,16,0.85) 100%);"></div>
     <div class="relative z-10 flex flex-col items-center justify-center text-center px-4 sm:px-8" style="min-height:100vh;">
       <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-semibold mb-6" style="background:rgba(106,107,234,0.15);border:1px solid rgba(106,107,234,0.3);color:var(--accent);">
         <i data-lucide="sparkles" style="width:12px;height:12px;"></i>
