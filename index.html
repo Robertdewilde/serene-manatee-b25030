@@ -29,44 +29,34 @@
     .toggle-active{background:var(--accent)!important;color:white!important;border-color:var(--accent)!important;}
     .accordion-content{display:none;}
     .accordion-content.open{display:block;}
-    /* Fixed tooltip */
     .info-wrap{position:relative;display:inline-block;}
-    .info-tooltip{
-      display:none;position:absolute;bottom:calc(100% + 8px);left:50%;transform:translateX(-50%);
-      background:rgba(26,29,46,0.98);color:#f1f3f7;padding:8px 12px;border-radius:8px;
-      font-size:12px;line-height:1.5;white-space:normal;width:200px;z-index:500;
-      pointer-events:none;border:1px solid var(--border);
-      box-shadow:0 4px 16px rgba(0,0,0,0.4);
-    }
+    .info-tooltip{display:none;position:absolute;bottom:calc(100% + 8px);left:50%;transform:translateX(-50%);background:rgba(26,29,46,0.98);color:#f1f3f7;padding:8px 12px;border-radius:8px;font-size:12px;line-height:1.5;white-space:normal;width:200px;z-index:500;pointer-events:none;border:1px solid var(--border);box-shadow:0 4px 16px rgba(0,0,0,0.4);}
     .info-tooltip::after{content:'';position:absolute;top:100%;left:50%;transform:translateX(-50%);border:5px solid transparent;border-top-color:rgba(26,29,46,0.98);}
     .info-wrap:hover .info-tooltip{display:block;}
-    /* Keep tooltips inside viewport */
-    tr:first-child .info-tooltip{bottom:auto;top:calc(100% + 8px);}
-    tr:first-child .info-tooltip::after{top:auto;bottom:100%;border-top-color:transparent;border-bottom-color:rgba(26,29,46,0.98);}
     .card{background:var(--bg-secondary);border:1px solid var(--border);border-radius:12px;}
-    /* Sticky CTA */
     #sticky-cta{position:fixed;bottom:0;left:0;right:0;z-index:40;transform:translateY(100%);transition:transform 0.3s ease;background:rgba(11,12,16,0.97);border-top:1px solid var(--border);backdrop-filter:blur(10px);}
     #sticky-cta.visible{transform:translateY(0);}
-    /* Testimonial cards */
     .testimonial-card{background:var(--bg-secondary);border:1px solid var(--border);border-radius:16px;padding:24px;}
     .star{color:#fbbf24;font-size:14px;}
-    /* Risk badge */
     .risk-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(16,185,129,0.1);border:1px solid rgba(16,185,129,0.3);color:#10b981;padding:6px 14px;border-radius:99px;font-size:12px;font-weight:600;}
-    /* Feature group */
     .feat-group{background:var(--bg-tertiary);border:1px solid var(--border);border-radius:12px;padding:20px;}
-    /* Calculator */
     .calc-slider{-webkit-appearance:none;width:100%;height:6px;border-radius:3px;background:var(--border);outline:none;}
     .calc-slider::-webkit-slider-thumb{-webkit-appearance:none;width:20px;height:20px;border-radius:50%;background:var(--accent);cursor:pointer;}
+    .counter{display:inline-block;}
+    .feature-preview-card{transition:border-color 0.2s,transform 0.2s;}
+    .feature-preview-card:hover{border-color:var(--accent)!important;transform:translateY(-2px);}
   </style>
 </head>
 <body class="w-full">
 
 <!-- STICKY CTA -->
-<div id="sticky-cta" class="px-4 py-3 flex items-center justify-between max-w-7xl mx-auto" style="max-width:100%;">
-  <p class="text-sm font-semibold hidden sm:block" style="color:var(--text);">Social Property Pro — AI Social Media for Real Estate</p>
-  <div class="flex items-center gap-3 ml-auto">
-    <span class="text-sm" style="color:var(--text-muted);">14 days free · No credit card</span>
-    <button class="btn-gold px-5 py-2 rounded-lg text-sm font-bold" onclick="showView('pricing')">Start Free Trial</button>
+<div id="sticky-cta" class="px-4 py-3" style="padding-bottom:env(safe-area-inset-bottom,12px);">
+  <div class="max-w-7xl mx-auto flex items-center justify-between">
+    <p class="text-sm font-semibold hidden sm:block" style="color:var(--text);">Social Property Pro — AI Social Media for Real Estate</p>
+    <div class="flex items-center gap-3 ml-auto">
+      <span class="text-sm" style="color:var(--text-muted);">14 days free · No credit card</span>
+      <button class="btn-gold px-5 py-2 rounded-lg text-sm font-bold" onclick="showView('pricing')">Start Free Trial</button>
+    </div>
   </div>
 </div>
 
@@ -74,13 +64,8 @@
 <nav class="fixed top-0 left-0 right-0 z-50 border-b" style="background:rgba(11,12,16,0.96);border-color:var(--border);backdrop-filter:blur(10px);">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-16">
     <div class="flex items-center gap-2 cursor-pointer" onclick="showView('home')">
-      <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="#6366f1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="filter:drop-shadow(0 0 8px rgba(99,102,241,0.4));position:relative;">
-        <style>
-          @keyframes twinkle{0%,100%{opacity:0;transform:scale(0.8);}50%{opacity:1;transform:scale(1.2);}}
-          .star-1{animation:twinkle 1.5s infinite 0s;transform-origin:18px 6px;}
-          .star-2{animation:twinkle 1.5s infinite 0.3s;transform-origin:8px 5px;}
-          .star-3{animation:twinkle 1.5s infinite 0.6s;transform-origin:14px 3px;}
-        </style>
+      <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="#6366f1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="filter:drop-shadow(0 0 8px rgba(99,102,241,0.4));">
+        <style>@keyframes twinkle{0%,100%{opacity:0;transform:scale(0.8);}50%{opacity:1;transform:scale(1.2);}}.star-1{animation:twinkle 1.5s infinite 0s;transform-origin:18px 6px;}.star-2{animation:twinkle 1.5s infinite 0.3s;transform-origin:8px 5px;}.star-3{animation:twinkle 1.5s infinite 0.6s;transform-origin:14px 3px;}</style>
         <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
         <polyline points="9 22 9 12 15 12 15 22"/>
         <circle cx="12" cy="8" r="1.5" fill="#6366f1"/>
@@ -114,10 +99,10 @@
 
 <main class="w-full pt-16">
 
-<!-- HOME VIEW -->
+<!-- ═══════════════════════════════════════════ HOME VIEW -->
 <section id="view-home" class="view active">
 
-  <!-- Hero -->
+  <!-- HERO -->
   <div class="relative w-full" style="height:100vh;min-height:600px;">
     <img src="https://agent-6a3152dcd7d22f3415c382b--socialpropertypro.netlify.app/assets/hero-header.svg" alt="Social Property Pro" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center top;">
     <div style="position:absolute;inset:0;background:linear-gradient(to bottom,rgba(11,12,16,0.60) 0%,rgba(11,12,16,0.78) 100%);"></div>
@@ -144,13 +129,138 @@
     </div>
   </div>
 
-  <!-- Social proof bar -->
+  <!-- SOCIAL PROOF BAR -->
   <div class="py-5 border-b" style="border-color:var(--border);background:var(--bg-secondary);">
     <div class="max-w-5xl mx-auto px-4 flex flex-wrap justify-center items-center gap-8 text-sm" style="color:var(--text-muted);">
       <span class="flex items-center gap-2"><span style="color:var(--gold);font-size:18px;">★★★★★</span> Trusted by 200+ estate agencies</span>
       <span class="flex items-center gap-2"><i data-lucide="shield-check" style="width:16px;height:16px;color:var(--accent);"></i> GDPR-compliant</span>
-      <span class="flex items-center gap-2"><i data-lucide="globe" style="width:16px;height:16px;color:var(--accent);"></i> Available in EN, ES, NL, DE</span>
+      <span class="flex items-center gap-2"><i data-lucide="globe" style="width:16px;height:16px;color:var(--accent);"></i> EN · ES · NL · DE</span>
       <span class="flex items-center gap-2"><i data-lucide="clock" style="width:16px;height:16px;color:var(--accent);"></i> Save 6+ hours per week</span>
+    </div>
+  </div>
+
+  <!-- ROI NUMBERS -->
+  <div class="py-20" style="background:linear-gradient(135deg,#0b0c10 0%,#11131e 50%,#0b0c10 100%);">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+      <p class="text-center text-xs font-semibold uppercase tracking-widest mb-3" style="color:var(--accent);">Real results</p>
+      <h2 class="text-3xl md:text-4xl font-bold text-center mb-14" style="color:var(--text);">The numbers speak for themselves</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-8 text-center">
+        <div>
+          <div class="text-6xl font-black mb-2 counter" data-target="6" data-suffix="h+" style="color:var(--gold);font-family:'Public Sans',sans-serif;">6h+</div>
+          <p class="font-semibold mb-1" style="color:var(--text);">Saved per week</p>
+          <p class="text-sm" style="color:var(--text-muted);">Stop writing posts manually. Let AI handle it while you close deals.</p>
+        </div>
+        <div>
+          <div class="text-6xl font-black mb-2 counter" data-target="40" data-suffix="%+" style="color:var(--accent);font-family:'Public Sans',sans-serif;">40%+</div>
+          <p class="font-semibold mb-1" style="color:var(--text);">More engagement</p>
+          <p class="text-sm" style="color:var(--text-muted);">Platform-optimised content performs dramatically better than generic posts.</p>
+        </div>
+        <div>
+          <div class="text-6xl font-black mb-2 counter" data-target="14" data-suffix="min" style="color:#10b981;font-family:'Public Sans',sans-serif;">14min</div>
+          <p class="font-semibold mb-1" style="color:var(--text);">For a full month of content</p>
+          <p class="text-sm" style="color:var(--text-muted);">Month Wizard generates 30+ posts, scripts and stories in minutes.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- HOW IT WORKS -->
+  <div class="py-20" style="background:var(--bg-secondary);">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+      <p class="text-center text-xs font-semibold uppercase tracking-widest mb-3" style="color:var(--accent);">How it works</p>
+      <h2 class="text-3xl md:text-4xl font-bold text-center mb-4" style="color:var(--text);">From listing to live post in 3 steps</h2>
+      <p class="text-center text-sm mb-14" style="color:var(--text-muted);">No learning curve. No social media expertise needed.</p>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+        <div class="text-center">
+          <div class="w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-5 text-2xl font-black" style="background:linear-gradient(135deg,var(--accent),#818cf8);color:white;font-family:'Public Sans',sans-serif;">1</div>
+          <div class="w-10 h-10 rounded-xl flex items-center justify-center mx-auto mb-4" style="background:rgba(106,107,234,0.15);">
+            <i data-lucide="link" style="width:20px;height:20px;color:var(--accent);"></i>
+          </div>
+          <h3 class="font-bold text-base mb-2" style="color:var(--text);">Paste your listing URL</h3>
+          <p class="text-sm leading-relaxed" style="color:var(--text-muted);">Or use the Chrome extension to grab property details from any portal in one click. No manual typing.</p>
+        </div>
+        <div class="text-center">
+          <div class="w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-5 text-2xl font-black" style="background:linear-gradient(135deg,var(--gold),#e0c99a);color:#0b0c10;font-family:'Public Sans',sans-serif;">2</div>
+          <div class="w-10 h-10 rounded-xl flex items-center justify-center mx-auto mb-4" style="background:rgba(210,182,125,0.15);">
+            <i data-lucide="sliders" style="width:20px;height:20px;color:var(--gold);"></i>
+          </div>
+          <h3 class="font-bold text-base mb-2" style="color:var(--text);">Choose platform & tone</h3>
+          <p class="text-sm leading-relaxed" style="color:var(--text-muted);">Select Instagram, LinkedIn, TikTok or all at once. Set your tone — professional, storytelling, luxury or casual.</p>
+        </div>
+        <div class="text-center">
+          <div class="w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-5 text-2xl font-black" style="background:linear-gradient(135deg,#10b981,#059669);color:white;font-family:'Public Sans',sans-serif;">3</div>
+          <div class="w-10 h-10 rounded-xl flex items-center justify-center mx-auto mb-4" style="background:rgba(16,185,129,0.15);">
+            <i data-lucide="send" style="width:20px;height:20px;color:#10b981;"></i>
+          </div>
+          <h3 class="font-bold text-base mb-2" style="color:var(--text);">AI generates, you publish</h3>
+          <p class="text-sm leading-relaxed" style="color:var(--text-muted);">Captions, hashtags, CTAs and scripts — ready in seconds. Review, tweak if you like, and schedule.</p>
+        </div>
+      </div>
+      <div class="text-center mt-12">
+        <button class="btn-gold px-8 py-4 rounded-xl font-bold text-base" onclick="showView('pricing')">Try it free for 14 days</button>
+        <p class="text-xs mt-3" style="color:var(--text-muted);">No credit card required</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- FEATURE PREVIEW -->
+  <div class="py-20" style="background:var(--bg);">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <p class="text-center text-xs font-semibold uppercase tracking-widest mb-3" style="color:var(--accent);">Core features</p>
+      <h2 class="text-3xl md:text-4xl font-bold text-center mb-4" style="color:var(--text);">Everything you need. Nothing you don't.</h2>
+      <p class="text-center text-sm mb-12" style="color:var(--text-muted);">Four powerful tools built specifically for real estate social media.</p>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+        <div class="card feature-preview-card overflow-hidden cursor-pointer" onclick="showView('features')">
+          <img src="https://raw.githubusercontent.com/Robertdewilde/serene-manatee-b25030/refs/heads/main/Month%20Wizard%20-%20%20Social%20Property%20Pro%20-%20AI%20Social%20Media%20Management%20for%20Real%20Estate%20Agents.jpg" alt="Month Wizard" class="w-full object-cover" style="height:220px;">
+          <div class="p-5">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold mb-3" style="background:rgba(106,107,234,0.15);color:var(--accent);"><i data-lucide="wand-2" style="width:11px;height:11px;"></i> Month Wizard</div>
+            <h3 class="font-bold text-base mb-1" style="color:var(--text);">Plan a full month in 5 minutes</h3>
+            <p class="text-xs leading-relaxed" style="color:var(--text-muted);">AI maps out your entire content calendar from your listings, open houses and local news.</p>
+          </div>
+        </div>
+        <div class="card feature-preview-card overflow-hidden cursor-pointer" onclick="showView('features')">
+          <img src="https://raw.githubusercontent.com/Robertdewilde/serene-manatee-b25030/refs/heads/main/Brainstorm%20Chat%20Social%20Property%20Pro%20-%20AI%20Social%20Media%20Management%20for%20Real%20Estate%20Agents.jpg" alt="Brainstorm Chat" class="w-full object-cover" style="height:220px;">
+          <div class="p-5">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold mb-3" style="background:rgba(106,107,234,0.15);color:var(--accent);"><i data-lucide="message-circle" style="width:11px;height:11px;"></i> Brainstorm Chat</div>
+            <h3 class="font-bold text-base mb-1" style="color:var(--text);">Your dedicated real estate copywriter</h3>
+            <p class="text-xs leading-relaxed" style="color:var(--text-muted);">Hook ideas, video scripts, neighbourhood guides — all in a simple chat interface.</p>
+          </div>
+        </div>
+        <div class="card feature-preview-card overflow-hidden cursor-pointer" onclick="showView('features')">
+          <img src="https://raw.githubusercontent.com/Robertdewilde/serene-manatee-b25030/refs/heads/main/Control%20Tower%20-%20Social%20Property%20Pro%20-%20AI%20Social%20Media%20Management%20for%20Real%20Estate%20Agents.jpg" alt="Control Tower" class="w-full object-cover" style="height:220px;">
+          <div class="p-5">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold mb-3" style="background:rgba(106,107,234,0.15);color:var(--accent);"><i data-lucide="layout-dashboard" style="width:11px;height:11px;"></i> Control Tower</div>
+            <h3 class="font-bold text-base mb-1" style="color:var(--text);">See everything at a glance</h3>
+            <p class="text-xs leading-relaxed" style="color:var(--text-muted);">Kanban-style dashboard to track, edit and organise all scheduled posts across platforms.</p>
+          </div>
+        </div>
+        <div class="card feature-preview-card overflow-hidden cursor-pointer" onclick="showView('features')">
+          <img src="https://raw.githubusercontent.com/Robertdewilde/serene-manatee-b25030/refs/heads/main/Chrome%20Extension%20-%20Social%20Property%20Pro%20-%20AI%20social%20media%20manager%20for%20estate%20agencies.jpg" alt="Chrome Extension" class="w-full object-cover" style="height:220px;">
+          <div class="p-5">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold mb-3" style="background:rgba(106,107,234,0.15);color:var(--accent);"><i data-lucide="chrome" style="width:11px;height:11px;"></i> Chrome Extension</div>
+            <h3 class="font-bold text-base mb-1" style="color:var(--text);">One click. Data grabbed.</h3>
+            <p class="text-xs leading-relaxed" style="color:var(--text-muted);">Pull property details from any portal directly into Social Property Pro. No copy-pasting.</p>
+          </div>
+        </div>
+      </div>
+      <div class="text-center mt-8">
+        <button class="px-6 py-3 rounded-xl text-sm font-semibold" style="border:1px solid var(--border);color:var(--text-muted);" onclick="showView('features')">See all features →</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- BIG QUOTE -->
+  <div class="py-16" style="background:linear-gradient(135deg,rgba(106,107,234,0.08) 0%,rgba(210,182,125,0.05) 100%);border-top:1px solid var(--border);border-bottom:1px solid var(--border);">
+    <div class="max-w-3xl mx-auto px-4 text-center">
+      <div style="font-size:4rem;color:var(--accent);opacity:0.35;font-family:Georgia,serif;line-height:1;">"</div>
+      <p class="text-xl md:text-2xl font-semibold leading-relaxed mb-6 -mt-2" style="color:var(--text);font-family:'Public Sans',sans-serif;">One sold property covers Social Property Pro for years. I closed three international buyers this quarter who found me through Instagram."</p>
+      <div class="flex items-center justify-center gap-3">
+        <div class="w-10 h-10 rounded-full flex items-center justify-center font-bold text-sm" style="background:rgba(106,107,234,0.2);color:var(--accent);">AK</div>
+        <div class="text-left">
+          <p class="text-sm font-semibold" style="color:var(--text);">Andreas Klein</p>
+          <p class="text-xs" style="color:var(--text-muted);">Agency Owner · Marbella</p>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -159,37 +269,29 @@
     <p class="text-center text-xs font-semibold uppercase tracking-widest mb-12" style="color:var(--accent);">Why agents choose Social Property Pro</p>
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
       <div class="card p-6">
-        <div class="w-10 h-10 rounded-lg flex items-center justify-center mb-4" style="background:rgba(106,107,234,0.15);">
-          <i data-lucide="home" style="width:20px;height:20px;color:var(--accent);"></i>
-        </div>
+        <div class="w-10 h-10 rounded-lg flex items-center justify-center mb-4" style="background:rgba(106,107,234,0.15);"><i data-lucide="home" style="width:20px;height:20px;color:var(--accent);"></i></div>
         <h3 class="font-bold text-base mb-2">Built for Real Estate</h3>
         <p class="text-sm leading-relaxed" style="color:var(--text-muted);">Speaks the language of estate agents and homebuyers — not generic marketing.</p>
       </div>
       <div class="card p-6">
-        <div class="w-10 h-10 rounded-lg flex items-center justify-center mb-4" style="background:rgba(106,107,234,0.15);">
-          <i data-lucide="compass" style="width:20px;height:20px;color:var(--accent);"></i>
-        </div>
+        <div class="w-10 h-10 rounded-lg flex items-center justify-center mb-4" style="background:rgba(106,107,234,0.15);"><i data-lucide="compass" style="width:20px;height:20px;color:var(--accent);"></i></div>
         <h3 class="font-bold text-base mb-2">Beyond Standard Listings</h3>
         <p class="text-sm leading-relaxed" style="color:var(--text-muted);">Full freedom for neighbourhood guides, lifestyle content, and market updates.</p>
       </div>
       <div class="card p-6">
-        <div class="w-10 h-10 rounded-lg flex items-center justify-center mb-4" style="background:rgba(106,107,234,0.15);">
-          <i data-lucide="layers" style="width:20px;height:20px;color:var(--accent);"></i>
-        </div>
+        <div class="w-10 h-10 rounded-lg flex items-center justify-center mb-4" style="background:rgba(106,107,234,0.15);"><i data-lucide="layers" style="width:20px;height:20px;color:var(--accent);"></i></div>
         <h3 class="font-bold text-base mb-2">Multi-Platform Tone</h3>
         <p class="text-sm leading-relaxed" style="color:var(--text-muted);">LinkedIn professional, TikTok casual, Instagram storytelling — all from one tool.</p>
       </div>
       <div class="card p-6">
-        <div class="w-10 h-10 rounded-lg flex items-center justify-center mb-4" style="background:rgba(106,107,234,0.15);">
-          <i data-lucide="zap" style="width:20px;height:20px;color:var(--accent);"></i>
-        </div>
+        <div class="w-10 h-10 rounded-lg flex items-center justify-center mb-4" style="background:rgba(106,107,234,0.15);"><i data-lucide="zap" style="width:20px;height:20px;color:var(--accent);"></i></div>
         <h3 class="font-bold text-base mb-2">Zero CRM Hassle</h3>
         <p class="text-sm leading-relaxed" style="color:var(--text-muted);">Chrome extension pulls property data directly from your current workflow.</p>
       </div>
     </div>
   </div>
 
-  <!-- Testimonials -->
+  <!-- TESTIMONIALS -->
   <div class="py-16" style="background:var(--bg-secondary);">
     <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
       <p class="text-center text-xs font-semibold uppercase tracking-widest mb-3" style="color:var(--accent);">What agents say</p>
@@ -219,7 +321,7 @@
         </div>
         <div class="testimonial-card">
           <div class="flex gap-0.5 mb-3"><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span></div>
-          <p class="text-sm leading-relaxed mb-4" style="color:var(--text-muted);">"The Brainstorm Chat writes better property descriptions than I do. And in English, Spanish and Dutch. I landed 2 international buyers last quarter directly from Instagram."</p>
+          <p class="text-sm leading-relaxed mb-4" style="color:var(--text-muted);">"The Brainstorm Chat writes better property descriptions than I do — in English, Spanish and Dutch. I landed 2 international buyers last quarter from Instagram."</p>
           <div class="flex items-center gap-3">
             <div class="w-9 h-9 rounded-full flex items-center justify-center font-bold text-sm" style="background:rgba(106,107,234,0.2);color:var(--accent);">SK</div>
             <div>
@@ -232,7 +334,29 @@
     </div>
   </div>
 
-  <!-- Platform strip -->
+  <!-- PRICING PREVIEW -->
+  <div class="py-20" style="background:linear-gradient(135deg,#0b0c10 0%,#11131e 100%);">
+    <div class="max-w-xl mx-auto px-4 text-center">
+      <p class="text-xs font-semibold uppercase tracking-widest mb-3" style="color:var(--accent);">Pricing</p>
+      <h2 class="text-3xl font-bold mb-3" style="color:var(--text);">One price. Everything included.</h2>
+      <p class="text-sm mb-8" style="color:var(--text-muted);">No tiers, no hidden fees, no surprises.</p>
+      <div class="card p-8 mb-4 text-center">
+        <div class="text-6xl font-black mb-2" style="color:var(--gold);font-family:'Public Sans',sans-serif;">€149</div>
+        <div class="text-sm mb-5" style="color:var(--text-muted);">per month · cancel anytime</div>
+        <div class="flex flex-wrap justify-center gap-4 text-xs mb-6" style="color:var(--text-muted);">
+          <span><span style="color:var(--gold);">✓</span> All features</span>
+          <span><span style="color:var(--gold);">✓</span> Unlimited users</span>
+          <span><span style="color:var(--gold);">✓</span> All platforms</span>
+          <span><span style="color:var(--gold);">✓</span> 14-day free trial</span>
+        </div>
+        <button class="btn-gold w-full py-4 rounded-xl font-bold text-base" onclick="showView('pricing')">Start Free Trial</button>
+        <p class="text-xs mt-3" style="color:var(--text-muted);">No credit card required · Less than half the cost of a freelancer</p>
+      </div>
+      <button class="text-sm" style="color:var(--text-muted);" onclick="showView('pricing')">See full pricing & team calculator →</button>
+    </div>
+  </div>
+
+  <!-- PLATFORM STRIP -->
   <div class="py-8 border-t" style="border-color:var(--border);">
     <div class="max-w-4xl mx-auto px-4 text-center">
       <p class="text-sm font-semibold mb-5" style="color:var(--text-muted);">Works with all major platforms</p>
@@ -248,75 +372,50 @@
 
 </section>
 
-<!-- FEATURES VIEW -->
+<!-- ═══════════════════════════════════════════ FEATURES VIEW -->
 <section id="view-features" class="view">
   <div class="py-16" style="background:var(--bg-secondary);">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <p class="text-center text-xs font-semibold uppercase tracking-widest mb-3" style="color:var(--accent);">Features</p>
       <h2 class="text-3xl md:text-4xl font-bold text-center mb-16">Powerful Features, Zero Complexity</h2>
-
       <div class="feature-block flex flex-col md:flex-row items-center gap-10 mb-20">
         <div class="flex-1">
-          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold mb-4" style="background:rgba(106,107,234,0.15);color:var(--accent);">
-            <i data-lucide="wand-2" style="width:12px;height:12px;"></i> Month Wizard
-          </div>
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold mb-4" style="background:rgba(106,107,234,0.15);color:var(--accent);"><i data-lucide="wand-2" style="width:12px;height:12px;"></i> Month Wizard</div>
           <h3 class="text-2xl font-bold mb-3">The Month-Wizard</h3>
           <p class="text-sm leading-relaxed" style="color:var(--text-muted);">Plan an entire month of real estate content in under 5 minutes. Input your active properties, local news, or open houses, and watch the AI map out a strategic calendar across all your platforms.</p>
         </div>
-        <div class="flex-1">
-          <img src="https://raw.githubusercontent.com/Robertdewilde/serene-manatee-b25030/refs/heads/main/Month%20Wizard%20-%20%20Social%20Property%20Pro%20-%20AI%20Social%20Media%20Management%20for%20Real%20Estate%20Agents.jpg" alt="Month Wizard" class="w-full rounded-xl object-cover" style="max-height:320px;" loading="lazy">
-        </div>
+        <div class="flex-1"><img src="https://raw.githubusercontent.com/Robertdewilde/serene-manatee-b25030/refs/heads/main/Month%20Wizard%20-%20%20Social%20Property%20Pro%20-%20AI%20Social%20Media%20Management%20for%20Real%20Estate%20Agents.jpg" alt="Month Wizard" class="w-full rounded-xl object-cover" style="max-height:320px;" loading="lazy"></div>
       </div>
-
       <div class="feature-block flex flex-col md:flex-row items-center gap-10 mb-20">
         <div class="flex-1">
-          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold mb-4" style="background:rgba(106,107,234,0.15);color:var(--accent);">
-            <i data-lucide="message-circle" style="width:12px;height:12px;"></i> Brainstorm Chat
-          </div>
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold mb-4" style="background:rgba(106,107,234,0.15);color:var(--accent);"><i data-lucide="message-circle" style="width:12px;height:12px;"></i> Brainstorm Chat</div>
           <h3 class="text-2xl font-bold mb-3">The Brainstorm Chat</h3>
           <p class="text-sm leading-relaxed" style="color:var(--text-muted);">Your dedicated real estate copywriter. Brainstorm hook ideas, video scripts for property walkthroughs, or neighbourhood spotlight guides.</p>
         </div>
-        <div class="flex-1">
-          <img src="https://raw.githubusercontent.com/Robertdewilde/serene-manatee-b25030/refs/heads/main/Brainstorm%20Chat%20Social%20Property%20Pro%20-%20AI%20Social%20Media%20Management%20for%20Real%20Estate%20Agents.jpg" alt="Brainstorm Chat" class="w-full rounded-xl object-cover" style="max-height:320px;" loading="lazy">
-        </div>
+        <div class="flex-1"><img src="https://raw.githubusercontent.com/Robertdewilde/serene-manatee-b25030/refs/heads/main/Brainstorm%20Chat%20Social%20Property%20Pro%20-%20AI%20Social%20Media%20Management%20for%20Real%20Estate%20Agents.jpg" alt="Brainstorm Chat" class="w-full rounded-xl object-cover" style="max-height:320px;" loading="lazy"></div>
       </div>
-
       <div class="feature-block flex flex-col md:flex-row items-center gap-10 mb-20">
         <div class="flex-1">
-          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold mb-4" style="background:rgba(106,107,234,0.15);color:var(--accent);">
-            <i data-lucide="layout-dashboard" style="width:12px;height:12px;"></i> Control Tower
-          </div>
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold mb-4" style="background:rgba(106,107,234,0.15);color:var(--accent);"><i data-lucide="layout-dashboard" style="width:12px;height:12px;"></i> Control Tower</div>
           <h3 class="text-2xl font-bold mb-3">The Control Tower</h3>
           <p class="text-sm leading-relaxed" style="color:var(--text-muted);">A sleek Kanban-style dashboard to track, edit, and organize scheduled posts across multiple platforms seamlessly.</p>
         </div>
-        <div class="flex-1">
-          <img src="https://raw.githubusercontent.com/Robertdewilde/serene-manatee-b25030/refs/heads/main/Control%20Tower%20-%20Social%20Property%20Pro%20-%20AI%20Social%20Media%20Management%20for%20Real%20Estate%20Agents.jpg" alt="Control Tower" class="w-full rounded-xl object-cover" style="max-height:320px;" loading="lazy">
-        </div>
+        <div class="flex-1"><img src="https://raw.githubusercontent.com/Robertdewilde/serene-manatee-b25030/refs/heads/main/Control%20Tower%20-%20Social%20Property%20Pro%20-%20AI%20Social%20Media%20Management%20for%20Real%20Estate%20Agents.jpg" alt="Control Tower" class="w-full rounded-xl object-cover" style="max-height:320px;" loading="lazy"></div>
       </div>
-
       <div class="feature-block flex flex-col md:flex-row items-center gap-10">
         <div class="flex-1">
-          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold mb-4" style="background:rgba(106,107,234,0.15);color:var(--accent);">
-            <i data-lucide="chrome" style="width:12px;height:12px;"></i> Chrome Extension
-          </div>
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold mb-4" style="background:rgba(106,107,234,0.15);color:var(--accent);"><i data-lucide="chrome" style="width:12px;height:12px;"></i> Chrome Extension</div>
           <h3 class="text-2xl font-bold mb-3">Chrome Extension</h3>
           <p class="text-sm leading-relaxed" style="color:var(--text-muted);">Instantly grab property details from any real estate portal and shoot them directly into Social Property Pro with one click. No copy-pasting.</p>
         </div>
-        <div class="flex-1">
-          <img src="https://raw.githubusercontent.com/Robertdewilde/serene-manatee-b25030/refs/heads/main/Chrome%20Extension%20-%20Social%20Property%20Pro%20-%20AI%20social%20media%20manager%20for%20estate%20agencies.jpg" alt="Chrome Extension" class="w-full rounded-xl object-cover" style="max-height:320px;" loading="lazy">
-        </div>
+        <div class="flex-1"><img src="https://raw.githubusercontent.com/Robertdewilde/serene-manatee-b25030/refs/heads/main/Chrome%20Extension%20-%20Social%20Property%20Pro%20-%20AI%20social%20media%20manager%20for%20estate%20agencies.jpg" alt="Chrome Extension" class="w-full rounded-xl object-cover" style="max-height:320px;" loading="lazy"></div>
       </div>
-
-      <!-- Feature groups -->
       <div class="mt-20 pt-16 border-t" style="border-color:var(--border);">
         <h3 class="text-2xl font-bold text-center mb-2">Everything Included</h3>
         <p class="text-center mb-10 text-sm" style="color:var(--text-muted);">One plan. Every feature. Unlimited users per office.</p>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
           <div class="feat-group">
-            <div class="flex items-center gap-2 mb-4">
-              <i data-lucide="pen-tool" style="width:18px;height:18px;color:var(--accent);"></i>
-              <h4 class="font-bold text-sm">Create Content</h4>
-            </div>
+            <div class="flex items-center gap-2 mb-4"><i data-lucide="pen-tool" style="width:18px;height:18px;color:var(--accent);"></i><h4 class="font-bold text-sm">Create Content</h4></div>
             <ul class="space-y-2 text-sm" style="color:var(--text-muted);">
               <li class="flex gap-2"><span style="color:var(--gold);">✓</span> Month Wizard Planner</li>
               <li class="flex gap-2"><span style="color:var(--gold);">✓</span> AI Content Generator</li>
@@ -326,10 +425,7 @@
             </ul>
           </div>
           <div class="feat-group">
-            <div class="flex items-center gap-2 mb-4">
-              <i data-lucide="calendar" style="width:18px;height:18px;color:var(--accent);"></i>
-              <h4 class="font-bold text-sm">Plan & Publish</h4>
-            </div>
+            <div class="flex items-center gap-2 mb-4"><i data-lucide="calendar" style="width:18px;height:18px;color:var(--accent);"></i><h4 class="font-bold text-sm">Plan & Publish</h4></div>
             <ul class="space-y-2 text-sm" style="color:var(--text-muted);">
               <li class="flex gap-2"><span style="color:var(--gold);">✓</span> Control Tower Dashboard</li>
               <li class="flex gap-2"><span style="color:var(--gold);">✓</span> Strategy Planner</li>
@@ -339,10 +435,7 @@
             </ul>
           </div>
           <div class="feat-group">
-            <div class="flex items-center gap-2 mb-4">
-              <i data-lucide="bar-chart-2" style="width:18px;height:18px;color:var(--accent);"></i>
-              <h4 class="font-bold text-sm">Manage & Measure</h4>
-            </div>
+            <div class="flex items-center gap-2 mb-4"><i data-lucide="bar-chart-2" style="width:18px;height:18px;color:var(--accent);"></i><h4 class="font-bold text-sm">Manage & Measure</h4></div>
             <ul class="space-y-2 text-sm" style="color:var(--text-muted);">
               <li class="flex gap-2"><span style="color:var(--gold);">✓</span> Social Inbox</li>
               <li class="flex gap-2"><span style="color:var(--gold);">✓</span> AI Reply Suggestions</li>
@@ -351,22 +444,18 @@
             </ul>
           </div>
         </div>
-        <div class="text-center">
-          <button class="btn-gold px-8 py-3 rounded-xl font-bold" onclick="showView('pricing')">Start Free Trial →</button>
-        </div>
+        <div class="text-center"><button class="btn-gold px-8 py-3 rounded-xl font-bold" onclick="showView('pricing')">Start Free Trial →</button></div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- PRICING VIEW -->
+<!-- ═══════════════════════════════════════════ PRICING VIEW -->
 <section id="view-pricing" class="view">
   <div class="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
     <p class="text-center text-xs font-semibold uppercase tracking-widest mb-3" style="color:var(--accent);">Pricing</p>
     <h2 class="text-3xl md:text-4xl font-bold text-center mb-3">Simple, Transparent Pricing</h2>
     <p class="text-center mb-10 text-sm" style="color:var(--text-muted);">One plan. Every feature. No hidden fees.</p>
-
-    <!-- Billing Toggle -->
     <div class="flex justify-center gap-3 mb-8">
       <button id="toggle-monthly" class="toggle-btn toggle-active px-6 py-2.5 rounded-lg font-semibold text-sm" style="border:1px solid var(--accent);">Monthly</button>
       <button id="toggle-annual" class="toggle-btn px-6 py-2.5 rounded-lg font-semibold text-sm relative" style="border:1px solid var(--border);color:var(--text-muted);">
@@ -374,26 +463,15 @@
         <span class="absolute -top-3 left-1/2 -translate-x-1/2 text-xs font-bold px-2 py-0.5 rounded-full" style="background:var(--accent);color:white;white-space:nowrap;">BEST VALUE</span>
       </button>
     </div>
-
-    <!-- Pricing Card -->
     <div class="card p-8 mb-6">
       <div id="price-display" class="text-center mb-4">
         <div class="text-6xl font-black" style="color:var(--gold);">€149</div>
         <div class="text-sm mt-2" style="color:var(--text-muted);">per month · cancel anytime</div>
       </div>
-      <div id="savings-badge" style="display:none;" class="text-center mb-4">
-        <span style="color:#10b981;font-size:14px;font-weight:600;">✓ You save €298 vs monthly billing</span>
-      </div>
-
-      <!-- Risk free badge -->
-      <div class="flex justify-center mb-5">
-        <span class="risk-badge"><i data-lucide="shield-check" style="width:14px;height:14px;"></i> 14-day money-back guarantee</span>
-      </div>
-
+      <div id="savings-badge" style="display:none;" class="text-center mb-4"><span style="color:#10b981;font-size:14px;font-weight:600;">✓ You save €298 vs monthly billing</span></div>
+      <div class="flex justify-center mb-5"><span class="risk-badge"><i data-lucide="shield-check" style="width:14px;height:14px;"></i> 14-day money-back guarantee</span></div>
       <button class="btn-gold w-full py-4 rounded-xl font-bold text-base mb-3" onclick="showView('contact')">Start 14-day free trial</button>
       <p class="text-center text-xs" style="color:var(--text-muted);">No credit card required · Cancel anytime · 14-day free trial</p>
-
-      <!-- Features grouped -->
       <div class="mt-8 pt-6 border-t space-y-2" style="border-color:var(--border);">
         <div class="flex items-center gap-3"><span style="color:var(--gold);">✓</span><span class="text-sm">Month Wizard Planner</span></div>
         <div class="flex items-center gap-3"><span style="color:var(--gold);">✓</span><span class="text-sm">AI Content Generator</span></div>
@@ -410,8 +488,6 @@
         <div class="flex items-center gap-3"><span style="color:var(--gold);">✓</span><span class="text-sm">AI Reply Suggestions</span></div>
         <div class="flex items-center gap-3"><span style="color:var(--gold);">✓</span><span class="text-sm">Lead Capture Board</span></div>
       </div>
-
-      <!-- Extra user + comparion -->
       <div class="mt-5 pt-5 border-t" style="border-color:var(--border);">
         <div class="flex items-center justify-between text-sm">
           <span style="color:var(--text-muted);">Extra user (optional)</span>
@@ -423,8 +499,6 @@
         <p class="text-xs" style="color:var(--text-muted);">Less than half the cost of a social media freelancer. Built exclusively for real estate.</p>
       </div>
     </div>
-
-    <!-- Team ROI Calculator -->
     <div class="card p-6 mb-10">
       <h3 class="font-bold text-base mb-1">Team Price Calculator</h3>
       <p class="text-xs mb-5" style="color:var(--text-muted);">See exactly what your office pays per agent</p>
@@ -443,10 +517,8 @@
           <p id="calc-per-agent" class="text-2xl font-black" style="color:var(--accent);">€149</p>
         </div>
       </div>
-      <p id="calc-saving" class="text-xs text-center mt-3" style="color:var(--text-muted);"></p>
+      <p id="calc-saving" class="text-xs text-center mt-3" style="color:var(--text-muted);">Add more agents for just €15/month each</p>
     </div>
-
-    <!-- FAQ -->
     <div class="mt-10">
       <h3 class="text-2xl font-bold text-center mb-8">Frequently Asked Questions</h3>
       <div class="space-y-3" id="faq-container"></div>
@@ -454,7 +526,7 @@
   </div>
 </section>
 
-<!-- ABOUT VIEW -->
+<!-- ═══════════════════════════════════════════ ABOUT VIEW -->
 <section id="view-about" class="view">
   <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
     <p class="text-center text-xs font-semibold uppercase tracking-widest mb-3" style="color:var(--accent);">About</p>
@@ -468,52 +540,37 @@
   </div>
 </section>
 
-<!-- CONTACT VIEW -->
+<!-- ═══════════════════════════════════════════ CONTACT VIEW -->
 <section id="view-contact" class="view">
   <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
     <p class="text-center text-xs font-semibold uppercase tracking-widest mb-3" style="color:var(--accent);">Contact</p>
     <h2 class="text-3xl md:text-4xl font-bold text-center mb-4">Get in Touch</h2>
     <p class="text-center mb-10 text-sm" style="color:var(--text-muted);">We'd love to hear from you. Reach out anytime.</p>
     <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
-      <div>
-        <img src="https://raw.githubusercontent.com/Robertdewilde/serene-manatee-b25030/refs/heads/main/AI%20social%20media%20management%20platform%20for%20real%20estate.jpg" alt="Contact" class="w-full rounded-xl object-cover" style="max-height:300px;" loading="lazy">
-      </div>
+      <div><img src="https://raw.githubusercontent.com/Robertdewilde/serene-manatee-b25030/refs/heads/main/AI%20social%20media%20management%20platform%20for%20real%20estate.jpg" alt="Contact" class="w-full rounded-xl object-cover" style="max-height:300px;" loading="lazy"></div>
       <div class="space-y-5">
-        <div class="flex items-center gap-3">
-          <i data-lucide="mail" style="width:20px;height:20px;color:var(--accent);flex-shrink:0;"></i>
-          <span class="text-sm">hello@socialproperty.pro</span>
-        </div>
-        <div class="flex items-center gap-3">
-          <i data-lucide="map-pin" style="width:20px;height:20px;color:var(--accent);flex-shrink:0;"></i>
-          <span class="text-sm">Málaga, Andalucía, Spain</span>
-        </div>
-        <div class="flex items-center gap-3">
-          <i data-lucide="phone" style="width:20px;height:20px;color:var(--accent);flex-shrink:0;"></i>
-          <span class="text-sm">+34 951 000 000</span>
-        </div>
+        <div class="flex items-center gap-3"><i data-lucide="mail" style="width:20px;height:20px;color:var(--accent);flex-shrink:0;"></i><span class="text-sm">hello@socialproperty.pro</span></div>
+        <div class="flex items-center gap-3"><i data-lucide="map-pin" style="width:20px;height:20px;color:var(--accent);flex-shrink:0;"></i><span class="text-sm">Málaga, Andalucía, Spain</span></div>
+        <div class="flex items-center gap-3"><i data-lucide="phone" style="width:20px;height:20px;color:var(--accent);flex-shrink:0;"></i><span class="text-sm">+34 951 000 000</span></div>
         <button class="btn-gold px-6 py-3 rounded-lg text-sm font-bold mt-2">Book a Demo</button>
       </div>
     </div>
   </div>
 </section>
 
-<!-- PRIVACY VIEW -->
+<!-- ═══════════════════════════════════════════ LEGAL VIEWS -->
 <section id="view-privacy" class="view">
   <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
     <h2 class="text-3xl font-bold mb-8">Privacy Policy</h2>
     <p class="text-sm leading-relaxed" style="color:var(--text-muted);">At Social Property Pro, we take your privacy seriously. We collect only the data necessary to provide our services — including your name, email, and usage analytics. We never sell your data to third parties. All information is encrypted in transit and at rest. You may request deletion of your account and associated data at any time by contacting us at support@socialproperty.pro. This policy is governed by GDPR and Spanish data protection law (LOPDGDD).</p>
   </div>
 </section>
-
-<!-- TERMS VIEW -->
 <section id="view-terms" class="view">
   <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
     <h2 class="text-3xl font-bold mb-8">Terms of Service</h2>
     <p class="text-sm leading-relaxed" style="color:var(--text-muted);">By using Social Property Pro you agree to these terms. Our service provides AI-generated content suggestions for social media marketing. You retain ownership of all content you create using our tools. We reserve the right to suspend accounts that violate our acceptable use policy. Subscriptions renew automatically unless cancelled before the billing date. Refunds are available within 14 days of initial purchase per EU consumer protection regulations.</p>
   </div>
 </section>
-
-<!-- COOKIES VIEW -->
 <section id="view-cookies" class="view">
   <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
     <h2 class="text-3xl font-bold mb-8">Cookie Policy</h2>
@@ -529,11 +586,7 @@
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 mb-8">
       <div>
         <div class="flex items-center gap-2 mb-4 cursor-pointer" onclick="showView('home')">
-          <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#6366f1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
-            <polyline points="9 22 9 12 15 12 15 22"/>
-            <circle cx="12" cy="8" r="1.5" fill="#6366f1"/>
-          </svg>
+          <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#6366f1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/><circle cx="12" cy="8" r="1.5" fill="#6366f1"/></svg>
           <span class="font-bold text-sm">Social Property Pro</span>
         </div>
         <p class="text-xs leading-relaxed" style="color:var(--text-muted);">AI-powered social media management built exclusively for real estate professionals.</p>
@@ -593,22 +646,43 @@ document.getElementById('hamburger').addEventListener('click',function(){
   document.getElementById('mobile-menu').classList.toggle('open');
 });
 
-// Sticky CTA — show after scrolling past hero
+// Sticky CTA
 var stickyCta=document.getElementById('sticky-cta');
 window.addEventListener('scroll',function(){
-  if(window.scrollY>window.innerHeight*0.7){
-    stickyCta.classList.add('visible');
-  } else {
-    stickyCta.classList.remove('visible');
-  }
+  stickyCta.classList.toggle('visible',window.scrollY>window.innerHeight*0.7);
 });
+
+// Animated counters
+var countersStarted=false;
+function startCounters(){
+  if(countersStarted)return;
+  countersStarted=true;
+  document.querySelectorAll('.counter').forEach(function(el){
+    var target=parseInt(el.dataset.target);
+    var suffix=el.dataset.suffix||'';
+    var start=0;
+    var duration=1500;
+    var step=target/duration*16;
+    var current=0;
+    var timer=setInterval(function(){
+      current+=step;
+      if(current>=target){current=target;clearInterval(timer);}
+      el.textContent=Math.floor(current)+suffix;
+    },16);
+  });
+}
+// Start counters when ROI section is visible
+var roiObserver=new IntersectionObserver(function(entries){
+  entries.forEach(function(e){if(e.isIntersecting)startCounters();});
+},{threshold:0.3});
+var roiSection=document.querySelector('.counter');
+if(roiSection)roiObserver.observe(roiSection.closest('div'));
 
 // Pricing toggle
 var toggleMonthly=document.getElementById('toggle-monthly');
 var toggleAnnual=document.getElementById('toggle-annual');
 var priceDisplay=document.getElementById('price-display');
 var savingsBadge=document.getElementById('savings-badge');
-
 function setPricing(isAnnual){
   if(isAnnual){
     priceDisplay.innerHTML='<div class="text-6xl font-black" style="color:var(--gold);">€124</div><div class="text-sm mt-2" style="color:var(--text-muted);">per month · billed as €1,490/year</div>';
@@ -632,28 +706,16 @@ toggleAnnual.addEventListener('click',function(){setPricing(true);});
 
 // ROI Calculator
 var calcSlider=document.getElementById('calc-slider');
-var calcAgentsDisplay=document.getElementById('calc-agents-display');
-var calcTotal=document.getElementById('calc-total');
-var calcPerAgent=document.getElementById('calc-per-agent');
-var calcSaving=document.getElementById('calc-saving');
-
 function updateCalc(){
   var agents=parseInt(calcSlider.value);
   var total=149+(Math.max(0,agents-1)*15);
   var perAgent=Math.round(total/agents);
-  calcAgentsDisplay.textContent=agents;
-  calcTotal.textContent='€'+total;
-  calcPerAgent.textContent='€'+perAgent;
-  if(agents>1){
-    calcSaving.textContent=agents+' agents · just €'+perAgent+' per agent per month';
-  } else {
-    calcSaving.textContent='Add more agents for just €15/month each';
-  }
+  document.getElementById('calc-agents-display').textContent=agents;
+  document.getElementById('calc-total').textContent='€'+total;
+  document.getElementById('calc-per-agent').textContent='€'+perAgent;
+  document.getElementById('calc-saving').textContent=agents>1?agents+' agents · just €'+perAgent+' per agent per month':'Add more agents for just €15/month each';
 }
-if(calcSlider){
-  calcSlider.addEventListener('input',updateCalc);
-  updateCalc();
-}
+if(calcSlider){calcSlider.addEventListener('input',updateCalc);updateCalc();}
 
 // FAQ
 var faqs=[
@@ -664,7 +726,6 @@ var faqs=[
   ['Do you handle VAT automatically?','Yes. VAT is calculated and applied automatically based on your country at checkout.'],
   ['Is my data safe and GDPR-compliant?','Yes. All data is stored on EU servers, encrypted in transit and at rest. You can request deletion of your data at any time.'],
 ];
-
 var faqContainer=document.getElementById('faq-container');
 if(faqContainer){
   faqs.forEach(function(f){
