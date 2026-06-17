@@ -138,12 +138,15 @@
 
   <!-- HERO -->
   <div class="relative w-full" style="min-height:100svh;">
-    <!-- Desktop: cover centered, Mobile: show robot (center) -->
-    <img src="https://agent-6a3152dcd7d22f3415c382b--socialpropertypro.netlify.app/assets/hero-header.svg"
-         alt="Social Property Pro"
-         style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center center;">
-    <div style="position:absolute;inset:0;background:linear-gradient(to bottom,rgba(11,12,16,0.55) 0%,rgba(11,12,16,0.82) 60%,rgba(11,12,16,0.95) 100%);"></div>
-    <div class="relative z-10 flex flex-col items-center justify-end text-center px-5 sm:px-8 pb-12 sm:pb-16" style="min-height:100svh;">
+    <picture>
+      <!-- Upload a portrait mobile crop here when ready: replace the first srcset URL -->
+      <source media="(max-width:639px)" srcset="https://agent-6a3152dcd7d22f3415c382b--socialpropertypro.netlify.app/assets/hero-header.svg">
+      <img src="https://agent-6a3152dcd7d22f3415c382b--socialpropertypro.netlify.app/assets/hero-header.svg"
+           alt="Social Property Pro"
+           style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center center;">
+    </picture>
+    <div style="position:absolute;inset:0;background:linear-gradient(to bottom,rgba(11,12,16,0.40) 0%,rgba(11,12,16,0.65) 55%,rgba(11,12,16,0.90) 100%);"></div>
+    <div class="relative z-10 flex flex-col items-center justify-center text-center px-5 sm:px-8" style="min-height:100svh;padding-top:80px;padding-bottom:60px;">
       <div class="inline-flex items-center gap-2 rounded-full font-semibold mb-4 hero-badge" style="background:rgba(106,107,234,0.15);border:1px solid rgba(106,107,234,0.3);color:var(--accent);">
         <i data-lucide="sparkles" style="width:11px;height:11px;"></i>
         Instant Real Estate Marketing. Powered by AI.
@@ -169,7 +172,7 @@
   <!-- SOCIAL PROOF BAR -->
   <div class="py-5 border-b" style="border-color:var(--border);background:var(--bg-secondary);">
     <div class="max-w-5xl mx-auto px-4 flex flex-wrap justify-center items-center gap-6 text-sm" style="color:var(--text-muted);">
-      <span class="flex items-center gap-2"><span style="color:var(--gold);font-size:16px;">★★★★★</span> Trusted by 200+ estate agencies</span>
+      <span class="flex items-center gap-2"><i data-lucide="award" style="width:16px;height:16px;color:var(--accent);"></i> Trusted by 200+ estate agencies</span>
       <span class="flex items-center gap-2"><i data-lucide="shield-check" style="width:15px;height:15px;color:var(--accent);"></i> GDPR-compliant</span>
       <span class="flex items-center gap-2"><i data-lucide="globe" style="width:15px;height:15px;color:var(--accent);"></i> EN · ES · NL · DE</span>
       <span class="flex items-center gap-2"><i data-lucide="clock" style="width:15px;height:15px;color:var(--accent);"></i> Save 6+ hours per week</span>
@@ -209,33 +212,24 @@
       <p class="text-center text-sm mb-12" style="color:var(--text-muted);">No learning curve. No social media expertise needed.</p>
       <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
         <div class="text-center">
-          <div class="flex items-center justify-center mx-auto mb-4">
-            <span class="text-sm font-bold" style="color:var(--accent);border:2.5px solid rgba(106,107,234,0.4);border-radius:50%;width:32px;height:32px;display:flex;align-items:center;justify-content:center;">1</span>
-          </div>
-          <div class="w-10 h-10 rounded-xl flex items-center justify-center mx-auto mb-3" style="background:rgba(106,107,234,0.1);">
+          <div class="w-10 h-10 rounded-xl flex items-center justify-center mx-auto mb-4" style="background:rgba(106,107,234,0.1);">
             <i data-lucide="link" style="width:18px;height:18px;color:var(--accent);"></i>
           </div>
-          <h3 class="font-semibold text-base mb-2" style="color:var(--text);">Paste your listing URL</h3>
+          <h3 class="font-semibold text-base mb-2" style="color:var(--text);">1. Paste your listing URL</h3>
           <p class="text-sm leading-relaxed" style="color:var(--text-muted);">Or use the Chrome extension to grab property details from any portal in one click. No manual typing.</p>
         </div>
         <div class="text-center">
-          <div class="flex items-center justify-center mx-auto mb-4">
-            <span class="text-sm font-bold" style="color:var(--gold);border:2.5px solid rgba(210,182,125,0.4);border-radius:50%;width:32px;height:32px;display:flex;align-items:center;justify-content:center;">2</span>
-          </div>
-          <div class="w-10 h-10 rounded-xl flex items-center justify-center mx-auto mb-3" style="background:rgba(210,182,125,0.1);">
+          <div class="w-10 h-10 rounded-xl flex items-center justify-center mx-auto mb-4" style="background:rgba(210,182,125,0.1);">
             <i data-lucide="sliders" style="width:18px;height:18px;color:var(--gold);"></i>
           </div>
-          <h3 class="font-semibold text-base mb-2" style="color:var(--text);">Choose platform & tone</h3>
+          <h3 class="font-semibold text-base mb-2" style="color:var(--text);">2. Choose platform & tone</h3>
           <p class="text-sm leading-relaxed" style="color:var(--text-muted);">Select Instagram, LinkedIn, TikTok or all at once. Set your tone — professional, storytelling, luxury or casual.</p>
         </div>
         <div class="text-center">
-          <div class="flex items-center justify-center mx-auto mb-4">
-            <span class="text-sm font-bold" style="color:#10b981;border:2.5px solid rgba(16,185,129,0.4);border-radius:50%;width:32px;height:32px;display:flex;align-items:center;justify-content:center;">3</span>
-          </div>
-          <div class="w-10 h-10 rounded-xl flex items-center justify-center mx-auto mb-3" style="background:rgba(16,185,129,0.1);">
+          <div class="w-10 h-10 rounded-xl flex items-center justify-center mx-auto mb-4" style="background:rgba(16,185,129,0.1);">
             <i data-lucide="send" style="width:18px;height:18px;color:#10b981;"></i>
           </div>
-          <h3 class="font-semibold text-base mb-2" style="color:var(--text);">AI generates, you publish</h3>
+          <h3 class="font-semibold text-base mb-2" style="color:var(--text);">3. AI generates, you publish</h3>
           <p class="text-sm leading-relaxed" style="color:var(--text-muted);">Captions, hashtags, CTAs and scripts — ready in seconds. Review, tweak if you like, and schedule.</p>
         </div>
       </div>
@@ -309,7 +303,8 @@
 
   <!-- USPs -->
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-    <p class="text-center text-xs font-semibold uppercase tracking-widest mb-12" style="color:var(--accent);">Why agents choose Social Property Pro</p>
+    <p class="text-center text-xs font-semibold uppercase tracking-widest mb-3" style="color:var(--accent);">Why choose Social Property Pro?</p>
+    <h2 class="text-2xl sm:text-3xl font-bold text-center mb-12" style="color:var(--text);">Stop posting. Start converting.</h2>
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
       <div class="card p-6">
         <div class="w-10 h-10 rounded-lg flex items-center justify-center mb-4" style="background:rgba(106,107,234,0.15);"><i data-lucide="home" style="width:20px;height:20px;color:var(--accent);"></i></div>
