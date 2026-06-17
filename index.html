@@ -45,6 +45,40 @@
     .counter{display:inline-block;}
     .feature-preview-card{transition:border-color 0.2s,transform 0.2s;}
     .feature-preview-card:hover{border-color:var(--accent)!important;transform:translateY(-2px);}
+
+    /* ── Hero responsive ── */
+    .hero-h1{
+      font-family:'Public Sans',system-ui,sans-serif;
+      font-weight:900;
+      text-align:center;
+      line-height:1.1;
+      letter-spacing:-0.018rem;
+      color:#f1f3f7;
+      max-width:56rem;
+      /* mobile first */
+      font-size:1.75rem;
+    }
+    .hero-sub{
+      font-family:'Inter',system-ui,sans-serif;
+      max-width:42rem;
+      margin-top:1rem;
+      line-height:1.6;
+      color:#d1d5e0;
+      font-size:0.95rem;
+    }
+    .hero-badge{
+      font-size:0.7rem;
+      padding:6px 14px;
+    }
+    @media(min-width:640px){
+      .hero-h1{font-size:2.4rem;}
+      .hero-sub{font-size:1.05rem;margin-top:1.25rem;}
+      .hero-badge{font-size:0.75rem;}
+    }
+    @media(min-width:1024px){
+      .hero-h1{font-size:2.97rem;}
+      .hero-sub{font-size:1.125rem;margin-top:1.5rem;}
+    }
   </style>
 </head>
 <body class="w-full">
@@ -61,7 +95,7 @@
 </div>
 
 <!-- NAV -->
-<nav class="fixed top-0 left-0 right-0 z-50 border-b" style="background:rgba(11,12,16,0.96);border-color:var(--border);backdrop-filter:blur(10px);">
+<nav class="fixed top-0 left-0 right:0 z-50 border-b" style="top:0;left:0;right:0;position:fixed;background:rgba(11,12,16,0.96);border-color:var(--border);backdrop-filter:blur(10px);">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-16">
     <div class="flex items-center gap-2 cursor-pointer" onclick="showView('home')">
       <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="#6366f1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="filter:drop-shadow(0 0 8px rgba(99,102,241,0.4));">
@@ -99,40 +133,46 @@
 
 <main class="w-full pt-16">
 
-<!-- ═══════════════════════════════════════════ HOME VIEW -->
+<!-- HOME VIEW -->
 <section id="view-home" class="view active">
 
   <!-- HERO -->
-  <div class="relative w-full" style="height:100vh;min-height:600px;">
-    <img src="https://agent-6a3152dcd7d22f3415c382b--socialpropertypro.netlify.app/assets/hero-header.svg" alt="Social Property Pro" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center top;">
-    <div style="position:absolute;inset:0;background:linear-gradient(to bottom,rgba(11,12,16,0.60) 0%,rgba(11,12,16,0.78) 100%);"></div>
-    <div class="relative z-10 flex flex-col items-center justify-center text-center px-4 sm:px-8" style="height:100%;">
-      <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-semibold mb-5" style="background:rgba(106,107,234,0.15);border:1px solid rgba(106,107,234,0.3);color:var(--accent);">
-        <i data-lucide="sparkles" style="width:12px;height:12px;"></i>
+  <div class="relative w-full" style="min-height:100svh;">
+    <!-- Desktop: cover centered, Mobile: show robot (center) -->
+    <img src="https://agent-6a3152dcd7d22f3415c382b--socialpropertypro.netlify.app/assets/hero-header.svg"
+         alt="Social Property Pro"
+         style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center center;">
+    <div style="position:absolute;inset:0;background:linear-gradient(to bottom,rgba(11,12,16,0.55) 0%,rgba(11,12,16,0.82) 60%,rgba(11,12,16,0.95) 100%);"></div>
+    <div class="relative z-10 flex flex-col items-center justify-end text-center px-5 sm:px-8 pb-12 sm:pb-16" style="min-height:100svh;">
+      <div class="inline-flex items-center gap-2 rounded-full font-semibold mb-4 hero-badge" style="background:rgba(106,107,234,0.15);border:1px solid rgba(106,107,234,0.3);color:var(--accent);">
+        <i data-lucide="sparkles" style="width:11px;height:11px;"></i>
         Instant Real Estate Marketing. Powered by AI.
       </div>
-      <h1 style="font-family:'Public Sans',system-ui,sans-serif;font-size:2.97rem;font-weight:900;text-align:center;line-height:normal;letter-spacing:-0.018rem;color:#f1f3f7;max-width:56rem;">
-        Your AI Social Media Manager. Exclusively built for Real Estate.
+      <h1 class="hero-h1">
+        Your AI Social Media Manager.<br class="hidden sm:block"> Exclusively built for Real Estate.
       </h1>
-      <p style="font-family:'Inter',system-ui,sans-serif;font-size:1.125rem;max-width:42rem;margin-top:1.5rem;line-height:1.75;color:#d1d5e0;">
-        Launch hyper-local campaigns and a full month of platform-specific posts in minutes. Premium content creation for property professionals—with zero CRM hassle.
+      <p class="hero-sub px-2">
+        Launch hyper-local campaigns and a full month of platform-specific posts in minutes. Premium content for property professionals — zero CRM hassle.
       </p>
-      <div class="flex flex-col sm:flex-row gap-4 mt-8">
-        <button class="btn-gold px-8 py-4 rounded-xl text-base font-bold" onclick="showView('pricing')">Start 14-Day Free Trial</button>
-        <button class="px-8 py-4 rounded-xl text-base font-semibold" style="border:2px solid rgba(241,243,247,0.6);color:#f1f3f7;background:rgba(255,255,255,0.08);" onclick="showView('features')">See Features →</button>
+      <div class="flex flex-col sm:flex-row gap-3 mt-6">
+        <button class="btn-gold px-7 py-3.5 rounded-xl text-sm font-bold" onclick="showView('pricing')">Start 14-Day Free Trial</button>
+        <button class="px-7 py-3.5 rounded-xl text-sm font-semibold" style="border:2px solid rgba(241,243,247,0.5);color:#f1f3f7;background:rgba(255,255,255,0.07);" onclick="showView('features')">See Features →</button>
       </div>
-      <div class="flex flex-wrap justify-center gap-x-6 gap-y-2 mt-5">
+      <div class="flex flex-wrap justify-center gap-x-5 gap-y-2 mt-4">
+        <span class="text-xs flex items-center gap-1" style="color:rgba(241,243,247,0.85);"><span style="color:var(--gold);font-weight:700;">✓</span> No credit card required</span>
+        <span class="text-xs flex items-center gap-1" style="color:rgba(241,243,247,0.85);"><span style="color:var(--gold);font-weight:700;">✓</span> GDPR‑ready</span>
+        <span class="text-xs flex items-center gap-1" style="color:rgba(241,243,247,0.85);"><span style="color:var(--gold);font-weight:700;">✓</span> Save hours. Sell more property.</span>
       </div>
     </div>
   </div>
 
   <!-- SOCIAL PROOF BAR -->
   <div class="py-5 border-b" style="border-color:var(--border);background:var(--bg-secondary);">
-    <div class="max-w-5xl mx-auto px-4 flex flex-wrap justify-center items-center gap-8 text-sm" style="color:var(--text-muted);">
-      <span class="flex items-center gap-2"><span style="color:var(--gold);font-size:18px;">★★★★★</span> Trusted by 200+ estate agencies</span>
-      <span class="flex items-center gap-2"><i data-lucide="shield-check" style="width:16px;height:16px;color:var(--accent);"></i> GDPR-compliant</span>
-      <span class="flex items-center gap-2"><i data-lucide="globe" style="width:16px;height:16px;color:var(--accent);"></i> EN · ES · NL · DE</span>
-      <span class="flex items-center gap-2"><i data-lucide="clock" style="width:16px;height:16px;color:var(--accent);"></i> Save 6+ hours per week</span>
+    <div class="max-w-5xl mx-auto px-4 flex flex-wrap justify-center items-center gap-6 text-sm" style="color:var(--text-muted);">
+      <span class="flex items-center gap-2"><span style="color:var(--gold);font-size:16px;">★★★★★</span> Trusted by 200+ estate agencies</span>
+      <span class="flex items-center gap-2"><i data-lucide="shield-check" style="width:15px;height:15px;color:var(--accent);"></i> GDPR-compliant</span>
+      <span class="flex items-center gap-2"><i data-lucide="globe" style="width:15px;height:15px;color:var(--accent);"></i> EN · ES · NL · DE</span>
+      <span class="flex items-center gap-2"><i data-lucide="clock" style="width:15px;height:15px;color:var(--accent);"></i> Save 6+ hours per week</span>
     </div>
   </div>
 
@@ -140,20 +180,20 @@
   <div class="py-20" style="background:linear-gradient(135deg,#0b0c10 0%,#11131e 50%,#0b0c10 100%);">
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
       <p class="text-center text-xs font-semibold uppercase tracking-widest mb-3" style="color:var(--accent);">Real results</p>
-      <h2 class="text-3xl md:text-4xl font-bold text-center mb-14" style="color:var(--text);">The numbers speak for themselves</h2>
+      <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-center mb-12" style="color:var(--text);">The numbers speak for themselves</h2>
       <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
-        <div class="rounded-2xl p-8 text-center" style="background:rgba(210,182,125,0.06);border:1px solid rgba(210,182,125,0.15);">
-          <div class="text-5xl font-black mb-1 counter" data-target="6" data-suffix="h+" style="color:var(--gold);font-family:'Public Sans',sans-serif;letter-spacing:-0.02em;">6h+</div>
+        <div class="rounded-2xl p-6 sm:p-8 text-center" style="background:rgba(210,182,125,0.06);border:1px solid rgba(210,182,125,0.15);">
+          <div class="text-4xl sm:text-5xl font-black mb-1 counter" data-target="6" data-suffix="h+" style="color:var(--gold);font-family:'Public Sans',sans-serif;letter-spacing:-0.02em;">6h+</div>
           <div class="text-xs font-semibold uppercase tracking-widest mb-3" style="color:var(--gold);opacity:0.7;">Saved per week</div>
           <p class="text-sm leading-relaxed" style="color:var(--text-muted);">Stop writing posts manually. Let AI handle it while you close deals.</p>
         </div>
-        <div class="rounded-2xl p-8 text-center" style="background:rgba(106,107,234,0.06);border:1px solid rgba(106,107,234,0.15);">
-          <div class="text-5xl font-black mb-1 counter" data-target="40" data-suffix="%+" style="color:var(--accent);font-family:'Public Sans',sans-serif;letter-spacing:-0.02em;">40%+</div>
+        <div class="rounded-2xl p-6 sm:p-8 text-center" style="background:rgba(106,107,234,0.06);border:1px solid rgba(106,107,234,0.15);">
+          <div class="text-4xl sm:text-5xl font-black mb-1 counter" data-target="40" data-suffix="%+" style="color:var(--accent);font-family:'Public Sans',sans-serif;letter-spacing:-0.02em;">40%+</div>
           <div class="text-xs font-semibold uppercase tracking-widest mb-3" style="color:var(--accent);opacity:0.7;">More engagement</div>
           <p class="text-sm leading-relaxed" style="color:var(--text-muted);">Platform-optimised content performs dramatically better than generic posts.</p>
         </div>
-        <div class="rounded-2xl p-8 text-center" style="background:rgba(16,185,129,0.06);border:1px solid rgba(16,185,129,0.15);">
-          <div class="text-5xl font-black mb-1 counter" data-target="14" data-suffix="min" style="color:#10b981;font-family:'Public Sans',sans-serif;letter-spacing:-0.02em;">14min</div>
+        <div class="rounded-2xl p-6 sm:p-8 text-center" style="background:rgba(16,185,129,0.06);border:1px solid rgba(16,185,129,0.15);">
+          <div class="text-4xl sm:text-5xl font-black mb-1 counter" data-target="14" data-suffix="min" style="color:#10b981;font-family:'Public Sans',sans-serif;letter-spacing:-0.02em;">14min</div>
           <div class="text-xs font-semibold uppercase tracking-widest mb-3" style="color:#10b981;opacity:0.7;">Full month of content</div>
           <p class="text-sm leading-relaxed" style="color:var(--text-muted);">Month Wizard generates 30+ posts, scripts and stories in minutes.</p>
         </div>
@@ -165,41 +205,41 @@
   <div class="py-20" style="background:var(--bg-secondary);">
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
       <p class="text-center text-xs font-semibold uppercase tracking-widest mb-3" style="color:var(--accent);">How it works</p>
-      <h2 class="text-3xl md:text-4xl font-bold text-center mb-3" style="color:var(--text);">From listing to live post in 3 steps</h2>
-      <p class="text-center text-sm mb-14" style="color:var(--text-muted);">No learning curve. No social media expertise needed.</p>
+      <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-center mb-3" style="color:var(--text);">From listing to live post in 3 steps</h2>
+      <p class="text-center text-sm mb-12" style="color:var(--text-muted);">No learning curve. No social media expertise needed.</p>
       <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
         <div class="text-center">
-          <div class="flex items-center justify-center mx-auto mb-5" style="width:48px;height:48px;">
+          <div class="flex items-center justify-center mx-auto mb-4">
             <span class="text-sm font-bold" style="color:var(--accent);border:2.5px solid rgba(106,107,234,0.4);border-radius:50%;width:32px;height:32px;display:flex;align-items:center;justify-content:center;">1</span>
           </div>
-          <div class="w-10 h-10 rounded-xl flex items-center justify-center mx-auto mb-4" style="background:rgba(106,107,234,0.1);">
+          <div class="w-10 h-10 rounded-xl flex items-center justify-center mx-auto mb-3" style="background:rgba(106,107,234,0.1);">
             <i data-lucide="link" style="width:18px;height:18px;color:var(--accent);"></i>
           </div>
           <h3 class="font-semibold text-base mb-2" style="color:var(--text);">Paste your listing URL</h3>
           <p class="text-sm leading-relaxed" style="color:var(--text-muted);">Or use the Chrome extension to grab property details from any portal in one click. No manual typing.</p>
         </div>
         <div class="text-center">
-          <div class="flex items-center justify-center mx-auto mb-5" style="width:48px;height:48px;">
+          <div class="flex items-center justify-center mx-auto mb-4">
             <span class="text-sm font-bold" style="color:var(--gold);border:2.5px solid rgba(210,182,125,0.4);border-radius:50%;width:32px;height:32px;display:flex;align-items:center;justify-content:center;">2</span>
           </div>
-          <div class="w-10 h-10 rounded-xl flex items-center justify-center mx-auto mb-4" style="background:rgba(210,182,125,0.1);">
+          <div class="w-10 h-10 rounded-xl flex items-center justify-center mx-auto mb-3" style="background:rgba(210,182,125,0.1);">
             <i data-lucide="sliders" style="width:18px;height:18px;color:var(--gold);"></i>
           </div>
           <h3 class="font-semibold text-base mb-2" style="color:var(--text);">Choose platform & tone</h3>
           <p class="text-sm leading-relaxed" style="color:var(--text-muted);">Select Instagram, LinkedIn, TikTok or all at once. Set your tone — professional, storytelling, luxury or casual.</p>
         </div>
         <div class="text-center">
-          <div class="flex items-center justify-center mx-auto mb-5" style="width:48px;height:48px;">
+          <div class="flex items-center justify-center mx-auto mb-4">
             <span class="text-sm font-bold" style="color:#10b981;border:2.5px solid rgba(16,185,129,0.4);border-radius:50%;width:32px;height:32px;display:flex;align-items:center;justify-content:center;">3</span>
           </div>
-          <div class="w-10 h-10 rounded-xl flex items-center justify-center mx-auto mb-4" style="background:rgba(16,185,129,0.1);">
+          <div class="w-10 h-10 rounded-xl flex items-center justify-center mx-auto mb-3" style="background:rgba(16,185,129,0.1);">
             <i data-lucide="send" style="width:18px;height:18px;color:#10b981;"></i>
           </div>
           <h3 class="font-semibold text-base mb-2" style="color:var(--text);">AI generates, you publish</h3>
           <p class="text-sm leading-relaxed" style="color:var(--text-muted);">Captions, hashtags, CTAs and scripts — ready in seconds. Review, tweak if you like, and schedule.</p>
         </div>
       </div>
-      <div class="text-center mt-12">
+      <div class="text-center mt-10">
         <button class="btn-gold px-8 py-4 rounded-xl font-bold text-base" onclick="showView('pricing')">Try it free for 14 days</button>
         <p class="text-xs mt-3" style="color:var(--text-muted);">No credit card required</p>
       </div>
@@ -210,11 +250,11 @@
   <div class="py-20" style="background:var(--bg);">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <p class="text-center text-xs font-semibold uppercase tracking-widest mb-3" style="color:var(--accent);">Core features</p>
-      <h2 class="text-3xl md:text-4xl font-bold text-center mb-4" style="color:var(--text);">Everything you need. Nothing you don't.</h2>
+      <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-center mb-4" style="color:var(--text);">Everything you need. Nothing you don't.</h2>
       <p class="text-center text-sm mb-12" style="color:var(--text-muted);">Four powerful tools built specifically for real estate social media.</p>
       <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
         <div class="card feature-preview-card overflow-hidden cursor-pointer" onclick="showView('features')">
-          <img src="https://raw.githubusercontent.com/Robertdewilde/serene-manatee-b25030/refs/heads/main/A%20full%20month%20of%20content%20in%205%20minutes%20-%20Social%20Property%20Pro%20-%20AI%20Social%20Media%20Management%20for%20Real%20Estate%20Agents.jpg" alt="Month Wizard" class="w-full object-cover" style="height:220px;">
+          <img src="https://raw.githubusercontent.com/Robertdewilde/serene-manatee-b25030/refs/heads/main/A%20full%20month%20of%20content%20in%205%20minutes%20-%20Social%20Property%20Pro%20-%20AI%20Social%20Media%20Management%20for%20Real%20Estate%20Agents.jpg" alt="Month Wizard" class="w-full object-cover" style="height:200px;">
           <div class="p-5">
             <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold mb-3" style="background:rgba(106,107,234,0.15);color:var(--accent);"><i data-lucide="wand-2" style="width:11px;height:11px;"></i> Month Wizard</div>
             <h3 class="font-bold text-base mb-1" style="color:var(--text);">Plan a full month in 5 minutes</h3>
@@ -222,7 +262,7 @@
           </div>
         </div>
         <div class="card feature-preview-card overflow-hidden cursor-pointer" onclick="showView('features')">
-          <img src="https://raw.githubusercontent.com/Robertdewilde/serene-manatee-b25030/refs/heads/main/Your%20dedicated%20real%20estate%20copywriter%20-%20Social%20Property%20Pro%20-%20AI%20Social%20Media%20Management%20for%20Real%20Estate%20Agents.jpg" alt="Brainstorm Chat" class="w-full object-cover" style="height:220px;">
+          <img src="https://raw.githubusercontent.com/Robertdewilde/serene-manatee-b25030/refs/heads/main/Your%20dedicated%20real%20estate%20copywriter%20-%20Social%20Property%20Pro%20-%20AI%20Social%20Media%20Management%20for%20Real%20Estate%20Agents.jpg" alt="Brainstorm Chat" class="w-full object-cover" style="height:200px;">
           <div class="p-5">
             <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold mb-3" style="background:rgba(106,107,234,0.15);color:var(--accent);"><i data-lucide="message-circle" style="width:11px;height:11px;"></i> Brainstorm Chat</div>
             <h3 class="font-bold text-base mb-1" style="color:var(--text);">Your dedicated real estate copywriter</h3>
@@ -230,7 +270,7 @@
           </div>
         </div>
         <div class="card feature-preview-card overflow-hidden cursor-pointer" onclick="showView('features')">
-          <img src="https://raw.githubusercontent.com/Robertdewilde/serene-manatee-b25030/refs/heads/main/See%20everything%20at%20a%20glance%20-%20Social%20Property%20Pro%20-%20AI%20Social%20Media%20Management%20for%20Real%20Estate%20Agents.jpg" alt="Control Tower" class="w-full object-cover" style="height:220px;">
+          <img src="https://raw.githubusercontent.com/Robertdewilde/serene-manatee-b25030/refs/heads/main/See%20everything%20at%20a%20glance%20-%20Social%20Property%20Pro%20-%20AI%20Social%20Media%20Management%20for%20Real%20Estate%20Agents.jpg" alt="Control Tower" class="w-full object-cover" style="height:200px;">
           <div class="p-5">
             <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold mb-3" style="background:rgba(106,107,234,0.15);color:var(--accent);"><i data-lucide="layout-dashboard" style="width:11px;height:11px;"></i> Control Tower</div>
             <h3 class="font-bold text-base mb-1" style="color:var(--text);">See everything at a glance</h3>
@@ -238,7 +278,7 @@
           </div>
         </div>
         <div class="card feature-preview-card overflow-hidden cursor-pointer" onclick="showView('features')">
-          <img src="https://raw.githubusercontent.com/Robertdewilde/serene-manatee-b25030/refs/heads/main/Chrome%20extension%20data%20grabbing%20-%20Social%20Property%20Pro%20-%20AI%20Social%20Media%20Management%20for%20Real%20Estate%20Agents.jpg" alt="Chrome Extension" class="w-full object-cover" style="height:220px;">
+          <img src="https://raw.githubusercontent.com/Robertdewilde/serene-manatee-b25030/refs/heads/main/Chrome%20extension%20data%20grabbing%20-%20Social%20Property%20Pro%20-%20AI%20Social%20Media%20Management%20for%20Real%20Estate%20Agents.jpg" alt="Chrome Extension" class="w-full object-cover" style="height:200px;">
           <div class="p-5">
             <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold mb-3" style="background:rgba(106,107,234,0.15);color:var(--accent);"><i data-lucide="chrome" style="width:11px;height:11px;"></i> Chrome Extension</div>
             <h3 class="font-bold text-base mb-1" style="color:var(--text);">One click. Data grabbed.</h3>
@@ -253,10 +293,10 @@
   </div>
 
   <!-- BIG QUOTE -->
-  <div class="py-16" style="background:linear-gradient(135deg,rgba(106,107,234,0.08) 0%,rgba(210,182,125,0.05) 100%);border-top:1px solid var(--border);border-bottom:1px solid var(--border);">
+  <div class="py-14" style="background:linear-gradient(135deg,rgba(106,107,234,0.08) 0%,rgba(210,182,125,0.05) 100%);border-top:1px solid var(--border);border-bottom:1px solid var(--border);">
     <div class="max-w-3xl mx-auto px-4 text-center">
-      <div style="font-size:4rem;color:var(--accent);opacity:0.35;font-family:Georgia,serif;line-height:1;">"</div>
-      <p class="text-xl md:text-2xl font-semibold leading-relaxed mb-6 -mt-2" style="color:var(--text);font-family:'Public Sans',sans-serif;">One sold property covers Social Property Pro for years. I closed three international buyers this quarter who found me through Instagram."</p>
+      <div style="font-size:3.5rem;color:var(--accent);opacity:0.35;font-family:Georgia,serif;line-height:1;">"</div>
+      <p class="text-lg md:text-xl font-semibold leading-relaxed mb-6 -mt-2" style="color:var(--text);font-family:'Public Sans',sans-serif;">One sold property covers Social Property Pro for years. I closed three international buyers this quarter who found me through Instagram."</p>
       <div class="flex items-center justify-center gap-3">
         <div class="w-10 h-10 rounded-full flex items-center justify-center font-bold text-sm" style="background:rgba(106,107,234,0.2);color:var(--accent);">AK</div>
         <div class="text-left">
@@ -305,10 +345,7 @@
           <p class="text-sm leading-relaxed mb-4" style="color:var(--text-muted);">"I used to spend Sunday evenings writing Instagram posts. Now the Month Wizard does it in 5 minutes. My engagement went up 40% in the first month."</p>
           <div class="flex items-center gap-3">
             <div class="w-9 h-9 rounded-full flex items-center justify-center font-bold text-sm" style="background:rgba(106,107,234,0.2);color:var(--accent);">MR</div>
-            <div>
-              <p class="text-sm font-semibold" style="color:var(--text);">María Rodríguez</p>
-              <p class="text-xs" style="color:var(--text-muted);">Solo Agent · Marbella</p>
-            </div>
+            <div><p class="text-sm font-semibold" style="color:var(--text);">María Rodríguez</p><p class="text-xs" style="color:var(--text-muted);">Solo Agent · Marbella</p></div>
           </div>
         </div>
         <div class="testimonial-card" style="border-color:var(--accent);">
@@ -316,10 +353,7 @@
           <p class="text-sm leading-relaxed mb-4" style="color:var(--text-muted);">"We have 4 agents and each one posts on their own Instagram now. The Control Tower gives me oversight of everything. Worth every cent of the €149."</p>
           <div class="flex items-center gap-3">
             <div class="w-9 h-9 rounded-full flex items-center justify-center font-bold text-sm" style="background:rgba(106,107,234,0.2);color:var(--accent);">JV</div>
-            <div>
-              <p class="text-sm font-semibold" style="color:var(--text);">Jan van der Berg</p>
-              <p class="text-xs" style="color:var(--text-muted);">Office Manager · Amsterdam</p>
-            </div>
+            <div><p class="text-sm font-semibold" style="color:var(--text);">Jan van der Berg</p><p class="text-xs" style="color:var(--text-muted);">Office Manager · Amsterdam</p></div>
           </div>
         </div>
         <div class="testimonial-card">
@@ -327,10 +361,7 @@
           <p class="text-sm leading-relaxed mb-4" style="color:var(--text-muted);">"The Brainstorm Chat writes better property descriptions than I do — in English, Spanish and Dutch. I landed 2 international buyers last quarter from Instagram."</p>
           <div class="flex items-center gap-3">
             <div class="w-9 h-9 rounded-full flex items-center justify-center font-bold text-sm" style="background:rgba(106,107,234,0.2);color:var(--accent);">SK</div>
-            <div>
-              <p class="text-sm font-semibold" style="color:var(--text);">Sophie Klaassen</p>
-              <p class="text-xs" style="color:var(--text-muted);">Agency Owner · Costa del Sol</p>
-            </div>
+            <div><p class="text-sm font-semibold" style="color:var(--text);">Sophie Klaassen</p><p class="text-xs" style="color:var(--text-muted);">Agency Owner · Costa del Sol</p></div>
           </div>
         </div>
       </div>
@@ -341,7 +372,7 @@
   <div class="py-20" style="background:linear-gradient(135deg,#0b0c10 0%,#11131e 100%);">
     <div class="max-w-xl mx-auto px-4 text-center">
       <p class="text-xs font-semibold uppercase tracking-widest mb-3" style="color:var(--accent);">Pricing</p>
-      <h2 class="text-3xl font-bold mb-3" style="color:var(--text);">One price. Everything included.</h2>
+      <h2 class="text-2xl sm:text-3xl font-bold mb-3" style="color:var(--text);">One price. Everything included.</h2>
       <p class="text-sm mb-8" style="color:var(--text-muted);">No tiers, no hidden fees, no surprises.</p>
       <div class="card p-8 mb-4 text-center">
         <div class="text-6xl font-black mb-2" style="color:var(--gold);font-family:'Public Sans',sans-serif;">€149</div>
@@ -363,19 +394,19 @@
   <div class="py-8 border-t" style="border-color:var(--border);">
     <div class="max-w-4xl mx-auto px-4 text-center">
       <p class="text-sm font-semibold mb-5" style="color:var(--text-muted);">Works with all major platforms</p>
-      <div class="flex flex-wrap justify-center gap-8 items-center" style="color:var(--text-muted);">
-        <span class="flex items-center gap-2 text-sm font-medium"><i data-lucide="instagram" style="width:18px;height:18px;"></i> Instagram</span>
-        <span class="flex items-center gap-2 text-sm font-medium"><i data-lucide="facebook" style="width:18px;height:18px;"></i> Facebook</span>
-        <span class="flex items-center gap-2 text-sm font-medium"><i data-lucide="linkedin" style="width:18px;height:18px;"></i> LinkedIn</span>
-        <span class="flex items-center gap-2 text-sm font-medium"><i data-lucide="music" style="width:18px;height:18px;"></i> TikTok</span>
-        <span class="flex items-center gap-2 text-sm font-medium"><i data-lucide="search" style="width:18px;height:18px;"></i> Google Business</span>
+      <div class="flex flex-wrap justify-center gap-6 items-center" style="color:var(--text-muted);">
+        <span class="flex items-center gap-2 text-sm font-medium"><i data-lucide="instagram" style="width:17px;height:17px;"></i> Instagram</span>
+        <span class="flex items-center gap-2 text-sm font-medium"><i data-lucide="facebook" style="width:17px;height:17px;"></i> Facebook</span>
+        <span class="flex items-center gap-2 text-sm font-medium"><i data-lucide="linkedin" style="width:17px;height:17px;"></i> LinkedIn</span>
+        <span class="flex items-center gap-2 text-sm font-medium"><i data-lucide="music" style="width:17px;height:17px;"></i> TikTok</span>
+        <span class="flex items-center gap-2 text-sm font-medium"><i data-lucide="search" style="width:17px;height:17px;"></i> Google Business</span>
       </div>
     </div>
   </div>
 
 </section>
 
-<!-- ═══════════════════════════════════════════ FEATURES VIEW -->
+<!-- FEATURES VIEW -->
 <section id="view-features" class="view">
   <div class="py-16" style="background:var(--bg-secondary);">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -453,7 +484,7 @@
   </div>
 </section>
 
-<!-- ═══════════════════════════════════════════ PRICING VIEW -->
+<!-- PRICING VIEW -->
 <section id="view-pricing" class="view">
   <div class="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
     <p class="text-center text-xs font-semibold uppercase tracking-widest mb-3" style="color:var(--accent);">Pricing</p>
@@ -529,7 +560,7 @@
   </div>
 </section>
 
-<!-- ═══════════════════════════════════════════ ABOUT VIEW -->
+<!-- ABOUT VIEW -->
 <section id="view-about" class="view">
   <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
     <p class="text-center text-xs font-semibold uppercase tracking-widest mb-3" style="color:var(--accent);">About</p>
@@ -543,7 +574,7 @@
   </div>
 </section>
 
-<!-- ═══════════════════════════════════════════ CONTACT VIEW -->
+<!-- CONTACT VIEW -->
 <section id="view-contact" class="view">
   <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
     <p class="text-center text-xs font-semibold uppercase tracking-widest mb-3" style="color:var(--accent);">Contact</p>
@@ -561,7 +592,7 @@
   </div>
 </section>
 
-<!-- ═══════════════════════════════════════════ LEGAL VIEWS -->
+<!-- LEGAL VIEWS -->
 <section id="view-privacy" class="view">
   <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
     <h2 class="text-3xl font-bold mb-8">Privacy Policy</h2>
@@ -624,7 +655,6 @@
 </footer>
 
 <script>
-// View switching
 function showView(id){
   document.querySelectorAll('.view').forEach(function(v){v.classList.remove('active');});
   var t=document.getElementById('view-'+id);
@@ -632,8 +662,6 @@ function showView(id){
   window.scrollTo({top:0,behavior:'smooth'});
   setTimeout(function(){lucide.createIcons();},30);
 }
-
-// Nav links
 document.querySelectorAll('[data-view]').forEach(function(el){
   el.style.cursor='pointer';
   el.addEventListener('click',function(e){
@@ -643,19 +671,13 @@ document.querySelectorAll('[data-view]').forEach(function(el){
     if(mm)mm.classList.remove('open');
   });
 });
-
-// Hamburger
 document.getElementById('hamburger').addEventListener('click',function(){
   document.getElementById('mobile-menu').classList.toggle('open');
 });
-
-// Sticky CTA
 var stickyCta=document.getElementById('sticky-cta');
 window.addEventListener('scroll',function(){
   stickyCta.classList.toggle('visible',window.scrollY>window.innerHeight*0.7);
 });
-
-// Animated counters
 var countersStarted=false;
 function startCounters(){
   if(countersStarted)return;
@@ -663,9 +685,7 @@ function startCounters(){
   document.querySelectorAll('.counter').forEach(function(el){
     var target=parseInt(el.dataset.target);
     var suffix=el.dataset.suffix||'';
-    var start=0;
-    var duration=1500;
-    var step=target/duration*16;
+    var step=target/1500*16;
     var current=0;
     var timer=setInterval(function(){
       current+=step;
@@ -674,14 +694,12 @@ function startCounters(){
     },16);
   });
 }
-// Start counters when ROI section is visible
-var roiObserver=new IntersectionObserver(function(entries){
-  entries.forEach(function(e){if(e.isIntersecting)startCounters();});
-},{threshold:0.3});
-var roiSection=document.querySelector('.counter');
-if(roiSection)roiObserver.observe(roiSection.closest('div'));
-
-// Pricing toggle
+var roiEl=document.querySelector('.counter');
+if(roiEl){
+  new IntersectionObserver(function(entries){
+    if(entries[0].isIntersecting)startCounters();
+  },{threshold:0.3}).observe(roiEl.closest('div'));
+}
 var toggleMonthly=document.getElementById('toggle-monthly');
 var toggleAnnual=document.getElementById('toggle-annual');
 var priceDisplay=document.getElementById('price-display');
@@ -706,8 +724,6 @@ function setPricing(isAnnual){
 }
 toggleMonthly.addEventListener('click',function(){setPricing(false);});
 toggleAnnual.addEventListener('click',function(){setPricing(true);});
-
-// ROI Calculator
 var calcSlider=document.getElementById('calc-slider');
 function updateCalc(){
   var agents=parseInt(calcSlider.value);
@@ -719,8 +735,6 @@ function updateCalc(){
   document.getElementById('calc-saving').textContent=agents>1?agents+' agents · just €'+perAgent+' per agent per month':'Add more agents for just €15/month each';
 }
 if(calcSlider){calcSlider.addEventListener('input',updateCalc);updateCalc();}
-
-// FAQ
 var faqs=[
   ['How many users can I add?','Unlimited. Every agent in your office can have their own login at no extra cost. Only add paid extra users (€15/mo) if you need multiple independent logins.'],
   ['Can I cancel anytime?','Yes. No contracts, no cancellation fees. Cancel with one click from your account settings.'],
@@ -748,7 +762,6 @@ if(faqContainer){
     if(!isOpen){content.classList.add('open');icon.textContent='−';}
   });
 }
-
 lucide.createIcons();
 </script>
 </body>
