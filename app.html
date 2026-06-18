@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Social Property Pro</title>
+  <title>Social Listings Pro</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;700;800&family=Public+Sans:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
@@ -81,7 +81,7 @@
         <circle cx="8" cy="4" r="1" fill="#fbbf24" style="animation:twinkle 1.5s infinite .35s;"/>
         <circle cx="15" cy="2" r="1" fill="#fbbf24" style="animation:twinkle 1.5s infinite .7s;"/>
       </svg>
-      <span style="font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;font-size:14px;color:var(--text);letter-spacing:-.01em;line-height:1.2;">Social Property Pro</span>
+      <span style="font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;font-size:14px;color:var(--text);letter-spacing:-.01em;line-height:1.2;">Social Listings Pro</span>
     </div>
   </div>
   <nav class="p-2 flex-1" id="nav">
@@ -561,7 +561,7 @@
         <h3 class="font-bold text-sm mb-4">🔗 Link Builder</h3>
         <div class="space-y-3">
           <div><label class="text-xs font-medium mb-1 block" style="color:var(--muted);">Your URL</label>
-            <div class="flex"><span class="text-xs px-3 py-2 rounded-l-lg flex-shrink-0" style="background:var(--bg3);border:1px solid var(--border);border-right:0;color:var(--muted);">socialproperty.pro/</span><input id="bio-slug" type="text" value="sunshine-properties" style="border-radius:0 8px 8px 0;"></div>
+            <div class="flex"><span class="text-xs px-3 py-2 rounded-l-lg flex-shrink-0" style="background:var(--bg3);border:1px solid var(--border);border-right:0;color:var(--muted);">sociallistings.pro/</span><input id="bio-slug" type="text" value="sunshine-properties" style="border-radius:0 8px 8px 0;"></div>
           </div>
           <div><label class="text-xs font-medium mb-1 block" style="color:var(--muted);">Headline</label><input id="bio-hl" type="text" value="Sunshine Properties S.L."></div>
           <div><label class="text-xs font-medium mb-1 block" style="color:var(--muted);">Tagline</label><input id="bio-tl" type="text" value="Your Dream Home on the Costa del Sol"></div>
@@ -669,7 +669,7 @@
   </div><!-- /p-5 -->
 </main>
 <script>
-const API_KEY = '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';
+const API_KEY = 'YOUR_API_KEY_HERE';
 const MODEL = 'claude-sonnet-4-6';
 
 // ── OFFLINE ──────────────────────────────────────────────────────────────────
@@ -926,7 +926,7 @@ async function sendChat(msg){
     const msgs=chatHist.map(m=>({role:m.role,content:m.content}));
     const r=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'Content-Type':'application/json'},
       body:JSON.stringify({model:MODEL,max_tokens:1000,
-        system:'You are an expert real estate social media strategist for Social Property Pro. The agent targets luxury investors & expats in Marbella, Costa del Sol with a storytelling tone. Be concise, creative, and practical.',
+        system:'You are an expert real estate social media strategist for Social Listings Pro. The agent targets luxury investors & expats in Marbella, Costa del Sol with a storytelling tone. Be concise, creative, and practical.',
         messages:msgs})});
     const d=await r.json();const reply=d.content.map(b=>b.type==='text'?b.text:'').join('');
     document.getElementById(tid)?.remove();
