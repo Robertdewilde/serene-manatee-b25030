@@ -108,15 +108,26 @@
     .view{display:none;padding:24px;}.view.active{display:block;}
 
     /* ── INPUTS ── */
-    input,select,textarea{
+    input,textarea{
       background:var(--bg3);border:1px solid var(--border);color:var(--text);
       border-radius:8px;padding:9px 12px;font-size:13px;width:100%;outline:none;
       font-family:'Inter',sans-serif;transition:border-color .15s;
     }
-    input:focus,select:focus,textarea:focus{border-color:var(--accent2);}
+    select{
+      background:var(--bg3);border:1px solid var(--border);color:var(--muted);
+      border-radius:7px;padding:6px 10px;font-size:12px;width:100%;outline:none;
+      font-family:'Inter',sans-serif;transition:all .15s;
+      -webkit-appearance:none;appearance:none;
+      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='11' height='11' viewBox='0 0 24 24' fill='none' stroke='%2371717a' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+      background-repeat:no-repeat;background-position:right 9px center;
+      padding-right:26px;cursor:pointer;
+    }
+    select:focus{border-color:var(--accent2);color:var(--text);}
+    select:hover{border-color:var(--border2);}
+    input:focus,textarea:focus{border-color:var(--accent2);}
     input::placeholder,textarea::placeholder{color:var(--muted2);}
-    select option{background:var(--bg3);}
-    label.field-label{font-size:12px;font-weight:500;color:var(--muted);margin-bottom:5px;display:block;}
+    select option{background:#18181f;color:var(--text);font-size:12px;}
+    label.field-label{font-size:11px;font-weight:500;color:var(--muted2);margin-bottom:5px;display:block;letter-spacing:.03em;text-transform:uppercase;}
 
     /* ── BADGES ── */
     .badge{display:inline-flex;align-items:center;gap:3px;padding:2px 8px;border-radius:99px;font-size:11px;font-weight:600;}
@@ -495,8 +506,8 @@
     <button class="btn btn-ghost btn-sm ai-tab" data-panel="custom"><i data-lucide="rocket" style="width:12px;height:12px;"></i>Custom Campaign</button>
   </div>
   <div id="ai-panel-social">
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;">
-      <div class="card" style="padding:20px;display:flex;flex-direction:column;gap:14px;">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;">
+      <div class="card" style="padding:24px;display:flex;flex-direction:column;gap:18px;">
         <p style="font-size:13px;font-weight:600;">Property Details</p>
         <div><label class="field-label">Property URL or Description</label><textarea id="prop-url" rows="4" placeholder="Paste a property URL or describe the listing..."></textarea></div>
         <div><label class="field-label" style="margin-bottom:8px;">Platforms</label>
@@ -548,7 +559,7 @@
       </div>
     </div>
   </div>
-  <div id="ai-panel-blog" class="hidden card" style="padding:20px;max-width:560px;display:flex;flex-direction:column;gap:14px;">
+  <div id="ai-panel-blog" class="hidden card" style="padding:24px;max-width:560px;display:flex;flex-direction:column;gap:18px;margin-top:4px;">
     <p style="font-size:13px;font-weight:600;">Blog Article Creator</p>
     <div><label class="field-label">Target Keywords</label><input id="blog-kw" type="text" placeholder="e.g. Marbella luxury villas, Costa del Sol investment"></div>
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
@@ -558,14 +569,14 @@
     <button id="gen-blog" class="btn btn-gold" style="justify-content:center;padding:11px;"><i data-lucide="sparkles" style="width:14px;height:14px;"></i>Generate Article</button>
     <div id="blog-out" class="hidden" style="background:var(--bg3);border-radius:8px;padding:14px;font-size:12px;line-height:1.7;white-space:pre-wrap;max-height:360px;overflow-y:auto;"></div>
   </div>
-  <div id="ai-panel-gbp" class="hidden card" style="padding:20px;max-width:560px;display:flex;flex-direction:column;gap:14px;">
+  <div id="ai-panel-gbp" class="hidden card" style="padding:24px;max-width:560px;display:flex;flex-direction:column;gap:18px;margin-top:4px;">
     <p style="font-size:13px;font-weight:600;">Google Business Profile Update</p>
     <div><label class="field-label">Update Type</label><select id="gbp-type"><option>What's New</option><option>Event</option><option>Offer</option><option>Success Story</option></select></div>
     <div><label class="field-label">Property / Topic</label><input id="gbp-topic" type="text" placeholder="e.g. New listing in Golden Mile"></div>
     <button id="gen-gbp" class="btn btn-gold" style="justify-content:center;padding:11px;"><i data-lucide="sparkles" style="width:14px;height:14px;"></i>Generate GBP Update</button>
     <div id="gbp-out" class="hidden" style="background:var(--bg3);border-radius:8px;padding:14px;font-size:12px;line-height:1.7;white-space:pre-wrap;"></div>
   </div>
-  <div id="ai-panel-custom" class="hidden card" style="padding:20px;max-width:560px;display:flex;flex-direction:column;gap:14px;">
+  <div id="ai-panel-custom" class="hidden card" style="padding:24px;max-width:560px;display:flex;flex-direction:column;gap:18px;margin-top:4px;">
     <p style="font-size:13px;font-weight:600;">Custom Campaign Engine</p>
     <div><label class="field-label">Campaign Topic</label><textarea id="custom-topic" rows="3" placeholder="e.g. Neighbourhood guide, market update, open house series..."></textarea></div>
     <div><label class="field-label">Number of Posts</label><input id="custom-count" type="number" value="20" min="5" max="60"></div>
@@ -932,7 +943,7 @@
 
   </main>
 <script>
-const API_KEY = 'YOUR_API_KEY_HERE';
+const API_KEY = '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';
 const MODEL = 'claude-sonnet-4-6';
 
 // ── OFFLINE ──────────────────────────────────────────────────────────────────
