@@ -378,14 +378,71 @@ body{
 .ai-pulse{
   animation:aiPulse 1.5s infinite;
 }
-html{background:#0d0f14!important;}
-body{background:#0d0f14!important;-webkit-backface-visibility:hidden;backface-visibility:hidden;}
-.shell,.content,.sidebar,.card,.inset,.stat-card,.kb-col,.kb-card,.topbar{
-  -webkit-backface-visibility:hidden;
-  backface-visibility:hidden;
-  -webkit-perspective:1000;
-  perspective:1000;
+
+/* =====================================================
+   DESKTOP / LAPTOP UI POLISH
+   ===================================================== */
+
+.page{
+  max-width:1400px;
+  margin:0 auto;
+  padding:28px 32px;
 }
+
+.card,
+.stat-card,
+.kb-col,
+.kb-card,
+.post-card{
+  min-width:0;
+}
+
+.stat-grid{
+  gap:18px;
+}
+
+.two-col,
+.three-col,
+.four-col{
+  gap:22px!important;
+  align-items:start;
+}
+
+.card{
+  overflow:hidden;
+}
+
+.view .card{
+  margin-bottom:18px;
+}
+
+.section-head{
+  margin-bottom:24px;
+}
+
+.topbar{
+  backdrop-filter:none;
+  -webkit-backdrop-filter:none;
+  background:#080a0f;
+}
+
+@media(min-width:1200px){
+  .page{
+    padding-left:40px;
+    padding-right:40px;
+  }
+}
+
+@media(min-width:769px) and (max-width:1200px){
+  .page{
+    padding:22px;
+  }
+
+  .stat-grid{
+    grid-template-columns:repeat(2,1fr);
+  }
+}
+
 </style>
 </head>
 <body>
