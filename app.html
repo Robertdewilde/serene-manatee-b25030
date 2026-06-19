@@ -6,28 +6,28 @@
   <title>Social Listings Pro</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;700;800&family=Public+Sans:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
   <script src="https://cdn.tailwindcss.com/3.4.17"></script>
   <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
   <style>
-    *{font-family:'Inter',system-ui,sans-serif;box-sizing:border-box;margin:0;padding:0;}
+    *{box-sizing:border-box;margin:0;padding:0;}
     :root{
-      --bg:#09090b;
-      --bg2:#111116;
-      --bg3:#18181f;
-      --bg4:#1f1f28;
-      --text:#fafafa;
-      --muted:#71717a;
-      --muted2:#52525b;
-      --border:#27272a;
-      --border2:#3f3f46;
-      --accent:#7c3aed;
-      --accent2:#8b5cf6;
-      --accentL:rgba(124,58,237,.12);
-      --gold:#d4a853;
-      --goldL:rgba(212,168,83,.12);
-      --green:#22c55e;
-      --greenL:rgba(34,197,94,.12);
+      --bg:#0b0c10;
+      --bg2:#11131e;
+      --bg3:#1a1d2e;
+      --bg4:#242838;
+      --text:#f1f3f7;
+      --muted:#9ca3b4;
+      --muted2:#6b7280;
+      --border:#2d3348;
+      --border2:#3d4460;
+      --accent:#6a6bea;
+      --accent2:#818cf8;
+      --accentL:rgba(106,107,234,.12);
+      --gold:#d2b67d;
+      --goldL:rgba(210,182,125,.12);
+      --green:#10b981;
+      --greenL:rgba(16,185,129,.12);
       --amber:#f59e0b;
       --amberL:rgba(245,158,11,.12);
       --red:#ef4444;
@@ -35,23 +35,29 @@
       --blue:#3b82f6;
       --blueL:rgba(59,130,246,.12);
     }
-    body{background:var(--bg);color:var(--text);min-height:100vh;}
+    body{background:var(--bg);color:var(--text);min-height:100vh;font-family:'Inter',system-ui,sans-serif;}
+    h1,h2,h3,h4,h5,h6{font-family:'Public Sans',system-ui,sans-serif;}
 
     /* ── SIDEBAR ── */
     .sidebar{
-      width:220px;background:var(--bg2);border-right:1px solid var(--border);
-      position:fixed;top:0;left:0;height:100vh;overflow-y:auto;z-index:30;
+      width:224px;background:var(--bg2);border-right:1px solid var(--border);
+      position:fixed;top:0;left:0;height:100vh;overflow-y:auto;z-index:40;
       display:flex;flex-direction:column;
     }
-    .main{margin-left:220px;min-height:100vh;background:var(--bg);}
-    @media(max-width:768px){
-      .sidebar{transform:translateX(-220px);transition:transform .25s;}
-      .sidebar.open{transform:translateX(0);}
+    .main{margin-left:224px;min-height:100vh;background:var(--bg);}
+    .sidebar-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:35;backdrop-filter:blur(2px);}
+    #menu-btn{display:none;}
+    @media(max-width:900px){
+      #menu-btn{display:flex;}
+      .sidebar{transform:translateX(-224px);transition:transform .25s;box-shadow:none;}
+      .sidebar.open{transform:translateX(0);box-shadow:0 0 48px rgba(0,0,0,.8);}
+      .sidebar.open~.sidebar-overlay{display:block;}
       .main{margin-left:0;}
+      .topbar{padding:0 16px;}
     }
 
     /* ── LOGO ── */
-    .logo-text{font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;font-size:14px;letter-spacing:-.02em;color:var(--text);}
+    .logo-text{font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:14px;letter-spacing:-.02em;color:var(--text);}
 
     /* ── NAV ── */
     .nav-section{font-size:10px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--muted2);padding:16px 14px 4px;}
@@ -93,19 +99,33 @@
     .stat-card:hover::before{opacity:1;}
 
     /* ── BUTTONS ── */
-    .btn{display:inline-flex;align-items:center;gap:6px;padding:8px 16px;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;border:none;transition:all .15s;font-family:'Inter',sans-serif;white-space:nowrap;}
-    .btn-primary{background:var(--accent);color:white;box-shadow:0 0 20px rgba(124,58,237,.3);}
-    .btn-primary:hover{background:var(--accent2);box-shadow:0 0 24px rgba(124,58,237,.4);}
+    .btn{display:inline-flex;align-items:center;gap:7px;padding:10px 18px;border-radius:8px;font-size:13px;font-weight:700;cursor:pointer;border:none;transition:all .18s;font-family:'Public Sans',system-ui,sans-serif;white-space:nowrap;letter-spacing:-.01em;}
+    .btn-primary{background:var(--accent);color:white;box-shadow:0 0 16px rgba(106,107,234,.3);}
+    .btn-primary:hover{background:var(--accent2);box-shadow:0 0 24px rgba(106,107,234,.45);transform:translateY(-1px);}
     .btn-ghost{background:transparent;border:1px solid var(--border2);color:var(--muted);}
-    .btn-ghost:hover{border-color:var(--border2);color:var(--text);background:var(--bg3);}
-    .btn-gold{background:linear-gradient(135deg,#d4a853,#e8c070);color:#0a0a0a;font-weight:700;box-shadow:0 0 20px rgba(212,168,83,.2);}
-    .btn-gold:hover{box-shadow:0 0 28px rgba(212,168,83,.35);filter:brightness(1.05);}
-    .btn-sm{padding:5px 12px;font-size:12px;border-radius:6px;}
-    .btn-xs{padding:3px 8px;font-size:11px;border-radius:5px;}
-    .btn-icon{padding:7px;border-radius:7px;}
+    .btn-ghost:hover{border-color:var(--accent);color:var(--accent);background:var(--accentL);}
+    .btn-gold{background:var(--gold);color:#0b0c10;font-weight:800;box-shadow:0 0 16px rgba(210,182,125,.2);}
+    .btn-gold:hover{background:#e0c99a;box-shadow:0 0 24px rgba(210,182,125,.35);transform:translateY(-1px);}
+    .btn-sm{padding:7px 14px;font-size:12px;border-radius:7px;}
+    .btn-xs{padding:4px 10px;font-size:11px;border-radius:6px;}
+    .btn-icon{padding:8px;border-radius:8px;}
 
     /* ── VIEWS ── */
-    .view{display:none;padding:24px;}.view.active{display:block;}
+    .view{display:none;padding:28px 32px;}.view.active{display:block;}
+    @media(max-width:900px){.view{padding:16px;}}
+    /* ── RESPONSIVE GRID ── */
+    .grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;}
+    .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+    .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;}
+    @media(max-width:900px){
+      .grid-4{grid-template-columns:repeat(2,1fr);}
+      .grid-2{grid-template-columns:1fr;}
+      .grid-3{grid-template-columns:1fr 1fr;}
+    }
+    @media(max-width:560px){
+      .grid-4{grid-template-columns:1fr 1fr;}
+      .grid-3{grid-template-columns:1fr;}
+    }
 
     /* ── INPUTS ── */
     input,textarea{
@@ -114,20 +134,20 @@
       font-family:'Inter',sans-serif;transition:border-color .15s;
     }
     select{
-      background:var(--bg3);border:1px solid var(--border);color:var(--muted);
-      border-radius:7px;padding:6px 10px;font-size:12px;width:100%;outline:none;
-      font-family:'Inter',sans-serif;transition:all .15s;
+      background:var(--bg3);border:1px solid var(--border);color:var(--text);
+      border-radius:7px;padding:7px 28px 7px 10px;font-size:11px;font-weight:500;width:100%;outline:none;
+      font-family:'Inter',system-ui,sans-serif;transition:all .15s;
       -webkit-appearance:none;appearance:none;
-      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='11' height='11' viewBox='0 0 24 24' fill='none' stroke='%2371717a' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
-      background-repeat:no-repeat;background-position:right 9px center;
-      padding-right:26px;cursor:pointer;
+      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' viewBox='0 0 24 24' fill='none' stroke='%239ca3b4' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+      background-repeat:no-repeat;background-position:right 8px center;
+      cursor:pointer;letter-spacing:.01em;
     }
-    select:focus{border-color:var(--accent2);color:var(--text);}
+    select:focus{border-color:var(--accent);color:var(--text);}
     select:hover{border-color:var(--border2);}
-    input:focus,textarea:focus{border-color:var(--accent2);}
+    input:focus,textarea:focus{border-color:var(--accent);}
     input::placeholder,textarea::placeholder{color:var(--muted2);}
-    select option{background:#18181f;color:var(--text);font-size:12px;}
-    label.field-label{font-size:11px;font-weight:500;color:var(--muted2);margin-bottom:5px;display:block;letter-spacing:.03em;text-transform:uppercase;}
+    select option{background:var(--bg3);color:var(--text);font-size:11px;}
+    label.field-label{font-size:10px;font-weight:600;color:var(--muted);margin-bottom:6px;display:block;letter-spacing:.06em;text-transform:uppercase;}
 
     /* ── BADGES ── */
     .badge{display:inline-flex;align-items:center;gap:3px;padding:2px 8px;border-radius:99px;font-size:11px;font-weight:600;}
@@ -188,9 +208,9 @@
     #offline-bar{display:none;position:fixed;top:0;left:0;right:0;z-index:300;background:var(--amber);color:#0a0a0a;text-align:center;font-size:12px;font-weight:600;padding:5px 8px;}
 
     /* ── SECTION HEADER ── */
-    .section-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;}
-    .section-title{font-size:15px;font-weight:600;color:var(--text);}
-    .section-sub{font-size:12px;color:var(--muted);margin-top:1px;}
+    .section-header{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:28px;gap:12px;}
+    .section-title{font-size:18px;font-weight:700;color:var(--text);font-family:'Public Sans',system-ui,sans-serif;letter-spacing:-.02em;}
+    .section-sub{font-size:13px;color:var(--muted);margin-top:3px;}
 
     /* ── METRIC ROW ── */
     .metric-icon{width:36px;height:36px;border-radius:9px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
@@ -279,11 +299,12 @@
   </div>
 </aside>
 
+<div class="sidebar-overlay" id="sidebar-overlay"></div>
 <!-- ═══════════ MAIN ═══════════ -->
 <main class="main" id="main">
   <div class="topbar">
     <div style="display:flex;align-items:center;gap:12px;">
-      <button id="menu-btn" class="btn btn-ghost btn-icon"><i data-lucide="menu" style="width:16px;height:16px;"></i></button>
+      <button id="menu-btn" class="btn btn-ghost btn-icon" style="display:flex;"><i data-lucide="menu" style="width:16px;height:16px;"></i></button>
       <div>
         <p style="font-size:14px;font-weight:600;" id="page-title">Dashboard</p>
         <p style="font-size:11px;color:var(--muted);" id="page-sub">Welcome back</p>
@@ -305,7 +326,7 @@
     <div><p class="section-title">Dashboard</p><p class="section-sub">Thursday, June 18 · Good morning, Sarah</p></div>
     <button class="btn btn-primary btn-sm" onclick="switchView('monthly-wizard')"><i data-lucide="plus" style="width:13px;height:13px;"></i>New Content</button>
   </div>
-  <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:20px;">
+  <div style="display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-bottom:24px;">
     <div class="stat-card">
       <div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:12px;">
         <div class="metric-icon" style="background:var(--accentL);"><i data-lucide="calendar-check" style="width:17px;height:17px;color:var(--accent2);"></i></div>
@@ -507,7 +528,7 @@
   </div>
   <div id="ai-panel-social">
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;">
-      <div class="card" style="padding:24px;display:flex;flex-direction:column;gap:18px;">
+      <div class="card" style="padding:28px;display:flex;flex-direction:column;gap:20px;">
         <p style="font-size:13px;font-weight:600;">Property Details</p>
         <div><label class="field-label">Property URL or Description</label><textarea id="prop-url" rows="4" placeholder="Paste a property URL or describe the listing..."></textarea></div>
         <div><label class="field-label" style="margin-bottom:8px;">Platforms</label>
@@ -559,7 +580,8 @@
       </div>
     </div>
   </div>
-  <div id="ai-panel-blog" class="hidden card" style="padding:24px;max-width:560px;display:flex;flex-direction:column;gap:18px;margin-top:4px;">
+  <div id="ai-panel-blog" class="hidden" style="margin-top:20px;">
+    <div class="card" style="padding:28px;max-width:600px;display:flex;flex-direction:column;gap:20px;">
     <p style="font-size:13px;font-weight:600;">Blog Article Creator</p>
     <div><label class="field-label">Target Keywords</label><input id="blog-kw" type="text" placeholder="e.g. Marbella luxury villas, Costa del Sol investment"></div>
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
@@ -568,20 +590,25 @@
     </div>
     <button id="gen-blog" class="btn btn-gold" style="justify-content:center;padding:11px;"><i data-lucide="sparkles" style="width:14px;height:14px;"></i>Generate Article</button>
     <div id="blog-out" class="hidden" style="background:var(--bg3);border-radius:8px;padding:14px;font-size:12px;line-height:1.7;white-space:pre-wrap;max-height:360px;overflow-y:auto;"></div>
+    </div>
   </div>
-  <div id="ai-panel-gbp" class="hidden card" style="padding:24px;max-width:560px;display:flex;flex-direction:column;gap:18px;margin-top:4px;">
+  <div id="ai-panel-gbp" class="hidden" style="margin-top:20px;">
+    <div class="card" style="padding:28px;max-width:600px;display:flex;flex-direction:column;gap:20px;">
     <p style="font-size:13px;font-weight:600;">Google Business Profile Update</p>
     <div><label class="field-label">Update Type</label><select id="gbp-type"><option>What's New</option><option>Event</option><option>Offer</option><option>Success Story</option></select></div>
     <div><label class="field-label">Property / Topic</label><input id="gbp-topic" type="text" placeholder="e.g. New listing in Golden Mile"></div>
     <button id="gen-gbp" class="btn btn-gold" style="justify-content:center;padding:11px;"><i data-lucide="sparkles" style="width:14px;height:14px;"></i>Generate GBP Update</button>
     <div id="gbp-out" class="hidden" style="background:var(--bg3);border-radius:8px;padding:14px;font-size:12px;line-height:1.7;white-space:pre-wrap;"></div>
+    </div>
   </div>
-  <div id="ai-panel-custom" class="hidden card" style="padding:24px;max-width:560px;display:flex;flex-direction:column;gap:18px;margin-top:4px;">
+  <div id="ai-panel-custom" class="hidden" style="margin-top:20px;">
+    <div class="card" style="padding:28px;max-width:600px;display:flex;flex-direction:column;gap:20px;">
     <p style="font-size:13px;font-weight:600;">Custom Campaign Engine</p>
     <div><label class="field-label">Campaign Topic</label><textarea id="custom-topic" rows="3" placeholder="e.g. Neighbourhood guide, market update, open house series..."></textarea></div>
     <div><label class="field-label">Number of Posts</label><input id="custom-count" type="number" value="20" min="5" max="60"></div>
     <button id="gen-custom" class="btn btn-gold" style="justify-content:center;padding:11px;"><i data-lucide="sparkles" style="width:14px;height:14px;"></i>Generate Campaign</button>
     <div id="custom-out" class="hidden" style="background:var(--bg3);border-radius:8px;padding:14px;font-size:12px;line-height:1.7;white-space:pre-wrap;max-height:360px;overflow-y:auto;"></div>
+    </div>
   </div>
 </section>
 
@@ -642,7 +669,7 @@
     <div><p class="section-title">Control Tower</p><p class="section-sub">Your content pipeline from draft to published</p></div>
     <button class="btn btn-primary btn-sm" onclick="switchView('ai-generator')"><i data-lucide="plus" style="width:13px;height:13px;"></i>New Post</button>
   </div>
-  <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;">
+  <div style="display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;overflow-x:auto;">
     <div class="kanban-col">
       <div class="kanban-header"><span class="kanban-title">To Do</span><span style="font-size:11px;background:var(--bg4);padding:1px 7px;border-radius:99px;color:var(--muted);">2</span></div>
       <div class="post-card"><div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px;"><span class="badge b-ig">IG</span><span style="font-size:10px;color:var(--muted);">Jun 20</span></div><p style="font-size:12px;font-weight:600;line-height:1.4;">Just Listed: Villa Golden Mile</p></div>
@@ -735,7 +762,7 @@
 <!-- ═══════════ ANALYTICS ═══════════ -->
 <section class="view" id="view-analytics">
   <div class="section-header"><div><p class="section-title">Analytics</p><p class="section-sub">Track your performance across all platforms</p></div></div>
-  <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:20px;">
+  <div style="display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-bottom:24px;">
     <div class="stat-card"><div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:12px;"><div class="metric-icon" style="background:var(--accentL);"><i data-lucide="eye" style="width:17px;height:17px;color:var(--accent2);"></i></div><span class="badge b-green" style="font-size:10px;">+31%</span></div><p style="font-size:28px;font-weight:700;letter-spacing:-.02em;">142K</p><p style="font-size:12px;color:var(--muted);margin-top:2px;">Total Impressions</p></div>
     <div class="stat-card"><div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:12px;"><div class="metric-icon" style="background:var(--greenL);"><i data-lucide="heart" style="width:17px;height:17px;color:var(--green);"></i></div><span class="badge b-green" style="font-size:10px;">+0.6%</span></div><p style="font-size:28px;font-weight:700;letter-spacing:-.02em;color:var(--green);">4.8%</p><p style="font-size:12px;color:var(--muted);margin-top:2px;">Engagement Rate</p></div>
     <div class="stat-card"><div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:12px;"><div class="metric-icon" style="background:var(--goldL);"><i data-lucide="mouse-pointer-click" style="width:17px;height:17px;color:var(--gold);"></i></div><span class="badge b-amber" style="font-size:10px;">+18%</span></div><p style="font-size:28px;font-weight:700;letter-spacing:-.02em;color:var(--gold);">2.1K</p><p style="font-size:12px;color:var(--muted);margin-top:2px;">Link Clicks</p></div>
@@ -998,7 +1025,12 @@ function switchView(id){
 document.getElementById('nav').addEventListener('click',e=>{
   const b=e.target.closest('[data-view]');if(b)switchView(b.dataset.view);
 });
-document.getElementById('menu-btn')?.addEventListener('click',()=>document.getElementById('sidebar').classList.toggle('open'));
+document.getElementById('menu-btn')?.addEventListener('click',()=>{
+  document.getElementById('sidebar').classList.toggle('open');
+});
+document.getElementById('sidebar-overlay')?.addEventListener('click',()=>{
+  document.getElementById('sidebar').classList.remove('open');
+});
 
 // ── CLAUDE API ────────────────────────────────────────────────────────────────
 async function claude(system,user){
