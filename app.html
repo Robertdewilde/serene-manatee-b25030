@@ -425,7 +425,55 @@ body{
   -webkit-backdrop-filter:none;
   background:#080a0f;
 }
+/* ── DASHBOARD MOBILE RENDER FIX ───────────────── */
 
+@media(max-width:768px){
+
+  #view-dashboard,
+  #view-dashboard .page,
+  #view-dashboard .card,
+  #view-dashboard .stat-card{
+    transform:none!important;
+    filter:none!important;
+    backdrop-filter:none!important;
+    -webkit-backdrop-filter:none!important;
+    contain:layout!important;
+  }
+
+
+  #view-dashboard .stat-grid{
+    display:grid!important;
+    grid-template-columns:1fr 1fr!important;
+    gap:10px!important;
+  }
+
+
+  #view-dashboard .two-col{
+    display:grid!important;
+    grid-template-columns:1fr!important;
+    gap:10px!important;
+  }
+
+
+  #view-dashboard .card,
+  #view-dashboard .stat-card{
+    overflow:hidden!important;
+    box-shadow:none!important;
+  }
+
+
+  #view-dashboard svg{
+    transform:none!important;
+  }
+
+
+  #view-dashboard *{
+    -webkit-transform:translateZ(0);
+    transform:translateZ(0);
+  }
+
+}
+  
 </style>
 </head>
 <body>
