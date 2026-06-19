@@ -1,974 +1,776 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Social Listings Pro</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;700;800&family=Public+Sans:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
-  <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
-  <style>
-    *{box-sizing:border-box;margin:0;padding:0;}
-    :root{
-      --bg:#0b0c10;
-      --bg2:#11131e;
-      --bg3:#1a1d2e;
-      --bg4:#242838;
-      --text:#f1f3f7;
-      --muted:#9ca3b4;
-      --muted2:#6b7280;
-      --border:#2d3348;
-      --border2:#3d4460;
-      --accent:#6a6bea;
-      --accent2:#818cf8;
-      --accentL:rgba(106,107,234,.12);
-      --gold:#d2b67d;
-      --goldL:rgba(210,182,125,.12);
-      --green:#10b981;
-      --greenL:rgba(16,185,129,.12);
-      --amber:#f59e0b;
-      --amberL:rgba(245,158,11,.12);
-      --red:#ef4444;
-      --redL:rgba(239,68,68,.12);
-      --blue:#3b82f6;
-      --blueL:rgba(59,130,246,.12);
-    }
-    body{background:var(--bg);color:var(--text);min-height:100vh;font-family:'Inter',system-ui,sans-serif;}
-    h1,h2,h3,h4,h5,h6{font-family:'Public Sans',system-ui,sans-serif;}
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Social Listings Pro</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;700;800&family=Public+Sans:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com/3.4.17"></script>
+<script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --bg:#0b0c10;--bg2:#11131e;--bg3:#1a1d2e;--bg4:#242838;
+  --text:#f1f3f7;--muted:#9ca3b4;--muted2:#6b7280;
+  --border:#2d3348;--border2:#3d4460;
+  --accent:#6a6bea;--accent2:#818cf8;--accentL:rgba(106,107,234,.12);
+  --gold:#d2b67d;--goldL:rgba(210,182,125,.12);
+  --green:#10b981;--greenL:rgba(16,185,129,.12);
+  --amber:#f59e0b;--amberL:rgba(245,158,11,.12);
+  --red:#ef4444;--redL:rgba(239,68,68,.12);
+  --blue:#3b82f6;--blueL:rgba(59,130,246,.12);
+}
+html,body{height:100%;overflow-x:hidden;}
+body{background:var(--bg);color:var(--text);font-family:'Inter',system-ui,sans-serif;font-size:14px;line-height:1.5;}
 
-    /* ── SIDEBAR ── */
-    .sidebar{
-      width:224px;background:var(--bg2);border-right:1px solid var(--border);
-      position:fixed;top:0;left:0;height:100vh;overflow-y:auto;z-index:40;
-      display:flex;flex-direction:column;
-    }
-    .main{margin-left:224px;min-height:100vh;background:var(--bg);}
-    .sidebar-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:35;backdrop-filter:blur(2px);}
-    #menu-btn{display:none;}
-    @media(max-width:900px){
-      #menu-btn{display:flex;}
-      .sidebar{transform:translateX(-224px);transition:transform .25s;box-shadow:none;}
-      .sidebar.open{transform:translateX(0);box-shadow:0 0 48px rgba(0,0,0,.8);}
-      .sidebar.open~.sidebar-overlay{display:block;}
-      .main{margin-left:0;}
-      .topbar{padding:0 16px;}
-    }
+/* LAYOUT */
+.app-shell{display:flex;min-height:100vh;}
+.sidebar{width:220px;flex-shrink:0;background:var(--bg2);border-right:1px solid var(--border);position:fixed;top:0;left:0;height:100vh;overflow-y:auto;z-index:50;display:flex;flex-direction:column;transition:transform .25s;}
+.content{flex:1;margin-left:220px;min-height:100vh;display:flex;flex-direction:column;min-width:0;}
+.overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:40;backdrop-filter:blur(2px);}
 
-    /* ── LOGO ── */
-    .logo-text{font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:14px;letter-spacing:-.02em;color:var(--text);}
+/* SIDEBAR */
+.logo-wrap{padding:16px 14px 12px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:9px;}
+.logo-icon{width:28px;height:28px;border-radius:7px;background:linear-gradient(135deg,var(--accent),var(--accent2));display:flex;align-items:center;justify-content:center;flex-shrink:0;box-shadow:0 0 14px rgba(106,107,234,.35);}
+.logo-text{font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:13px;letter-spacing:-.02em;color:var(--text);}
+.nav-wrap{padding:8px;flex:1;}
+.nav-group{font-size:10px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--muted2);padding:14px 8px 4px;}
+.nav-item{display:flex;align-items:center;gap:8px;padding:7px 9px;border-radius:7px;font-size:12.5px;font-weight:500;color:var(--muted);cursor:pointer;transition:all .12s;border:none;background:none;width:100%;text-align:left;margin-bottom:1px;}
+.nav-item:hover{color:var(--text);background:rgba(255,255,255,.05);}
+.nav-item.active{color:var(--text);background:var(--bg3);font-weight:600;}
+.nav-item.active svg,.nav-item.active i{color:var(--accent2)!important;}
+.nav-item i{width:14px;height:14px;flex-shrink:0;}
+.sidebar-user{padding:10px;border-top:1px solid var(--border);}
+.user-pill{display:flex;align-items:center;gap:9px;padding:8px 9px;border-radius:8px;background:var(--bg3);}
+.user-avatar{width:26px;height:26px;border-radius:50%;background:linear-gradient(135deg,var(--accent),var(--accent2));display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:white;flex-shrink:0;}
 
-    /* ── NAV ── */
-    .nav-section{font-size:10px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--muted2);padding:16px 14px 4px;}
-    .nav-item{
-      display:flex;align-items:center;gap:9px;padding:7px 10px;border-radius:7px;
-      font-size:13px;font-weight:500;color:var(--muted);cursor:pointer;
-      transition:all .15s;border:none;background:none;width:100%;text-align:left;
-      margin-bottom:1px;
-    }
-    .nav-item:hover{color:var(--text);background:var(--bg3);}
-    .nav-item.active{color:var(--text);background:var(--bg4);font-weight:600;}
-    .nav-item.active i{color:var(--accent2);}
+/* TOPBAR */
+.topbar{position:sticky;top:0;z-index:30;height:50px;background:rgba(11,12,16,.95);border-bottom:1px solid var(--border);backdrop-filter:blur(12px);display:flex;align-items:center;justify-content:space-between;padding:0 20px;flex-shrink:0;}
+#menu-btn{display:none;}
 
-    /* ── TOPBAR ── */
-    .topbar{
-      position:sticky;top:0;z-index:20;height:52px;
-      background:rgba(9,9,11,.9);border-bottom:1px solid var(--border);
-      backdrop-filter:blur(12px);
-      display:flex;align-items:center;justify-content:space-between;
-      padding:0 24px;
-    }
+/* VIEWS */
+.view{display:none;}.view.active{display:block;}
+.page{padding:24px 28px;max-width:1400px;}
 
-    /* ── CARDS ── */
-    .card{background:var(--bg2);border:1px solid var(--border);border-radius:12px;}
-    .card-inner{background:var(--bg3);border-radius:8px;}
-    .card-hover{transition:border-color .15s,transform .15s;}
-    .card-hover:hover{border-color:var(--border2);transform:translateY(-1px);}
+/* CARDS */
+.card{background:var(--bg2);border:1px solid var(--border);border-radius:12px;}
+.card-body{padding:20px;}
+.inner{background:var(--bg3);border-radius:8px;border:1px solid var(--border);}
 
-    /* ── STAT CARD ── */
-    .stat-card{
-      background:var(--bg2);border:1px solid var(--border);border-radius:12px;
-      padding:20px;position:relative;overflow:hidden;
-    }
-    .stat-card::before{
-      content:'';position:absolute;top:0;left:0;right:0;height:1px;
-      background:linear-gradient(90deg,transparent,var(--accent2),transparent);
-      opacity:0;transition:opacity .3s;
-    }
-    .stat-card:hover::before{opacity:1;}
+/* STAT CARD */
+.stat{background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:18px;position:relative;overflow:hidden;transition:border-color .2s;}
+.stat:hover{border-color:var(--border2);}
+.stat-val{font-size:26px;font-weight:800;letter-spacing:-.03em;margin-top:10px;font-family:'Public Sans',system-ui,sans-serif;}
+.stat-label{font-size:11px;color:var(--muted);margin-top:3px;font-weight:500;}
 
-    /* ── BUTTONS ── */
-    .btn{display:inline-flex;align-items:center;gap:7px;padding:10px 18px;border-radius:8px;font-size:13px;font-weight:700;cursor:pointer;border:none;transition:all .18s;font-family:'Public Sans',system-ui,sans-serif;white-space:nowrap;letter-spacing:-.01em;}
-    .btn-primary{background:var(--accent);color:white;box-shadow:0 0 16px rgba(106,107,234,.3);}
-    .btn-primary:hover{background:var(--accent2);box-shadow:0 0 24px rgba(106,107,234,.45);transform:translateY(-1px);}
-    .btn-ghost{background:transparent;border:1px solid var(--border2);color:var(--muted);}
-    .btn-ghost:hover{border-color:var(--accent);color:var(--accent);background:var(--accentL);}
-    .btn-gold{background:var(--gold);color:#0b0c10;font-weight:800;box-shadow:0 0 16px rgba(210,182,125,.2);}
-    .btn-gold:hover{background:#e0c99a;box-shadow:0 0 24px rgba(210,182,125,.35);transform:translateY(-1px);}
-    .btn-sm{padding:7px 14px;font-size:12px;border-radius:7px;}
-    .btn-xs{padding:4px 10px;font-size:11px;border-radius:6px;}
-    .btn-icon{padding:8px;border-radius:8px;}
+/* BUTTONS */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;padding:9px 18px;border-radius:8px;font-size:13px;font-weight:700;cursor:pointer;border:none;transition:all .16s;font-family:'Public Sans',system-ui,sans-serif;white-space:nowrap;letter-spacing:-.01em;line-height:1;}
+.btn-primary{background:var(--accent);color:white;}
+.btn-primary:hover{background:var(--accent2);transform:translateY(-1px);box-shadow:0 4px 16px rgba(106,107,234,.4);}
+.btn-ghost{background:transparent;border:1px solid var(--border2);color:var(--muted);}
+.btn-ghost:hover{border-color:var(--accent);color:var(--accent);background:var(--accentL);}
+.btn-gold{background:var(--gold);color:#0b0c10;font-weight:800;}
+.btn-gold:hover{background:#e0c99a;transform:translateY(-1px);box-shadow:0 4px 16px rgba(210,182,125,.35);}
+.btn-sm{padding:6px 14px;font-size:12px;border-radius:7px;}
+.btn-xs{padding:4px 10px;font-size:11px;border-radius:6px;}
+.btn-icon{padding:8px;border-radius:8px;aspect-ratio:1;}
 
-    /* ── VIEWS ── */
-    .view{display:none;padding:28px 32px;}.view.active{display:block;}
-    @media(max-width:900px){.view{padding:16px;}}
-    /* ── RESPONSIVE GRID ── */
-    .grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;}
-    .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
-    .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;}
-    @media(max-width:900px){
-      .grid-4{grid-template-columns:repeat(2,1fr);}
-      .grid-2{grid-template-columns:1fr;}
-      .grid-3{grid-template-columns:1fr 1fr;}
-    }
-    @media(max-width:560px){
-      .grid-4{grid-template-columns:1fr 1fr;}
-      .grid-3{grid-template-columns:1fr;}
-    }
+/* FORMS */
+label.lbl{display:block;font-size:10px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--muted);margin-bottom:5px;}
+input:not([type=range]):not([type=color]),textarea{background:var(--bg3);border:1px solid var(--border);color:var(--text);border-radius:7px;padding:8px 11px;font-size:13px;width:100%;outline:none;font-family:'Inter',system-ui,sans-serif;transition:border-color .15s;}
+input:not([type=range]):not([type=color]):focus,textarea:focus{border-color:var(--accent);}
+input::placeholder,textarea::placeholder{color:var(--muted2);}
+select{background:var(--bg3);border:1px solid var(--border);color:var(--text);border-radius:7px;padding:7px 26px 7px 10px;font-size:11.5px;font-weight:500;width:100%;outline:none;font-family:'Inter',system-ui,sans-serif;transition:all .15s;-webkit-appearance:none;appearance:none;cursor:pointer;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' viewBox='0 0 24 24' fill='none' stroke='%239ca3b4' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 8px center;}
+select:focus{border-color:var(--accent);}
+select:hover{border-color:var(--border2);}
+select option{background:var(--bg3);color:var(--text);font-size:11.5px;}
+input[type=range]{appearance:none;-webkit-appearance:none;height:4px;border-radius:2px;background:var(--border2);width:100%;outline:none;border:none;padding:0;background-image:none;}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:15px;height:15px;border-radius:50%;background:var(--accent2);cursor:pointer;}
+input[type=color]{width:34px;height:34px;padding:2px;border-radius:7px;cursor:pointer;border:1px solid var(--border);}
 
-    /* ── INPUTS ── */
-    input,textarea{
-      background:var(--bg3);border:1px solid var(--border);color:var(--text);
-      border-radius:8px;padding:9px 12px;font-size:13px;width:100%;outline:none;
-      font-family:'Inter',sans-serif;transition:border-color .15s;
-    }
-    select{
-      background:var(--bg3);border:1px solid var(--border);color:var(--text);
-      border-radius:7px;padding:7px 28px 7px 10px;font-size:11px;font-weight:500;width:100%;outline:none;
-      font-family:'Inter',system-ui,sans-serif;transition:all .15s;
-      -webkit-appearance:none;appearance:none;
-      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' viewBox='0 0 24 24' fill='none' stroke='%239ca3b4' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
-      background-repeat:no-repeat;background-position:right 8px center;
-      cursor:pointer;letter-spacing:.01em;
-    }
-    select:focus{border-color:var(--accent);color:var(--text);}
-    select:hover{border-color:var(--border2);}
-    input:focus,textarea:focus{border-color:var(--accent);}
-    input::placeholder,textarea::placeholder{color:var(--muted2);}
-    select option{background:var(--bg3);color:var(--text);font-size:11px;}
-    label.field-label{font-size:10px;font-weight:600;color:var(--muted);margin-bottom:6px;display:block;letter-spacing:.06em;text-transform:uppercase;}
+/* BADGES */
+.badge{display:inline-flex;align-items:center;gap:3px;padding:2px 7px;border-radius:99px;font-size:10.5px;font-weight:600;}
+.b-ig{background:linear-gradient(135deg,#f09433,#dc2743,#bc1888);color:white;}
+.b-fb{background:#1877f2;color:white;}
+.b-li{background:#0a66c2;color:white;}
+.b-tt{background:#111;color:white;border:1px solid #2a2a2a;}
+.b-gb{background:#4285f4;color:white;}
+.b-green{background:var(--greenL);color:var(--green);border:1px solid rgba(16,185,129,.25);}
+.b-amber{background:var(--amberL);color:var(--amber);border:1px solid rgba(245,158,11,.25);}
+.b-accent{background:var(--accentL);color:var(--accent2);border:1px solid rgba(106,107,234,.25);}
+.b-red{background:var(--redL);color:var(--red);border:1px solid rgba(239,68,68,.25);}
 
-    /* ── BADGES ── */
-    .badge{display:inline-flex;align-items:center;gap:3px;padding:2px 8px;border-radius:99px;font-size:11px;font-weight:600;}
-    .b-ig{background:linear-gradient(135deg,#f09433,#dc2743,#bc1888);color:white;}
-    .b-fb{background:#1877f2;color:white;}
-    .b-li{background:#0a66c2;color:white;}
-    .b-tt{background:#1a1a1a;color:white;border:1px solid #333;}
-    .b-gb{background:#4285f4;color:white;}
-    .b-green{background:var(--greenL);color:var(--green);border:1px solid rgba(34,197,94,.2);}
-    .b-amber{background:var(--amberL);color:var(--amber);border:1px solid rgba(245,158,11,.2);}
-    .b-accent{background:var(--accentL);color:var(--accent2);border:1px solid rgba(139,92,246,.2);}
-    .b-red{background:var(--redL);color:var(--red);border:1px solid rgba(239,68,68,.2);}
+/* LANG CHIPS */
+.chip{display:inline-flex;align-items:center;gap:4px;padding:5px 11px;border-radius:7px;font-size:11.5px;font-weight:500;border:1px solid var(--border);cursor:pointer;transition:all .12s;user-select:none;color:var(--muted);}
+.chip.on{border-color:var(--accent);background:var(--accentL);color:var(--accent);}
+.chip:hover:not(.on){border-color:var(--border2);color:var(--text);}
 
-    /* ── ANIMATIONS ── */
-    .ai-pulse{animation:aiP 1.8s ease-in-out infinite;}
-    @keyframes aiP{0%,100%{opacity:.3;transform:scale(.95);}50%{opacity:1;transform:scale(1);}}
-    .fade-in{animation:fadeIn .25s ease;}
-    @keyframes fadeIn{from{opacity:0;transform:translateY(4px);}to{opacity:1;transform:none;}}
-    .shimmer{animation:shimmer 2s infinite;background:linear-gradient(90deg,var(--bg3) 25%,var(--bg4) 50%,var(--bg3) 75%);background-size:200% 100%;}
-    @keyframes shimmer{0%{background-position:200% 0;}100%{background-position:-200% 0;}}
+/* KANBAN */
+.kb-col{background:var(--bg2);border:1px solid var(--border);border-radius:11px;padding:14px;min-height:280px;}
+.kb-title{font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.07em;margin-bottom:10px;display:flex;align-items:center;justify-content:space-between;}
+.kb-card{background:var(--bg3);border:1px solid var(--border);border-radius:9px;padding:11px;margin-bottom:7px;cursor:pointer;transition:border-color .12s;}
+.kb-card:hover{border-color:var(--border2);}
 
-    /* ── SCROLLBAR ── */
-    ::-webkit-scrollbar{width:4px;height:4px;}
-    ::-webkit-scrollbar-track{background:transparent;}
-    ::-webkit-scrollbar-thumb{background:var(--border2);border-radius:2px;}
+/* CALENDAR */
+.cal-day{background:var(--bg3);border:1px solid var(--border);border-radius:7px;padding:6px;min-height:56px;cursor:pointer;transition:border-color .12s;}
+.cal-day:hover{border-color:var(--border2);}
+.cal-day.has-post{border-color:rgba(106,107,234,.35);}
 
-    /* ── CHAT BUBBLES ── */
-    .bubble-user{background:var(--accent);color:white;border-radius:16px 16px 4px 16px;padding:10px 14px;max-width:80%;font-size:13px;line-height:1.5;}
-    .bubble-ai{background:var(--bg3);border:1px solid var(--border);border-radius:16px 16px 16px 4px;padding:10px 14px;max-width:85%;font-size:13px;line-height:1.6;white-space:pre-wrap;}
+/* CHAT */
+.bmsg{background:var(--accent);color:white;border-radius:14px 14px 3px 14px;padding:9px 13px;max-width:80%;font-size:13px;line-height:1.5;align-self:flex-end;}
+.amsg{background:var(--bg3);border:1px solid var(--border);border-radius:14px 14px 14px 3px;padding:9px 13px;max-width:86%;font-size:13px;line-height:1.6;white-space:pre-wrap;}
 
-    /* ── WIZARD DOTS ── */
-    .dot{width:6px;height:6px;border-radius:50%;background:var(--border2);transition:all .2s;}
-    .dot.active{background:var(--accent2);transform:scale(1.4);}
-    .dot.done{background:var(--green);}
+/* WIZARD DOTS */
+.wdot{width:6px;height:6px;border-radius:50%;background:var(--border2);transition:all .18s;}
+.wdot.on{background:var(--accent2);transform:scale(1.4);}
+.wdot.done{background:var(--green);}
+.wizard-step{display:none;}.wizard-step.active{display:block;}
 
-    /* ── LANG CHIPS ── */
-    .lang-chip{display:inline-flex;align-items:center;gap:5px;padding:5px 12px;border-radius:8px;font-size:12px;font-weight:500;border:1px solid var(--border);cursor:pointer;transition:all .15s;user-select:none;color:var(--muted);}
-    .lang-chip.selected{border-color:var(--accent2);background:var(--accentL);color:var(--accent2);}
-    .lang-chip:hover:not(.selected){border-color:var(--border2);color:var(--text);}
+/* MISC */
+.ai-tab.active-tab{background:var(--accent)!important;color:white!important;border-color:var(--accent)!important;}
+.post-card{background:var(--bg3);border:1px solid var(--border);border-radius:9px;padding:12px;transition:border-color .12s;}
+.post-card:hover{border-color:var(--border2);}
+.inbox-row{padding:11px;border-radius:8px;border:1px solid var(--border);cursor:pointer;transition:all .12s;margin-bottom:5px;}
+.inbox-row:hover{background:var(--bg3);border-color:var(--border2);}
+.inbox-row.sel{background:var(--bg3);border-color:var(--accent);}
+.sec-icon{width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.ai-pulse{animation:aip 1.8s ease-in-out infinite;}
+@keyframes aip{0%,100%{opacity:.3;transform:scale(.95);}50%{opacity:1;transform:scale(1);}}
+.fade-in{animation:fi .22s ease;}
+@keyframes fi{from{opacity:0;transform:translateY(4px);}to{opacity:1;transform:none;}}
+::-webkit-scrollbar{width:4px;height:4px;}
+::-webkit-scrollbar-thumb{background:var(--border2);border-radius:2px;}
+::-webkit-scrollbar-track{background:transparent;}
+#toast{position:fixed;bottom:18px;right:18px;z-index:200;background:var(--bg3);border:1px solid var(--border2);border-radius:9px;padding:10px 15px;font-size:13px;font-weight:500;display:none;box-shadow:0 8px 28px rgba(0,0,0,.55);}
+#toast.show{display:flex;align-items:center;gap:7px;animation:fi .25s ease;}
+#offline-bar{display:none;position:fixed;top:0;left:0;right:0;z-index:300;background:var(--amber);color:#0a0a0a;text-align:center;font-size:12px;font-weight:600;padding:5px 8px;}
+.aipulse-wrap{width:44px;height:44px;border-radius:11px;background:var(--accentL);display:flex;align-items:center;justify-content:center;margin:0 auto 12px;}
 
-    /* ── KANBAN ── */
-    .kanban-col{background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:14px;min-height:320px;}
-    .kanban-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;}
-    .kanban-title{font-size:12px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;}
-    .post-card{background:var(--bg3);border:1px solid var(--border);border-radius:10px;padding:12px;transition:border-color .15s,transform .1s;cursor:pointer;margin-bottom:8px;}
-    .post-card:hover{border-color:var(--border2);transform:translateY(-1px);}
-
-    /* ── CALENDAR ── */
-    .cal-day{background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:6px;min-height:60px;cursor:pointer;transition:all .15s;}
-    .cal-day:hover{border-color:var(--border2);}
-    .cal-day.has-post{border-color:rgba(124,58,237,.35);background:rgba(124,58,237,.04);}
-
-    /* ── TOAST ── */
-    #toast{position:fixed;bottom:20px;right:20px;z-index:200;background:var(--bg3);border:1px solid var(--border2);border-radius:10px;padding:11px 16px;font-size:13px;font-weight:500;display:none;box-shadow:0 8px 32px rgba(0,0,0,.6);}
-    #toast.show{display:flex;align-items:center;gap:8px;animation:fadeIn .3s ease;}
-
-    /* ── OFFLINE BAR ── */
-    #offline-bar{display:none;position:fixed;top:0;left:0;right:0;z-index:300;background:var(--amber);color:#0a0a0a;text-align:center;font-size:12px;font-weight:600;padding:5px 8px;}
-
-    /* ── SECTION HEADER ── */
-    .section-header{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:28px;gap:12px;}
-    .section-title{font-size:18px;font-weight:700;color:var(--text);font-family:'Public Sans',system-ui,sans-serif;letter-spacing:-.02em;}
-    .section-sub{font-size:13px;color:var(--muted);margin-top:3px;}
-
-    /* ── METRIC ROW ── */
-    .metric-icon{width:36px;height:36px;border-radius:9px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
-
-    /* ── AI STATUS ── */
-    .ai-status-dot{width:6px;height:6px;border-radius:50%;animation:pulse 2s infinite;}
-    @keyframes pulse{0%,100%{opacity:1;}50%{opacity:.4;}}
-
-    /* ── DIVIDER ── */
-    .divider{height:1px;background:var(--border);margin:16px 0;}
-
-    /* ── TAG ── */
-    .tag{display:inline-flex;align-items:center;gap:4px;padding:2px 8px;border-radius:5px;font-size:11px;font-weight:500;background:var(--bg4);color:var(--muted);border:1px solid var(--border);}
-
-    /* ── PROGRESS BAR ── */
-    .progress-track{height:4px;background:var(--bg4);border-radius:2px;overflow:hidden;}
-    .progress-fill{height:100%;border-radius:2px;background:linear-gradient(90deg,var(--accent),var(--accent2));transition:width .3s;}
-
-    /* ── INBOX MSG ── */
-    .inbox-msg{padding:12px;border-radius:8px;border:1px solid var(--border);cursor:pointer;transition:all .15s;margin-bottom:6px;}
-    .inbox-msg:hover{background:var(--bg3);border-color:var(--border2);}
-    .inbox-msg.selected{background:var(--bg3);border-color:var(--accent2);}
-
-    /* ── RANGE SLIDER ── */
-    input[type=range]{appearance:none;-webkit-appearance:none;height:4px;border-radius:2px;background:var(--border2);padding:0;}
-    input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:16px;height:16px;border-radius:50%;background:var(--accent2);cursor:pointer;box-shadow:0 0 8px rgba(139,92,246,.4);}
-
-    /* ── COLOR INPUT ── */
-    input[type=color]{width:36px;height:36px;padding:2px;border-radius:8px;cursor:pointer;}
-
-    /* ── CHART SVG ── */
-    .chart-container{position:relative;}
-
-    /* ── WIZARD STEP ── */
-    .wizard-step{display:none;}.wizard-step.active{display:block;}
-
-    /* ── AI TAB ── */
-    .ai-tab.active-tab{background:var(--accent);color:white;border-color:var(--accent);}
-  </style>
+/* RESPONSIVE */
+@media(max-width:900px){
+  .sidebar{transform:translateX(-220px);}
+  .sidebar.open{transform:translateX(0);box-shadow:0 0 48px rgba(0,0,0,.8);}
+  .overlay.show{display:block;}
+  .content{margin-left:0;}
+  #menu-btn{display:flex!important;}
+  .page{padding:16px;}
+  .cols-4{grid-template-columns:1fr 1fr!important;}
+  .cols-2{grid-template-columns:1fr!important;}
+  .cols-3{grid-template-columns:1fr 1fr!important;}
+  .hide-mobile{display:none!important;}
+}
+@media(max-width:560px){
+  .cols-4{grid-template-columns:1fr 1fr!important;}
+  .cols-3{grid-template-columns:1fr!important;}
+  .cols-2{grid-template-columns:1fr!important;}
+  .kb-grid{grid-template-columns:1fr 1fr!important;overflow-x:auto;}
+}
+</style>
 </head>
 <body>
-<div id="offline-bar"><i data-lucide="wifi-off" style="width:13px;height:13px;display:inline;margin-right:4px;"></i> You're offline — AI features unavailable</div>
+<div id="offline-bar"><i data-lucide="wifi-off" style="width:13px;height:13px;margin-right:4px;vertical-align:middle;"></i>You're offline — AI unavailable</div>
 <div id="toast"></div>
+<div class="overlay" id="overlay"></div>
 
-<!-- ═══════════ SIDEBAR ═══════════ -->
+<div class="app-shell">
+<!-- SIDEBAR -->
 <aside class="sidebar" id="sidebar">
-  <div style="padding:16px 14px 12px;border-bottom:1px solid var(--border);">
-    <div style="display:flex;align-items:center;gap:10px;">
-      <div style="width:30px;height:30px;border-radius:8px;background:linear-gradient(135deg,var(--accent),var(--accent2));display:flex;align-items:center;justify-content:center;flex-shrink:0;box-shadow:0 0 16px rgba(124,58,237,.4);">
-        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
-          <polyline points="9 22 9 12 15 12 15 22"/>
-        </svg>
-      </div>
-      <span class="logo-text">Social Listings Pro</span>
-    </div>
+  <div class="logo-wrap">
+    <div class="logo-icon"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>
+    <span class="logo-text">Social Listings Pro</span>
   </div>
-  <nav style="padding:8px;flex:1;" id="nav">
-    <button class="nav-item active" data-view="dashboard"><i data-lucide="layout-dashboard" style="width:15px;height:15px;flex-shrink:0;"></i>Dashboard</button>
-    <p class="nav-section">Create</p>
-    <button class="nav-item" data-view="monthly-wizard"><i data-lucide="calendar-range" style="width:15px;height:15px;flex-shrink:0;"></i>Monthly Wizard</button>
-    <button class="nav-item" data-view="ai-generator"><i data-lucide="sparkles" style="width:15px;height:15px;flex-shrink:0;"></i>AI Generator</button>
-    <button class="nav-item" data-view="brainstorm"><i data-lucide="message-square" style="width:15px;height:15px;flex-shrink:0;"></i>Brainstorm Chat</button>
-    <button class="nav-item" data-view="campaign-wizard"><i data-lucide="rocket" style="width:15px;height:15px;flex-shrink:0;"></i>Campaign Wizard</button>
-    <p class="nav-section">Manage</p>
-    <button class="nav-item" data-view="control-tower"><i data-lucide="kanban" style="width:15px;height:15px;flex-shrink:0;"></i>Control Tower</button>
-    <button class="nav-item" data-view="calendar"><i data-lucide="calendar" style="width:15px;height:15px;flex-shrink:0;"></i>Calendar</button>
-    <button class="nav-item" data-view="social-inbox"><i data-lucide="inbox" style="width:15px;height:15px;flex-shrink:0;"></i>Social Inbox</button>
-    <p class="nav-section">Grow</p>
-    <button class="nav-item" data-view="analytics"><i data-lucide="bar-chart-3" style="width:15px;height:15px;flex-shrink:0;"></i>Analytics</button>
-    <button class="nav-item" data-view="strategy-planner"><i data-lucide="target" style="width:15px;height:15px;flex-shrink:0;"></i>Strategy Planner</button>
-    <button class="nav-item" data-view="link-in-bio"><i data-lucide="link-2" style="width:15px;height:15px;flex-shrink:0;"></i>Link-in-Bio</button>
-    <p class="nav-section">Brand</p>
-    <button class="nav-item" data-view="brand-kit"><i data-lucide="palette" style="width:15px;height:15px;flex-shrink:0;"></i>Brand Kit</button>
-    <button class="nav-item" data-view="templates"><i data-lucide="layout-template" style="width:15px;height:15px;flex-shrink:0;"></i>Templates</button>
-    <button class="nav-item" data-view="settings"><i data-lucide="settings" style="width:15px;height:15px;flex-shrink:0;"></i>Settings</button>
+  <nav class="nav-wrap" id="nav">
+    <button class="nav-item active" data-view="dashboard"><i data-lucide="layout-dashboard"></i>Dashboard</button>
+    <p class="nav-group">Create</p>
+    <button class="nav-item" data-view="monthly-wizard"><i data-lucide="calendar-range"></i>Monthly Wizard</button>
+    <button class="nav-item" data-view="ai-generator"><i data-lucide="sparkles"></i>AI Generator</button>
+    <button class="nav-item" data-view="brainstorm"><i data-lucide="message-square"></i>Brainstorm Chat</button>
+    <button class="nav-item" data-view="campaign-wizard"><i data-lucide="rocket"></i>Campaign Wizard</button>
+    <p class="nav-group">Manage</p>
+    <button class="nav-item" data-view="control-tower"><i data-lucide="kanban"></i>Control Tower</button>
+    <button class="nav-item" data-view="calendar"><i data-lucide="calendar"></i>Calendar</button>
+    <button class="nav-item" data-view="social-inbox"><i data-lucide="inbox"></i>Social Inbox</button>
+    <p class="nav-group">Grow</p>
+    <button class="nav-item" data-view="analytics"><i data-lucide="bar-chart-3"></i>Analytics</button>
+    <button class="nav-item" data-view="strategy-planner"><i data-lucide="target"></i>Strategy Planner</button>
+    <button class="nav-item" data-view="link-in-bio"><i data-lucide="link-2"></i>Link-in-Bio</button>
+    <p class="nav-group">Brand</p>
+    <button class="nav-item" data-view="brand-kit"><i data-lucide="palette"></i>Brand Kit</button>
+    <button class="nav-item" data-view="templates"><i data-lucide="layout-template"></i>Templates</button>
+    <button class="nav-item" data-view="settings"><i data-lucide="settings"></i>Settings</button>
   </nav>
-  <div style="padding:10px;border-top:1px solid var(--border);">
-    <div style="display:flex;align-items:center;gap:10px;padding:8px 10px;border-radius:8px;background:var(--bg3);">
-      <div style="width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,var(--accent),var(--accent2));display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:white;flex-shrink:0;" id="avatar-init">SJ</div>
-      <div style="overflow:hidden;flex:1;">
-        <p style="font-size:12px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;" id="sidebar-name">Sarah Johnson</p>
-        <p style="font-size:11px;color:var(--muted);">Premium Plan</p>
-      </div>
+  <div class="sidebar-user">
+    <div class="user-pill">
+      <div class="user-avatar" id="avatar-init">SJ</div>
+      <div style="overflow:hidden;flex:1;"><p style="font-size:12px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;" id="sidebar-name">Sarah Johnson</p><p style="font-size:10.5px;color:var(--muted);">Premium Plan</p></div>
     </div>
   </div>
 </aside>
 
-<div class="sidebar-overlay" id="sidebar-overlay"></div>
-<!-- ═══════════ MAIN ═══════════ -->
-<main class="main" id="main">
+<!-- CONTENT -->
+<div class="content" id="content">
   <div class="topbar">
-    <div style="display:flex;align-items:center;gap:12px;">
-      <button id="menu-btn" class="btn btn-ghost btn-icon" style="display:flex;"><i data-lucide="menu" style="width:16px;height:16px;"></i></button>
-      <div>
-        <p style="font-size:14px;font-weight:600;" id="page-title">Dashboard</p>
-        <p style="font-size:11px;color:var(--muted);" id="page-sub">Welcome back</p>
-      </div>
+    <div style="display:flex;align-items:center;gap:10px;">
+      <button id="menu-btn" class="btn btn-ghost btn-icon" style="display:none;"><i data-lucide="menu" style="width:16px;height:16px;"></i></button>
+      <div><p style="font-size:14px;font-weight:600;font-family:'Public Sans',sans-serif;" id="page-title">Dashboard</p><p style="font-size:11px;color:var(--muted);" id="page-sub">Welcome back</p></div>
     </div>
     <div style="display:flex;align-items:center;gap:8px;">
-      <div id="ai-status" style="display:flex;align-items:center;gap:6px;font-size:11px;font-weight:500;padding:4px 10px;border-radius:6px;background:var(--greenL);color:var(--green);border:1px solid rgba(34,197,94,.2);">
-        <span class="ai-status-dot" style="background:var(--green);"></span>AI Ready
+      <div id="ai-status" style="display:flex;align-items:center;gap:5px;font-size:11px;font-weight:600;padding:4px 10px;border-radius:6px;background:var(--greenL);color:var(--green);border:1px solid rgba(16,185,129,.2);">
+        <span style="width:5px;height:5px;border-radius:50%;background:var(--green);display:inline-block;animation:aip 2s infinite;"></span>AI Ready
       </div>
-      <select id="lang-sw" style="width:auto;padding:4px 8px;font-size:12px;border-radius:6px;">
-        <option value="en">🇬🇧 EN</option><option value="es">🇪🇸 ES</option><option value="de">🇩🇪 DE</option><option value="nl">🇳🇱 NL</option>
+      <select id="lang-sw" style="width:auto;padding:5px 22px 5px 8px;font-size:11px;">
+        <option>🇬🇧 EN</option><option>🇪🇸 ES</option><option>🇩🇪 DE</option><option>🇳🇱 NL</option>
       </select>
     </div>
   </div>
 
-<!-- ═══════════ DASHBOARD ═══════════ -->
+<!-- ═══ DASHBOARD ═══ -->
 <section class="view active" id="view-dashboard">
-  <div class="section-header">
-    <div><p class="section-title">Dashboard</p><p class="section-sub">Thursday, June 18 · Good morning, Sarah</p></div>
+<div class="page">
+  <div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:24px;gap:12px;flex-wrap:wrap;">
+    <div><h1 style="font-family:'Public Sans',sans-serif;font-size:20px;font-weight:800;letter-spacing:-.02em;">Dashboard</h1><p style="font-size:13px;color:var(--muted);margin-top:3px;">Welcome back, Sarah</p></div>
     <button class="btn btn-primary btn-sm" onclick="switchView('monthly-wizard')"><i data-lucide="plus" style="width:13px;height:13px;"></i>New Content</button>
   </div>
-  <div style="display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-bottom:24px;">
-    <div class="stat-card">
-      <div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:12px;">
-        <div class="metric-icon" style="background:var(--accentL);"><i data-lucide="calendar-check" style="width:17px;height:17px;color:var(--accent2);"></i></div>
-        <span class="badge b-green" style="font-size:10px;">+12%</span>
-      </div>
-      <p style="font-size:28px;font-weight:700;letter-spacing:-.02em;color:var(--text);">24</p>
-      <p style="font-size:12px;color:var(--muted);margin-top:2px;">Scheduled Posts</p>
-    </div>
-    <div class="stat-card">
-      <div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:12px;">
-        <div class="metric-icon" style="background:var(--greenL);"><i data-lucide="trending-up" style="width:17px;height:17px;color:var(--green);"></i></div>
-        <span class="badge b-green" style="font-size:10px;">+0.6%</span>
-      </div>
-      <p style="font-size:28px;font-weight:700;letter-spacing:-.02em;color:var(--green);">4.8%</p>
-      <p style="font-size:12px;color:var(--muted);margin-top:2px;">Engagement Rate</p>
-    </div>
-    <div class="stat-card">
-      <div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:12px;">
-        <div class="metric-icon" style="background:var(--goldL);"><i data-lucide="radio" style="width:17px;height:17px;color:var(--gold);"></i></div>
-        <span class="badge b-amber" style="font-size:10px;">+23%</span>
-      </div>
-      <p style="font-size:28px;font-weight:700;letter-spacing:-.02em;color:var(--gold);">18.2K</p>
-      <p style="font-size:12px;color:var(--muted);margin-top:2px;">Total Reach</p>
-    </div>
-    <div class="stat-card">
-      <div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:12px;">
-        <div class="metric-icon" style="background:var(--blueL);"><i data-lucide="users" style="width:17px;height:17px;color:var(--blue);"></i></div>
-        <span class="badge b-green" style="font-size:10px;">+8 new</span>
-      </div>
-      <p style="font-size:28px;font-weight:700;letter-spacing:-.02em;color:var(--blue);">37</p>
-      <p style="font-size:12px;color:var(--muted);margin-top:2px;">Leads Generated</p>
-    </div>
+  <div class="cols-4" style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:20px;">
+    <div class="stat"><div style="display:flex;align-items:flex-start;justify-content:space-between;"><div class="sec-icon" style="background:var(--accentL);"><i data-lucide="calendar-check" style="width:15px;height:15px;color:var(--accent2);"></i></div><span class="badge b-green" style="font-size:10px;">+12%</span></div><p class="stat-val">24</p><p class="stat-label">Scheduled Posts</p></div>
+    <div class="stat"><div style="display:flex;align-items:flex-start;justify-content:space-between;"><div class="sec-icon" style="background:var(--greenL);"><i data-lucide="trending-up" style="width:15px;height:15px;color:var(--green);"></i></div><span class="badge b-green" style="font-size:10px;">+0.6%</span></div><p class="stat-val" style="color:var(--green);">4.8%</p><p class="stat-label">Engagement Rate</p></div>
+    <div class="stat"><div style="display:flex;align-items:flex-start;justify-content:space-between;"><div class="sec-icon" style="background:var(--goldL);"><i data-lucide="radio" style="width:15px;height:15px;color:var(--gold);"></i></div><span class="badge b-amber" style="font-size:10px;">+23%</span></div><p class="stat-val" style="color:var(--gold);">18.2K</p><p class="stat-label">Total Reach</p></div>
+    <div class="stat"><div style="display:flex;align-items:flex-start;justify-content:space-between;"><div class="sec-icon" style="background:var(--blueL);"><i data-lucide="users" style="width:15px;height:15px;color:var(--blue);"></i></div><span class="badge b-green" style="font-size:10px;">+8</span></div><p class="stat-val" style="color:var(--blue);">37</p><p class="stat-label">Leads Generated</p></div>
   </div>
-  <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px;">
-    <div class="card" style="padding:18px;">
-      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;">
-        <div style="display:flex;align-items:center;gap:8px;"><i data-lucide="zap" style="width:15px;height:15px;color:var(--gold);"></i><p style="font-size:13px;font-weight:600;">Quick Actions</p></div>
-      </div>
-      <div style="display:flex;flex-wrap:wrap;gap:8px;">
-        <button class="btn btn-primary btn-sm" onclick="switchView('monthly-wizard')"><i data-lucide="calendar-range" style="width:12px;height:12px;"></i>Monthly Wizard</button>
-        <button class="btn btn-ghost btn-sm" onclick="switchView('ai-generator')"><i data-lucide="sparkles" style="width:12px;height:12px;"></i>New Post</button>
-        <button class="btn btn-ghost btn-sm" onclick="switchView('brainstorm')"><i data-lucide="message-square" style="width:12px;height:12px;"></i>Brainstorm</button>
-        <button class="btn btn-ghost btn-sm" onclick="switchView('campaign-wizard')"><i data-lucide="rocket" style="width:12px;height:12px;"></i>Campaign</button>
-        <button class="btn btn-ghost btn-sm" onclick="switchView('strategy-planner')"><i data-lucide="target" style="width:12px;height:12px;"></i>Strategy</button>
+  <div class="cols-2" style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px;">
+    <div class="card card-body">
+      <div style="display:flex;align-items:center;gap:7px;margin-bottom:14px;"><i data-lucide="zap" style="width:14px;height:14px;color:var(--gold);"></i><p style="font-size:13px;font-weight:600;font-family:'Public Sans',sans-serif;">Quick Actions</p></div>
+      <div style="display:flex;flex-wrap:wrap;gap:7px;">
+        <button class="btn btn-primary btn-sm" onclick="switchView('monthly-wizard')"><i data-lucide="calendar-range" style="width:11px;height:11px;"></i>Monthly Wizard</button>
+        <button class="btn btn-ghost btn-sm" onclick="switchView('ai-generator')"><i data-lucide="sparkles" style="width:11px;height:11px;"></i>New Post</button>
+        <button class="btn btn-ghost btn-sm" onclick="switchView('brainstorm')"><i data-lucide="message-square" style="width:11px;height:11px;"></i>Brainstorm</button>
+        <button class="btn btn-ghost btn-sm" onclick="switchView('campaign-wizard')"><i data-lucide="rocket" style="width:11px;height:11px;"></i>Campaign</button>
+        <button class="btn btn-ghost btn-sm" onclick="switchView('strategy-planner')"><i data-lucide="target" style="width:11px;height:11px;"></i>Strategy</button>
       </div>
     </div>
-    <div class="card" style="padding:18px;">
-      <div style="display:flex;align-items:center;gap:8px;margin-bottom:14px;"><i data-lucide="cpu" style="width:15px;height:15px;color:var(--accent2);"></i><p style="font-size:13px;font-weight:600;">AI Recommendations</p></div>
+    <div class="card card-body">
+      <div style="display:flex;align-items:center;gap:7px;margin-bottom:14px;"><i data-lucide="cpu" style="width:14px;height:14px;color:var(--accent2);"></i><p style="font-size:13px;font-weight:600;font-family:'Public Sans',sans-serif;">AI Recommendations</p></div>
       <div style="display:flex;flex-direction:column;gap:8px;">
-        <div style="display:flex;align-items:flex-start;gap:10px;padding:10px;border-radius:8px;background:var(--bg3);border:1px solid var(--border);">
-          <div class="metric-icon" style="background:var(--greenL);width:28px;height:28px;border-radius:7px;flex-shrink:0;"><i data-lucide="trending-up" style="width:13px;height:13px;color:var(--green);"></i></div>
-          <div><p style="font-size:12px;font-weight:600;">Post more Reels — 3.2x more engagement</p><p style="font-size:11px;color:var(--muted);margin-top:1px;">Try 3 Reels/week to reach more buyers.</p></div>
-        </div>
-        <div style="display:flex;align-items:flex-start;gap:10px;padding:10px;border-radius:8px;background:var(--bg3);border:1px solid var(--border);">
-          <div class="metric-icon" style="background:var(--accentL);width:28px;height:28px;border-radius:7px;flex-shrink:0;"><i data-lucide="clock" style="width:13px;height:13px;color:var(--accent2);"></i></div>
-          <div><p style="font-size:12px;font-weight:600;">Best posting time: Tue & Thu 9:00 AM</p><p style="font-size:11px;color:var(--muted);margin-top:1px;">Your audience is most active then.</p></div>
-        </div>
+        <div class="inner" style="padding:10px;display:flex;gap:9px;align-items:flex-start;"><div class="sec-icon" style="background:var(--greenL);width:26px;height:26px;border-radius:6px;"><i data-lucide="trending-up" style="width:12px;height:12px;color:var(--green);"></i></div><div><p style="font-size:12px;font-weight:600;">Post more Reels — 3.2x engagement boost</p><p style="font-size:11px;color:var(--muted);margin-top:2px;">Try 3 Reels/week to reach more buyers.</p></div></div>
+        <div class="inner" style="padding:10px;display:flex;gap:9px;align-items:flex-start;"><div class="sec-icon" style="background:var(--accentL);width:26px;height:26px;border-radius:6px;"><i data-lucide="clock" style="width:12px;height:12px;color:var(--accent2);"></i></div><div><p style="font-size:12px;font-weight:600;">Best posting time: Tue & Thu 9:00 AM</p><p style="font-size:11px;color:var(--muted);margin-top:2px;">Your audience is most active then.</p></div></div>
       </div>
     </div>
   </div>
-  <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
-    <div class="card" style="padding:18px;">
-      <div style="display:flex;align-items:center;gap:8px;margin-bottom:14px;"><i data-lucide="home" style="width:15px;height:15px;color:var(--gold);"></i><p style="font-size:13px;font-weight:600;">Recent Listings</p></div>
+  <div class="cols-2" style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
+    <div class="card card-body">
+      <div style="display:flex;align-items:center;gap:7px;margin-bottom:14px;"><i data-lucide="home" style="width:14px;height:14px;color:var(--gold);"></i><p style="font-size:13px;font-weight:600;font-family:'Public Sans',sans-serif;">Recent Listings</p></div>
       <div style="display:flex;flex-direction:column;gap:8px;">
-        <div style="display:flex;align-items:center;gap:10px;padding:10px;border-radius:8px;background:var(--bg3);border:1px solid var(--border);">
-          <div style="width:36px;height:36px;border-radius:8px;background:linear-gradient(135deg,var(--accent),var(--accent2));flex-shrink:0;"></div>
-          <div style="flex:1;"><p style="font-size:12px;font-weight:600;">Villa Golden Mile</p><p style="font-size:11px;color:var(--muted);">€485,000 · 3BD · Marbella</p></div>
-          <span class="badge b-green">Active</span>
-        </div>
-        <div style="display:flex;align-items:center;gap:10px;padding:10px;border-radius:8px;background:var(--bg3);border:1px solid var(--border);">
-          <div style="width:36px;height:36px;border-radius:8px;background:linear-gradient(135deg,var(--gold),#e8c070);flex-shrink:0;"></div>
-          <div style="flex:1;"><p style="font-size:12px;font-weight:600;">Penthouse Sotogrande</p><p style="font-size:11px;color:var(--muted);">€1.2M · 5BD · Sotogrande</p></div>
-          <span class="badge b-amber">Pending</span>
-        </div>
-        <div style="display:flex;align-items:center;gap:10px;padding:10px;border-radius:8px;background:var(--bg3);border:1px solid var(--border);">
-          <div style="width:36px;height:36px;border-radius:8px;background:linear-gradient(135deg,#3b82f6,#60a5fa);flex-shrink:0;"></div>
-          <div style="flex:1;"><p style="font-size:12px;font-weight:600;">Apartment Málaga Centro</p><p style="font-size:11px;color:var(--muted);">€320,000 · 2BD · Málaga</p></div>
-          <span class="badge b-accent">Draft</span>
-        </div>
+        <div class="inner" style="padding:10px;display:flex;align-items:center;gap:9px;"><div style="width:34px;height:34px;border-radius:7px;background:linear-gradient(135deg,var(--accent),var(--accent2));flex-shrink:0;"></div><div style="flex:1;min-width:0;"><p style="font-size:12px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Villa Golden Mile</p><p style="font-size:11px;color:var(--muted);">€485,000 · 3BD · Marbella</p></div><span class="badge b-green">Active</span></div>
+        <div class="inner" style="padding:10px;display:flex;align-items:center;gap:9px;"><div style="width:34px;height:34px;border-radius:7px;background:linear-gradient(135deg,var(--gold),#e8c070);flex-shrink:0;"></div><div style="flex:1;min-width:0;"><p style="font-size:12px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Penthouse Sotogrande</p><p style="font-size:11px;color:var(--muted);">€1.2M · 5BD · Sotogrande</p></div><span class="badge b-amber">Pending</span></div>
+        <div class="inner" style="padding:10px;display:flex;align-items:center;gap:9px;"><div style="width:34px;height:34px;border-radius:7px;background:linear-gradient(135deg,var(--blue),#60a5fa);flex-shrink:0;"></div><div style="flex:1;min-width:0;"><p style="font-size:12px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Apartment Málaga Centro</p><p style="font-size:11px;color:var(--muted);">€320,000 · 2BD · Málaga</p></div><span class="badge b-accent">Draft</span></div>
       </div>
     </div>
-    <div class="card" style="padding:18px;">
-      <div style="display:flex;align-items:center;gap:8px;margin-bottom:14px;"><i data-lucide="mic" style="width:15px;height:15px;color:var(--accent2);"></i><p style="font-size:13px;font-weight:600;">Active Tone per Platform</p></div>
-      <div style="display:flex;flex-direction:column;gap:8px;">
-        <div style="display:flex;align-items:center;justify-content:space-between;padding:8px 12px;border-radius:8px;background:var(--bg3);border:1px solid var(--border);">
-          <div style="display:flex;align-items:center;gap:8px;"><span class="badge b-ig">IG</span><span style="font-size:12px;font-weight:500;">Instagram</span></div>
-          <span style="font-size:11px;font-weight:600;color:#ec4899;background:rgba(236,72,153,.1);padding:2px 8px;border-radius:5px;">Storytelling</span>
-        </div>
-        <div style="display:flex;align-items:center;justify-content:space-between;padding:8px 12px;border-radius:8px;background:var(--bg3);border:1px solid var(--border);">
-          <div style="display:flex;align-items:center;gap:8px;"><span class="badge b-fb">FB</span><span style="font-size:12px;font-weight:500;">Facebook</span></div>
-          <span style="font-size:11px;font-weight:600;color:var(--accent2);background:var(--accentL);padding:2px 8px;border-radius:5px;">Professional</span>
-        </div>
-        <div style="display:flex;align-items:center;justify-content:space-between;padding:8px 12px;border-radius:8px;background:var(--bg3);border:1px solid var(--border);">
-          <div style="display:flex;align-items:center;gap:8px;"><span class="badge b-li">LI</span><span style="font-size:12px;font-weight:500;">LinkedIn</span></div>
-          <span style="font-size:11px;font-weight:600;color:var(--blue);background:var(--blueL);padding:2px 8px;border-radius:5px;">Authoritative</span>
-        </div>
-        <div style="display:flex;align-items:center;justify-content:space-between;padding:8px 12px;border-radius:8px;background:var(--bg3);border:1px solid var(--border);">
-          <div style="display:flex;align-items:center;gap:8px;"><span class="badge b-tt">TT</span><span style="font-size:12px;font-weight:500;">TikTok</span></div>
-          <span style="font-size:11px;font-weight:600;color:var(--muted);background:var(--bg4);padding:2px 8px;border-radius:5px;">Casual</span>
-        </div>
+    <div class="card card-body">
+      <div style="display:flex;align-items:center;gap:7px;margin-bottom:14px;"><i data-lucide="mic" style="width:14px;height:14px;color:var(--accent2);"></i><p style="font-size:13px;font-weight:600;font-family:'Public Sans',sans-serif;">Active Tone per Platform</p></div>
+      <div style="display:flex;flex-direction:column;gap:7px;">
+        <div class="inner" style="padding:9px 11px;display:flex;align-items:center;justify-content:space-between;"><div style="display:flex;align-items:center;gap:7px;"><span class="badge b-ig">IG</span><span style="font-size:12px;">Instagram</span></div><span style="font-size:11px;font-weight:600;color:#ec4899;background:rgba(236,72,153,.1);padding:2px 7px;border-radius:4px;">Storytelling</span></div>
+        <div class="inner" style="padding:9px 11px;display:flex;align-items:center;justify-content:space-between;"><div style="display:flex;align-items:center;gap:7px;"><span class="badge b-fb">FB</span><span style="font-size:12px;">Facebook</span></div><span style="font-size:11px;font-weight:600;color:var(--accent2);background:var(--accentL);padding:2px 7px;border-radius:4px;">Professional</span></div>
+        <div class="inner" style="padding:9px 11px;display:flex;align-items:center;justify-content:space-between;"><div style="display:flex;align-items:center;gap:7px;"><span class="badge b-li">LI</span><span style="font-size:12px;">LinkedIn</span></div><span style="font-size:11px;font-weight:600;color:var(--blue);background:var(--blueL);padding:2px 7px;border-radius:4px;">Authoritative</span></div>
+        <div class="inner" style="padding:9px 11px;display:flex;align-items:center;justify-content:space-between;"><div style="display:flex;align-items:center;gap:7px;"><span class="badge b-tt">TT</span><span style="font-size:12px;">TikTok</span></div><span style="font-size:11px;font-weight:600;color:var(--muted);background:var(--bg4);padding:2px 7px;border-radius:4px;">Casual</span></div>
       </div>
     </div>
   </div>
-</section>
+</div></section>
 
-<!-- ═══════════ MONTHLY WIZARD ═══════════ -->
+<!-- ═══ MONTHLY WIZARD ═══ -->
 <section class="view" id="view-monthly-wizard">
-  <div class="section-header">
-    <div><p class="section-title">Monthly Wizard</p><p class="section-sub">Plan your full month of content in minutes</p></div>
+<div class="page">
+  <div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:24px;gap:12px;flex-wrap:wrap;">
+    <div><h1 style="font-family:'Public Sans',sans-serif;font-size:20px;font-weight:800;letter-spacing:-.02em;">Monthly Wizard</h1><p style="font-size:13px;color:var(--muted);margin-top:3px;">Plan your full month of content in minutes</p></div>
     <div style="display:flex;gap:6px;" id="wizard-dots"></div>
   </div>
-  <div style="max-width:680px;margin:0 auto;">
-    <div class="card" style="padding:24px;">
+  <div style="max-width:640px;">
+    <div class="card card-body">
       <div class="wizard-step active" data-step="1">
-        <div style="display:flex;align-items:center;gap:10px;margin-bottom:20px;"><div class="metric-icon" style="background:var(--accentL);"><i data-lucide="target" style="width:17px;height:17px;color:var(--accent2);"></i></div><div><p style="font-size:14px;font-weight:600;">Goals & Targeting</p><p style="font-size:12px;color:var(--muted);">Define your strategy for this month</p></div></div>
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:20px;padding-bottom:16px;border-bottom:1px solid var(--border);"><div class="sec-icon" style="background:var(--accentL);"><i data-lucide="target" style="width:16px;height:16px;color:var(--accent2);"></i></div><div><p style="font-size:14px;font-weight:700;font-family:'Public Sans',sans-serif;">Goals & Targeting</p><p style="font-size:12px;color:var(--muted);">Define your strategy for this month</p></div></div>
         <div style="display:flex;flex-direction:column;gap:14px;">
-          <div><label class="field-label">Primary Goal</label><select id="mw-goal"><option>Get More Listings</option><option>Find Buyers</option><option>Brand Awareness</option><option>Community Building</option></select></div>
-          <div><label class="field-label">Target Region</label><input id="mw-region" type="text" value="Marbella & Costa del Sol"></div>
-          <div><label class="field-label">Target Audience</label><select id="mw-audience"><option>Luxury Investors</option><option>Expats & Relocators</option><option>First-time Buyers</option><option>Local Sellers</option></select></div>
+          <div><label class="lbl">Primary Goal</label><select id="mw-goal"><option>Get More Listings</option><option>Find Buyers</option><option>Brand Awareness</option><option>Community Building</option></select></div>
+          <div><label class="lbl">Target Region</label><input id="mw-region" type="text" value="Marbella & Costa del Sol"></div>
+          <div><label class="lbl">Target Audience</label><select id="mw-audience"><option>Luxury Investors</option><option>Expats & Relocators</option><option>First-time Buyers</option><option>Local Sellers</option></select></div>
         </div>
       </div>
       <div class="wizard-step" data-step="2">
-        <div style="display:flex;align-items:center;gap:10px;margin-bottom:20px;"><div class="metric-icon" style="background:var(--accentL);"><i data-lucide="share-2" style="width:17px;height:17px;color:var(--accent2);"></i></div><div><p style="font-size:14px;font-weight:600;">Platforms & Frequency</p><p style="font-size:12px;color:var(--muted);">Where and how often you'll post</p></div></div>
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:20px;padding-bottom:16px;border-bottom:1px solid var(--border);"><div class="sec-icon" style="background:var(--accentL);"><i data-lucide="share-2" style="width:16px;height:16px;color:var(--accent2);"></i></div><div><p style="font-size:14px;font-weight:700;font-family:'Public Sans',sans-serif;">Platforms & Frequency</p><p style="font-size:12px;color:var(--muted);">Where and how often you'll post</p></div></div>
         <div style="display:flex;flex-direction:column;gap:14px;">
-          <div><label class="field-label">Posts per week</label><input id="mw-ppw" type="number" value="7" min="3" max="21"></div>
-          <div><label class="field-label" style="margin-bottom:10px;">Platforms</label>
-            <div style="display:flex;flex-wrap:wrap;gap:8px;">
-              <label style="display:flex;align-items:center;gap:7px;padding:8px 14px;border-radius:8px;border:1px solid var(--border);background:var(--bg3);cursor:pointer;font-size:12px;font-weight:500;"><input type="checkbox" checked class="mw-plat" value="Instagram" style="width:auto;"> <span class="badge b-ig" style="margin-right:2px;">IG</span> Instagram</label>
-              <label style="display:flex;align-items:center;gap:7px;padding:8px 14px;border-radius:8px;border:1px solid var(--border);background:var(--bg3);cursor:pointer;font-size:12px;font-weight:500;"><input type="checkbox" checked class="mw-plat" value="Facebook" style="width:auto;"> <span class="badge b-fb" style="margin-right:2px;">FB</span> Facebook</label>
-              <label style="display:flex;align-items:center;gap:7px;padding:8px 14px;border-radius:8px;border:1px solid var(--border);background:var(--bg3);cursor:pointer;font-size:12px;font-weight:500;"><input type="checkbox" class="mw-plat" value="LinkedIn" style="width:auto;"> <span class="badge b-li" style="margin-right:2px;">LI</span> LinkedIn</label>
-              <label style="display:flex;align-items:center;gap:7px;padding:8px 14px;border-radius:8px;border:1px solid var(--border);background:var(--bg3);cursor:pointer;font-size:12px;font-weight:500;"><input type="checkbox" class="mw-plat" value="TikTok" style="width:auto;"> <span class="badge b-tt" style="margin-right:2px;">TT</span> TikTok</label>
+          <div><label class="lbl">Posts per week</label><input id="mw-ppw" type="number" value="7" min="3" max="21"></div>
+          <div><label class="lbl" style="margin-bottom:8px;">Platforms</label>
+            <div style="display:flex;flex-wrap:wrap;gap:7px;">
+              <label style="display:flex;align-items:center;gap:6px;padding:7px 12px;border-radius:7px;border:1px solid var(--border);background:var(--bg3);cursor:pointer;font-size:12px;font-weight:500;"><input type="checkbox" checked class="mw-plat" value="Instagram" style="width:auto;"> <span class="badge b-ig">IG</span> Instagram</label>
+              <label style="display:flex;align-items:center;gap:6px;padding:7px 12px;border-radius:7px;border:1px solid var(--border);background:var(--bg3);cursor:pointer;font-size:12px;font-weight:500;"><input type="checkbox" checked class="mw-plat" value="Facebook" style="width:auto;"> <span class="badge b-fb">FB</span> Facebook</label>
+              <label style="display:flex;align-items:center;gap:6px;padding:7px 12px;border-radius:7px;border:1px solid var(--border);background:var(--bg3);cursor:pointer;font-size:12px;font-weight:500;"><input type="checkbox" class="mw-plat" value="LinkedIn" style="width:auto;"> <span class="badge b-li">LI</span> LinkedIn</label>
+              <label style="display:flex;align-items:center;gap:6px;padding:7px 12px;border-radius:7px;border:1px solid var(--border);background:var(--bg3);cursor:pointer;font-size:12px;font-weight:500;"><input type="checkbox" class="mw-plat" value="TikTok" style="width:auto;"> <span class="badge b-tt">TT</span> TikTok</label>
             </div>
           </div>
         </div>
       </div>
       <div class="wizard-step" data-step="3">
-        <div style="display:flex;align-items:center;gap:10px;margin-bottom:20px;"><div class="metric-icon" style="background:var(--accentL);"><i data-lucide="pie-chart" style="width:17px;height:17px;color:var(--accent2);"></i></div><div><p style="font-size:14px;font-weight:600;">Content Mix</p><p style="font-size:12px;color:var(--muted);">Balance your content pillars</p></div></div>
-        <div style="display:flex;flex-direction:column;gap:14px;">
-          <div style="display:flex;align-items:center;gap:12px;"><i data-lucide="home" style="width:14px;height:14px;color:var(--muted);flex-shrink:0;"></i><span style="font-size:12px;width:80px;flex-shrink:0;">Listings</span><input type="range" min="0" max="50" value="30" class="mw-mix" style="flex:1;"><span style="font-size:12px;width:32px;text-align:right;color:var(--accent2);font-weight:600;font-family:monospace;" class="mw-mv">30%</span></div>
-          <div style="display:flex;align-items:center;gap:12px;"><i data-lucide="book-open" style="width:14px;height:14px;color:var(--muted);flex-shrink:0;"></i><span style="font-size:12px;width:80px;flex-shrink:0;">Education</span><input type="range" min="0" max="50" value="20" class="mw-mix" style="flex:1;"><span style="font-size:12px;width:32px;text-align:right;color:var(--accent2);font-weight:600;font-family:monospace;" class="mw-mv">20%</span></div>
-          <div style="display:flex;align-items:center;gap:12px;"><i data-lucide="map-pin" style="width:14px;height:14px;color:var(--muted);flex-shrink:0;"></i><span style="font-size:12px;width:80px;flex-shrink:0;">Local Area</span><input type="range" min="0" max="50" value="20" class="mw-mix" style="flex:1;"><span style="font-size:12px;width:32px;text-align:right;color:var(--accent2);font-weight:600;font-family:monospace;" class="mw-mv">20%</span></div>
-          <div style="display:flex;align-items:center;gap:12px;"><i data-lucide="sun" style="width:14px;height:14px;color:var(--muted);flex-shrink:0;"></i><span style="font-size:12px;width:80px;flex-shrink:0;">Lifestyle</span><input type="range" min="0" max="50" value="15" class="mw-mix" style="flex:1;"><span style="font-size:12px;width:32px;text-align:right;color:var(--accent2);font-weight:600;font-family:monospace;" class="mw-mv">15%</span></div>
-          <div style="display:flex;align-items:center;gap:12px;"><i data-lucide="newspaper" style="width:14px;height:14px;color:var(--muted);flex-shrink:0;"></i><span style="font-size:12px;width:80px;flex-shrink:0;">News</span><input type="range" min="0" max="50" value="15" class="mw-mix" style="flex:1;"><span style="font-size:12px;width:32px;text-align:right;color:var(--accent2);font-weight:600;font-family:monospace;" class="mw-mv">15%</span></div>
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:20px;padding-bottom:16px;border-bottom:1px solid var(--border);"><div class="sec-icon" style="background:var(--accentL);"><i data-lucide="pie-chart" style="width:16px;height:16px;color:var(--accent2);"></i></div><div><p style="font-size:14px;font-weight:700;font-family:'Public Sans',sans-serif;">Content Mix</p><p style="font-size:12px;color:var(--muted);">Balance your content pillars</p></div></div>
+        <div style="display:flex;flex-direction:column;gap:13px;">
+          <div style="display:flex;align-items:center;gap:11px;"><i data-lucide="home" style="width:13px;height:13px;color:var(--muted);flex-shrink:0;"></i><span style="font-size:12px;width:72px;flex-shrink:0;color:var(--muted);">Listings</span><input type="range" min="0" max="50" value="30" class="mw-mix" style="flex:1;"><span style="font-size:11px;width:28px;text-align:right;color:var(--accent2);font-weight:700;font-family:monospace;" class="mw-mv">30%</span></div>
+          <div style="display:flex;align-items:center;gap:11px;"><i data-lucide="book-open" style="width:13px;height:13px;color:var(--muted);flex-shrink:0;"></i><span style="font-size:12px;width:72px;flex-shrink:0;color:var(--muted);">Education</span><input type="range" min="0" max="50" value="20" class="mw-mix" style="flex:1;"><span style="font-size:11px;width:28px;text-align:right;color:var(--accent2);font-weight:700;font-family:monospace;" class="mw-mv">20%</span></div>
+          <div style="display:flex;align-items:center;gap:11px;"><i data-lucide="map-pin" style="width:13px;height:13px;color:var(--muted);flex-shrink:0;"></i><span style="font-size:12px;width:72px;flex-shrink:0;color:var(--muted);">Local Area</span><input type="range" min="0" max="50" value="20" class="mw-mix" style="flex:1;"><span style="font-size:11px;width:28px;text-align:right;color:var(--accent2);font-weight:700;font-family:monospace;" class="mw-mv">20%</span></div>
+          <div style="display:flex;align-items:center;gap:11px;"><i data-lucide="sun" style="width:13px;height:13px;color:var(--muted);flex-shrink:0;"></i><span style="font-size:12px;width:72px;flex-shrink:0;color:var(--muted);">Lifestyle</span><input type="range" min="0" max="50" value="15" class="mw-mix" style="flex:1;"><span style="font-size:11px;width:28px;text-align:right;color:var(--accent2);font-weight:700;font-family:monospace;" class="mw-mv">15%</span></div>
+          <div style="display:flex;align-items:center;gap:11px;"><i data-lucide="newspaper" style="width:13px;height:13px;color:var(--muted);flex-shrink:0;"></i><span style="font-size:12px;width:72px;flex-shrink:0;color:var(--muted);">News</span><input type="range" min="0" max="50" value="15" class="mw-mix" style="flex:1;"><span style="font-size:11px;width:28px;text-align:right;color:var(--accent2);font-weight:700;font-family:monospace;" class="mw-mv">15%</span></div>
         </div>
       </div>
       <div class="wizard-step" data-step="4">
-        <div style="display:flex;align-items:center;gap:10px;margin-bottom:20px;"><div class="metric-icon" style="background:var(--accentL);"><i data-lucide="mic-2" style="width:17px;height:17px;color:var(--accent2);"></i></div><div><p style="font-size:14px;font-weight:600;">Tone per Platform</p><p style="font-size:12px;color:var(--muted);">Customise your voice for each channel</p></div></div>
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:20px;padding-bottom:16px;border-bottom:1px solid var(--border);"><div class="sec-icon" style="background:var(--accentL);"><i data-lucide="mic-2" style="width:16px;height:16px;color:var(--accent2);"></i></div><div><p style="font-size:14px;font-weight:700;font-family:'Public Sans',sans-serif;">Tone per Platform</p><p style="font-size:12px;color:var(--muted);">Customise your voice for each channel</p></div></div>
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
-          <div><label class="field-label"><span class="badge b-ig" style="margin-right:4px;">IG</span>Instagram</label><select class="mw-tone"><option>Storytelling</option><option>Professional</option><option>Casual</option><option>Luxury</option></select></div>
-          <div><label class="field-label"><span class="badge b-fb" style="margin-right:4px;">FB</span>Facebook</label><select class="mw-tone"><option>Professional</option><option>Storytelling</option><option>Casual</option></select></div>
-          <div><label class="field-label"><span class="badge b-li" style="margin-right:4px;">LI</span>LinkedIn</label><select class="mw-tone"><option>Professional</option><option>Authoritative</option></select></div>
-          <div><label class="field-label"><span class="badge b-tt" style="margin-right:4px;">TT</span>TikTok</label><select class="mw-tone"><option>Casual</option><option>Trendy</option></select></div>
+          <div><label class="lbl">Instagram</label><select class="mw-tone"><option>Storytelling</option><option>Professional</option><option>Casual</option><option>Luxury</option></select></div>
+          <div><label class="lbl">Facebook</label><select class="mw-tone"><option>Professional</option><option>Storytelling</option><option>Casual</option></select></div>
+          <div><label class="lbl">LinkedIn</label><select class="mw-tone"><option>Professional</option><option>Authoritative</option></select></div>
+          <div><label class="lbl">TikTok</label><select class="mw-tone"><option>Casual</option><option>Trendy</option></select></div>
         </div>
       </div>
       <div class="wizard-step" data-step="5">
-        <div style="display:flex;align-items:center;gap:10px;margin-bottom:20px;"><div class="metric-icon" style="background:var(--accentL);"><i data-lucide="globe" style="width:17px;height:17px;color:var(--accent2);"></i></div><div><p style="font-size:14px;font-weight:600;">Languages</p><p style="font-size:12px;color:var(--muted);">Posts will include flag separators per language</p></div></div>
-        <div style="display:flex;flex-wrap:wrap;gap:8px;" id="mw-langs">
-          <span class="lang-chip selected" data-lang="English">🇬🇧 English</span>
-          <span class="lang-chip" data-lang="Spanish">🇪🇸 Spanish</span>
-          <span class="lang-chip" data-lang="Dutch">🇳🇱 Dutch</span>
-          <span class="lang-chip" data-lang="German">🇩🇪 German</span>
-          <span class="lang-chip" data-lang="French">🇫🇷 French</span>
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:20px;padding-bottom:16px;border-bottom:1px solid var(--border);"><div class="sec-icon" style="background:var(--accentL);"><i data-lucide="globe" style="width:16px;height:16px;color:var(--accent2);"></i></div><div><p style="font-size:14px;font-weight:700;font-family:'Public Sans',sans-serif;">Languages</p><p style="font-size:12px;color:var(--muted);">Posts include flag separators per language</p></div></div>
+        <div style="display:flex;flex-wrap:wrap;gap:7px;" id="mw-langs">
+          <span class="chip on" data-lang="English">🇬🇧 English</span>
+          <span class="chip" data-lang="Spanish">🇪🇸 Spanish</span>
+          <span class="chip" data-lang="Dutch">🇳🇱 Dutch</span>
+          <span class="chip" data-lang="German">🇩🇪 German</span>
+          <span class="chip" data-lang="French">🇫🇷 French</span>
         </div>
       </div>
       <div class="wizard-step" data-step="6">
-        <div style="display:flex;align-items:center;gap:10px;margin-bottom:20px;"><div class="metric-icon" style="background:var(--goldL);"><i data-lucide="sparkles" style="width:17px;height:17px;color:var(--gold);"></i></div><div><p style="font-size:14px;font-weight:600;">Generate Your Month</p><p style="font-size:12px;color:var(--muted);">AI will create posts for all your platforms</p></div></div>
-        <div id="mw-gen" class="hidden" style="text-align:center;padding:32px 0;">
-          <div class="ai-pulse" style="width:48px;height:48px;border-radius:12px;background:var(--accentL);display:flex;align-items:center;justify-content:center;margin:0 auto 12px;"><i data-lucide="brain" style="width:24px;height:24px;color:var(--accent2);"></i></div>
-          <p style="font-size:14px;font-weight:600;">Generating your monthly plan...</p>
-          <p style="font-size:12px;color:var(--muted);margin-top:4px;">Claude is crafting posts for all your platforms</p>
-        </div>
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:20px;padding-bottom:16px;border-bottom:1px solid var(--border);"><div class="sec-icon" style="background:var(--goldL);"><i data-lucide="sparkles" style="width:16px;height:16px;color:var(--gold);"></i></div><div><p style="font-size:14px;font-weight:700;font-family:'Public Sans',sans-serif;">Generate Your Month</p><p style="font-size:12px;color:var(--muted);">AI will create posts for all your platforms</p></div></div>
+        <div id="mw-gen" class="hidden" style="text-align:center;padding:28px 0;"><div class="aipulse-wrap ai-pulse"><i data-lucide="brain" style="width:22px;height:22px;color:var(--accent2);"></i></div><p style="font-size:14px;font-weight:600;">Generating your monthly plan...</p><p style="font-size:12px;color:var(--muted);margin-top:4px;">Claude is crafting posts for all your platforms</p></div>
         <div id="mw-res" class="hidden fade-in">
-          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;">
-            <div style="display:flex;align-items:center;gap:6px;"><i data-lucide="check-circle" style="width:15px;height:15px;color:var(--green);"></i><p style="font-size:13px;font-weight:600;"><span id="mw-count">0</span> posts generated</p></div>
-            <button class="btn btn-primary btn-sm" onclick="showToast('All posts scheduled!')"><i data-lucide="calendar-plus" style="width:12px;height:12px;"></i>Schedule All</button>
-          </div>
-          <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;max-height:320px;overflow-y:auto;" id="mw-grid"></div>
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;"><div style="display:flex;align-items:center;gap:6px;"><i data-lucide="check-circle" style="width:14px;height:14px;color:var(--green);"></i><p style="font-size:13px;font-weight:600;"><span id="mw-count">0</span> posts generated</p></div><button class="btn btn-primary btn-sm" onclick="showToast('All posts scheduled!')"><i data-lucide="calendar-plus" style="width:11px;height:11px;"></i>Schedule All</button></div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:9px;max-height:300px;overflow-y:auto;" id="mw-grid"></div>
         </div>
-        <button id="mw-gen-btn" class="btn btn-gold" style="width:100%;justify-content:center;padding:12px;"><i data-lucide="sparkles" style="width:15px;height:15px;"></i>Generate Monthly Plan</button>
+        <button id="mw-gen-btn" class="btn btn-gold" style="width:100%;margin-top:4px;padding:12px;"><i data-lucide="sparkles" style="width:14px;height:14px;"></i>Generate Monthly Plan</button>
       </div>
       <div style="display:flex;align-items:center;justify-content:space-between;margin-top:20px;padding-top:16px;border-top:1px solid var(--border);">
-        <button id="mw-prev" class="btn btn-ghost btn-sm hidden"><i data-lucide="arrow-left" style="width:13px;height:13px;"></i>Back</button>
-        <button id="mw-next" class="btn btn-primary btn-sm" style="margin-left:auto;">Next<i data-lucide="arrow-right" style="width:13px;height:13px;"></i></button>
+        <button id="mw-prev" class="btn btn-ghost btn-sm hidden"><i data-lucide="arrow-left" style="width:12px;height:12px;"></i>Back</button>
+        <button id="mw-next" class="btn btn-primary btn-sm" style="margin-left:auto;">Next<i data-lucide="arrow-right" style="width:12px;height:12px;"></i></button>
       </div>
     </div>
   </div>
-</section>
+</div></section>
 
-<!-- ═══════════ AI GENERATOR ═══════════ -->
+<!-- ═══ AI GENERATOR ═══ -->
 <section class="view" id="view-ai-generator">
-  <div class="section-header">
-    <div><p class="section-title">AI Generator</p><p class="section-sub">Generate platform-optimised content in seconds</p></div>
-  </div>
-  <div style="display:flex;gap:6px;margin-bottom:20px;">
-    <button class="btn btn-primary btn-sm ai-tab active-tab" data-panel="social"><i data-lucide="instagram" style="width:12px;height:12px;"></i>Social Post</button>
-    <button class="btn btn-ghost btn-sm ai-tab" data-panel="blog"><i data-lucide="file-text" style="width:12px;height:12px;"></i>Blog Article</button>
-    <button class="btn btn-ghost btn-sm ai-tab" data-panel="gbp"><i data-lucide="map-pin" style="width:12px;height:12px;"></i>Google Business</button>
-    <button class="btn btn-ghost btn-sm ai-tab" data-panel="custom"><i data-lucide="rocket" style="width:12px;height:12px;"></i>Custom Campaign</button>
+<div class="page">
+  <div style="margin-bottom:24px;"><h1 style="font-family:'Public Sans',sans-serif;font-size:20px;font-weight:800;letter-spacing:-.02em;">AI Generator</h1><p style="font-size:13px;color:var(--muted);margin-top:3px;">Generate platform-optimised content in seconds</p></div>
+  <div style="display:flex;gap:6px;margin-bottom:24px;flex-wrap:wrap;">
+    <button class="btn btn-primary btn-sm ai-tab active-tab" data-panel="social"><i data-lucide="instagram" style="width:11px;height:11px;"></i>Social Post</button>
+    <button class="btn btn-ghost btn-sm ai-tab" data-panel="blog"><i data-lucide="file-text" style="width:11px;height:11px;"></i>Blog Article</button>
+    <button class="btn btn-ghost btn-sm ai-tab" data-panel="gbp"><i data-lucide="map-pin" style="width:11px;height:11px;"></i>Google Business</button>
+    <button class="btn btn-ghost btn-sm ai-tab" data-panel="custom"><i data-lucide="rocket" style="width:11px;height:11px;"></i>Custom Campaign</button>
   </div>
   <div id="ai-panel-social">
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;">
-      <div class="card" style="padding:28px;display:flex;flex-direction:column;gap:20px;">
-        <p style="font-size:13px;font-weight:600;">Property Details</p>
-        <div><label class="field-label">Property URL or Description</label><textarea id="prop-url" rows="4" placeholder="Paste a property URL or describe the listing..."></textarea></div>
-        <div><label class="field-label" style="margin-bottom:8px;">Platforms</label>
+    <div class="cols-2" style="display:grid;grid-template-columns:1fr 1fr;gap:20px;align-items:start;">
+      <div class="card card-body" style="display:flex;flex-direction:column;gap:16px;">
+        <p style="font-size:14px;font-weight:700;font-family:'Public Sans',sans-serif;">Property Details</p>
+        <div><label class="lbl">Property URL or Description</label><textarea id="prop-url" rows="4" placeholder="Paste a property URL or describe the listing..."></textarea></div>
+        <div><label class="lbl" style="margin-bottom:8px;">Platforms</label>
           <div style="display:flex;flex-wrap:wrap;gap:6px;">
-            <label style="display:flex;align-items:center;gap:6px;padding:6px 12px;border-radius:7px;border:1px solid var(--border);background:var(--bg3);cursor:pointer;font-size:12px;"><input type="checkbox" checked class="plat-check" value="Instagram" style="width:auto;"><span class="badge b-ig">IG</span></label>
-            <label style="display:flex;align-items:center;gap:6px;padding:6px 12px;border-radius:7px;border:1px solid var(--border);background:var(--bg3);cursor:pointer;font-size:12px;"><input type="checkbox" checked class="plat-check" value="Facebook" style="width:auto;"><span class="badge b-fb">FB</span></label>
-            <label style="display:flex;align-items:center;gap:6px;padding:6px 12px;border-radius:7px;border:1px solid var(--border);background:var(--bg3);cursor:pointer;font-size:12px;"><input type="checkbox" class="plat-check" value="LinkedIn" style="width:auto;"><span class="badge b-li">LI</span></label>
-            <label style="display:flex;align-items:center;gap:6px;padding:6px 12px;border-radius:7px;border:1px solid var(--border);background:var(--bg3);cursor:pointer;font-size:12px;"><input type="checkbox" class="plat-check" value="TikTok" style="width:auto;"><span class="badge b-tt">TT</span></label>
+            <label style="display:flex;align-items:center;gap:5px;padding:6px 10px;border-radius:7px;border:1px solid var(--border);background:var(--bg3);cursor:pointer;font-size:11.5px;"><input type="checkbox" checked class="plat-check" value="Instagram" style="width:auto;"><span class="badge b-ig">IG</span></label>
+            <label style="display:flex;align-items:center;gap:5px;padding:6px 10px;border-radius:7px;border:1px solid var(--border);background:var(--bg3);cursor:pointer;font-size:11.5px;"><input type="checkbox" checked class="plat-check" value="Facebook" style="width:auto;"><span class="badge b-fb">FB</span></label>
+            <label style="display:flex;align-items:center;gap:5px;padding:6px 10px;border-radius:7px;border:1px solid var(--border);background:var(--bg3);cursor:pointer;font-size:11.5px;"><input type="checkbox" class="plat-check" value="LinkedIn" style="width:auto;"><span class="badge b-li">LI</span></label>
+            <label style="display:flex;align-items:center;gap:5px;padding:6px 10px;border-radius:7px;border:1px solid var(--border);background:var(--bg3);cursor:pointer;font-size:11.5px;"><input type="checkbox" class="plat-check" value="TikTok" style="width:auto;"><span class="badge b-tt">TT</span></label>
           </div>
         </div>
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
-          <div><label class="field-label">Tone</label><select id="ai-tone"><option>Storytelling</option><option>Professional</option><option>Casual</option><option>Luxury</option></select></div>
-          <div><label class="field-label">Length</label><select id="ai-len"><option>Short & punchy</option><option>Medium</option><option>Long-form</option></select></div>
+          <div><label class="lbl">Tone</label><select id="ai-tone"><option>Storytelling</option><option>Professional</option><option>Casual</option><option>Luxury</option></select></div>
+          <div><label class="lbl">Length</label><select id="ai-len"><option>Short & punchy</option><option>Medium</option><option>Long-form</option></select></div>
         </div>
-        <div><label class="field-label" style="margin-bottom:8px;">Languages</label>
+        <div><label class="lbl" style="margin-bottom:8px;">Languages</label>
           <div style="display:flex;flex-wrap:wrap;gap:6px;" id="ai-langs">
-            <span class="lang-chip selected" data-lang="English">🇬🇧 EN</span>
-            <span class="lang-chip" data-lang="Spanish">🇪🇸 ES</span>
-            <span class="lang-chip" data-lang="Dutch">🇳🇱 NL</span>
-            <span class="lang-chip" data-lang="German">🇩🇪 DE</span>
-            <span class="lang-chip" data-lang="French">🇫🇷 FR</span>
+            <span class="chip on" data-lang="English">🇬🇧 EN</span>
+            <span class="chip" data-lang="Spanish">🇪🇸 ES</span>
+            <span class="chip" data-lang="Dutch">🇳🇱 NL</span>
+            <span class="chip" data-lang="German">🇩🇪 DE</span>
+            <span class="chip" data-lang="French">🇫🇷 FR</span>
           </div>
         </div>
-        <button id="gen-btn" class="btn btn-gold" style="width:100%;justify-content:center;padding:11px;"><i data-lucide="sparkles" style="width:15px;height:15px;"></i>Generate Content</button>
+        <button id="gen-btn" class="btn btn-gold" style="width:100%;padding:12px;"><i data-lucide="sparkles" style="width:14px;height:14px;"></i>Generate Content</button>
       </div>
       <div>
-        <div id="ai-load" class="hidden card" style="padding:48px;text-align:center;">
-          <div class="ai-pulse" style="width:48px;height:48px;border-radius:12px;background:var(--accentL);display:flex;align-items:center;justify-content:center;margin:0 auto 12px;"><i data-lucide="sparkles" style="width:24px;height:24px;color:var(--accent2);"></i></div>
-          <p style="font-size:14px;font-weight:600;">Generating content...</p>
-        </div>
-        <div id="ai-out" class="hidden fade-in" style="display:none;flex-direction:column;gap:12px;">
-          <div class="card" style="padding:16px;">
-            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;">
-              <div style="display:flex;align-items:center;gap:6px;"><i data-lucide="file-text" style="width:14px;height:14px;color:var(--accent2);"></i><p style="font-size:12px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.04em;">Generated Post</p></div>
-              <button id="copy-btn" class="btn btn-ghost btn-xs"><i data-lucide="copy" style="width:11px;height:11px;"></i>Copy</button>
-            </div>
-            <div style="background:var(--bg3);border-radius:8px;padding:12px;font-size:12px;line-height:1.7;white-space:pre-wrap;max-height:220px;overflow-y:auto;" id="gen-caption"></div>
+        <div id="ai-load" class="hidden card card-body" style="text-align:center;padding:40px;"><div class="aipulse-wrap ai-pulse"><i data-lucide="sparkles" style="width:22px;height:22px;color:var(--accent2);"></i></div><p style="font-size:14px;font-weight:600;">Generating content...</p></div>
+        <div id="ai-out" class="hidden fade-in" style="display:flex;flex-direction:column;gap:12px;">
+          <div class="card card-body">
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;"><div style="display:flex;align-items:center;gap:6px;"><i data-lucide="file-text" style="width:13px;height:13px;color:var(--accent2);"></i><p style="font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);">Generated Post</p></div><button id="copy-btn" class="btn btn-ghost btn-xs"><i data-lucide="copy" style="width:10px;height:10px;"></i>Copy</button></div>
+            <div class="inner" style="padding:12px;font-size:12.5px;line-height:1.7;white-space:pre-wrap;max-height:220px;overflow-y:auto;" id="gen-caption"></div>
           </div>
-          <div class="card" style="padding:16px;">
-            <div style="display:flex;align-items:center;gap:6px;margin-bottom:8px;"><i data-lucide="hash" style="width:14px;height:14px;color:var(--accent2);"></i><p style="font-size:12px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.04em;">Hashtags</p></div>
-            <div style="background:var(--bg3);border-radius:8px;padding:10px;font-size:12px;color:var(--accent2);" id="gen-hashtags"></div>
-          </div>
-          <div class="card" style="padding:16px;">
-            <div style="display:flex;align-items:center;gap:6px;margin-bottom:8px;"><i data-lucide="mouse-pointer-click" style="width:14px;height:14px;color:var(--gold);"></i><p style="font-size:12px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.04em;">CTA Suggestions</p></div>
-            <div style="background:var(--bg3);border-radius:8px;padding:10px;font-size:12px;" id="gen-ctas"></div>
-          </div>
-          <button class="btn btn-primary" style="width:100%;justify-content:center;" onclick="showToast('Saved to Control Tower!')"><i data-lucide="calendar-plus" style="width:13px;height:13px;"></i>Save to Control Tower</button>
+          <div class="card card-body"><div style="display:flex;align-items:center;gap:6px;margin-bottom:8px;"><i data-lucide="hash" style="width:13px;height:13px;color:var(--accent2);"></i><p style="font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);">Hashtags</p></div><div class="inner" style="padding:10px;font-size:12px;color:var(--accent2);" id="gen-hashtags"></div></div>
+          <div class="card card-body"><div style="display:flex;align-items:center;gap:6px;margin-bottom:8px;"><i data-lucide="mouse-pointer-click" style="width:13px;height:13px;color:var(--gold);"></i><p style="font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);">CTA Suggestions</p></div><div class="inner" style="padding:10px;font-size:12px;" id="gen-ctas"></div></div>
+          <button class="btn btn-primary" style="width:100%;" onclick="showToast('Saved to Control Tower!')"><i data-lucide="calendar-plus" style="width:12px;height:12px;"></i>Save to Control Tower</button>
         </div>
       </div>
     </div>
   </div>
-  <div id="ai-panel-blog" class="hidden" style="margin-top:20px;">
-    <div class="card" style="padding:28px;max-width:600px;display:flex;flex-direction:column;gap:20px;">
-    <p style="font-size:13px;font-weight:600;">Blog Article Creator</p>
-    <div><label class="field-label">Target Keywords</label><input id="blog-kw" type="text" placeholder="e.g. Marbella luxury villas, Costa del Sol investment"></div>
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
-      <div><label class="field-label">Audience</label><select id="blog-aud"><option>First-time Buyers</option><option>Luxury Investors</option><option>Expats</option></select></div>
-      <div><label class="field-label">Tone</label><select id="blog-tone"><option>Informative</option><option>Exclusive</option><option>Friendly</option></select></div>
-    </div>
-    <button id="gen-blog" class="btn btn-gold" style="justify-content:center;padding:11px;"><i data-lucide="sparkles" style="width:14px;height:14px;"></i>Generate Article</button>
-    <div id="blog-out" class="hidden" style="background:var(--bg3);border-radius:8px;padding:14px;font-size:12px;line-height:1.7;white-space:pre-wrap;max-height:360px;overflow-y:auto;"></div>
+  <div id="ai-panel-blog" class="hidden" style="margin-top:8px;max-width:580px;">
+    <div class="card card-body" style="display:flex;flex-direction:column;gap:16px;">
+      <p style="font-size:14px;font-weight:700;font-family:'Public Sans',sans-serif;">Blog Article Creator</p>
+      <div><label class="lbl">Target Keywords</label><input id="blog-kw" type="text" placeholder="e.g. Marbella luxury villas, Costa del Sol investment"></div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;"><div><label class="lbl">Audience</label><select id="blog-aud"><option>First-time Buyers</option><option>Luxury Investors</option><option>Expats</option></select></div><div><label class="lbl">Tone</label><select id="blog-tone"><option>Informative</option><option>Exclusive</option><option>Friendly</option></select></div></div>
+      <button id="gen-blog" class="btn btn-gold" style="width:100%;padding:11px;"><i data-lucide="sparkles" style="width:13px;height:13px;"></i>Generate Article</button>
+      <div id="blog-out" class="hidden inner" style="padding:14px;font-size:12px;line-height:1.7;white-space:pre-wrap;max-height:360px;overflow-y:auto;"></div>
     </div>
   </div>
-  <div id="ai-panel-gbp" class="hidden" style="margin-top:20px;">
-    <div class="card" style="padding:28px;max-width:600px;display:flex;flex-direction:column;gap:20px;">
-    <p style="font-size:13px;font-weight:600;">Google Business Profile Update</p>
-    <div><label class="field-label">Update Type</label><select id="gbp-type"><option>What's New</option><option>Event</option><option>Offer</option><option>Success Story</option></select></div>
-    <div><label class="field-label">Property / Topic</label><input id="gbp-topic" type="text" placeholder="e.g. New listing in Golden Mile"></div>
-    <button id="gen-gbp" class="btn btn-gold" style="justify-content:center;padding:11px;"><i data-lucide="sparkles" style="width:14px;height:14px;"></i>Generate GBP Update</button>
-    <div id="gbp-out" class="hidden" style="background:var(--bg3);border-radius:8px;padding:14px;font-size:12px;line-height:1.7;white-space:pre-wrap;"></div>
+  <div id="ai-panel-gbp" class="hidden" style="margin-top:8px;max-width:580px;">
+    <div class="card card-body" style="display:flex;flex-direction:column;gap:16px;">
+      <p style="font-size:14px;font-weight:700;font-family:'Public Sans',sans-serif;">Google Business Profile Update</p>
+      <div><label class="lbl">Update Type</label><select id="gbp-type"><option>What's New</option><option>Event</option><option>Offer</option><option>Success Story</option></select></div>
+      <div><label class="lbl">Property / Topic</label><input id="gbp-topic" type="text" placeholder="e.g. New listing in Golden Mile"></div>
+      <button id="gen-gbp" class="btn btn-gold" style="width:100%;padding:11px;"><i data-lucide="sparkles" style="width:13px;height:13px;"></i>Generate GBP Update</button>
+      <div id="gbp-out" class="hidden inner" style="padding:14px;font-size:12px;line-height:1.7;white-space:pre-wrap;"></div>
     </div>
   </div>
-  <div id="ai-panel-custom" class="hidden" style="margin-top:20px;">
-    <div class="card" style="padding:28px;max-width:600px;display:flex;flex-direction:column;gap:20px;">
-    <p style="font-size:13px;font-weight:600;">Custom Campaign Engine</p>
-    <div><label class="field-label">Campaign Topic</label><textarea id="custom-topic" rows="3" placeholder="e.g. Neighbourhood guide, market update, open house series..."></textarea></div>
-    <div><label class="field-label">Number of Posts</label><input id="custom-count" type="number" value="20" min="5" max="60"></div>
-    <button id="gen-custom" class="btn btn-gold" style="justify-content:center;padding:11px;"><i data-lucide="sparkles" style="width:14px;height:14px;"></i>Generate Campaign</button>
-    <div id="custom-out" class="hidden" style="background:var(--bg3);border-radius:8px;padding:14px;font-size:12px;line-height:1.7;white-space:pre-wrap;max-height:360px;overflow-y:auto;"></div>
+  <div id="ai-panel-custom" class="hidden" style="margin-top:8px;max-width:580px;">
+    <div class="card card-body" style="display:flex;flex-direction:column;gap:16px;">
+      <p style="font-size:14px;font-weight:700;font-family:'Public Sans',sans-serif;">Custom Campaign Engine</p>
+      <div><label class="lbl">Campaign Topic</label><textarea id="custom-topic" rows="3" placeholder="e.g. Neighbourhood guide, market update, open house series..."></textarea></div>
+      <div><label class="lbl">Number of Posts</label><input id="custom-count" type="number" value="20" min="5" max="60"></div>
+      <button id="gen-custom" class="btn btn-gold" style="width:100%;padding:11px;"><i data-lucide="sparkles" style="width:13px;height:13px;"></i>Generate Campaign</button>
+      <div id="custom-out" class="hidden inner" style="padding:14px;font-size:12px;line-height:1.7;white-space:pre-wrap;max-height:360px;overflow-y:auto;"></div>
     </div>
   </div>
-</section>
+</div></section>
 
-<!-- ═══════════ BRAINSTORM CHAT ═══════════ -->
+<!-- ═══ BRAINSTORM ═══ -->
 <section class="view" id="view-brainstorm">
-  <div class="section-header">
-    <div><p class="section-title">Brainstorm Chat</p><p class="section-sub">Context-aware AI that knows your tone, audience & goals</p></div>
-    <button id="clear-chat" class="btn btn-ghost btn-sm"><i data-lucide="trash-2" style="width:12px;height:12px;"></i>Clear</button>
+<div class="page">
+  <div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:24px;gap:12px;flex-wrap:wrap;">
+    <div><h1 style="font-family:'Public Sans',sans-serif;font-size:20px;font-weight:800;letter-spacing:-.02em;">Brainstorm Chat</h1><p style="font-size:13px;color:var(--muted);margin-top:3px;">Context-aware AI — knows your tone, audience & goals</p></div>
+    <button id="clear-chat" class="btn btn-ghost btn-sm"><i data-lucide="trash-2" style="width:11px;height:11px;"></i>Clear</button>
   </div>
-  <div class="card" style="display:flex;flex-direction:column;height:calc(100vh - 160px);max-width:820px;">
+  <div class="card" style="display:flex;flex-direction:column;height:calc(100vh - 180px);max-width:820px;">
     <div style="padding:14px 16px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:10px;flex-shrink:0;">
-      <div style="width:32px;height:32px;border-radius:8px;background:linear-gradient(135deg,var(--accent),var(--accent2));display:flex;align-items:center;justify-content:center;"><i data-lucide="brain" style="width:16px;height:16px;color:white;"></i></div>
-      <div><p style="font-size:13px;font-weight:600;">AI Content Partner</p><p style="font-size:11px;color:var(--muted);">Knows your strategy · Marbella · Luxury · Storytelling</p></div>
-      <div style="margin-left:auto;display:flex;align-items:center;gap:6px;font-size:11px;color:var(--green);background:var(--greenL);padding:3px 10px;border-radius:5px;border:1px solid rgba(34,197,94,.2);"><span style="width:5px;height:5px;border-radius:50%;background:var(--green);"></span>Online</div>
+      <div style="width:30px;height:30px;border-radius:8px;background:linear-gradient(135deg,var(--accent),var(--accent2));display:flex;align-items:center;justify-content:center;"><i data-lucide="brain" style="width:15px;height:15px;color:white;"></i></div>
+      <div style="flex:1;"><p style="font-size:13px;font-weight:600;">AI Content Partner</p><p style="font-size:11px;color:var(--muted);">Marbella · Luxury · Storytelling</p></div>
+      <div style="display:flex;align-items:center;gap:5px;font-size:11px;color:var(--green);background:var(--greenL);padding:3px 9px;border-radius:5px;border:1px solid rgba(16,185,129,.2);"><span style="width:5px;height:5px;border-radius:50%;background:var(--green);display:inline-block;"></span>Online</div>
     </div>
-    <div style="flex:1;overflow-y:auto;padding:16px;display:flex;flex-direction:column;gap:10px;" id="chat-msgs">
-      <div class="bubble-ai">Hi! I'm your AI brainstorm partner. I know your strategy targets luxury investors in Marbella with a storytelling tone. What would you like to work on?</div>
+    <div style="flex:1;overflow-y:auto;padding:14px;display:flex;flex-direction:column;gap:9px;" id="chat-msgs">
+      <div class="amsg">Hi! I'm your AI brainstorm partner. I know your strategy targets luxury investors in Marbella with a storytelling tone. What would you like to work on?</div>
     </div>
-    <div style="padding:10px 16px;border-top:1px solid var(--border);display:flex;gap:6px;flex-wrap:wrap;flex-shrink:0;">
-      <button class="btn btn-ghost btn-xs qp" data-p="Give me 5 creative hook ideas for a new luxury listing in Marbella"><i data-lucide="lightbulb" style="width:11px;height:11px;"></i>Hook ideas</button>
-      <button class="btn btn-ghost btn-xs qp" data-p="Write a neighbourhood guide post for the Golden Mile area"><i data-lucide="map-pin" style="width:11px;height:11px;"></i>Neighbourhood guide</button>
-      <button class="btn btn-ghost btn-xs qp" data-p="Create a TikTok/Reels video script for a property walkthrough"><i data-lucide="video" style="width:11px;height:11px;"></i>Video script</button>
-      <button class="btn btn-ghost btn-xs qp" data-p="What are the best trending hashtags for luxury real estate in Marbella?"><i data-lucide="hash" style="width:11px;height:11px;"></i>Hashtags</button>
+    <div style="padding:8px 12px;border-top:1px solid var(--border);display:flex;gap:5px;flex-wrap:wrap;flex-shrink:0;">
+      <button class="btn btn-ghost btn-xs qp" data-p="Give me 5 creative hook ideas for a new luxury listing in Marbella"><i data-lucide="lightbulb" style="width:10px;height:10px;"></i>Hook ideas</button>
+      <button class="btn btn-ghost btn-xs qp" data-p="Write a neighbourhood guide post for the Golden Mile area"><i data-lucide="map-pin" style="width:10px;height:10px;"></i>Neighbourhood guide</button>
+      <button class="btn btn-ghost btn-xs qp" data-p="Create a TikTok/Reels video script for a property walkthrough"><i data-lucide="video" style="width:10px;height:10px;"></i>Video script</button>
+      <button class="btn btn-ghost btn-xs qp" data-p="What are the best trending hashtags for luxury real estate in Marbella?"><i data-lucide="hash" style="width:10px;height:10px;"></i>Hashtags</button>
     </div>
-    <div style="padding:12px;border-top:1px solid var(--border);display:flex;gap:8px;flex-shrink:0;">
+    <div style="padding:10px 12px;border-top:1px solid var(--border);display:flex;gap:7px;flex-shrink:0;">
       <input id="chat-input" type="text" placeholder="Ask for hooks, scripts, campaign ideas, hashtags..." style="flex:1;">
-      <button id="chat-send" class="btn btn-primary"><i data-lucide="send" style="width:14px;height:14px;"></i>Send</button>
+      <button id="chat-send" class="btn btn-primary"><i data-lucide="send" style="width:13px;height:13px;"></i>Send</button>
     </div>
   </div>
-</section>
+</div></section>
 
-<!-- ═══════════ CAMPAIGN WIZARD ═══════════ -->
+<!-- ═══ CAMPAIGN WIZARD ═══ -->
 <section class="view" id="view-campaign-wizard">
-  <div class="section-header"><div><p class="section-title">Campaign Wizard</p><p class="section-sub">Build a targeted multi-day content campaign</p></div></div>
-  <div class="card" style="padding:24px;max-width:640px;display:flex;flex-direction:column;gap:16px;">
-    <div><label class="field-label">Campaign Topic</label><textarea id="cw-topic" rows="3" placeholder="e.g. Summer open house series, local food guide, investment webinar..."></textarea></div>
-    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;">
-      <div><label class="field-label">Goal</label><select id="cw-goal"><option>Lead Generation</option><option>Brand Awareness</option><option>Engagement</option><option>Event Promotion</option></select></div>
-      <div><label class="field-label">Audience</label><select id="cw-aud"><option>Luxury Investors</option><option>Expats</option><option>First-time Buyers</option><option>Local Community</option></select></div>
-      <div><label class="field-label">Duration</label><select id="cw-dur"><option>1 week</option><option selected>2 weeks</option><option>1 month</option></select></div>
+<div class="page">
+  <div style="margin-bottom:24px;"><h1 style="font-family:'Public Sans',sans-serif;font-size:20px;font-weight:800;letter-spacing:-.02em;">Campaign Wizard</h1><p style="font-size:13px;color:var(--muted);margin-top:3px;">Build a targeted multi-day content campaign</p></div>
+  <div class="card card-body" style="max-width:620px;display:flex;flex-direction:column;gap:16px;">
+    <div><label class="lbl">Campaign Topic</label><textarea id="cw-topic" rows="3" placeholder="e.g. Summer open house series, local food guide, investment webinar..."></textarea></div>
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;">
+      <div><label class="lbl">Goal</label><select id="cw-goal"><option>Lead Generation</option><option>Brand Awareness</option><option>Engagement</option><option>Event Promotion</option></select></div>
+      <div><label class="lbl">Audience</label><select id="cw-aud"><option>Luxury Investors</option><option>Expats</option><option>First-time Buyers</option><option>Local Community</option></select></div>
+      <div><label class="lbl">Duration</label><select id="cw-dur"><option>1 week</option><option selected>2 weeks</option><option>1 month</option></select></div>
     </div>
-    <div><label class="field-label" style="margin-bottom:8px;">Languages</label>
+    <div><label class="lbl" style="margin-bottom:8px;">Languages</label>
       <div style="display:flex;flex-wrap:wrap;gap:6px;" id="cw-langs">
-        <span class="lang-chip selected" data-lang="English">🇬🇧 English</span>
-        <span class="lang-chip" data-lang="Spanish">🇪🇸 Spanish</span>
-        <span class="lang-chip" data-lang="Dutch">🇳🇱 Dutch</span>
-        <span class="lang-chip" data-lang="German">🇩🇪 German</span>
+        <span class="chip on" data-lang="English">🇬🇧 English</span>
+        <span class="chip" data-lang="Spanish">🇪🇸 Spanish</span>
+        <span class="chip" data-lang="Dutch">🇳🇱 Dutch</span>
+        <span class="chip" data-lang="German">🇩🇪 German</span>
       </div>
     </div>
-    <button id="cw-btn" class="btn btn-gold" style="justify-content:center;padding:12px;"><i data-lucide="sparkles" style="width:15px;height:15px;"></i>Generate Campaign</button>
+    <button id="cw-btn" class="btn btn-gold" style="width:100%;padding:12px;"><i data-lucide="sparkles" style="width:14px;height:14px;"></i>Generate Campaign</button>
   </div>
-  <div id="cw-out" class="hidden fade-in" style="margin-top:20px;"><p style="font-size:13px;font-weight:600;margin-bottom:12px;">Generated Campaign Posts</p><div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;max-height:400px;overflow-y:auto;" id="cw-grid"></div></div>
-</section>
+  <div id="cw-out" class="hidden fade-in" style="margin-top:20px;max-width:620px;"><p style="font-size:13px;font-weight:600;margin-bottom:12px;">Generated Campaign Posts</p><div style="display:grid;grid-template-columns:1fr 1fr;gap:9px;max-height:400px;overflow-y:auto;" id="cw-grid"></div></div>
+</div></section>
 
-<!-- ═══════════ CONTROL TOWER ═══════════ -->
+<!-- ═══ CONTROL TOWER ═══ -->
 <section class="view" id="view-control-tower">
-  <div class="section-header">
-    <div><p class="section-title">Control Tower</p><p class="section-sub">Your content pipeline from draft to published</p></div>
-    <button class="btn btn-primary btn-sm" onclick="switchView('ai-generator')"><i data-lucide="plus" style="width:13px;height:13px;"></i>New Post</button>
+<div class="page">
+  <div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:24px;gap:12px;flex-wrap:wrap;">
+    <div><h1 style="font-family:'Public Sans',sans-serif;font-size:20px;font-weight:800;letter-spacing:-.02em;">Control Tower</h1><p style="font-size:13px;color:var(--muted);margin-top:3px;">Your content pipeline from draft to published</p></div>
+    <button class="btn btn-primary btn-sm" onclick="switchView('ai-generator')"><i data-lucide="plus" style="width:12px;height:12px;"></i>New Post</button>
   </div>
-  <div style="display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;overflow-x:auto;">
-    <div class="kanban-col">
-      <div class="kanban-header"><span class="kanban-title">To Do</span><span style="font-size:11px;background:var(--bg4);padding:1px 7px;border-radius:99px;color:var(--muted);">2</span></div>
-      <div class="post-card"><div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px;"><span class="badge b-ig">IG</span><span style="font-size:10px;color:var(--muted);">Jun 20</span></div><p style="font-size:12px;font-weight:600;line-height:1.4;">Just Listed: Villa Golden Mile</p></div>
-      <div class="post-card"><div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px;"><span class="badge b-fb">FB</span><span style="font-size:10px;color:var(--muted);">Jun 22</span></div><p style="font-size:12px;font-weight:600;line-height:1.4;">Open House — Marbella</p></div>
+  <div class="kb-grid cols-4" style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;">
+    <div class="kb-col"><div class="kb-title">To Do <span style="background:var(--bg4);padding:1px 7px;border-radius:99px;color:var(--muted);font-size:10px;font-weight:600;">2</span></div>
+      <div class="kb-card"><div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:5px;"><span class="badge b-ig">IG</span><span style="font-size:10px;color:var(--muted);">Jun 20</span></div><p style="font-size:12px;font-weight:600;line-height:1.4;">Just Listed: Villa Golden Mile</p></div>
+      <div class="kb-card"><div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:5px;"><span class="badge b-fb">FB</span><span style="font-size:10px;color:var(--muted);">Jun 22</span></div><p style="font-size:12px;font-weight:600;line-height:1.4;">Open House — Marbella</p></div>
     </div>
-    <div class="kanban-col">
-      <div class="kanban-header"><span class="kanban-title">In Progress</span><span style="font-size:11px;background:var(--amberL);padding:1px 7px;border-radius:99px;color:var(--amber);">1</span></div>
-      <div class="post-card"><div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px;"><span class="badge b-li">LI</span><span style="font-size:10px;color:var(--muted);">Jun 19</span></div><p style="font-size:12px;font-weight:600;line-height:1.4;">Market Insights Q2 2026</p></div>
+    <div class="kb-col"><div class="kb-title">In Progress <span style="background:var(--amberL);padding:1px 7px;border-radius:99px;color:var(--amber);font-size:10px;font-weight:600;">1</span></div>
+      <div class="kb-card"><div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:5px;"><span class="badge b-li">LI</span><span style="font-size:10px;color:var(--muted);">Jun 19</span></div><p style="font-size:12px;font-weight:600;line-height:1.4;">Market Insights Q2 2026</p></div>
     </div>
-    <div class="kanban-col">
-      <div class="kanban-header"><span class="kanban-title">Scheduled</span><span style="font-size:11px;background:var(--accentL);padding:1px 7px;border-radius:99px;color:var(--accent2);">2</span></div>
-      <div class="post-card"><div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px;"><span class="badge b-tt">TT</span><span style="font-size:10px;color:var(--muted);">Jun 21</span></div><p style="font-size:12px;font-weight:600;line-height:1.4;">POV: House hunting in Marbella</p></div>
-      <div class="post-card"><div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px;"><span class="badge b-ig">IG</span><span style="font-size:10px;color:var(--muted);">Jun 23</span></div><p style="font-size:12px;font-weight:600;line-height:1.4;">Neighbourhood Guide: Golden Mile</p></div>
+    <div class="kb-col"><div class="kb-title">Scheduled <span style="background:var(--accentL);padding:1px 7px;border-radius:99px;color:var(--accent2);font-size:10px;font-weight:600;">2</span></div>
+      <div class="kb-card"><div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:5px;"><span class="badge b-tt">TT</span><span style="font-size:10px;color:var(--muted);">Jun 21</span></div><p style="font-size:12px;font-weight:600;line-height:1.4;">POV: House hunting in Marbella</p></div>
+      <div class="kb-card"><div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:5px;"><span class="badge b-ig">IG</span><span style="font-size:10px;color:var(--muted);">Jun 23</span></div><p style="font-size:12px;font-weight:600;line-height:1.4;">Neighbourhood Guide: Golden Mile</p></div>
     </div>
-    <div class="kanban-col">
-      <div class="kanban-header"><span class="kanban-title">Published</span><span style="font-size:11px;background:var(--greenL);padding:1px 7px;border-radius:99px;color:var(--green);">1</span></div>
-      <div class="post-card" style="opacity:.6;"><div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px;"><span class="badge b-ig">IG</span><span style="font-size:10px;color:var(--green);">Published</span></div><p style="font-size:12px;font-weight:600;line-height:1.4;">Beachfront Villa Infinity Pool</p><p style="font-size:10px;color:var(--muted);margin-top:4px;">Jun 18</p></div>
+    <div class="kb-col"><div class="kb-title">Published <span style="background:var(--greenL);padding:1px 7px;border-radius:99px;color:var(--green);font-size:10px;font-weight:600;">1</span></div>
+      <div class="kb-card" style="opacity:.6;"><div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:5px;"><span class="badge b-ig">IG</span><span style="font-size:10px;color:var(--green);">Published</span></div><p style="font-size:12px;font-weight:600;line-height:1.4;">Beachfront Villa Infinity Pool</p><p style="font-size:10px;color:var(--muted);margin-top:4px;">Jun 18</p></div>
     </div>
   </div>
-</section>
+</div></section>
 
-<!-- ═══════════ CALENDAR ═══════════ -->
+<!-- ═══ CALENDAR ═══ -->
 <section class="view" id="view-calendar">
-  <div class="section-header">
-    <div><p class="section-title">June 2026</p><p class="section-sub">Your content schedule at a glance</p></div>
-    <button class="btn btn-primary btn-sm" onclick="showToast('Posting times optimised!')"><i data-lucide="zap" style="width:13px;height:13px;"></i>Auto-Optimise Times</button>
+<div class="page">
+  <div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:24px;gap:12px;flex-wrap:wrap;">
+    <div><h1 style="font-family:'Public Sans',sans-serif;font-size:20px;font-weight:800;letter-spacing:-.02em;">June 2026</h1><p style="font-size:13px;color:var(--muted);margin-top:3px;">Your content schedule at a glance</p></div>
+    <button class="btn btn-primary btn-sm" onclick="showToast('Times optimised!')"><i data-lucide="zap" style="width:12px;height:12px;"></i>Auto-Optimise Times</button>
   </div>
-  <div class="card" style="padding:20px;">
-    <div style="display:grid;grid-template-columns:repeat(7,1fr);gap:6px;text-align:center;margin-bottom:8px;">
-      <span style="font-size:11px;font-weight:600;color:var(--muted);">Mon</span><span style="font-size:11px;font-weight:600;color:var(--muted);">Tue</span><span style="font-size:11px;font-weight:600;color:var(--muted);">Wed</span><span style="font-size:11px;font-weight:600;color:var(--muted);">Thu</span><span style="font-size:11px;font-weight:600;color:var(--muted);">Fri</span><span style="font-size:11px;font-weight:600;color:var(--muted);">Sat</span><span style="font-size:11px;font-weight:600;color:var(--muted);">Sun</span>
+  <div class="card card-body">
+    <div style="display:grid;grid-template-columns:repeat(7,1fr);gap:5px;text-align:center;margin-bottom:6px;">
+      <span style="font-size:10.5px;font-weight:600;color:var(--muted);">Mon</span><span style="font-size:10.5px;font-weight:600;color:var(--muted);">Tue</span><span style="font-size:10.5px;font-weight:600;color:var(--muted);">Wed</span><span style="font-size:10.5px;font-weight:600;color:var(--muted);">Thu</span><span style="font-size:10.5px;font-weight:600;color:var(--muted);">Fri</span><span style="font-size:10.5px;font-weight:600;color:var(--muted);">Sat</span><span style="font-size:10.5px;font-weight:600;color:var(--muted);">Sun</span>
     </div>
-    <div style="display:grid;grid-template-columns:repeat(7,1fr);gap:6px;" id="cal-grid"></div>
+    <div style="display:grid;grid-template-columns:repeat(7,1fr);gap:5px;" id="cal-grid"></div>
   </div>
-</section>
+</div></section>
 
-<!-- ═══════════ SOCIAL INBOX ═══════════ -->
+<!-- ═══ SOCIAL INBOX ═══ -->
 <section class="view" id="view-social-inbox">
-  <div class="section-header"><div><p class="section-title">Social Inbox</p><p class="section-sub">Manage comments and DMs across all platforms</p></div></div>
-  <div style="display:grid;grid-template-columns:280px 1fr;gap:16px;height:calc(100vh - 150px);">
-    <div class="card" style="padding:12px;display:flex;flex-direction:column;">
-      <div style="display:flex;gap:6px;margin-bottom:12px;flex-shrink:0;">
-        <button class="btn btn-primary btn-sm" style="flex:1;justify-content:center;">Comments</button>
-        <button class="btn btn-ghost btn-sm" style="flex:1;justify-content:center;">DMs</button>
+<div class="page">
+  <div style="margin-bottom:24px;"><h1 style="font-family:'Public Sans',sans-serif;font-size:20px;font-weight:800;letter-spacing:-.02em;">Social Inbox</h1><p style="font-size:13px;color:var(--muted);margin-top:3px;">Manage comments and DMs across all platforms</p></div>
+  <div class="cols-2" style="display:grid;grid-template-columns:280px 1fr;gap:16px;height:calc(100vh - 200px);min-height:400px;">
+    <div class="card" style="padding:12px;display:flex;flex-direction:column;overflow:hidden;">
+      <div style="display:flex;gap:5px;margin-bottom:10px;flex-shrink:0;">
+        <button class="btn btn-primary btn-sm" style="flex:1;">Comments</button>
+        <button class="btn btn-ghost btn-sm" style="flex:1;">DMs</button>
       </div>
       <div style="flex:1;overflow-y:auto;">
-        <div class="inbox-msg" data-sender="@marc_travels" data-ctx="Instagram Comment" data-msg="Is this property still available for viewings this week?" data-prop="Villa Golden Mile">
-          <div style="display:flex;justify-content:space-between;align-items:start;margin-bottom:4px;"><span style="font-size:12px;font-weight:600;">@marc_travels</span><span class="badge b-ig">IG</span></div>
-          <p style="font-size:12px;color:var(--muted);line-height:1.4;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;">Is this property still available for viewings this week?</p>
-          <p style="font-size:11px;color:var(--muted2);margin-top:4px;">2m ago · Villa Golden Mile</p>
+        <div class="inbox-row" data-sender="@marc_travels" data-ctx="Instagram Comment" data-msg="Is this property still available for viewings this week?" data-prop="Villa Golden Mile">
+          <div style="display:flex;justify-content:space-between;align-items:start;margin-bottom:3px;"><span style="font-size:12px;font-weight:600;">@marc_travels</span><span class="badge b-ig">IG</span></div>
+          <p style="font-size:11.5px;color:var(--muted);line-height:1.4;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;">Is this property still available for viewings this week?</p>
+          <p style="font-size:10.5px;color:var(--muted2);margin-top:4px;">2m ago · Villa Golden Mile</p>
         </div>
-        <div class="inbox-msg" data-sender="Elena Rostova" data-ctx="Facebook Comment" data-msg="What are the community fees for this villa?" data-prop="Penthouse Sotogrande">
-          <div style="display:flex;justify-content:space-between;align-items:start;margin-bottom:4px;"><span style="font-size:12px;font-weight:600;">Elena Rostova</span><span class="badge b-fb">FB</span></div>
-          <p style="font-size:12px;color:var(--muted);line-height:1.4;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;">What are the community fees for this villa?</p>
-          <p style="font-size:11px;color:var(--muted2);margin-top:4px;">1h ago · Penthouse Sotogrande</p>
+        <div class="inbox-row" data-sender="Elena Rostova" data-ctx="Facebook Comment" data-msg="What are the community fees for this villa?" data-prop="Penthouse Sotogrande">
+          <div style="display:flex;justify-content:space-between;align-items:start;margin-bottom:3px;"><span style="font-size:12px;font-weight:600;">Elena Rostova</span><span class="badge b-fb">FB</span></div>
+          <p style="font-size:11.5px;color:var(--muted);line-height:1.4;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;">What are the community fees for this villa?</p>
+          <p style="font-size:10.5px;color:var(--muted2);margin-top:4px;">1h ago · Penthouse Sotogrande</p>
         </div>
-        <div class="inbox-msg" data-sender="John Doe" data-ctx="Instagram DM" data-msg="I am looking for a villa around Malaga, budget max 500k." data-prop="—">
-          <div style="display:flex;justify-content:space-between;align-items:start;margin-bottom:4px;"><span style="font-size:12px;font-weight:600;">John Doe</span><span class="badge b-ig">IG</span></div>
-          <p style="font-size:12px;color:var(--muted);line-height:1.4;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;">Looking for a villa around Malaga, budget max 500k</p>
-          <p style="font-size:11px;color:var(--muted2);margin-top:4px;">4h ago</p>
+        <div class="inbox-row" data-sender="John Doe" data-ctx="Instagram DM" data-msg="I am looking for a villa around Malaga, budget max 500k." data-prop="—">
+          <div style="display:flex;justify-content:space-between;align-items:start;margin-bottom:3px;"><span style="font-size:12px;font-weight:600;">John Doe</span><span class="badge b-ig">IG</span></div>
+          <p style="font-size:11.5px;color:var(--muted);line-height:1.4;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;">Looking for a villa around Malaga, budget max 500k</p>
+          <p style="font-size:10.5px;color:var(--muted2);margin-top:4px;">4h ago</p>
         </div>
       </div>
     </div>
-    <div class="card" style="padding:16px;display:flex;flex-direction:column;">
+    <div class="card" style="padding:16px;display:flex;flex-direction:column;overflow:hidden;">
       <div id="inbox-empty" style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;color:var(--muted);">
-        <div style="width:48px;height:48px;border-radius:12px;background:var(--bg3);display:flex;align-items:center;justify-content:center;margin-bottom:10px;"><i data-lucide="inbox" style="width:22px;height:22px;"></i></div>
+        <div style="width:44px;height:44px;border-radius:11px;background:var(--bg3);display:flex;align-items:center;justify-content:center;margin-bottom:9px;"><i data-lucide="inbox" style="width:20px;height:20px;"></i></div>
         <p style="font-size:13px;font-weight:500;">Select a message to reply</p>
-        <p style="font-size:12px;color:var(--muted2);margin-top:4px;">AI-powered reply suggestions</p>
+        <p style="font-size:11.5px;color:var(--muted2);margin-top:3px;">AI-powered reply suggestions</p>
       </div>
-      <div id="inbox-chat" class="hidden" style="display:flex;flex-direction:column;height:100%;">
-        <div style="border-bottom:1px solid var(--border);padding-bottom:12px;margin-bottom:12px;flex-shrink:0;">
-          <p style="font-size:13px;font-weight:600;" id="inbox-sender">—</p>
-          <p style="font-size:11px;color:var(--muted);margin-top:2px;" id="inbox-ctx">—</p>
+      <div id="inbox-chat" class="hidden" style="display:flex;flex-direction:column;height:100%;overflow:hidden;">
+        <div style="border-bottom:1px solid var(--border);padding-bottom:10px;margin-bottom:10px;flex-shrink:0;"><p style="font-size:13px;font-weight:600;" id="inbox-sender">—</p><p style="font-size:11px;color:var(--muted);margin-top:2px;" id="inbox-ctx">—</p></div>
+        <div style="flex:1;overflow-y:auto;display:flex;flex-direction:column;gap:7px;margin-bottom:10px;" id="inbox-msgs"></div>
+        <div style="display:flex;gap:5px;flex-wrap:wrap;margin-bottom:7px;flex-shrink:0;">
+          <button id="ai-reply-btn" class="btn btn-xs" style="background:var(--accentL);color:var(--accent2);border:1px solid rgba(106,107,234,.25);"><i data-lucide="sparkles" style="width:10px;height:10px;"></i>AI Reply</button>
+          <button class="btn btn-ghost btn-xs iq-btn" data-t="viewing"><i data-lucide="calendar" style="width:10px;height:10px;"></i>Schedule Viewing</button>
+          <button class="btn btn-ghost btn-xs iq-btn" data-t="info"><i data-lucide="info" style="width:10px;height:10px;"></i>Property Info</button>
         </div>
-        <div style="flex:1;overflow-y:auto;display:flex;flex-direction:column;gap:8px;margin-bottom:12px;" id="inbox-msgs"></div>
-        <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:8px;flex-shrink:0;">
-          <button id="ai-reply-btn" class="btn btn-sm" style="background:var(--accentL);color:var(--accent2);border:1px solid rgba(139,92,246,.25);"><i data-lucide="sparkles" style="width:11px;height:11px;"></i>AI Reply</button>
-          <button class="btn btn-ghost btn-xs iq-btn" data-t="viewing"><i data-lucide="calendar" style="width:11px;height:11px;"></i>Schedule Viewing</button>
-          <button class="btn btn-ghost btn-xs iq-btn" data-t="info"><i data-lucide="info" style="width:11px;height:11px;"></i>Property Info</button>
-        </div>
-        <div id="ai-sug" class="hidden" style="background:var(--bg3);border-radius:8px;padding:10px;font-size:12px;margin-bottom:8px;line-height:1.6;white-space:pre-wrap;max-height:90px;overflow-y:auto;border-left:2px solid var(--accent2);flex-shrink:0;"></div>
-        <div style="display:flex;gap:8px;flex-shrink:0;">
-          <input id="reply-input" type="text" placeholder="Type a reply..." style="flex:1;">
-          <button id="reply-send" class="btn btn-primary"><i data-lucide="send" style="width:14px;height:14px;"></i></button>
-        </div>
+        <div id="ai-sug" class="hidden inner" style="padding:9px;font-size:12px;margin-bottom:7px;line-height:1.6;white-space:pre-wrap;max-height:80px;overflow-y:auto;border-left:2px solid var(--accent2);flex-shrink:0;"></div>
+        <div style="display:flex;gap:7px;flex-shrink:0;"><input id="reply-input" type="text" placeholder="Type a reply..." style="flex:1;"><button id="reply-send" class="btn btn-primary btn-sm"><i data-lucide="send" style="width:12px;height:12px;"></i></button></div>
       </div>
     </div>
   </div>
-</section>
+</div></section>
 
-<!-- ═══════════ ANALYTICS ═══════════ -->
+<!-- ═══ ANALYTICS ═══ -->
 <section class="view" id="view-analytics">
-  <div class="section-header"><div><p class="section-title">Analytics</p><p class="section-sub">Track your performance across all platforms</p></div></div>
-  <div style="display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-bottom:24px;">
-    <div class="stat-card"><div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:12px;"><div class="metric-icon" style="background:var(--accentL);"><i data-lucide="eye" style="width:17px;height:17px;color:var(--accent2);"></i></div><span class="badge b-green" style="font-size:10px;">+31%</span></div><p style="font-size:28px;font-weight:700;letter-spacing:-.02em;">142K</p><p style="font-size:12px;color:var(--muted);margin-top:2px;">Total Impressions</p></div>
-    <div class="stat-card"><div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:12px;"><div class="metric-icon" style="background:var(--greenL);"><i data-lucide="heart" style="width:17px;height:17px;color:var(--green);"></i></div><span class="badge b-green" style="font-size:10px;">+0.6%</span></div><p style="font-size:28px;font-weight:700;letter-spacing:-.02em;color:var(--green);">4.8%</p><p style="font-size:12px;color:var(--muted);margin-top:2px;">Engagement Rate</p></div>
-    <div class="stat-card"><div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:12px;"><div class="metric-icon" style="background:var(--goldL);"><i data-lucide="mouse-pointer-click" style="width:17px;height:17px;color:var(--gold);"></i></div><span class="badge b-amber" style="font-size:10px;">+18%</span></div><p style="font-size:28px;font-weight:700;letter-spacing:-.02em;color:var(--gold);">2.1K</p><p style="font-size:12px;color:var(--muted);margin-top:2px;">Link Clicks</p></div>
-    <div class="stat-card"><div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:12px;"><div class="metric-icon" style="background:var(--blueL);"><i data-lucide="user-plus" style="width:17px;height:17px;color:var(--blue);"></i></div><span class="badge b-green" style="font-size:10px;">+12%</span></div><p style="font-size:28px;font-weight:700;letter-spacing:-.02em;color:var(--blue);">+847</p><p style="font-size:12px;color:var(--muted);margin-top:2px;">New Followers</p></div>
+<div class="page">
+  <div style="margin-bottom:24px;"><h1 style="font-family:'Public Sans',sans-serif;font-size:20px;font-weight:800;letter-spacing:-.02em;">Analytics</h1><p style="font-size:13px;color:var(--muted);margin-top:3px;">Track your performance across all platforms</p></div>
+  <div class="cols-4" style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:20px;">
+    <div class="stat"><div style="display:flex;align-items:flex-start;justify-content:space-between;"><div class="sec-icon" style="background:var(--accentL);"><i data-lucide="eye" style="width:15px;height:15px;color:var(--accent2);"></i></div><span class="badge b-green" style="font-size:10px;">+31%</span></div><p class="stat-val">142K</p><p class="stat-label">Total Impressions</p></div>
+    <div class="stat"><div style="display:flex;align-items:flex-start;justify-content:space-between;"><div class="sec-icon" style="background:var(--greenL);"><i data-lucide="heart" style="width:15px;height:15px;color:var(--green);"></i></div><span class="badge b-green" style="font-size:10px;">+0.6%</span></div><p class="stat-val" style="color:var(--green);">4.8%</p><p class="stat-label">Engagement Rate</p></div>
+    <div class="stat"><div style="display:flex;align-items:flex-start;justify-content:space-between;"><div class="sec-icon" style="background:var(--goldL);"><i data-lucide="mouse-pointer-click" style="width:15px;height:15px;color:var(--gold);"></i></div><span class="badge b-amber" style="font-size:10px;">+18%</span></div><p class="stat-val" style="color:var(--gold);">2.1K</p><p class="stat-label">Link Clicks</p></div>
+    <div class="stat"><div style="display:flex;align-items:flex-start;justify-content:space-between;"><div class="sec-icon" style="background:var(--blueL);"><i data-lucide="user-plus" style="width:15px;height:15px;color:var(--blue);"></i></div><span class="badge b-green" style="font-size:10px;">+12%</span></div><p class="stat-val" style="color:var(--blue);">+847</p><p class="stat-label">New Followers</p></div>
   </div>
-  <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px;">
-    <div class="card" style="padding:18px;"><p style="font-size:13px;font-weight:600;margin-bottom:14px;">Engagement Rate</p><svg id="chart-eng" viewBox="0 0 300 110" style="width:100%;"></svg></div>
-    <div class="card" style="padding:18px;"><p style="font-size:13px;font-weight:600;margin-bottom:14px;">Reach Over Time</p><svg id="chart-reach" viewBox="0 0 300 110" style="width:100%;"></svg></div>
+  <div class="cols-2" style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px;">
+    <div class="card card-body"><p style="font-size:13px;font-weight:600;margin-bottom:12px;font-family:'Public Sans',sans-serif;">Engagement Rate</p><svg id="chart-eng" viewBox="0 0 300 100" style="width:100%;"></svg></div>
+    <div class="card card-body"><p style="font-size:13px;font-weight:600;margin-bottom:12px;font-family:'Public Sans',sans-serif;">Reach Over Time</p><svg id="chart-reach" viewBox="0 0 300 100" style="width:100%;"></svg></div>
   </div>
-  <div class="card" style="padding:18px;margin-bottom:16px;">
-    <div style="display:flex;align-items:center;gap:8px;margin-bottom:14px;"><i data-lucide="trophy" style="width:15px;height:15px;color:var(--gold);"></i><p style="font-size:13px;font-weight:600;">Top Performing Posts</p></div>
-    <div style="display:flex;flex-direction:column;gap:8px;">
-      <div style="display:flex;align-items:center;gap:12px;padding:10px;border-radius:8px;background:var(--bg3);border:1px solid var(--border);"><span style="font-size:18px;flex-shrink:0;">🥇</span><div style="flex:1;"><p style="font-size:12px;font-weight:600;">Just Listed: Beachfront Villa with Infinity Pool</p><p style="font-size:11px;color:var(--muted);margin-top:2px;">Instagram · Jun 3 · 8.2% engagement</p></div><span class="badge b-ig">IG</span></div>
-      <div style="display:flex;align-items:center;gap:12px;padding:10px;border-radius:8px;background:var(--bg3);border:1px solid var(--border);"><span style="font-size:18px;flex-shrink:0;">🥈</span><div style="flex:1;"><p style="font-size:12px;font-weight:600;">5 Reasons to Invest in Costa del Sol in 2026</p><p style="font-size:11px;color:var(--muted);margin-top:2px;">LinkedIn · Jun 5 · 6.1% engagement</p></div><span class="badge b-li">LI</span></div>
-      <div style="display:flex;align-items:center;gap:12px;padding:10px;border-radius:8px;background:var(--bg3);border:1px solid var(--border);"><span style="font-size:18px;flex-shrink:0;">🥉</span><div style="flex:1;"><p style="font-size:12px;font-weight:600;">POV: House hunting in Marbella</p><p style="font-size:11px;color:var(--muted);margin-top:2px;">TikTok · Jun 7 · 5.8% engagement</p></div><span class="badge b-tt">TT</span></div>
+  <div class="card card-body" style="margin-bottom:16px;">
+    <div style="display:flex;align-items:center;gap:7px;margin-bottom:14px;"><i data-lucide="trophy" style="width:14px;height:14px;color:var(--gold);"></i><p style="font-size:13px;font-weight:600;font-family:'Public Sans',sans-serif;">Top Performing Posts</p></div>
+    <div style="display:flex;flex-direction:column;gap:7px;">
+      <div class="inner" style="padding:10px;display:flex;align-items:center;gap:11px;"><span style="font-size:17px;flex-shrink:0;">🥇</span><div style="flex:1;min-width:0;"><p style="font-size:12px;font-weight:600;">Just Listed: Beachfront Villa with Infinity Pool</p><p style="font-size:11px;color:var(--muted);margin-top:2px;">Instagram · Jun 3 · 8.2% engagement</p></div><span class="badge b-ig">IG</span></div>
+      <div class="inner" style="padding:10px;display:flex;align-items:center;gap:11px;"><span style="font-size:17px;flex-shrink:0;">🥈</span><div style="flex:1;min-width:0;"><p style="font-size:12px;font-weight:600;">5 Reasons to Invest in Costa del Sol in 2026</p><p style="font-size:11px;color:var(--muted);margin-top:2px;">LinkedIn · Jun 5 · 6.1% engagement</p></div><span class="badge b-li">LI</span></div>
+      <div class="inner" style="padding:10px;display:flex;align-items:center;gap:11px;"><span style="font-size:17px;flex-shrink:0;">🥉</span><div style="flex:1;min-width:0;"><p style="font-size:12px;font-weight:600;">POV: House hunting in Marbella</p><p style="font-size:11px;color:var(--muted);margin-top:2px;">TikTok · Jun 7 · 5.8% engagement</p></div><span class="badge b-tt">TT</span></div>
     </div>
   </div>
-  <div class="card" style="padding:18px;">
-    <div style="display:flex;align-items:center;gap:8px;margin-bottom:14px;"><i data-lucide="users" style="width:15px;height:15px;color:var(--accent2);"></i><p style="font-size:13px;font-weight:600;">Lead Capture Board</p></div>
-    <table style="width:100%;font-size:12px;border-collapse:collapse;">
-      <thead><tr style="border-bottom:1px solid var(--border);"><th style="text-align:left;padding-bottom:8px;font-weight:600;color:var(--muted);font-size:11px;text-transform:uppercase;letter-spacing:.04em;padding-right:16px;">Name</th><th style="text-align:left;padding-bottom:8px;font-weight:600;color:var(--muted);font-size:11px;text-transform:uppercase;letter-spacing:.04em;padding-right:16px;">Property</th><th style="text-align:left;padding-bottom:8px;font-weight:600;color:var(--muted);font-size:11px;text-transform:uppercase;letter-spacing:.04em;padding-right:16px;">Source</th><th style="text-align:left;padding-bottom:8px;font-weight:600;color:var(--muted);font-size:11px;text-transform:uppercase;letter-spacing:.04em;">Date</th></tr></thead>
+  <div class="card card-body">
+    <div style="display:flex;align-items:center;gap:7px;margin-bottom:14px;"><i data-lucide="users" style="width:14px;height:14px;color:var(--accent2);"></i><p style="font-size:13px;font-weight:600;font-family:'Public Sans',sans-serif;">Lead Capture Board</p></div>
+    <div style="overflow-x:auto;"><table style="width:100%;font-size:12px;border-collapse:collapse;min-width:400px;">
+      <thead><tr style="border-bottom:1px solid var(--border);"><th style="text-align:left;padding-bottom:7px;font-weight:600;color:var(--muted);font-size:10px;text-transform:uppercase;letter-spacing:.05em;padding-right:16px;">Name</th><th style="text-align:left;padding-bottom:7px;font-weight:600;color:var(--muted);font-size:10px;text-transform:uppercase;letter-spacing:.05em;padding-right:16px;">Property</th><th style="text-align:left;padding-bottom:7px;font-weight:600;color:var(--muted);font-size:10px;text-transform:uppercase;letter-spacing:.05em;padding-right:16px;">Source</th><th style="text-align:left;padding-bottom:7px;font-weight:600;color:var(--muted);font-size:10px;text-transform:uppercase;letter-spacing:.05em;">Date</th></tr></thead>
       <tbody>
-        <tr style="border-bottom:1px solid var(--border);"><td style="padding:10px 16px 10px 0;font-weight:500;">Marcus Aurelius</td><td style="padding:10px 16px 10px 0;color:var(--muted);">Villa Golden Mile</td><td style="padding:10px 16px 10px 0;"><span class="badge b-ig">IG</span></td><td style="padding:10px 0;color:var(--muted);">Just now</td></tr>
-        <tr style="border-bottom:1px solid var(--border);"><td style="padding:10px 16px 10px 0;font-weight:500;">Clara Oswald</td><td style="padding:10px 16px 10px 0;color:var(--muted);">Penthouse Sotogrande</td><td style="padding:10px 16px 10px 0;"><span class="badge b-fb">FB</span></td><td style="padding:10px 0;color:var(--muted);">2h ago</td></tr>
-        <tr><td style="padding:10px 16px 10px 0;font-weight:500;">David Tennant</td><td style="padding:10px 16px 10px 0;color:var(--muted);">Apartment Málaga</td><td style="padding:10px 16px 10px 0;"><span class="badge b-gb">GBP</span></td><td style="padding:10px 0;color:var(--muted);">Yesterday</td></tr>
+        <tr style="border-bottom:1px solid var(--border);"><td style="padding:9px 16px 9px 0;font-weight:500;">Marcus Aurelius</td><td style="padding:9px 16px 9px 0;color:var(--muted);">Villa Golden Mile</td><td style="padding:9px 16px 9px 0;"><span class="badge b-ig">IG</span></td><td style="padding:9px 0;color:var(--muted);">Just now</td></tr>
+        <tr style="border-bottom:1px solid var(--border);"><td style="padding:9px 16px 9px 0;font-weight:500;">Clara Oswald</td><td style="padding:9px 16px 9px 0;color:var(--muted);">Penthouse Sotogrande</td><td style="padding:9px 16px 9px 0;"><span class="badge b-fb">FB</span></td><td style="padding:9px 0;color:var(--muted);">2h ago</td></tr>
+        <tr><td style="padding:9px 16px 9px 0;font-weight:500;">David Tennant</td><td style="padding:9px 16px 9px 0;color:var(--muted);">Apartment Málaga</td><td style="padding:9px 16px 9px 0;"><span class="badge b-gb">GBP</span></td><td style="padding:9px 0;color:var(--muted);">Yesterday</td></tr>
       </tbody>
-    </table>
+    </table></div>
   </div>
-</section>
+</div></section>
 
-<!-- ═══════════ STRATEGY PLANNER ═══════════ -->
+<!-- ═══ STRATEGY PLANNER ═══ -->
 <section class="view" id="view-strategy-planner">
-  <div class="section-header">
-    <div><p class="section-title">Strategy Planner</p><p class="section-sub">Build your monthly content strategy</p></div>
-    <div style="display:flex;gap:8px;"><button id="gen-strategy" class="btn btn-gold btn-sm"><i data-lucide="sparkles" style="width:12px;height:12px;"></i>Generate Strategy</button><button class="btn btn-ghost btn-sm" onclick="switchView('monthly-wizard')"><i data-lucide="arrow-right" style="width:12px;height:12px;"></i>To Monthly Plan</button></div>
+<div class="page">
+  <div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:24px;gap:12px;flex-wrap:wrap;">
+    <div><h1 style="font-family:'Public Sans',sans-serif;font-size:20px;font-weight:800;letter-spacing:-.02em;">Strategy Planner</h1><p style="font-size:13px;color:var(--muted);margin-top:3px;">Build your monthly content strategy</p></div>
+    <div style="display:flex;gap:7px;flex-wrap:wrap;"><button id="gen-strategy" class="btn btn-gold btn-sm"><i data-lucide="sparkles" style="width:11px;height:11px;"></i>Generate Strategy</button><button class="btn btn-ghost btn-sm" onclick="switchView('monthly-wizard')"><i data-lucide="arrow-right" style="width:11px;height:11px;"></i>To Monthly Plan</button></div>
   </div>
-  <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;max-width:900px;">
-    <div class="card" style="padding:18px;">
-      <div style="display:flex;align-items:center;gap:8px;margin-bottom:14px;"><i data-lucide="target" style="width:15px;height:15px;color:var(--accent2);"></i><p style="font-size:13px;font-weight:600;">SMART Goals</p></div>
+  <div class="cols-2" style="display:grid;grid-template-columns:1fr 1fr;gap:16px;max-width:880px;margin-bottom:16px;">
+    <div class="card card-body">
+      <div style="display:flex;align-items:center;gap:7px;margin-bottom:14px;"><i data-lucide="target" style="width:14px;height:14px;color:var(--accent2);"></i><p style="font-size:13px;font-weight:600;font-family:'Public Sans',sans-serif;">SMART Goals</p></div>
       <div style="display:flex;flex-direction:column;gap:12px;">
-        <div><label class="field-label">Target Region</label><input id="str-region" type="text" value="Golden Mile, Marbella"></div>
-        <div><label class="field-label">Primary Goal</label><select id="str-goal"><option>Get More Listings</option><option>Find Buyers</option><option>Brand Awareness</option></select></div>
-        <div><label class="field-label">Tone</label><select id="str-tone"><option>Professional</option><option>Storytelling</option><option>Casual</option><option>Luxury</option></select></div>
-        <div><label class="field-label">Monthly Posts</label><input id="str-posts" type="number" value="60"></div>
+        <div><label class="lbl">Target Region</label><input id="str-region" type="text" value="Golden Mile, Marbella"></div>
+        <div><label class="lbl">Primary Goal</label><select id="str-goal"><option>Get More Listings</option><option>Find Buyers</option><option>Brand Awareness</option></select></div>
+        <div><label class="lbl">Tone</label><select id="str-tone"><option>Professional</option><option>Storytelling</option><option>Casual</option><option>Luxury</option></select></div>
+        <div><label class="lbl">Monthly Posts</label><input id="str-posts" type="number" value="60"></div>
       </div>
     </div>
-    <div class="card" style="padding:18px;">
-      <div style="display:flex;align-items:center;gap:8px;margin-bottom:14px;"><i data-lucide="bar-chart-2" style="width:15px;height:15px;color:var(--green);"></i><p style="font-size:13px;font-weight:600;">Target KPIs</p></div>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
-        <div style="padding:10px;border-radius:8px;background:var(--bg3);border:1px solid var(--border);"><p style="font-size:11px;color:var(--muted);">Engagement Rate</p><p style="font-size:18px;font-weight:700;color:var(--accent2);margin-top:2px;">5%+</p></div>
-        <div style="padding:10px;border-radius:8px;background:var(--bg3);border:1px solid var(--border);"><p style="font-size:11px;color:var(--muted);">Reach Growth</p><p style="font-size:18px;font-weight:700;color:var(--green);margin-top:2px;">+20%/mo</p></div>
-        <div style="padding:10px;border-radius:8px;background:var(--bg3);border:1px solid var(--border);"><p style="font-size:11px;color:var(--muted);">Leads/Month</p><p style="font-size:18px;font-weight:700;color:var(--gold);margin-top:2px;">15+</p></div>
-        <div style="padding:10px;border-radius:8px;background:var(--bg3);border:1px solid var(--border);"><p style="font-size:11px;color:var(--muted);">New Followers</p><p style="font-size:18px;font-weight:700;margin-top:2px;">+200/mo</p></div>
+    <div class="card card-body">
+      <div style="display:flex;align-items:center;gap:7px;margin-bottom:14px;"><i data-lucide="bar-chart-2" style="width:14px;height:14px;color:var(--green);"></i><p style="font-size:13px;font-weight:600;font-family:'Public Sans',sans-serif;">Target KPIs</p></div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:7px;">
+        <div class="inner" style="padding:10px;"><p style="font-size:11px;color:var(--muted);">Engagement Rate</p><p style="font-size:18px;font-weight:800;color:var(--accent2);margin-top:2px;">5%+</p></div>
+        <div class="inner" style="padding:10px;"><p style="font-size:11px;color:var(--muted);">Reach Growth</p><p style="font-size:18px;font-weight:800;color:var(--green);margin-top:2px;">+20%/mo</p></div>
+        <div class="inner" style="padding:10px;"><p style="font-size:11px;color:var(--muted);">Leads/Month</p><p style="font-size:18px;font-weight:800;color:var(--gold);margin-top:2px;">15+</p></div>
+        <div class="inner" style="padding:10px;"><p style="font-size:11px;color:var(--muted);">New Followers</p><p style="font-size:18px;font-weight:800;margin-top:2px;">+200/mo</p></div>
       </div>
-    </div>
-    <div class="card" style="padding:18px;grid-column:1/-1;">
-      <div style="display:flex;align-items:center;gap:8px;margin-bottom:14px;"><i data-lucide="sparkles" style="width:15px;height:15px;color:var(--gold);"></i><p style="font-size:13px;font-weight:600;">AI Strategy Output</p></div>
-      <div id="str-out" style="background:var(--bg3);border-radius:8px;padding:14px;font-size:12px;line-height:1.7;white-space:pre-wrap;min-height:80px;max-height:320px;overflow-y:auto;color:var(--muted);">Click "Generate Strategy" to create a personalised content strategy.</div>
     </div>
   </div>
-</section>
+  <div class="card card-body" style="max-width:880px;">
+    <div style="display:flex;align-items:center;gap:7px;margin-bottom:12px;"><i data-lucide="sparkles" style="width:14px;height:14px;color:var(--gold);"></i><p style="font-size:13px;font-weight:600;font-family:'Public Sans',sans-serif;">AI Strategy Output</p></div>
+    <div id="str-out" class="inner" style="padding:14px;font-size:12px;line-height:1.7;white-space:pre-wrap;min-height:80px;max-height:320px;overflow-y:auto;color:var(--muted);">Click "Generate Strategy" to create a personalised content strategy.</div>
+  </div>
+</div></section>
 
-<!-- ═══════════ LINK-IN-BIO ═══════════ -->
+<!-- ═══ LINK-IN-BIO ═══ -->
 <section class="view" id="view-link-in-bio">
-  <div class="section-header"><div><p class="section-title">Link-in-Bio</p><p class="section-sub">Your real estate hub page</p></div></div>
-  <div style="display:grid;grid-template-columns:1fr auto;gap:20px;align-items:start;">
-    <div style="display:flex;flex-direction:column;gap:16px;">
-      <div class="card" style="padding:18px;">
-        <div style="display:flex;align-items:center;gap:8px;margin-bottom:14px;"><i data-lucide="link-2" style="width:15px;height:15px;color:var(--accent2);"></i><p style="font-size:13px;font-weight:600;">Link Builder</p></div>
-        <div style="display:flex;flex-direction:column;gap:12px;">
-          <div><label class="field-label">Your URL</label><div style="display:flex;"><span style="font-size:12px;padding:9px 12px;border-radius:8px 0 0 8px;background:var(--bg4);border:1px solid var(--border);border-right:0;color:var(--muted);white-space:nowrap;">sociallistings.pro/</span><input id="bio-slug" type="text" value="sunshine-properties" style="border-radius:0 8px 8px 0;"></div></div>
-          <div><label class="field-label">Headline</label><input id="bio-hl" type="text" value="Sunshine Properties S.L."></div>
-          <div><label class="field-label">Tagline</label><input id="bio-tl" type="text" value="Your Dream Home on the Costa del Sol"></div>
-          <button class="btn btn-gold btn-sm" style="justify-content:center;" onclick="showToast('Link-in-Bio saved!')"><i data-lucide="save" style="width:13px;height:13px;"></i>Save</button>
-        </div>
+<div class="page">
+  <div style="margin-bottom:24px;"><h1 style="font-family:'Public Sans',sans-serif;font-size:20px;font-weight:800;letter-spacing:-.02em;">Link-in-Bio</h1><p style="font-size:13px;color:var(--muted);margin-top:3px;">Your real estate hub page</p></div>
+  <div class="cols-2" style="display:grid;grid-template-columns:1fr auto;gap:20px;align-items:start;">
+    <div style="display:flex;flex-direction:column;gap:14px;">
+      <div class="card card-body" style="display:flex;flex-direction:column;gap:14px;">
+        <p style="font-size:13px;font-weight:600;font-family:'Public Sans',sans-serif;">Link Builder</p>
+        <div><label class="lbl">Your URL</label><div style="display:flex;"><span style="font-size:11.5px;padding:8px 10px;border-radius:7px 0 0 7px;background:var(--bg4);border:1px solid var(--border);border-right:0;color:var(--muted);white-space:nowrap;">sociallistings.pro/</span><input id="bio-slug" type="text" value="sunshine-properties" style="border-radius:0 7px 7px 0;"></div></div>
+        <div><label class="lbl">Headline</label><input id="bio-hl" type="text" value="Sunshine Properties S.L."></div>
+        <div><label class="lbl">Tagline</label><input id="bio-tl" type="text" value="Your Dream Home on the Costa del Sol"></div>
+        <button class="btn btn-gold btn-sm" style="align-self:flex-start;" onclick="showToast('Saved!')"><i data-lucide="save" style="width:12px;height:12px;"></i>Save</button>
       </div>
-      <div class="card" style="padding:18px;">
-        <div style="display:flex;align-items:center;gap:8px;margin-bottom:14px;"><i data-lucide="home" style="width:15px;height:15px;color:var(--gold);"></i><p style="font-size:13px;font-weight:600;">Active Listings</p></div>
-        <div style="display:flex;flex-direction:column;gap:8px;">
-          <div style="display:flex;align-items:center;gap:10px;padding:10px;border-radius:8px;background:var(--bg3);border:1px solid var(--border);"><div style="width:34px;height:34px;border-radius:7px;background:linear-gradient(135deg,var(--accent),var(--accent2));flex-shrink:0;"></div><div style="flex:1;"><p style="font-size:12px;font-weight:600;">Villa Golden Mile</p><p style="font-size:11px;color:var(--muted);">€485,000 · Marbella</p></div><span class="badge b-green">Live</span></div>
-          <div style="display:flex;align-items:center;gap:10px;padding:10px;border-radius:8px;background:var(--bg3);border:1px solid var(--border);"><div style="width:34px;height:34px;border-radius:7px;background:linear-gradient(135deg,var(--gold),#e8c070);flex-shrink:0;"></div><div style="flex:1;"><p style="font-size:12px;font-weight:600;">Penthouse Sotogrande</p><p style="font-size:11px;color:var(--muted);">€1.2M · Sotogrande</p></div><span class="badge b-green">Live</span></div>
-        </div>
+      <div class="card card-body" style="display:flex;flex-direction:column;gap:9px;">
+        <p style="font-size:13px;font-weight:600;font-family:'Public Sans',sans-serif;">Active Listings</p>
+        <div class="inner" style="padding:10px;display:flex;align-items:center;gap:9px;"><div style="width:32px;height:32px;border-radius:7px;background:linear-gradient(135deg,var(--accent),var(--accent2));flex-shrink:0;"></div><div style="flex:1;"><p style="font-size:12px;font-weight:600;">Villa Golden Mile</p><p style="font-size:11px;color:var(--muted);">€485,000 · Marbella</p></div><span class="badge b-green">Live</span></div>
+        <div class="inner" style="padding:10px;display:flex;align-items:center;gap:9px;"><div style="width:32px;height:32px;border-radius:7px;background:linear-gradient(135deg,var(--gold),#e8c070);flex-shrink:0;"></div><div style="flex:1;"><p style="font-size:12px;font-weight:600;">Penthouse Sotogrande</p><p style="font-size:11px;color:var(--muted);">€1.2M · Sotogrande</p></div><span class="badge b-green">Live</span></div>
       </div>
     </div>
-    <!-- Phone preview -->
-    <div style="width:240px;border-radius:28px;border:1.5px solid var(--border2);background:var(--bg);overflow:hidden;box-shadow:0 24px 64px rgba(0,0,0,.6);">
-      <div style="height:20px;background:var(--bg2);border-radius:28px 28px 0 0;display:flex;align-items:center;justify-content:center;"><div style="width:50px;height:4px;border-radius:2px;background:var(--border2);"></div></div>
-      <div style="padding:16px;display:flex;flex-direction:column;align-items:center;text-align:center;">
-        <div style="width:52px;height:52px;border-radius:50%;background:linear-gradient(135deg,var(--accent),var(--accent2));display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:700;color:white;margin-bottom:10px;">SP</div>
-        <p style="font-size:12px;font-weight:700;" id="bio-prev-hl">Sunshine Properties S.L.</p>
-        <p style="font-size:10px;color:var(--muted);margin-top:3px;line-height:1.4;" id="bio-prev-tl">Your Dream Home on the Costa del Sol</p>
-        <div style="width:100%;margin-top:12px;display:flex;flex-direction:column;gap:8px;">
-          <div style="border-radius:10px;overflow:hidden;text-align:left;background:var(--bg2);border:1px solid var(--border);"><div style="height:48px;background:linear-gradient(135deg,rgba(124,58,237,.3),rgba(139,92,246,.1));"></div><div style="padding:6px 8px;"><p style="font-size:10px;font-weight:700;">Villa Golden Mile</p><p style="font-size:9px;color:var(--muted);">€485,000</p></div></div>
-          <div style="border-radius:10px;overflow:hidden;text-align:left;background:var(--bg2);border:1px solid var(--border);"><div style="height:48px;background:linear-gradient(135deg,rgba(212,168,83,.3),rgba(232,192,112,.1));"></div><div style="padding:6px 8px;"><p style="font-size:10px;font-weight:700;">Penthouse Sotogrande</p><p style="font-size:9px;color:var(--muted);">€1,200,000</p></div></div>
+    <div style="width:230px;" class="hide-mobile">
+      <div style="border-radius:26px;border:1.5px solid var(--border2);background:var(--bg);overflow:hidden;box-shadow:0 20px 56px rgba(0,0,0,.55);">
+        <div style="height:18px;background:var(--bg2);border-radius:26px 26px 0 0;display:flex;align-items:center;justify-content:center;"><div style="width:44px;height:3px;border-radius:2px;background:var(--border2);"></div></div>
+        <div style="padding:14px;display:flex;flex-direction:column;align-items:center;text-align:center;">
+          <div style="width:46px;height:46px;border-radius:50%;background:linear-gradient(135deg,var(--accent),var(--accent2));display:flex;align-items:center;justify-content:center;font-size:17px;font-weight:700;color:white;margin-bottom:8px;">SP</div>
+          <p style="font-size:11.5px;font-weight:700;" id="bio-prev-hl">Sunshine Properties S.L.</p>
+          <p style="font-size:10px;color:var(--muted);margin-top:2px;line-height:1.4;" id="bio-prev-tl">Your Dream Home on the Costa del Sol</p>
+          <div style="width:100%;margin-top:10px;display:flex;flex-direction:column;gap:7px;">
+            <div style="border-radius:9px;overflow:hidden;text-align:left;background:var(--bg2);border:1px solid var(--border);"><div style="height:42px;background:linear-gradient(135deg,rgba(106,107,234,.3),rgba(106,107,234,.06));"></div><div style="padding:5px 7px;"><p style="font-size:10px;font-weight:700;">Villa Golden Mile</p><p style="font-size:9px;color:var(--muted);">€485,000</p></div></div>
+            <div style="border-radius:9px;overflow:hidden;text-align:left;background:var(--bg2);border:1px solid var(--border);"><div style="height:42px;background:linear-gradient(135deg,rgba(210,182,125,.3),rgba(210,182,125,.06));"></div><div style="padding:5px 7px;"><p style="font-size:10px;font-weight:700;">Penthouse Sotogrande</p><p style="font-size:9px;color:var(--muted);">€1,200,000</p></div></div>
+          </div>
         </div>
       </div>
     </div>
   </div>
-</section>
+</div></section>
 
-<!-- ═══════════ BRAND KIT ═══════════ -->
+<!-- ═══ BRAND KIT ═══ -->
 <section class="view" id="view-brand-kit">
-  <div class="section-header"><div><p class="section-title">Brand Kit</p><p class="section-sub">Your visual identity and tone of voice</p></div></div>
-  <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;max-width:800px;">
-    <div class="card" style="padding:18px;">
-      <div style="display:flex;align-items:center;gap:8px;margin-bottom:14px;"><i data-lucide="image" style="width:15px;height:15px;color:var(--accent2);"></i><p style="font-size:13px;font-weight:600;">Logo Upload</p></div>
-      <div style="border:1.5px dashed var(--border2);border-radius:10px;padding:32px;text-align:center;cursor:pointer;transition:border-color .15s;" onmouseenter="this.style.borderColor='var(--accent2)'" onmouseleave="this.style.borderColor='var(--border2)'">
-        <div style="width:40px;height:40px;border-radius:10px;background:var(--bg3);display:flex;align-items:center;justify-content:center;margin:0 auto 10px;"><i data-lucide="upload" style="width:18px;height:18px;color:var(--muted);"></i></div>
+<div class="page">
+  <div style="margin-bottom:24px;"><h1 style="font-family:'Public Sans',sans-serif;font-size:20px;font-weight:800;letter-spacing:-.02em;">Brand Kit</h1><p style="font-size:13px;color:var(--muted);margin-top:3px;">Your visual identity and tone of voice</p></div>
+  <div class="cols-2" style="display:grid;grid-template-columns:1fr 1fr;gap:16px;max-width:760px;">
+    <div class="card card-body">
+      <div style="display:flex;align-items:center;gap:7px;margin-bottom:14px;"><i data-lucide="image" style="width:14px;height:14px;color:var(--accent2);"></i><p style="font-size:13px;font-weight:600;font-family:'Public Sans',sans-serif;">Logo Upload</p></div>
+      <div style="border:1.5px dashed var(--border2);border-radius:9px;padding:28px;text-align:center;cursor:pointer;" onmouseenter="this.style.borderColor='var(--accent)'" onmouseleave="this.style.borderColor='var(--border2)'">
+        <div style="width:36px;height:36px;border-radius:9px;background:var(--bg3);display:flex;align-items:center;justify-content:center;margin:0 auto 8px;"><i data-lucide="upload" style="width:16px;height:16px;color:var(--muted);"></i></div>
         <p style="font-size:12px;font-weight:500;color:var(--muted);">Drop your logo here</p>
-        <p style="font-size:11px;color:var(--muted2);margin-top:3px;">PNG, SVG or JPG</p>
+        <p style="font-size:11px;color:var(--muted2);margin-top:2px;">PNG, SVG or JPG</p>
       </div>
     </div>
-    <div class="card" style="padding:18px;">
-      <div style="display:flex;align-items:center;gap:8px;margin-bottom:14px;"><i data-lucide="palette" style="width:15px;height:15px;color:var(--accent2);"></i><p style="font-size:13px;font-weight:600;">Brand Colors</p></div>
-      <div style="display:flex;flex-direction:column;gap:12px;">
-        <div style="display:flex;align-items:center;gap:12px;"><input type="color" id="bc-pri" value="#7c3aed" style="width:36px;height:36px;border-radius:8px;padding:2px;cursor:pointer;background:transparent;border:1px solid var(--border);"><div><p style="font-size:12px;font-weight:500;">Primary</p><p style="font-size:11px;color:var(--muted);" id="bc-pri-hex">#7C3AED</p></div></div>
-        <div style="display:flex;align-items:center;gap:12px;"><input type="color" id="bc-sec" value="#d4a853" style="width:36px;height:36px;border-radius:8px;padding:2px;cursor:pointer;background:transparent;border:1px solid var(--border);"><div><p style="font-size:12px;font-weight:500;">Gold / Secondary</p><p style="font-size:11px;color:var(--muted);" id="bc-sec-hex">#D4A853</p></div></div>
-        <div style="display:flex;align-items:center;gap:12px;"><input type="color" id="bc-acc" value="#22c55e" style="width:36px;height:36px;border-radius:8px;padding:2px;cursor:pointer;background:transparent;border:1px solid var(--border);"><div><p style="font-size:12px;font-weight:500;">Accent</p><p style="font-size:11px;color:var(--muted);" id="bc-acc-hex">#22C55E</p></div></div>
+    <div class="card card-body">
+      <div style="display:flex;align-items:center;gap:7px;margin-bottom:14px;"><i data-lucide="palette" style="width:14px;height:14px;color:var(--accent2);"></i><p style="font-size:13px;font-weight:600;font-family:'Public Sans',sans-serif;">Brand Colors</p></div>
+      <div style="display:flex;flex-direction:column;gap:11px;">
+        <div style="display:flex;align-items:center;gap:11px;"><input type="color" id="bc-pri" value="#6a6bea"><div><p style="font-size:12px;font-weight:500;">Primary</p><p style="font-size:11px;color:var(--muted);" id="bc-pri-hex">#6A6BEA</p></div></div>
+        <div style="display:flex;align-items:center;gap:11px;"><input type="color" id="bc-sec" value="#d2b67d"><div><p style="font-size:12px;font-weight:500;">Gold / Secondary</p><p style="font-size:11px;color:var(--muted);" id="bc-sec-hex">#D2B67D</p></div></div>
+        <div style="display:flex;align-items:center;gap:11px;"><input type="color" id="bc-acc" value="#10b981"><div><p style="font-size:12px;font-weight:500;">Accent</p><p style="font-size:11px;color:var(--muted);" id="bc-acc-hex">#10B981</p></div></div>
       </div>
     </div>
-    <div class="card" style="padding:18px;grid-column:1/-1;">
-      <div style="display:flex;align-items:center;gap:8px;margin-bottom:14px;"><i data-lucide="mic-2" style="width:15px;height:15px;color:var(--accent2);"></i><p style="font-size:13px;font-weight:600;">Tone Presets</p></div>
-      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:14px;">
-        <div><label class="field-label">Default</label><select><option>Professional</option><option>Storytelling</option><option>Casual</option><option>Luxury</option></select></div>
-        <div><label class="field-label"><span class="badge b-ig" style="margin-right:4px;">IG</span>Instagram</label><select><option>Storytelling</option><option>Professional</option><option>Casual</option></select></div>
-        <div><label class="field-label"><span class="badge b-li" style="margin-right:4px;">LI</span>LinkedIn</label><select><option>Professional</option><option>Authoritative</option></select></div>
-        <div><label class="field-label"><span class="badge b-tt" style="margin-right:4px;">TT</span>TikTok</label><select><option>Casual</option><option>Trendy</option></select></div>
+    <div class="card card-body" style="grid-column:1/-1;">
+      <div style="display:flex;align-items:center;gap:7px;margin-bottom:14px;"><i data-lucide="mic-2" style="width:14px;height:14px;color:var(--accent2);"></i><p style="font-size:13px;font-weight:600;font-family:'Public Sans',sans-serif;">Tone Presets</p></div>
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:14px;">
+        <div><label class="lbl">Default</label><select><option>Professional</option><option>Storytelling</option><option>Casual</option><option>Luxury</option></select></div>
+        <div><label class="lbl">Instagram</label><select><option>Storytelling</option><option>Professional</option><option>Casual</option></select></div>
+        <div><label class="lbl">LinkedIn</label><select><option>Professional</option><option>Authoritative</option></select></div>
+        <div><label class="lbl">TikTok</label><select><option>Casual</option><option>Trendy</option></select></div>
       </div>
-      <button class="btn btn-gold btn-sm" onclick="showToast('Brand Kit saved!')"><i data-lucide="save" style="width:13px;height:13px;"></i>Save Brand Kit</button>
+      <button class="btn btn-gold btn-sm" onclick="showToast('Brand Kit saved!')"><i data-lucide="save" style="width:12px;height:12px;"></i>Save Brand Kit</button>
     </div>
   </div>
-</section>
+</div></section>
 
-<!-- ═══════════ TEMPLATES ═══════════ -->
+<!-- ═══ TEMPLATES ═══ -->
 <section class="view" id="view-templates">
-  <div class="section-header"><div><p class="section-title">Templates</p><p class="section-sub">Ready-to-use post templates with AI auto-fill</p></div></div>
-  <div style="display:flex;gap:6px;margin-bottom:20px;">
-    <button class="btn btn-primary btn-sm tpl-f active-tpl" data-f="all">All</button>
-    <button class="btn btn-ghost btn-sm tpl-f" data-f="post"><i data-lucide="image" style="width:12px;height:12px;"></i>Posts</button>
-    <button class="btn btn-ghost btn-sm tpl-f" data-f="carousel"><i data-lucide="layout" style="width:12px;height:12px;"></i>Carousel</button>
-    <button class="btn btn-ghost btn-sm tpl-f" data-f="reel"><i data-lucide="play" style="width:12px;height:12px;"></i>Reels</button>
-    <button class="btn btn-ghost btn-sm tpl-f" data-f="story"><i data-lucide="smartphone" style="width:12px;height:12px;"></i>Stories</button>
+<div class="page">
+  <div style="margin-bottom:24px;"><h1 style="font-family:'Public Sans',sans-serif;font-size:20px;font-weight:800;letter-spacing:-.02em;">Templates</h1><p style="font-size:13px;color:var(--muted);margin-top:3px;">Ready-to-use post templates with AI auto-fill</p></div>
+  <div style="display:flex;gap:5px;margin-bottom:20px;flex-wrap:wrap;">
+    <button class="btn btn-primary btn-sm tpl-f" data-f="all">All</button>
+    <button class="btn btn-ghost btn-sm tpl-f" data-f="post"><i data-lucide="image" style="width:10px;height:10px;"></i>Posts</button>
+    <button class="btn btn-ghost btn-sm tpl-f" data-f="carousel"><i data-lucide="layout" style="width:10px;height:10px;"></i>Carousel</button>
+    <button class="btn btn-ghost btn-sm tpl-f" data-f="reel"><i data-lucide="play" style="width:10px;height:10px;"></i>Reels</button>
+    <button class="btn btn-ghost btn-sm tpl-f" data-f="story"><i data-lucide="smartphone" style="width:10px;height:10px;"></i>Stories</button>
   </div>
-  <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:14px;" id="tpl-grid">
-    <div class="card card-hover" data-type="post" style="overflow:hidden;cursor:pointer;">
-      <div style="height:120px;background:linear-gradient(135deg,rgba(124,58,237,.4),rgba(124,58,237,.08));display:flex;align-items:center;justify-content:center;"><i data-lucide="home" style="width:32px;height:32px;color:var(--accent2);"></i></div>
-      <div style="padding:12px;"><p style="font-size:12px;font-weight:600;">Just Listed</p><p style="font-size:11px;color:var(--muted);margin-top:2px;">Instagram · 1080×1080</p><button class="btn btn-primary btn-xs" style="width:100%;justify-content:center;margin-top:8px;" onclick="showToast('Template auto-filled!')"><i data-lucide="sparkles" style="width:10px;height:10px;"></i>AI Auto-Fill</button></div>
-    </div>
-    <div class="card card-hover" data-type="post" style="overflow:hidden;cursor:pointer;">
-      <div style="height:120px;background:linear-gradient(135deg,rgba(24,119,242,.4),rgba(24,119,242,.08));display:flex;align-items:center;justify-content:center;"><i data-lucide="door-open" style="width:32px;height:32px;color:#60a5fa;"></i></div>
-      <div style="padding:12px;"><p style="font-size:12px;font-weight:600;">Open House</p><p style="font-size:11px;color:var(--muted);margin-top:2px;">Facebook · 1200×630</p><button class="btn btn-primary btn-xs" style="width:100%;justify-content:center;margin-top:8px;" onclick="showToast('Template auto-filled!')"><i data-lucide="sparkles" style="width:10px;height:10px;"></i>AI Auto-Fill</button></div>
-    </div>
-    <div class="card card-hover" data-type="carousel" style="overflow:hidden;cursor:pointer;">
-      <div style="height:120px;background:linear-gradient(135deg,rgba(236,72,153,.4),rgba(236,72,153,.08));display:flex;align-items:center;justify-content:center;"><i data-lucide="layout" style="width:32px;height:32px;color:#ec4899;"></i></div>
-      <div style="padding:12px;"><p style="font-size:12px;font-weight:600;">Property Carousel</p><p style="font-size:11px;color:var(--muted);margin-top:2px;">Instagram · 5 slides</p><button class="btn btn-primary btn-xs" style="width:100%;justify-content:center;margin-top:8px;" onclick="showToast('Template auto-filled!')"><i data-lucide="sparkles" style="width:10px;height:10px;"></i>AI Auto-Fill</button></div>
-    </div>
-    <div class="card card-hover" data-type="reel" style="overflow:hidden;cursor:pointer;">
-      <div style="height:120px;background:linear-gradient(135deg,rgba(34,197,94,.4),rgba(34,197,94,.08));display:flex;align-items:center;justify-content:center;"><i data-lucide="play-circle" style="width:32px;height:32px;color:var(--green);"></i></div>
-      <div style="padding:12px;"><p style="font-size:12px;font-weight:600;">Reels Cover</p><p style="font-size:11px;color:var(--muted);margin-top:2px;">Vertical · 1080×1920</p><button class="btn btn-primary btn-xs" style="width:100%;justify-content:center;margin-top:8px;" onclick="showToast('Template auto-filled!')"><i data-lucide="sparkles" style="width:10px;height:10px;"></i>AI Auto-Fill</button></div>
-    </div>
-    <div class="card card-hover" data-type="story" style="overflow:hidden;cursor:pointer;">
-      <div style="height:120px;background:linear-gradient(135deg,rgba(245,158,11,.4),rgba(245,158,11,.08));display:flex;align-items:center;justify-content:center;"><i data-lucide="smartphone" style="width:32px;height:32px;color:var(--amber);"></i></div>
-      <div style="padding:12px;"><p style="font-size:12px;font-weight:600;">Story Template</p><p style="font-size:11px;color:var(--muted);margin-top:2px;">Instagram Story</p><button class="btn btn-primary btn-xs" style="width:100%;justify-content:center;margin-top:8px;" onclick="showToast('Template auto-filled!')"><i data-lucide="sparkles" style="width:10px;height:10px;"></i>AI Auto-Fill</button></div>
-    </div>
-    <div class="card card-hover" data-type="post" style="overflow:hidden;cursor:pointer;">
-      <div style="height:120px;background:linear-gradient(135deg,var(--accent),var(--accent2));display:flex;align-items:center;justify-content:center;flex-direction:column;"><i data-lucide="check-circle" style="width:28px;height:28px;color:white;"></i><p style="font-size:14px;font-weight:800;color:white;margin-top:4px;">SOLD</p></div>
-      <div style="padding:12px;"><p style="font-size:12px;font-weight:600;">Just Sold</p><p style="font-size:11px;color:var(--muted);margin-top:2px;">Multi-platform</p><button class="btn btn-primary btn-xs" style="width:100%;justify-content:center;margin-top:8px;" onclick="showToast('Template auto-filled!')"><i data-lucide="sparkles" style="width:10px;height:10px;"></i>AI Auto-Fill</button></div>
-    </div>
+  <div class="cols-4" style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;" id="tpl-grid">
+    <div class="card" data-type="post" style="overflow:hidden;cursor:pointer;transition:border-color .12s;" onmouseenter="this.style.borderColor='var(--border2)'" onmouseleave="this.style.borderColor='var(--border)'"><div style="height:110px;background:linear-gradient(135deg,rgba(106,107,234,.35),rgba(106,107,234,.06));display:flex;align-items:center;justify-content:center;"><i data-lucide="home" style="width:28px;height:28px;color:var(--accent2);"></i></div><div style="padding:12px;"><p style="font-size:12px;font-weight:600;">Just Listed</p><p style="font-size:10.5px;color:var(--muted);margin-top:2px;">Instagram · 1080×1080</p><button class="btn btn-primary btn-xs" style="width:100%;margin-top:8px;" onclick="showToast('Template auto-filled!')"><i data-lucide="sparkles" style="width:9px;height:9px;"></i>AI Auto-Fill</button></div></div>
+    <div class="card" data-type="post" style="overflow:hidden;cursor:pointer;transition:border-color .12s;" onmouseenter="this.style.borderColor='var(--border2)'" onmouseleave="this.style.borderColor='var(--border)'"><div style="height:110px;background:linear-gradient(135deg,rgba(24,119,242,.35),rgba(24,119,242,.06));display:flex;align-items:center;justify-content:center;"><i data-lucide="door-open" style="width:28px;height:28px;color:#60a5fa;"></i></div><div style="padding:12px;"><p style="font-size:12px;font-weight:600;">Open House</p><p style="font-size:10.5px;color:var(--muted);margin-top:2px;">Facebook · 1200×630</p><button class="btn btn-primary btn-xs" style="width:100%;margin-top:8px;" onclick="showToast('Template auto-filled!')"><i data-lucide="sparkles" style="width:9px;height:9px;"></i>AI Auto-Fill</button></div></div>
+    <div class="card" data-type="carousel" style="overflow:hidden;cursor:pointer;transition:border-color .12s;" onmouseenter="this.style.borderColor='var(--border2)'" onmouseleave="this.style.borderColor='var(--border)'"><div style="height:110px;background:linear-gradient(135deg,rgba(236,72,153,.35),rgba(236,72,153,.06));display:flex;align-items:center;justify-content:center;"><i data-lucide="layout" style="width:28px;height:28px;color:#ec4899;"></i></div><div style="padding:12px;"><p style="font-size:12px;font-weight:600;">Property Carousel</p><p style="font-size:10.5px;color:var(--muted);margin-top:2px;">Instagram · 5 slides</p><button class="btn btn-primary btn-xs" style="width:100%;margin-top:8px;" onclick="showToast('Template auto-filled!')"><i data-lucide="sparkles" style="width:9px;height:9px;"></i>AI Auto-Fill</button></div></div>
+    <div class="card" data-type="reel" style="overflow:hidden;cursor:pointer;transition:border-color .12s;" onmouseenter="this.style.borderColor='var(--border2)'" onmouseleave="this.style.borderColor='var(--border)'"><div style="height:110px;background:linear-gradient(135deg,rgba(16,185,129,.35),rgba(16,185,129,.06));display:flex;align-items:center;justify-content:center;"><i data-lucide="play-circle" style="width:28px;height:28px;color:var(--green);"></i></div><div style="padding:12px;"><p style="font-size:12px;font-weight:600;">Reels Cover</p><p style="font-size:10.5px;color:var(--muted);margin-top:2px;">Vertical · 1080×1920</p><button class="btn btn-primary btn-xs" style="width:100%;margin-top:8px;" onclick="showToast('Template auto-filled!')"><i data-lucide="sparkles" style="width:9px;height:9px;"></i>AI Auto-Fill</button></div></div>
+    <div class="card" data-type="story" style="overflow:hidden;cursor:pointer;transition:border-color .12s;" onmouseenter="this.style.borderColor='var(--border2)'" onmouseleave="this.style.borderColor='var(--border)'"><div style="height:110px;background:linear-gradient(135deg,rgba(245,158,11,.35),rgba(245,158,11,.06));display:flex;align-items:center;justify-content:center;"><i data-lucide="smartphone" style="width:28px;height:28px;color:var(--amber);"></i></div><div style="padding:12px;"><p style="font-size:12px;font-weight:600;">Story Template</p><p style="font-size:10.5px;color:var(--muted);margin-top:2px;">Instagram Story</p><button class="btn btn-primary btn-xs" style="width:100%;margin-top:8px;" onclick="showToast('Template auto-filled!')"><i data-lucide="sparkles" style="width:9px;height:9px;"></i>AI Auto-Fill</button></div></div>
+    <div class="card" data-type="post" style="overflow:hidden;cursor:pointer;transition:border-color .12s;" onmouseenter="this.style.borderColor='var(--border2)'" onmouseleave="this.style.borderColor='var(--border)'"><div style="height:110px;background:linear-gradient(135deg,var(--accent),var(--accent2));display:flex;align-items:center;justify-content:center;flex-direction:column;"><i data-lucide="check-circle" style="width:22px;height:22px;color:white;"></i><p style="font-size:14px;font-weight:800;color:white;margin-top:4px;">SOLD</p></div><div style="padding:12px;"><p style="font-size:12px;font-weight:600;">Just Sold</p><p style="font-size:10.5px;color:var(--muted);margin-top:2px;">Multi-platform</p><button class="btn btn-primary btn-xs" style="width:100%;margin-top:8px;" onclick="showToast('Template auto-filled!')"><i data-lucide="sparkles" style="width:9px;height:9px;"></i>AI Auto-Fill</button></div></div>
   </div>
-</section>
+</div></section>
 
-<!-- ═══════════ SETTINGS ═══════════ -->
+<!-- ═══ SETTINGS ═══ -->
 <section class="view" id="view-settings">
-  <div class="section-header"><div><p class="section-title">Settings</p><p class="section-sub">Account and preferences</p></div></div>
-  <div style="max-width:640px;display:flex;flex-direction:column;gap:16px;">
-    <div class="card" style="padding:18px;">
-      <div style="display:flex;align-items:center;gap:8px;margin-bottom:16px;"><i data-lucide="user" style="width:15px;height:15px;color:var(--accent2);"></i><p style="font-size:13px;font-weight:600;">Profile</p></div>
-      <div style="display:flex;flex-direction:column;gap:12px;">
-        <div><label class="field-label">Your Name</label><input id="s-name" type="text" value="Sarah Johnson"></div>
-        <div><label class="field-label">Agency Name</label><input id="s-agency" type="text" value="Sunshine Properties S.L."></div>
-        <div><label class="field-label">Target Region</label><input id="s-region" type="text" value="Marbella & Costa del Sol"></div>
-        <button class="btn btn-gold btn-sm" id="save-profile" style="align-self:flex-start;"><i data-lucide="save" style="width:13px;height:13px;"></i>Save Profile</button>
-      </div>
+<div class="page">
+  <div style="margin-bottom:24px;"><h1 style="font-family:'Public Sans',sans-serif;font-size:20px;font-weight:800;letter-spacing:-.02em;">Settings</h1><p style="font-size:13px;color:var(--muted);margin-top:3px;">Account and preferences</p></div>
+  <div style="max-width:600px;display:flex;flex-direction:column;gap:14px;">
+    <div class="card card-body" style="display:flex;flex-direction:column;gap:13px;">
+      <div style="display:flex;align-items:center;gap:7px;margin-bottom:2px;"><i data-lucide="user" style="width:14px;height:14px;color:var(--accent2);"></i><p style="font-size:13px;font-weight:600;font-family:'Public Sans',sans-serif;">Profile</p></div>
+      <div><label class="lbl">Your Name</label><input id="s-name" type="text" value="Sarah Johnson"></div>
+      <div><label class="lbl">Agency Name</label><input id="s-agency" type="text" value="Sunshine Properties S.L."></div>
+      <div><label class="lbl">Target Region</label><input id="s-region" type="text" value="Marbella & Costa del Sol"></div>
+      <button class="btn btn-gold btn-sm" id="save-profile" style="align-self:flex-start;"><i data-lucide="save" style="width:12px;height:12px;"></i>Save Profile</button>
     </div>
-    <div class="card" style="padding:18px;">
-      <div style="display:flex;align-items:center;gap:8px;margin-bottom:16px;"><i data-lucide="plug" style="width:15px;height:15px;color:var(--accent2);"></i><p style="font-size:13px;font-weight:600;">Integrations</p></div>
-      <div style="display:flex;flex-direction:column;gap:8px;">
-        <div style="display:flex;align-items:center;justify-content:space-between;padding:10px 12px;border-radius:8px;background:var(--bg3);border:1px solid var(--border);"><div style="display:flex;align-items:center;gap:10px;"><div style="width:28px;height:28px;border-radius:7px;background:#1877f2;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;color:white;">f</div><div><p style="font-size:12px;font-weight:600;">Meta Business Suite</p><p style="font-size:11px;color:var(--muted);">Instagram & Facebook pages</p></div></div><span class="badge b-green"><i data-lucide="check" style="width:10px;height:10px;"></i>Connected</span></div>
-        <div style="display:flex;align-items:center;justify-content:space-between;padding:10px 12px;border-radius:8px;background:var(--bg3);border:1px solid var(--border);"><div style="display:flex;align-items:center;gap:10px;"><div style="width:28px;height:28px;border-radius:7px;background:#0a66c2;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;color:white;">in</div><div><p style="font-size:12px;font-weight:600;">LinkedIn</p><p style="font-size:11px;color:var(--muted);">Business page</p></div></div><button class="btn btn-ghost btn-xs"><i data-lucide="link" style="width:10px;height:10px;"></i>Connect</button></div>
-        <div style="display:flex;align-items:center;justify-content:space-between;padding:10px 12px;border-radius:8px;background:var(--bg3);border:1px solid var(--border);"><div style="display:flex;align-items:center;gap:10px;"><div style="width:28px;height:28px;border-radius:7px;background:#4285f4;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;color:white;">G</div><div><p style="font-size:12px;font-weight:600;">Google Business Profile</p><p style="font-size:11px;color:var(--muted);">Local search visibility</p></div></div><span class="badge b-green"><i data-lucide="check" style="width:10px;height:10px;"></i>Connected</span></div>
-      </div>
+    <div class="card card-body" style="display:flex;flex-direction:column;gap:9px;">
+      <div style="display:flex;align-items:center;gap:7px;margin-bottom:4px;"><i data-lucide="plug" style="width:14px;height:14px;color:var(--accent2);"></i><p style="font-size:13px;font-weight:600;font-family:'Public Sans',sans-serif;">Integrations</p></div>
+      <div class="inner" style="padding:10px 12px;display:flex;align-items:center;justify-content:space-between;"><div style="display:flex;align-items:center;gap:9px;"><div style="width:26px;height:26px;border-radius:6px;background:#1877f2;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;color:white;">f</div><div><p style="font-size:12px;font-weight:600;">Meta Business Suite</p><p style="font-size:11px;color:var(--muted);">Instagram & Facebook</p></div></div><span class="badge b-green"><i data-lucide="check" style="width:9px;height:9px;"></i>Connected</span></div>
+      <div class="inner" style="padding:10px 12px;display:flex;align-items:center;justify-content:space-between;"><div style="display:flex;align-items:center;gap:9px;"><div style="width:26px;height:26px;border-radius:6px;background:#0a66c2;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;color:white;">in</div><div><p style="font-size:12px;font-weight:600;">LinkedIn</p><p style="font-size:11px;color:var(--muted);">Business page</p></div></div><button class="btn btn-ghost btn-xs"><i data-lucide="link" style="width:9px;height:9px;"></i>Connect</button></div>
+      <div class="inner" style="padding:10px 12px;display:flex;align-items:center;justify-content:space-between;"><div style="display:flex;align-items:center;gap:9px;"><div style="width:26px;height:26px;border-radius:6px;background:#4285f4;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;color:white;">G</div><div><p style="font-size:12px;font-weight:600;">Google Business Profile</p><p style="font-size:11px;color:var(--muted);">Local search visibility</p></div></div><span class="badge b-green"><i data-lucide="check" style="width:9px;height:9px;"></i>Connected</span></div>
     </div>
-    <div class="card" style="padding:18px;">
-      <div style="display:flex;align-items:center;gap:8px;margin-bottom:16px;"><i data-lucide="sliders" style="width:15px;height:15px;color:var(--accent2);"></i><p style="font-size:13px;font-weight:600;">Defaults</p></div>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px;">
-        <div><label class="field-label">Default Tone</label><select id="s-tone"><option>Professional</option><option>Storytelling</option><option>Casual</option><option>Luxury</option></select></div>
-        <div><label class="field-label">Default Language</label><select id="s-lang"><option>English</option><option>Spanish</option><option>Dutch</option><option>German</option></select></div>
-        <div><label class="field-label">Emoji Style</label><select><option>Moderate</option><option>Minimal</option><option>Heavy</option><option>None</option></select></div>
-        <div><label class="field-label">Brand Personality</label><select><option>Trustworthy Expert</option><option>Friendly Neighbour</option><option>Luxury Curator</option></select></div>
+    <div class="card card-body">
+      <div style="display:flex;align-items:center;gap:7px;margin-bottom:14px;"><i data-lucide="sliders" style="width:14px;height:14px;color:var(--accent2);"></i><p style="font-size:13px;font-weight:600;font-family:'Public Sans',sans-serif;">Defaults</p></div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:11px;margin-bottom:14px;">
+        <div><label class="lbl">Default Tone</label><select id="s-tone"><option>Professional</option><option>Storytelling</option><option>Casual</option><option>Luxury</option></select></div>
+        <div><label class="lbl">Default Language</label><select id="s-lang"><option>English</option><option>Spanish</option><option>Dutch</option><option>German</option></select></div>
+        <div><label class="lbl">Emoji Style</label><select><option>Moderate</option><option>Minimal</option><option>Heavy</option><option>None</option></select></div>
+        <div><label class="lbl">Brand Personality</label><select><option>Trustworthy Expert</option><option>Friendly Neighbour</option><option>Luxury Curator</option></select></div>
       </div>
-      <button class="btn btn-gold btn-sm" onclick="showToast('Settings saved!')"><i data-lucide="save" style="width:13px;height:13px;"></i>Save Settings</button>
+      <button class="btn btn-gold btn-sm" onclick="showToast('Settings saved!')"><i data-lucide="save" style="width:12px;height:12px;"></i>Save Settings</button>
     </div>
   </div>
-</section>
+</div></section>
 
-  </main>
+</div><!-- /content -->
+</div><!-- /app-shell -->
 <script>
 const API_KEY = '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';
 const MODEL = 'claude-sonnet-4-6';
@@ -1042,7 +844,7 @@ async function claude(system,user){
 }
 
 // Get selected lang chips
-function getLangs(cid){return[...document.querySelectorAll('#'+cid+' .lang-chip.selected')].map(c=>c.dataset.lang);}
+function getLangs(cid){return[...document.querySelectorAll('#'+cid+' .chip.on')].map(c=>c.dataset.lang);}
 
 // Build language instruction
 function langInstr(langs){
@@ -1060,7 +862,7 @@ Each version should be natural and culturally appropriate for that market.`;
 }
 
 // Lang chip toggle
-document.addEventListener('click',e=>{const c=e.target.closest('.lang-chip');if(c)c.classList.toggle('selected');});
+document.addEventListener('click',e=>{const c=e.target.closest('.chip');if(c)c.classList.toggle('on');});
 
 // ── MONTHLY WIZARD ────────────────────────────────────────────────────────────
 let mwS=1,mwT=6;
@@ -1148,7 +950,7 @@ CTA:
     document.getElementById('gen-caption').textContent=cap;
     document.getElementById('gen-hashtags').textContent=tags;
     document.getElementById('gen-ctas').textContent=ctas;
-    document.getElementById('ai-load').classList.add('hidden');document.getElementById('ai-out').classList.remove('hidden');
+    document.getElementById('ai-load').classList.add('hidden');const aiOut=document.getElementById('ai-out');aiOut.classList.remove('hidden');aiOut.style.display='flex';
   }catch(e){document.getElementById('ai-load').classList.add('hidden');showToast(e.message==='offline'?'⚠️ Offline':'❌ Failed','err');}
 });
 
@@ -1250,10 +1052,10 @@ document.querySelectorAll('.qp').forEach(b=>b.addEventListener('click',()=>sendC
 
 // ── SOCIAL INBOX ──────────────────────────────────────────────────────────────
 let curMsg=null;
-document.querySelectorAll('.inbox-msg').forEach(m=>m.addEventListener('click',function(){
+document.querySelectorAll('.inbox-row').forEach(m=>m.addEventListener('click',function(){
   curMsg={sender:this.dataset.sender,ctx:this.dataset.ctx,msg:this.dataset.msg,prop:this.dataset.prop};
   document.getElementById('inbox-empty').classList.add('hidden');
-  const chat=document.getElementById('inbox-chat');chat.classList.remove('hidden');chat.style.display='flex';chat.style.flexDirection='column';
+  const chat=document.getElementById('inbox-chat');chat.classList.remove('hidden');chat.style.display='flex';chat.style.flexDirection='column';chat.style.height='100%';
   document.getElementById('inbox-sender').textContent=curMsg.sender;
   document.getElementById('inbox-ctx').textContent=curMsg.ctx+' · '+curMsg.prop;
   document.getElementById('inbox-msgs').innerHTML=`<div class="bubble-ai">${curMsg.msg}</div>`;
