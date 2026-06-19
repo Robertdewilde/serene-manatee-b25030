@@ -103,7 +103,7 @@ body{background:var(--s0);color:var(--t1);font-family:'Inter',system-ui,sans-ser
 .inset{background:var(--s3);border:1px solid var(--b1);border-radius:var(--r-md);}
 
 /* ── STAT CARDS ───────────────────────────────────── */
-.stat-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:20px;}
+.stat-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:20px;}@media(max-width:960px){.stat-grid{grid-template-columns:1fr 1fr!important;}}
 .stat-card{background:var(--s2);border:1px solid var(--b1);border-radius:var(--r-lg);padding:18px 20px;position:relative;overflow:hidden;transition:border-color .15s;}
 .stat-card:hover{border-color:var(--b2);}
 .stat-card::after{content:'';position:absolute;bottom:0;left:20px;right:20px;height:1px;background:linear-gradient(90deg,transparent,var(--a1) 50%,transparent);opacity:0;transition:opacity .3s;}
@@ -190,8 +190,8 @@ input[type=color]{width:38px;height:38px;padding:2px;border-radius:var(--r-md);c
 .inbox-row{padding:12px;border-radius:var(--r-md);border:1px solid var(--b1);cursor:pointer;transition:all .12s;margin-bottom:6px;}
 .inbox-row:hover{background:var(--s3);border-color:var(--b2);}
 .inbox-row.sel{background:var(--s3);border-color:var(--a1);}
-.ai-pulse{animation:aip 1.8s ease-in-out infinite;}
-@keyframes aip{0%,100%{opacity:.3;transform:scale(.95);}50%{opacity:1;transform:scale(1);}}
+.ai-pulse{opacity:.7;}
+50%{opacity:1;transform:scale(1);}}
 .fade-in{animation:fi .22s ease;}
 @keyframes fi{from{opacity:0;transform:translateY(4px);}to{opacity:1;transform:none;}}
 ::-webkit-scrollbar{width:4px;height:4px;}
@@ -275,7 +275,7 @@ input[type=color]{width:38px;height:38px;padding:2px;border-radius:var(--r-md);c
     </div>
     <div style="display:flex;align-items:center;gap:8px;">
       <div id="ai-status" style="display:flex;align-items:center;gap:6px;font-size:11.5px;font-weight:600;padding:5px 12px;border-radius:99px;background:var(--gL);color:var(--green);border:1px solid rgba(45,213,152,.2);">
-        <span style="width:6px;height:6px;border-radius:50%;background:var(--green);display:inline-block;animation:aip 2s infinite;"></span>AI Ready
+        <span style="width:6px;height:6px;border-radius:50%;background:var(--green);display:inline-block;"></span>AI Ready
       </div>
       <select id="lang-sw" style="width:auto;padding:7px 28px 7px 10px;font-size:12px;border-radius:99px;">
         <option>🇬🇧 EN</option><option>🇪🇸 ES</option><option>🇩🇪 DE</option><option>🇳🇱 NL</option>
