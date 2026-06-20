@@ -296,38 +296,39 @@ input[type=color]{width:38px;height:38px;padding:2px;border-radius:var(--r-md);c
 
 
 
-/* ── TEMPLATES HARD RENDER FIX ───────────────── */
 
-#tpl-grid{
-  display:grid!important;
-  contain:paint!important;
-}
 
-#tpl-grid .card{
-  transform:none!important;
-  filter:none!important;
-  box-shadow:none!important;
-  transition:none!important;
-  contain:paint!important;
-}
 
-#tpl-grid .card > div:first-child{
-  background:#20263a!important;
-  background-image:none!important;
-}
+
+
+
+
 
 @media(max-width:768px){
   #tpl-grid{
     grid-template-columns:1fr 1fr!important;
     gap:8px!important;
   }
-  #tpl-grid .card{
-    overflow:hidden!important;
-    min-height:0!important;
-  }
-  #tpl-grid .card:hover{
-    border-color:var(--b1)!important;
-  }
+  
+  
+}
+
+/* ── TEMPLATES ───────────────────────────────────── */
+#tpl-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;}
+.tpl-card{background:var(--s2);border:1px solid var(--b1);border-radius:var(--r-lg);overflow:hidden;cursor:pointer;}
+.tpl-thumb{height:100px;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:6px;}
+.tpl-c1{background:#1c1f35;}
+.tpl-c2{background:#161e2e;}
+.tpl-c3{background:#221528;}
+.tpl-c4{background:#152218;}
+.tpl-c5{background:#221a0c;}
+.tpl-c6{background:#1a1c28;}
+.tpl-body{padding:12px;}
+.tpl-name{font-size:12.5px;font-weight:600;color:var(--t1);}
+.tpl-meta{font-size:11px;color:var(--t3);margin-top:2px;margin-bottom:9px;}
+@media(max-width:768px){
+  #tpl-grid{grid-template-columns:1fr 1fr!important;gap:8px;}
+  .tpl-thumb{height:80px;}
 }
 </style>
 </head>
@@ -889,18 +890,18 @@ input[type=color]{width:38px;height:38px;padding:2px;border-radius:var(--r-md);c
   <div class="page-header"><h1 class="page-title">Templates</h1><p class="page-sub">Ready-to-use post templates with AI auto-fill</p></div>
   <div style="display:flex;gap:6px;margin-bottom:22px;flex-wrap:wrap;">
     <button class="btn btn-primary btn-sm tpl-f" data-f="all">All</button>
-    <button class="btn btn-ghost btn-sm tpl-f" data-f="post"><i data-lucide="image" style="width:11px;height:11px;"></i>Posts</button>
-    <button class="btn btn-ghost btn-sm tpl-f" data-f="carousel"><i data-lucide="layout" style="width:11px;height:11px;"></i>Carousel</button>
-    <button class="btn btn-ghost btn-sm tpl-f" data-f="reel"><i data-lucide="play" style="width:11px;height:11px;"></i>Reels</button>
-    <button class="btn btn-ghost btn-sm tpl-f" data-f="story"><i data-lucide="smartphone" style="width:11px;height:11px;"></i>Stories</button>
+    <button class="btn btn-ghost btn-sm tpl-f" data-f="post">Posts</button>
+    <button class="btn btn-ghost btn-sm tpl-f" data-f="carousel">Carousel</button>
+    <button class="btn btn-ghost btn-sm tpl-f" data-f="reel">Reels</button>
+    <button class="btn btn-ghost btn-sm tpl-f" data-f="story">Stories</button>
   </div>
-  <div class="four-col" id="tpl-grid">
-    <div class="card" data-type="post" style="overflow:hidden;cursor:pointer;"><div style="height:112px;background:#20263a;display:flex;align-items:center;justify-content:center;"><i data-lucide="home" style="width:28px;height:28px;color:var(--a2);"></i></div><div style="padding:13px;"><p style="font-size:12.5px;font-weight:600;">Just Listed</p><p style="font-size:11px;color:var(--t3);margin-top:2px;">Instagram · 1080×1080</p><button class="btn btn-primary btn-xs" style="width:100%;margin-top:9px;" onclick="showToast('Template auto-filled!')"><i data-lucide="sparkles" style="width:9px;height:9px;"></i>AI Auto-Fill</button></div></div>
-    <div class="card" data-type="post" style="overflow:hidden;cursor:pointer;"><div style="height:112px;background:#1a2540;display:flex;align-items:center;justify-content:center;"><i data-lucide="door-open" style="width:28px;height:28px;color:#60a5fa;"></i></div><div style="padding:13px;"><p style="font-size:12.5px;font-weight:600;">Open House</p><p style="font-size:11px;color:var(--t3);margin-top:2px;">Facebook · 1200×630</p><button class="btn btn-primary btn-xs" style="width:100%;margin-top:9px;" onclick="showToast('Template auto-filled!')"><i data-lucide="sparkles" style="width:9px;height:9px;"></i>AI Auto-Fill</button></div></div>
-    <div class="card" data-type="carousel" style="overflow:hidden;cursor:pointer;"><div style="height:112px;background:#2a1f30;display:flex;align-items:center;justify-content:center;"><i data-lucide="layout" style="width:28px;height:28px;color:#ec4899;"></i></div><div style="padding:13px;"><p style="font-size:12.5px;font-weight:600;">Property Carousel</p><p style="font-size:11px;color:var(--t3);margin-top:2px;">Instagram · 5 slides</p><button class="btn btn-primary btn-xs" style="width:100%;margin-top:9px;" onclick="showToast('Template auto-filled!')"><i data-lucide="sparkles" style="width:9px;height:9px;"></i>AI Auto-Fill</button></div></div>
-    <div class="card" data-type="reel" style="overflow:hidden;cursor:pointer;"><div style="height:112px;background:#1a2e28;display:flex;align-items:center;justify-content:center;"><i data-lucide="play-circle" style="width:28px;height:28px;color:var(--green);"></i></div><div style="padding:13px;"><p style="font-size:12.5px;font-weight:600;">Reels Cover</p><p style="font-size:11px;color:var(--t3);margin-top:2px;">Vertical · 1080×1920</p><button class="btn btn-primary btn-xs" style="width:100%;margin-top:9px;" onclick="showToast('Template auto-filled!')"><i data-lucide="sparkles" style="width:9px;height:9px;"></i>AI Auto-Fill</button></div></div>
-    <div class="card" data-type="story" style="overflow:hidden;cursor:pointer;"><div style="height:112px;background:#2a2210;display:flex;align-items:center;justify-content:center;"><i data-lucide="smartphone" style="width:28px;height:28px;color:var(--amber);"></i></div><div style="padding:13px;"><p style="font-size:12.5px;font-weight:600;">Story Template</p><p style="font-size:11px;color:var(--t3);margin-top:2px;">Instagram Story</p><button class="btn btn-primary btn-xs" style="width:100%;margin-top:9px;" onclick="showToast('Template auto-filled!')"><i data-lucide="sparkles" style="width:9px;height:9px;"></i>AI Auto-Fill</button></div></div>
-    <div class="card" data-type="post" style="overflow:hidden;cursor:pointer;"><div style="height:112px;background:#20263a;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:4px;"><i data-lucide="check-circle" style="width:22px;height:22px;color:var(--a2);"></i><p style="font-size:15px;font-weight:800;color:var(--a2);">SOLD</p></div><div style="padding:13px;"><p style="font-size:12.5px;font-weight:600;">Just Sold</p><p style="font-size:11px;color:var(--t3);margin-top:2px;">Multi-platform</p><button class="btn btn-primary btn-xs" style="width:100%;margin-top:9px;" onclick="showToast('Template auto-filled!')"><i data-lucide="sparkles" style="width:9px;height:9px;"></i>AI Auto-Fill</button></div></div>
+  <div id="tpl-grid">
+    <div class="tpl-card" data-type="post"><div class="tpl-thumb tpl-c1"><i data-lucide="home" style="width:26px;height:26px;color:#8b85ff;"></i></div><div class="tpl-body"><p class="tpl-name">Just Listed</p><p class="tpl-meta">Instagram · 1080×1080</p><button class="btn btn-primary btn-xs" style="width:100%;" onclick="showToast('Template auto-filled!')">AI Auto-Fill</button></div></div>
+    <div class="tpl-card" data-type="post"><div class="tpl-thumb tpl-c2"><i data-lucide="door-open" style="width:26px;height:26px;color:#60a5fa;"></i></div><div class="tpl-body"><p class="tpl-name">Open House</p><p class="tpl-meta">Facebook · 1200×630</p><button class="btn btn-primary btn-xs" style="width:100%;" onclick="showToast('Template auto-filled!')">AI Auto-Fill</button></div></div>
+    <div class="tpl-card" data-type="carousel"><div class="tpl-thumb tpl-c3"><i data-lucide="layout" style="width:26px;height:26px;color:#ec4899;"></i></div><div class="tpl-body"><p class="tpl-name">Property Carousel</p><p class="tpl-meta">Instagram · 5 slides</p><button class="btn btn-primary btn-xs" style="width:100%;" onclick="showToast('Template auto-filled!')">AI Auto-Fill</button></div></div>
+    <div class="tpl-card" data-type="reel"><div class="tpl-thumb tpl-c4"><i data-lucide="play-circle" style="width:26px;height:26px;color:#2dd598;"></i></div><div class="tpl-body"><p class="tpl-name">Reels Cover</p><p class="tpl-meta">Vertical · 1080×1920</p><button class="btn btn-primary btn-xs" style="width:100%;" onclick="showToast('Template auto-filled!')">AI Auto-Fill</button></div></div>
+    <div class="tpl-card" data-type="story"><div class="tpl-thumb tpl-c5"><i data-lucide="smartphone" style="width:26px;height:26px;color:#f0a500;"></i></div><div class="tpl-body"><p class="tpl-name">Story Template</p><p class="tpl-meta">Instagram Story</p><button class="btn btn-primary btn-xs" style="width:100%;" onclick="showToast('Template auto-filled!')">AI Auto-Fill</button></div></div>
+    <div class="tpl-card" data-type="post"><div class="tpl-thumb tpl-c6"><i data-lucide="check-circle" style="width:26px;height:26px;color:#8b85ff;"></i></div><div class="tpl-body"><p class="tpl-name">Just Sold</p><p class="tpl-meta">Multi-platform</p><button class="btn btn-primary btn-xs" style="width:100%;" onclick="showToast('Template auto-filled!')">AI Auto-Fill</button></div></div>
   </div>
 </div></section>
 
