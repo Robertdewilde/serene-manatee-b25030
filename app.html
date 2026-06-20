@@ -292,41 +292,41 @@ input[type=color]{width:38px;height:38px;padding:2px;border-radius:var(--r-md);c
 
 
 
-/* ── TEMPLATES MOBILE RENDER FIX ─────────────── */
+
+
+
+
+/* ── TEMPLATES HARD RENDER FIX ───────────────── */
 
 #tpl-grid{
-  contain:layout paint;
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:12px;
+  display:grid!important;
+  contain:paint!important;
 }
 
 #tpl-grid .card{
   transform:none!important;
   filter:none!important;
-  contain:layout paint;
-  overflow:hidden;
-  box-shadow:none;
+  box-shadow:none!important;
+  transition:none!important;
+  contain:paint!important;
 }
 
 #tpl-grid .card > div:first-child{
+  background:#20263a!important;
   background-image:none!important;
-  background:#1f2335!important;
 }
 
 @media(max-width:768px){
   #tpl-grid{
     grid-template-columns:1fr 1fr!important;
-    gap:10px!important;
+    gap:8px!important;
   }
   #tpl-grid .card{
-    min-height:0;
+    overflow:hidden!important;
+    min-height:0!important;
   }
   #tpl-grid .card:hover{
-    transform:none!important;
-  }
-  #tpl-grid i{
-    transform:none!important;
+    border-color:var(--b1)!important;
   }
 }
 </style>
@@ -465,10 +465,10 @@ input[type=color]{width:38px;height:38px;padding:2px;border-radius:var(--r-md);c
           <div class="field"><label class="lbl">Posts per week</label><input id="mw-ppw" type="number" value="7" min="3" max="21"></div>
           <div class="field"><label class="lbl">Platforms</label>
             <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:2px;">
-              <label style="display:flex;align-items:center;gap:7px;padding:9px 14px;border-radius:var(--r-md);border:1px solid var(--b2);background:var(--s3);cursor:pointer;font-size:13px;font-weight:500;transition:border-color .12s;" onmouseenter="this.style.borderColor='var(--b3)'" onmouseleave="this.style.borderColor='var(--b2)'"><input type="checkbox" checked class="mw-plat" value="Instagram" style="width:auto;"> <span class="badge b-ig" style="margin:0 2px;">IG</span> Instagram</label>
-              <label style="display:flex;align-items:center;gap:7px;padding:9px 14px;border-radius:var(--r-md);border:1px solid var(--b2);background:var(--s3);cursor:pointer;font-size:13px;font-weight:500;transition:border-color .12s;" onmouseenter="this.style.borderColor='var(--b3)'" onmouseleave="this.style.borderColor='var(--b2)'"><input type="checkbox" checked class="mw-plat" value="Facebook" style="width:auto;"> <span class="badge b-fb" style="margin:0 2px;">FB</span> Facebook</label>
-              <label style="display:flex;align-items:center;gap:7px;padding:9px 14px;border-radius:var(--r-md);border:1px solid var(--b2);background:var(--s3);cursor:pointer;font-size:13px;font-weight:500;transition:border-color .12s;" onmouseenter="this.style.borderColor='var(--b3)'" onmouseleave="this.style.borderColor='var(--b2)'"><input type="checkbox" class="mw-plat" value="LinkedIn" style="width:auto;"> <span class="badge b-li" style="margin:0 2px;">LI</span> LinkedIn</label>
-              <label style="display:flex;align-items:center;gap:7px;padding:9px 14px;border-radius:var(--r-md);border:1px solid var(--b2);background:var(--s3);cursor:pointer;font-size:13px;font-weight:500;transition:border-color .12s;" onmouseenter="this.style.borderColor='var(--b3)'" onmouseleave="this.style.borderColor='var(--b2)'"><input type="checkbox" class="mw-plat" value="TikTok" style="width:auto;"> <span class="badge b-tt" style="margin:0 2px;">TT</span> TikTok</label>
+              <label style="display:flex;align-items:center;gap:7px;padding:9px 14px;border-radius:var(--r-md);border:1px solid var(--b2);background:var(--s3);cursor:pointer;font-size:13px;font-weight:500;transition:border-color .12s;"><input type="checkbox" checked class="mw-plat" value="Instagram" style="width:auto;"> <span class="badge b-ig" style="margin:0 2px;">IG</span> Instagram</label>
+              <label style="display:flex;align-items:center;gap:7px;padding:9px 14px;border-radius:var(--r-md);border:1px solid var(--b2);background:var(--s3);cursor:pointer;font-size:13px;font-weight:500;transition:border-color .12s;"><input type="checkbox" checked class="mw-plat" value="Facebook" style="width:auto;"> <span class="badge b-fb" style="margin:0 2px;">FB</span> Facebook</label>
+              <label style="display:flex;align-items:center;gap:7px;padding:9px 14px;border-radius:var(--r-md);border:1px solid var(--b2);background:var(--s3);cursor:pointer;font-size:13px;font-weight:500;transition:border-color .12s;"><input type="checkbox" class="mw-plat" value="LinkedIn" style="width:auto;"> <span class="badge b-li" style="margin:0 2px;">LI</span> LinkedIn</label>
+              <label style="display:flex;align-items:center;gap:7px;padding:9px 14px;border-radius:var(--r-md);border:1px solid var(--b2);background:var(--s3);cursor:pointer;font-size:13px;font-weight:500;transition:border-color .12s;"><input type="checkbox" class="mw-plat" value="TikTok" style="width:auto;"> <span class="badge b-tt" style="margin:0 2px;">TT</span> TikTok</label>
             </div>
           </div>
         </div>
@@ -856,7 +856,7 @@ input[type=color]{width:38px;height:38px;padding:2px;border-radius:var(--r-md);c
   <div class="two-col" style="display:grid;grid-template-columns:1fr 1fr;gap:14px;max-width:780px;">
     <div class="card card-p">
       <div style="display:flex;align-items:center;gap:8px;margin-bottom:16px;"><i data-lucide="image" style="width:14px;height:14px;color:var(--a2);"></i><p style="font-size:13.5px;font-weight:700;font-family:'Public Sans',sans-serif;">Logo Upload</p></div>
-      <div style="border:1.5px dashed var(--b2);border-radius:var(--r-lg);padding:32px;text-align:center;cursor:pointer;transition:border-color .15s;" onmouseenter="this.style.borderColor='var(--a1)'" onmouseleave="this.style.borderColor='var(--b2)'">
+      <div style="border:1.5px dashed var(--b2);border-radius:var(--r-lg);padding:32px;text-align:center;cursor:pointer;transition:border-color .15s;">
         <div style="width:38px;height:38px;border-radius:10px;background:var(--s3);display:flex;align-items:center;justify-content:center;margin:0 auto 10px;"><i data-lucide="upload" style="width:17px;height:17px;color:var(--t3);"></i></div>
         <p style="font-size:12.5px;font-weight:500;color:var(--t2);">Drop your logo here</p>
         <p style="font-size:11.5px;color:var(--t3);margin-top:3px;">PNG, SVG or JPG</p>
@@ -895,12 +895,12 @@ input[type=color]{width:38px;height:38px;padding:2px;border-radius:var(--r-md);c
     <button class="btn btn-ghost btn-sm tpl-f" data-f="story"><i data-lucide="smartphone" style="width:11px;height:11px;"></i>Stories</button>
   </div>
   <div class="four-col" id="tpl-grid">
-    <div class="card" data-type="post" style="overflow:hidden;cursor:pointer;transition:border-color .15s;" onmouseenter="this.style.borderColor='var(--a1)'" onmouseleave="this.style.borderColor='var(--b1)'"><div style="height:112px;background:linear-gradient(135deg,rgba(108,99,255,.35),rgba(108,99,255,.06));display:flex;align-items:center;justify-content:center;"><i data-lucide="home" style="width:28px;height:28px;color:var(--a2);"></i></div><div style="padding:13px;"><p style="font-size:12.5px;font-weight:600;">Just Listed</p><p style="font-size:11px;color:var(--t3);margin-top:2px;">Instagram · 1080×1080</p><button class="btn btn-primary btn-xs" style="width:100%;margin-top:9px;" onclick="showToast('Template auto-filled!')"><i data-lucide="sparkles" style="width:9px;height:9px;"></i>AI Auto-Fill</button></div></div>
-    <div class="card" data-type="post" style="overflow:hidden;cursor:pointer;transition:border-color .15s;" onmouseenter="this.style.borderColor='var(--a1)'" onmouseleave="this.style.borderColor='var(--b1)'"><div style="height:112px;background:linear-gradient(135deg,rgba(24,119,242,.35),rgba(24,119,242,.06));display:flex;align-items:center;justify-content:center;"><i data-lucide="door-open" style="width:28px;height:28px;color:#60a5fa;"></i></div><div style="padding:13px;"><p style="font-size:12.5px;font-weight:600;">Open House</p><p style="font-size:11px;color:var(--t3);margin-top:2px;">Facebook · 1200×630</p><button class="btn btn-primary btn-xs" style="width:100%;margin-top:9px;" onclick="showToast('Template auto-filled!')"><i data-lucide="sparkles" style="width:9px;height:9px;"></i>AI Auto-Fill</button></div></div>
-    <div class="card" data-type="carousel" style="overflow:hidden;cursor:pointer;transition:border-color .15s;" onmouseenter="this.style.borderColor='var(--a1)'" onmouseleave="this.style.borderColor='var(--b1)'"><div style="height:112px;background:linear-gradient(135deg,rgba(236,72,153,.35),rgba(236,72,153,.06));display:flex;align-items:center;justify-content:center;"><i data-lucide="layout" style="width:28px;height:28px;color:#ec4899;"></i></div><div style="padding:13px;"><p style="font-size:12.5px;font-weight:600;">Property Carousel</p><p style="font-size:11px;color:var(--t3);margin-top:2px;">Instagram · 5 slides</p><button class="btn btn-primary btn-xs" style="width:100%;margin-top:9px;" onclick="showToast('Template auto-filled!')"><i data-lucide="sparkles" style="width:9px;height:9px;"></i>AI Auto-Fill</button></div></div>
-    <div class="card" data-type="reel" style="overflow:hidden;cursor:pointer;transition:border-color .15s;" onmouseenter="this.style.borderColor='var(--a1)'" onmouseleave="this.style.borderColor='var(--b1)'"><div style="height:112px;background:linear-gradient(135deg,rgba(45,213,152,.35),rgba(45,213,152,.06));display:flex;align-items:center;justify-content:center;"><i data-lucide="play-circle" style="width:28px;height:28px;color:var(--green);"></i></div><div style="padding:13px;"><p style="font-size:12.5px;font-weight:600;">Reels Cover</p><p style="font-size:11px;color:var(--t3);margin-top:2px;">Vertical · 1080×1920</p><button class="btn btn-primary btn-xs" style="width:100%;margin-top:9px;" onclick="showToast('Template auto-filled!')"><i data-lucide="sparkles" style="width:9px;height:9px;"></i>AI Auto-Fill</button></div></div>
-    <div class="card" data-type="story" style="overflow:hidden;cursor:pointer;transition:border-color .15s;" onmouseenter="this.style.borderColor='var(--a1)'" onmouseleave="this.style.borderColor='var(--b1)'"><div style="height:112px;background:linear-gradient(135deg,rgba(240,165,0,.35),rgba(240,165,0,.06));display:flex;align-items:center;justify-content:center;"><i data-lucide="smartphone" style="width:28px;height:28px;color:var(--amber);"></i></div><div style="padding:13px;"><p style="font-size:12.5px;font-weight:600;">Story Template</p><p style="font-size:11px;color:var(--t3);margin-top:2px;">Instagram Story</p><button class="btn btn-primary btn-xs" style="width:100%;margin-top:9px;" onclick="showToast('Template auto-filled!')"><i data-lucide="sparkles" style="width:9px;height:9px;"></i>AI Auto-Fill</button></div></div>
-    <div class="card" data-type="post" style="overflow:hidden;cursor:pointer;transition:border-color .15s;" onmouseenter="this.style.borderColor='var(--a1)'" onmouseleave="this.style.borderColor='var(--b1)'"><div style="height:112px;background:linear-gradient(135deg,var(--a1),var(--a2));display:flex;align-items:center;justify-content:center;flex-direction:column;gap:4px;"><i data-lucide="check-circle" style="width:22px;height:22px;color:white;"></i><p style="font-size:15px;font-weight:800;color:white;">SOLD</p></div><div style="padding:13px;"><p style="font-size:12.5px;font-weight:600;">Just Sold</p><p style="font-size:11px;color:var(--t3);margin-top:2px;">Multi-platform</p><button class="btn btn-primary btn-xs" style="width:100%;margin-top:9px;" onclick="showToast('Template auto-filled!')"><i data-lucide="sparkles" style="width:9px;height:9px;"></i>AI Auto-Fill</button></div></div>
+    <div class="card" data-type="post" style="overflow:hidden;cursor:pointer;"><div style="height:112px;background:linear-gradient(135deg,rgba(108,99,255,.35),rgba(108,99,255,.06));display:flex;align-items:center;justify-content:center;"><i data-lucide="home" style="width:28px;height:28px;color:var(--a2);"></i></div><div style="padding:13px;"><p style="font-size:12.5px;font-weight:600;">Just Listed</p><p style="font-size:11px;color:var(--t3);margin-top:2px;">Instagram · 1080×1080</p><button class="btn btn-primary btn-xs" style="width:100%;margin-top:9px;" onclick="showToast('Template auto-filled!')"><i data-lucide="sparkles" style="width:9px;height:9px;"></i>AI Auto-Fill</button></div></div>
+    <div class="card" data-type="post" style="overflow:hidden;cursor:pointer;"><div style="height:112px;background:linear-gradient(135deg,rgba(24,119,242,.35),rgba(24,119,242,.06));display:flex;align-items:center;justify-content:center;"><i data-lucide="door-open" style="width:28px;height:28px;color:#60a5fa;"></i></div><div style="padding:13px;"><p style="font-size:12.5px;font-weight:600;">Open House</p><p style="font-size:11px;color:var(--t3);margin-top:2px;">Facebook · 1200×630</p><button class="btn btn-primary btn-xs" style="width:100%;margin-top:9px;" onclick="showToast('Template auto-filled!')"><i data-lucide="sparkles" style="width:9px;height:9px;"></i>AI Auto-Fill</button></div></div>
+    <div class="card" data-type="carousel" style="overflow:hidden;cursor:pointer;"><div style="height:112px;background:linear-gradient(135deg,rgba(236,72,153,.35),rgba(236,72,153,.06));display:flex;align-items:center;justify-content:center;"><i data-lucide="layout" style="width:28px;height:28px;color:#ec4899;"></i></div><div style="padding:13px;"><p style="font-size:12.5px;font-weight:600;">Property Carousel</p><p style="font-size:11px;color:var(--t3);margin-top:2px;">Instagram · 5 slides</p><button class="btn btn-primary btn-xs" style="width:100%;margin-top:9px;" onclick="showToast('Template auto-filled!')"><i data-lucide="sparkles" style="width:9px;height:9px;"></i>AI Auto-Fill</button></div></div>
+    <div class="card" data-type="reel" style="overflow:hidden;cursor:pointer;"><div style="height:112px;background:linear-gradient(135deg,rgba(45,213,152,.35),rgba(45,213,152,.06));display:flex;align-items:center;justify-content:center;"><i data-lucide="play-circle" style="width:28px;height:28px;color:var(--green);"></i></div><div style="padding:13px;"><p style="font-size:12.5px;font-weight:600;">Reels Cover</p><p style="font-size:11px;color:var(--t3);margin-top:2px;">Vertical · 1080×1920</p><button class="btn btn-primary btn-xs" style="width:100%;margin-top:9px;" onclick="showToast('Template auto-filled!')"><i data-lucide="sparkles" style="width:9px;height:9px;"></i>AI Auto-Fill</button></div></div>
+    <div class="card" data-type="story" style="overflow:hidden;cursor:pointer;"><div style="height:112px;background:linear-gradient(135deg,rgba(240,165,0,.35),rgba(240,165,0,.06));display:flex;align-items:center;justify-content:center;"><i data-lucide="smartphone" style="width:28px;height:28px;color:var(--amber);"></i></div><div style="padding:13px;"><p style="font-size:12.5px;font-weight:600;">Story Template</p><p style="font-size:11px;color:var(--t3);margin-top:2px;">Instagram Story</p><button class="btn btn-primary btn-xs" style="width:100%;margin-top:9px;" onclick="showToast('Template auto-filled!')"><i data-lucide="sparkles" style="width:9px;height:9px;"></i>AI Auto-Fill</button></div></div>
+    <div class="card" data-type="post" style="overflow:hidden;cursor:pointer;"><div style="height:112px;background:linear-gradient(135deg,var(--a1),var(--a2));display:flex;align-items:center;justify-content:center;flex-direction:column;gap:4px;"><i data-lucide="check-circle" style="width:22px;height:22px;color:white;"></i><p style="font-size:15px;font-weight:800;color:white;">SOLD</p></div><div style="padding:13px;"><p style="font-size:12.5px;font-weight:600;">Just Sold</p><p style="font-size:11px;color:var(--t3);margin-top:2px;">Multi-platform</p><button class="btn btn-primary btn-xs" style="width:100%;margin-top:9px;" onclick="showToast('Template auto-filled!')"><i data-lucide="sparkles" style="width:9px;height:9px;"></i>AI Auto-Fill</button></div></div>
   </div>
 </div></section>
 
