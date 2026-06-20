@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Social Listings Pro v3</title>
+<title>Social Listings Pro</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;700;800&family=Public+Sans:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
@@ -186,6 +186,7 @@ input[type=color]{width:38px;height:38px;padding:2px;border-radius:var(--r-md);c
 .step-icon{width:36px;height:36px;border-radius:9px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
 
 /* ── MISC ─────────────────────────────────────────── */
+.hidden{display:none!important;}
 .ai-tab.on{background:var(--a1)!important;color:white!important;border-color:var(--a1)!important;}
 .post-card{background:var(--s3);border:1px solid var(--b1);border-radius:var(--r-md);padding:13px;transition:all .12s;}
 .post-card:hover{border-color:var(--b2);}
@@ -534,7 +535,7 @@ input[type=color]{width:38px;height:38px;padding:2px;border-radius:var(--r-md);c
     <button class="btn btn-ghost btn-sm ai-tab" data-panel="custom"><i data-lucide="rocket" style="width:12px;height:12px;"></i>Custom Campaign</button>
   </div>
   <div id="ai-panel-social">
-    <div class="two-col" style="display:grid;grid-template-columns:1fr 1fr;gap:20px;align-items:start;">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;align-items:start;">
       <div class="card card-p" style="display:flex;flex-direction:column;gap:18px;">
         <p style="font-size:14px;font-weight:700;font-family:'Public Sans',sans-serif;">Property Details</p>
         <div class="field"><label class="lbl">Property URL or Description</label><textarea id="prop-url" rows="4" placeholder="Paste a property URL or describe the listing..."></textarea></div>
