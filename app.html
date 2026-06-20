@@ -293,59 +293,11 @@ input[type=color]{width:38px;height:38px;padding:2px;border-radius:var(--r-md);c
   .stat-grid{grid-template-columns:repeat(2,1fr);}
 }
 
-/* ── TEMPLATES MOBILE FIX ───────────────────────── */
+/* ── TEMPLATES MALI FIX ─────────────────────────── */
 @media(max-width:768px){
-  #view-templates .four-col{
-    grid-template-columns:1fr 1fr!important;
-    gap:8px!important;
-  }
-  #view-templates .card{
-    overflow:hidden!important;
-    box-shadow:none!important;
-  }
-  #view-templates [style*="height:112px"]{
-    height:90px!important;
-  }
-}
-
-/* ── MALI GPU: TEMPLATES FIX ────────────────────── */
-@media(max-width:768px){
-  #view-templates .card [style*="background:linear-gradient"]{
+  #tpl-grid .card > div:first-child{
     background:var(--s4)!important;
-  }
-  #view-templates .card{
-    contain:strict!important;
-  }
-  #view-templates{
-    will-change:auto!important;
-  }
-}
-
-/* ══════════════════════════════════════════════════
-   MALI GPU NUCLEAR FIX — NO GRADIENTS ON MOBILE
-   ══════════════════════════════════════════════════ */
-@media(max-width:768px){
-  *[style*="linear-gradient"]{
     background-image:none!important;
-    background:var(--s3)!important;
-  }
-  .logo-mark{
-    background:var(--a1)!important;
-  }
-  .user-av{
-    background:var(--a1)!important;
-  }
-  .bmsg{
-    background:var(--a1)!important;
-  }
-  .btn-gold{
-    background:var(--g1)!important;
-  }
-  .btn-primary{
-    background:var(--a1)!important;
-  }
-  .stat-card::after{
-    display:none!important;
   }
 }
 </style>
