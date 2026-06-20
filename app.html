@@ -307,6 +307,19 @@ input[type=color]{width:38px;height:38px;padding:2px;border-radius:var(--r-md);c
     height:90px!important;
   }
 }
+
+/* ── MALI GPU: TEMPLATES FIX ────────────────────── */
+@media(max-width:768px){
+  #view-templates .card [style*="background:linear-gradient"]{
+    background:var(--s4)!important;
+  }
+  #view-templates .card{
+    contain:strict!important;
+  }
+  #view-templates{
+    will-change:auto!important;
+  }
+}
 </style>
 </head>
 <body>
