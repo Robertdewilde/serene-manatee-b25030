@@ -95,6 +95,7 @@ body{background:var(--s0);color:var(--t1);font-family:'Inter',system-ui,sans-ser
 .topbar-title{font-family:'Public Sans',sans-serif;font-size:15px;font-weight:700;letter-spacing:-.02em;}
 .topbar-sub{font-size:11px;color:var(--t3);margin-top:1px;}
 #menu-btn{display:none;}
+#mobile-lang-bar{display:none;}
 
 /* ── VIEWS ────────────────────────────────────────── */
 .view{display:none;}.view.active{display:block;}
@@ -236,12 +237,14 @@ input[type=color]{width:38px;height:38px;padding:2px;border-radius:var(--r-md);c
 @media(max-width:768px){
   html,body{overflow-x:hidden;background:var(--s0);}
   /* Fixed topbar: content already has padding-top:var(--th) from base rule */
-  .topbar{left:0;right:0;padding:0 16px;background:var(--s1);border-bottom:1px solid var(--b2);height:58px;}
-  .content{padding-top:58px;}
+  .topbar{left:0;right:0;padding:14px 16px;background:var(--s1);border-bottom:1px solid var(--b2);height:auto;}
+  .content{padding-top:0;}
   .topbar-title{font-size:16px;}
   .topbar-sub{font-size:12px;color:var(--t2);}
-  #lang-sw{display:block;padding:6px 24px 6px 8px;font-size:12px;width:auto;}
+  #lang-sw{display:none;}
   #menu-btn{width:40px;height:40px;padding:0;flex-shrink:0;}
+  #mobile-lang-bar{display:flex;align-items:center;justify-content:space-between;padding:10px 16px;background:var(--s1);border-bottom:1px solid var(--b2);position:sticky;top:0;z-index:29;}
+  #mobile-lang-bar select{flex:1;max-width:200px;}
   .sidebar{transform:translateX(-100%);-webkit-transform:translateX(-100%);width:min(80vw,280px);}
   .sidebar.open{transform:translateX(0);-webkit-transform:translateX(0);}
   .content{margin-left:0;width:100%;}
@@ -410,6 +413,13 @@ input[type=color]{width:38px;height:38px;padding:2px;border-radius:var(--r-md);c
         <option>🇬🇧 EN</option><option>🇪🇸 ES</option><option>🇩🇪 DE</option><option>🇳🇱 NL</option>
       </select>
     </div>
+  </div>
+  <!-- Mobile-only language bar -->
+  <div id="mobile-lang-bar">
+    <span style="font-size:12px;color:var(--t3);font-weight:600;letter-spacing:.04em;text-transform:uppercase;">Language</span>
+    <select id="lang-sw-mobile" style="background:var(--s3);border:1px solid var(--b2);color:var(--t1);border-radius:var(--r-md);padding:7px 32px 7px 12px;font-size:14px;font-weight:600;outline:none;-webkit-appearance:none;appearance:none;cursor:pointer;background-image:url(&quot;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%237a8299' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E&quot;);background-repeat:no-repeat;background-position:right 10px center;">
+      <option>🇬🇧 English</option><option>🇪🇸 Español</option><option>🇩🇪 Deutsch</option><option>🇳🇱 Nederlands</option>
+    </select>
   </div>
 
 <!-- ═══ DASHBOARD ═══ -->
@@ -1481,5 +1491,13 @@ document.querySelectorAll('.nav-item[data-view]').forEach(btn => {
 });
 
 // ── INIT ──────────────────────────────────────────────────────────────────────
+// Sync mobile and desktop lang selectors
+document.getElementById('lang-sw-mobile')?.addEventListener('change',function(){
+  document.getElementById('lang-sw').value=this.value;
+});
+document.getElementById('lang-sw')?.addEventListener('change',function(){
+  const mob=document.getElementById('lang-sw-mobile');
+  if(mob)mob.value=this.value;
+});
 lucide.createIcons();
 </script></body></html>
