@@ -1019,6 +1019,7 @@ function switchView(id){
   document.querySelector('.nav-item[data-view="'+id+'"]')?.classList.add('active');
   if(PAGE[id]){document.getElementById('page-title').textContent=PAGE[id][0];document.getElementById('page-sub').textContent=PAGE[id][1];}
   document.getElementById('sidebar').classList.remove('open');
+  document.getElementById('overlay').classList.remove('show');
   window.scrollTo(0,0);setTimeout(()=>lucide.createIcons(),20);
 }
 document.getElementById('nav').addEventListener('click',e=>{
@@ -1032,6 +1033,7 @@ document.getElementById('menu-btn')?.addEventListener('click',()=>{
 });
 document.getElementById('overlay')?.addEventListener('click',()=>{
   document.getElementById('sidebar').classList.remove('open');
+  document.getElementById('overlay').classList.remove('show');
 });
 
 // ── CLAUDE API ────────────────────────────────────────────────────────────────
