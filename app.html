@@ -248,6 +248,9 @@ input[type=color]{width:38px;height:38px;padding:2px;border-radius:var(--r-md);c
   [style*="grid-template-columns:290px"]{grid-template-columns:1fr!important;}
   [style*="grid-template-columns:1fr auto"]{grid-template-columns:1fr!important;}
   [style*="grid-template-columns:280px"]{grid-template-columns:1fr!important;}
+  /* ── FIX: inline 1fr 1fr grids → single column on mobile ── */
+  [style*="grid-template-columns:1fr 1fr"]{grid-template-columns:1fr!important;}
+  [style*="grid-template-columns: 1fr 1fr"]{grid-template-columns:1fr!important;}
 }
 
 @keyframes aiPulse{
