@@ -329,39 +329,42 @@ input[type=color]{width:38px;height:38px;padding:2px;border-radius:var(--r-md);c
   .tip-icon{width:18px;height:18px;font-size:10px;}
 }
 
-
-/* TARGETED MOBILE RENDER FIX */
+/* FINAL MOBILE RASTER STRIP FIX */
 @media(max-width:768px){
 
-  html,body{
-    overflow-x:hidden!important;
+  .card,
+  .stat-card,
+  .kb-col,
+  .kb-card,
+  .post-card,
+  .inset,
+  .topbar,
+  .view,
+  .page{
+    transform:none!important;
+    filter:none!important;
+    perspective:none!important;
+    -webkit-perspective:none!important;
+    backface-visibility:visible!important;
+    -webkit-backface-visibility:visible!important;
+    contain:none!important;
+    box-shadow:none!important;
   }
 
-  .topbar{
-    backdrop-filter:none!important;
-    -webkit-backdrop-filter:none!important;
-  }
-
-  .two-col,
-  .three-col,
-  .four-col,
-  .g2,
-  .g3,
-  .g4{
-    grid-template-columns:1fr!important;
-  }
-
-  #tpl-grid{
-    grid-template-columns:1fr 1fr!important;
-  }
-
-  [style*="grid-template-columns:1fr 1fr"],
-  [style*="grid-template-columns: 1fr 1fr"]{
-    grid-template-columns:1fr!important;
-  }
-
-  .fade-in{
+  .fade-in,
+  .ai-pulse{
     animation:none!important;
+  }
+
+  .card:hover,
+  .kb-card:hover,
+  .btn-primary:hover,
+  .btn-gold:hover{
+    transform:none!important;
+  }
+
+  svg{
+    transform:none!important;
   }
 
 }
@@ -374,7 +377,6 @@ input[type=color]{width:38px;height:38px;padding:2px;border-radius:var(--r-md);c
 <div class="overlay" id="overlay"></div>
 
 <div class="shell">
-<!-- ═══ SIDEBAR ═══ -->
 <aside class="sidebar" id="sidebar">
   <div class="logo-row">
     <div class="logo-mark"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>
@@ -409,7 +411,6 @@ input[type=color]{width:38px;height:38px;padding:2px;border-radius:var(--r-md);c
   </div>
 </aside>
 
-<!-- ═══ CONTENT ═══ -->
 <div class="content" id="content">
   <div class="topbar">
     <div style="display:flex;align-items:center;gap:12px;">
@@ -426,7 +427,6 @@ input[type=color]{width:38px;height:38px;padding:2px;border-radius:var(--r-md);c
     </div>
   </div>
 
-<!-- ═══ DASHBOARD ═══ -->
 <section class="view active" id="view-dashboard">
 <div class="page">
   <div class="ph" style="display:flex;align-items:flex-start;justify-content:space-between;gap:12px;flex-wrap:wrap;">
@@ -453,1025 +453,443 @@ input[type=color]{width:38px;height:38px;padding:2px;border-radius:var(--r-md);c
     <div class="card card-p">
       <div style="display:flex;align-items:center;gap:8px;margin-bottom:14px;"><i data-lucide="cpu" style="width:14px;height:14px;color:var(--a2);"></i><p style="font-size:13.5px;font-weight:700;font-family:'Public Sans',sans-serif;">AI Recommendations</p><span class="tip-icon" onclick="showTip(this,'Claude analyses your posting patterns and engagement data to suggest what to do next.')">i</span></div>
       <div style="display:flex;flex-direction:column;gap:8px;">
-        <div class="inset" style="padding:11px;display:flex;gap:10px;align-items:flex-start;"><div class="stat-icon" style="background:var(--gL);width:28px;height:28px;border-radius:7px;flex-shrink:0;"><i data-lucide="trending-up" style="width:13px;height:13px;color:var(--green);"></i></div><div><p style="font-size:12.5px;font-weight:600;">Post more Reels — 3.2× engagement boost</p><p style="font-size:11.5px;color:var(--t2);margin-top:2px;">Try 3 Reels/week to reach more buyers.</p></div></div>
-        <div class="inset" style="padding:11px;display:flex;gap:10px;align-items:flex-start;"><div class="stat-icon" style="background:var(--a3);width:28px;height:28px;border-radius:7px;flex-shrink:0;"><i data-lucide="clock" style="width:13px;height:13px;color:var(--a2);"></i></div><div><p style="font-size:12.5px;font-weight:600;">Best posting time: Tue & Thu 9:00 AM</p><p style="font-size:11.5px;color:var(--t2);margin-top:2px;">Your audience is most active then.</p></div></div>
+        <div class="inset" style="padding:11px;display:flex;gap:10px;align-items:flex-start;"><div class="stat-icon" style="background:var(--gL);width:24px;height:24px;border-radius:6px;margin-top:2px;"><i data-lucide="sparkles" style="width:12px;height:12px;color:var(--green);"></i></div><div style="flex:1;"><p style="font-size:12.5px;font-weight:600;color:var(--t1);">Best Time to Post Today: 4:30 PM</p><p style="font-size:11.5px;color:var(--t2);margin-top:1px;">Based on your last 3 Just Listed posts, engagement peaks late afternoon. Schedule your next Reel then.</p></div></div>
       </div>
     </div>
   </div>
-  <div class="two-col" style="display:grid;grid-template-columns:1fr 1fr;gap:14px;">
-    <div class="card card-p">
-      <div style="display:flex;align-items:center;gap:8px;margin-bottom:14px;"><i data-lucide="home" style="width:14px;height:14px;color:var(--g1);"></i><p style="font-size:13.5px;font-weight:700;font-family:'Public Sans',sans-serif;">Recent Listings</p><span class="tip-icon" onclick="showTip(this,'Your active property listings. Click any listing to generate social posts for it directly.')">i</span></div>
-      <div style="display:flex;flex-direction:column;gap:8px;">
-        <div class="inset" style="padding:11px;display:flex;align-items:center;gap:10px;"><div style="width:36px;height:36px;border-radius:8px;background:linear-gradient(135deg,var(--a1),var(--a2));flex-shrink:0;"></div><div style="flex:1;min-width:0;"><p style="font-size:13px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Villa Golden Mile</p><p style="font-size:11.5px;color:var(--t2);">€485,000 · 3BD · Marbella</p></div><span class="badge b-green">Active</span></div>
-        <div class="inset" style="padding:11px;display:flex;align-items:center;gap:10px;"><div style="width:36px;height:36px;border-radius:8px;background:linear-gradient(135deg,var(--g1),#f0d895);flex-shrink:0;"></div><div style="flex:1;min-width:0;"><p style="font-size:13px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Penthouse Sotogrande</p><p style="font-size:11.5px;color:var(--t2);">€1.2M · 5BD · Sotogrande</p></div><span class="badge b-amber">Pending</span></div>
-        <div class="inset" style="padding:11px;display:flex;align-items:center;gap:10px;"><div style="width:36px;height:36px;border-radius:8px;background:linear-gradient(135deg,var(--blue),#73c0f7);flex-shrink:0;"></div><div style="flex:1;min-width:0;"><p style="font-size:13px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Apartment Málaga Centro</p><p style="font-size:11.5px;color:var(--t2);">€320,000 · 2BD · Málaga</p></div><span class="badge b-accent">Draft</span></div>
-      </div>
-    </div>
-    <div class="card card-p">
-      <div style="display:flex;align-items:center;gap:8px;margin-bottom:14px;"><i data-lucide="mic" style="width:14px;height:14px;color:var(--a2);"></i><p style="font-size:13.5px;font-weight:700;font-family:'Public Sans',sans-serif;">Active Tone per Platform</p><span class="tip-icon" onclick="showTip(this,'Your current tone settings per channel. Change these in Settings → Tone of Voice per Platform.')">i</span></div>
-      <div style="display:flex;flex-direction:column;gap:7px;">
-        <div class="inset" style="padding:10px 13px;display:flex;align-items:center;justify-content:space-between;"><div style="display:flex;align-items:center;gap:8px;"><span class="badge b-ig">IG</span><span style="font-size:13px;font-weight:500;">Instagram</span></div><span style="font-size:11.5px;font-weight:700;color:#ec4899;background:rgba(236,72,153,.12);padding:3px 9px;border-radius:5px;border:1px solid rgba(236,72,153,.2);">Storytelling</span></div>
-        <div class="inset" style="padding:10px 13px;display:flex;align-items:center;justify-content:space-between;"><div style="display:flex;align-items:center;gap:8px;"><span class="badge b-fb">FB</span><span style="font-size:13px;font-weight:500;">Facebook</span></div><span style="font-size:11.5px;font-weight:700;color:var(--a2);background:var(--a3);padding:3px 9px;border-radius:5px;border:1px solid rgba(108,99,255,.2);">Professional</span></div>
-        <div class="inset" style="padding:10px 13px;display:flex;align-items:center;justify-content:space-between;"><div style="display:flex;align-items:center;gap:8px;"><span class="badge b-li">LI</span><span style="font-size:13px;font-weight:500;">LinkedIn</span></div><span style="font-size:11.5px;font-weight:700;color:var(--blue);background:var(--bL);padding:3px 9px;border-radius:5px;border:1px solid rgba(79,163,224,.2);">Authoritative</span></div>
-        <div class="inset" style="padding:10px 13px;display:flex;align-items:center;justify-content:space-between;"><div style="display:flex;align-items:center;gap:8px;"><span class="badge b-tt">TT</span><span style="font-size:13px;font-weight:500;">TikTok</span></div><span style="font-size:11.5px;font-weight:700;color:var(--t2);background:var(--s4);padding:3px 9px;border-radius:5px;border:1px solid var(--b2);">Casual</span></div>
-      </div>
-    </div>
-  </div>
-</div></section>
+</div>
+</section>
 
-<!-- ═══ MONTHLY WIZARD ═══ -->
 <section class="view" id="view-monthly-wizard">
 <div class="page">
-  <div class="ph">
-    <div><h1 class="page-title">Monthly Wizard</h1><p class="page-sub">Plan your full month of content in minutes</p></div>
-    <div style="display:flex;gap:8px;" id="wizard-dots"></div>
+  <div class="page-header"><h1 class="page-title">Monthly AI Content Wizard</h1><p class="page-sub">Generate a structured monthly social plan in minutes</p></div>
+  <div style="max-width:680px;margin:0 auto;" class="card card-p">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:24px;background:var(--s3);padding:12px 16px;border-radius:var(--r-md);border:1px solid var(--b1);">
+      <div style="display:flex;align-items:center;gap:4px;"><span class="wdot on" id="wd-1"></span><span style="font-size:12px;font-weight:600;margin-left:5px;color:var(--t1);" id="wl-1">Listing details</span></div>
+      <div style="display:flex;align-items:center;gap:4px;"><span class="wdot" id="wd-2"></span><span style="font-size:12px;font-weight:500;margin-left:5px;color:var(--t3);" id="wl-2">Tone & Channels</span></div>
+      <div style="display:flex;align-items:center;gap:4px;"><span class="wdot" id="wd-3"></span><span style="font-size:12px;font-weight:500;margin-left:5px;color:var(--t3);" id="wl-3">Review plan</span></div>
+    </div>
+    
+    <div class="wizard-step active" id="ws-1">
+      <div class="step-head"><div class="step-icon" style="background:var(--a3);"><i data-lucide="home" style="width:16px;height:16px;color:var(--a2);"></i></div><div><p style="font-size:14.5px;font-weight:700;">Property Information</p><p style="font-size:12px;color:var(--t2);">Paste a listing link or description to train the AI model</p></div></div>
+      <div style="display:flex;flex-direction:column;gap:16px;">
+        <div class="field"><label class="lbl">Listing URL / Text Source</label><textarea id="mw-src" rows="5" placeholder="Paste Redfin/Zillow link, or copy-paste full agent remarks..."></textarea></div>
+        <div class="g2"><div class="field"><label class="lbl">Price Guide</label><input type="text" id="mw-price" placeholder="e.g. $1,250,000"></div><div class="field"><label class="lbl">Key Feature</label><input type="text" id="mw-feat" placeholder="e.g. Infinity pool, rooftop terrace"></div></div>
+        <div style="display:flex;justify-content:flex-end;margin-top:8px;"><button class="btn btn-primary" onclick="nextW(1,2)">Continue<i data-lucide="arrow-right" style="width:14px;height:14px;"></i></button></div>
+      </div>
+    </div>
+
+    <div class="wizard-step" id="ws-2">
+      <div class="step-head"><div class="step-icon" style="background:var(--g2);"><i data-lucide="sliders" style="width:16px;height:16px;color:var(--g1);"></i></div><div><p style="font-size:14.5px;font-weight:700;">Campaign Settings</p><p style="font-size:12px;color:var(--t2);">Tailor the brand outputs and output languages</p></div></div>
+      <div style="display:flex;flex-direction:column;gap:16px;">
+        <div class="g2">
+          <div class="field"><label class="lbl">Primary Tone</label><select id="mw-tone"><option>Luxurious & Elegant</option><option>Energetic & Urgent</option><option>Casual & Relatable</option><option>Professional & Detailed</option></select></div>
+          <div class="field"><label class="lbl">Target Language</label><select id="mw-lang"><option>English</option><option>Spanish</option><option>German</option><option>Dutch</option></select></div>
+        </div>
+        <div class="field"><label class="lbl">Target Channels</label>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:4px;">
+            <label style="display:flex;align-items:center;gap:8px;cursor:pointer;"><input type="checkbox" checked style="width:auto;margin:0;"> Instagram (Grid + Reels)</label>
+            <label style="display:flex;align-items:center;gap:8px;cursor:pointer;"><input type="checkbox" checked style="width:auto;margin:0;"> Facebook Business</label>
+            <label style="display:flex;align-items:center;gap:8px;cursor:pointer;"><input type="checkbox" style="width:auto;margin:0;"> LinkedIn Pro</label>
+            <label style="display:flex;align-items:center;gap:8px;cursor:pointer;"><input type="checkbox" style="width:auto;margin:0;"> TikTok Video</label>
+          </div>
+        </div>
+        <div style="display:flex;justify-content:between;margin-top:8px;width:100%;"><button class="btn btn-ghost" onclick="prevW(2,1)">Back</button><button class="btn btn-gold" onclick="runMWizard()">Generate Monthly Strategy<i data-lucide="sparkles" style="width:14px;height:14px;margin-left:4px;"></i></button></div>
+      </div>
+    </div>
+
+    <div class="wizard-step" id="ws-3">
+      <div class="step-head"><div class="step-icon" style="background:var(--gL);"><i data-lucide="check-square" style="width:16px;height:16px;color:var(--green);"></i></div><div><p style="font-size:14.5px;font-weight:700;">Strategy Generated</p><p style="font-size:12px;color:var(--t2);">Review and batch-approve the smart calendar draft</p></div></div>
+      <div id="mw-results" style="display:flex;flex-direction:column;gap:12px;margin-bottom:18px;"></div>
+      <div style="display:flex;justify-content:flex-end;gap:8px;"><button class="btn btn-ghost" onclick="switchView('dashboard')">Close</button><button class="btn btn-primary" onclick="approveMWizard()">Approve & Push to Calendar<i data-lucide="calendar" style="width:14px;height:14px;margin-left:4px;"></i></button></div>
+    </div>
   </div>
-  <div style="max-width:660px;">
-    <div class="card card-p">
-      <div class="wizard-step active" data-step="1">
-        <div class="step-head"><div class="step-icon" style="background:var(--a3);"><i data-lucide="target" style="width:17px;height:17px;color:var(--a2);"></i></div><div><p style="font-size:15px;font-weight:700;font-family:'Public Sans',sans-serif;">Goals & Targeting</p><p style="font-size:12.5px;color:var(--t2);margin-top:2px;">Define your strategy for this month</p></div></div>
-        <div style="display:flex;flex-direction:column;gap:16px;">
-          <div class="field"><label class="lbl">Primary Goal <span class="tip-icon" data-tipid="mw-goal" onclick="showTip(this,&quot;The AI optimises all generated posts towards this goal. &quot;Get More Listings&quot; creates seller-focused content, &quot;Find Buyers&quot; targets property seekers.&quot;)">i</span></label><select id="mw-goal"><option>Get More Listings</option><option>Find Buyers</option><option>Brand Awareness</option><option>Community Building</option></select></div>
-          <div class="field"><label class="lbl">Target Region <span class="tip-icon" data-tipid="mw-region" onclick="showTip(this,&quot;Used in hashtags, location tags and local content. Be specific: &quot;Marbella Golden Mile&quot; works better than just &quot;Spain&quot;.&quot;)">i</span></label><input id="mw-region" type="text" value="Marbella & Costa del Sol"></div>
-          <div class="field"><label class="lbl">Target Audience <span class="tip-icon" data-tipid="mw-audience" onclick="showTip(this,&quot;The AI adapts tone, messaging and property types for this audience. Luxury Investors get exclusive/premium language, First-time Buyers get reassuring/educational content.&quot;)">i</span></label><select id="mw-audience"><option>Luxury Investors</option><option>Expats & Relocators</option><option>First-time Buyers</option><option>Local Sellers</option></select></div>
+</div>
+</section>
+
+<div class="stat-card"><div style="display:flex;align-items:flex-start;justify-content:space-between;"><div class="stat-icon" style="background:var(--bL);"><i data-lucide="users" style="width:16px;height:16px;color:var(--blue);"></i></div><span class="badge b-green" style="font-size:10px;">+8 new</span></div><p class="stat-val" style="color:var(--blue);">37</p><p class="stat-lbl">Leads Generated</p></div>
+  </div> <div class="two-col" style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px;"> <div class="card card-p"> <div style="display:flex;align-items:center;gap:8px;margin-bottom:16px;"><i data-lucide="zap" style="width:14px;height:14px;color:var(--g1);"></i><p style="font-size:13.5px;font-weight:700;font-family:'Public Sans',sans-serif;">Quick Actions</p><span class="tip-icon" onclick="showTip(this,'Shortcuts to the most-used features. Click any button to jump directly to that tool.')">i</span></div> <div style="display:flex;flex-wrap:wrap;gap:7px;"> <button class="btn btn-primary btn-sm" onclick="switchView('monthly-wizard')"><i data-lucide="calendar-range" style="width:12px;height:12px;"></i>Monthly Wizard</button> <button class="btn btn-ghost btn-sm" onclick="switchView('ai-generator')"><i data-lucide="sparkles" style="width:12px;height:12px;"></i>New Post</button> <button class="btn btn-ghost btn-sm" onclick="switchView('brainstorm')"><i data-lucide="message-square" style="width:12px;height:12px;"></i>Brainstorm</button> <button class="btn btn-ghost btn-sm" onclick="switchView('campaign-wizard')"><i data-lucide="rocket" style="width:12px;height:12px;"></i>Campaign</button> <button class="btn btn-ghost btn-sm" onclick="switchView('strategy-planner')"><i data-lucide="target" style="width:12px;height:12px;"></i>Strategy</button> </div> </div> <div class="card card-p"> <div style="display:flex;align-items:center;gap:8px;margin-bottom:14px;"><i data-lucide="cpu" style="width:14px;height:14px;color:var(--a2);"></i><p style="font-size:13.5px;font-weight:700;font-family:'Public Sans',sans-serif;">AI Recommendations</p><span class="tip-icon" onclick="showTip(this,'Claude analyses your posting patterns and engagement data to suggest what to do next.')">i</span></div> <div style="display:flex;flex-direction:column;gap:8px;"> <div class="inset" style="padding:11px;display:flex;gap:10px;align-items:flex-start;"><div class="stat-icon" style="background:var(--gL);width:28px;height:28px;"><i data-lucide="sparkles" style="width:14px;height:14px;color:var(--green);"></i></div><div style="flex:1;"><p style="font-size:12px;font-weight:600;">Optimal Post Time Coming Up</p><p style="font-size:11px;color:var(--t2);margin-top:1px;">Your Instagram audience is active in 2 hours. Tap to generate a 'Just Listed' post now.</p></div><button class="btn btn-xs btn-gold" onclick="switchView('ai-generator')">Create</button></div> <div class="inset" style="padding:11px;display:flex;gap:10px;align-items:flex-start;"><div class="stat-icon" style="background:var(--a3);width:28px;height:28px;"><i data-lucide="target" style="width:14px;height:14px;color:var(--a2);"></i></div><div style="flex:1;"><p style="font-size:12px;font-weight:600;">Update Strategy Goal</p><p style="font-size:11px;color:var(--t2);margin-top:1px;">You are short of your monthly goal for 'Open House' content. Let Claude adjust your plan.</p></div><button class="btn btn-xs btn-ghost" onclick="switchView('strategy-planner')">View Plan</button></div> </div> </div> </div> <div class="card card-p" style="margin-bottom:24px;"> <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;"> <div style="display:flex;align-items:center;gap:8px;"><i data-lucide="clock" style="width:14px;height:14px;color:var(--a2);"></i><p style="font-size:13.5px;font-weight:700;font-family:'Public Sans',sans-serif;">Upcoming Scheduled Content</p><span class="tip-icon" onclick="showTip(this,'The next three posts queued to drop on your accounts. Use the Calendar view to see your full schedule.')">i</span></div> <button class="btn btn-xs btn-ghost" onclick="switchView('calendar')">Go to Calendar →</button> </div> <div class="g3" id="dash-posts-row"> </div> </div>
+  </div>
+</section>
+
+<section class="view" id="view-monthly-wizard">
+<div class="page" style="max-width:800px;margin:0 auto;">
+  <div class="card card-p" style="position:relative;overflow:hidden;">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:24px;border-bottom:1px solid var(--b1);padding-bottom:14px;">
+      <div><h2 style="font-family:'Public Sans',sans-serif;font-size:16px;font-weight:800;letter-spacing:-.01em;">Monthly AI Content Autopilot</h2><p style="font-size:12px;color:var(--t3);margin-top:2px;">Let Claude map out and draft your entire month's content calendar in seconds.</p></div>
+      <div style="display:flex;align-items:center;gap:6px;" id="w-dots">
+        <span class="wdot on"></span><span class="wdot"></span><span class="wdot"></span><span class="wdot"></span>
+      </div>
+    </div>
+    
+    <div class="wizard-step active" id="w-step-1">
+      <div class="step-head"><div class="step-icon" style="background:var(--a3);"><i data-lucide="building-2" style="width:16px;height:16px;color:var(--a2);"></i></div><div><p style="font-size:13px;font-weight:700;">Property &amp; Focus</p><p style="font-size:11px;color:var(--t3);">Tell us what you want to promote this month</p></div></div>
+      <div style="display:flex;flex-direction:column;gap:14px;">
+        <div class="field"><label class="lbl">Primary Focus Property (Optional)</label><input type="text" id="w-address" placeholder="e.g. 742 Evergreen Terrace, Springfield"></div>
+        <div class="field"><label class="lbl">Listing Details / Key Highlights</label><textarea id="w-details" rows="3" placeholder="e.g. 4 beds, 2.5 baths, stunning pool, newly renovated kitchen, open house this Sunday 2-4pm..."></textarea></div>
+        <div class="field"><label class="lbl">Monthly Marketing Goal</label><select id="w-goal"><option>Generate Buyer Leads</option><option>Promote New Listings</option><option>Build Local Authority / Branding</option><option>Recruit Sellers / Get Appraisals</option></select></div>
+        <div style="display:flex;justify-content:flex-end;margin-top:10px;"><button class="btn btn-primary" onclick="nextStep(1)">Continue <i data-lucide="arrow-right" style="width:13px;height:13px;"></i></button></div>
+      </div>
+    </div>
+
+    <div class="wizard-step" id="w-step-2">
+      <div class="step-head"><div class="step-icon" style="background:var(--g2);"><i data-lucide="sliders" style="width:16px;height:16px;color:var(--g1);"></i></div><div><p style="font-size:13px;font-weight:700;">Volume &amp; Channels</p><p style="font-size:11px;color:var(--t3);">Choose your frequency and networks</p></div></div>
+      <div style="display:flex;flex-direction:column;gap:14px;">
+        <div class="field"><label class="lbl" id="lbl-vol">Posting Frequency: 3 posts per week (12 total)</label><input type="range" id="w-freq" min="1" max="5" value="3" oninput="document.getElementById('lbl-vol').textContent=`Posting Frequency: ${this.value} posts per week (${this.value*4} total)`"></div>
+        <div class="field"><label class="lbl">Target Platforms</label>
+          <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:4px;">
+            <div class="chip on" onclick="this.classList.toggle('on')">Instagram</div>
+            <div class="chip on" onclick="this.classList.toggle('on')">Facebook</div>
+            <div class="chip" onclick="this.classList.toggle('on')">LinkedIn</div>
+            <div class="chip" onclick="this.classList.toggle('on')">TikTok</div>
+          </div>
+        </div>
+        <div style="display:flex;justify-content:space-between;margin-top:10px;"><button class="btn btn-ghost" onclick="prevStep(2)"><i data-lucide="arrow-left" style="width:13px;height:13px;"></i> Back</button><button class="btn btn-primary" onclick="nextStep(2)">Continue <i data-lucide="arrow-right" style="width:13px;height:13px;"></i></button></div>
+      </div>
+    </div>
+
+    <div class="wizard-step" id="w-step-3">
+      <div class="step-head"><div class="step-icon" style="background:rgba(79,163,224,.13);"><i data-lucide="smile" style="width:16px;height:16px;color:var(--blue);"></i></div><div><p style="font-size:13px;font-weight:700;">Tone &amp; Style</p><p style="font-size:11px;color:var(--t3);">Set the personality of the content AI creates</p></div></div>
+      <div style="display:flex;flex-direction:column;gap:14px;">
+        <div class="field"><label class="lbl">Brand Tone</label><select id="w-tone"><option>Professional &amp; Trustworthy</option><option>Energetic &amp; Enthusiastic</option><option>Luxury &amp; Sophisticated</option><option>Casual &amp; Friendly / Local Expert</option></select></div>
+        <div class="field"><label class="lbl">Emoji Style</label><select id="w-emoji"><option>Generous (Highly engaging, standard for Real Estate)</option><option>Minimal (1-2 per post, clean look)</option><option>None (Strictly professional)</option></select></div>
+        <div style="display:flex;justify-content:space-between;margin-top:10px;"><button class="btn btn-ghost" onclick="prevStep(3)"><i data-lucide="arrow-left" style="width:13px;height:13px;"></i> Back</button><button class="btn btn-gold" onclick="runWizard()"><i data-lucide="sparkles" style="width:13px;height:13px;"></i> Generate Month Blueprint</button></div>
+      </div>
+    </div>
+
+    <div class="wizard-step" id="w-step-4">
+      <div id="w-loading" style="padding:40px 0;text-align:center;">
+        <div class="aip-wrap ai-pulse"><i data-lucide="sparkles" style="width:20px;height:20px;color:var(--a1);"></i></div>
+        <p style="font-family:'Public Sans',sans-serif;font-weight:700;font-size:15px;" id="w-load-title">Claude is brainstorming themes...</p>
+        <p style="font-size:12px;color:var(--t2);margin-top:4px;" id="w-load-sub">Analyzing listing features and market goals.</p>
+      </div>
+      <div id="w-success" class="hidden" style="padding:10px 0;text-align:center;">
+        <div style="width:44px;height:44px;border-radius:50%;background:var(--gL);display:flex;align-items:center;justify-content:center;margin:0 auto 14px;"><i data-lucide="check" style="width:20px;height:20px;color:var(--green);"></i></div>
+        <p style="font-family:'Public Sans',sans-serif;font-weight:700;font-size:16px;">Autopilot Blueprint Complete!</p>
+        <p style="font-size:12.5px;color:var(--t2);margin-top:4px;max-width:440px;margin-left:auto;margin-right:auto;">Claude has engineered 12 bespoke drafts and plotted them across your next 30 days based on peak traffic data.</p>
+        <div style="display:flex;justify-content:center;gap:10px;margin-top:22px;">
+          <button class="btn btn-ghost btn-sm" onclick="switchView('calendar')"><i data-lucide="calendar" style="width:12px;height:12px;"></i> View on Calendar</button>
+          <button class="btn btn-primary btn-sm" onclick="switchView('control-tower')"><i data-lucide="kanban" style="width:12px;height:12px;"></i> Approve in Control Tower</button>
         </div>
       </div>
-      <div class="wizard-step" data-step="2">
-        <div class="step-head"><div class="step-icon" style="background:var(--a3);"><i data-lucide="share-2" style="width:17px;height:17px;color:var(--a2);"></i></div><div><p style="font-size:15px;font-weight:700;font-family:'Public Sans',sans-serif;">Platforms & Frequency</p><p style="font-size:12.5px;color:var(--t2);margin-top:2px;">Where and how often you'll post</p></div></div>
-        <div style="display:flex;flex-direction:column;gap:16px;">
-          <div class="field"><label class="lbl">Posts per week</label><input id="mw-ppw" type="number" value="7" min="3" max="21"></div>
-          <div class="field"><label class="lbl">Platforms</label>
-            <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:2px;">
-              <label style="display:flex;align-items:center;gap:7px;padding:9px 14px;border-radius:var(--r-md);border:1px solid var(--b2);background:var(--s3);cursor:pointer;font-size:13px;font-weight:500;transition:border-color .12s;"><input type="checkbox" checked class="mw-plat" value="Instagram" style="width:auto;"> <span class="badge b-ig" style="margin:0 2px;">IG</span> Instagram</label>
-              <label style="display:flex;align-items:center;gap:7px;padding:9px 14px;border-radius:var(--r-md);border:1px solid var(--b2);background:var(--s3);cursor:pointer;font-size:13px;font-weight:500;transition:border-color .12s;"><input type="checkbox" checked class="mw-plat" value="Facebook" style="width:auto;"> <span class="badge b-fb" style="margin:0 2px;">FB</span> Facebook</label>
-              <label style="display:flex;align-items:center;gap:7px;padding:9px 14px;border-radius:var(--r-md);border:1px solid var(--b2);background:var(--s3);cursor:pointer;font-size:13px;font-weight:500;transition:border-color .12s;"><input type="checkbox" class="mw-plat" value="LinkedIn" style="width:auto;"> <span class="badge b-li" style="margin:0 2px;">LI</span> LinkedIn</label>
-              <label style="display:flex;align-items:center;gap:7px;padding:9px 14px;border-radius:var(--r-md);border:1px solid var(--b2);background:var(--s3);cursor:pointer;font-size:13px;font-weight:500;transition:border-color .12s;"><input type="checkbox" class="mw-plat" value="TikTok" style="width:auto;"> <span class="badge b-tt" style="margin:0 2px;">TT</span> TikTok</label>
+    </div>
+  </div>
+</div>
+</section>
+
+<section class="view" id="view-ai-generator">
+<div class="page">
+  <div class="g2" style="grid-template-columns:360px 1fr;align-items:flex-start;">
+    <div class="card card-p" style="display:flex;flex-direction:column;gap:14px;">
+      <div style="display:flex;align-items:center;gap:6px;"><i data-lucide="sparkles" style="width:14px;height:14px;color:var(--a2);"></i><p style="font-size:13.5px;font-weight:700;font-family:'Public Sans',sans-serif;">AI Prompt Panel</p></div>
+      <div class="field"><label class="lbl">Template Style</label><select id="gen-tpl"><option value="just-listed">✨ Just Listed Showcase</option><option value="open-house">🏡 Open House Alert</option><option value="local-expert">📈 Neighborhood Market Update</option><option value="testimonial">⭐️ Client Success Story</option></select></div>
+      <div class="field"><label class="lbl">Listing Address or Topic</label><input type="text" id="gen-topic" placeholder="e.g. 14 High Street, Newtown"></div>
+      <div class="field"><label class="lbl">Context / Custom Details</label><textarea id="gen-context" rows="4" placeholder="Add custom copy specs, pricing, features or angles here..."></textarea></div>
+      <div class="field"><label class="lbl">Platform Aspect Ratio</label><select id="gen-ratio"><option>Square (1:1) - Feed post</option><option>Vertical (9:16) - Reel/Story</option><option>Landscape (16:9) - LinkedIn/FB</option></select></div>
+      <button class="btn btn-primary" onclick="runGenerator()" style="margin-top:6px;"><i data-lucide="wand-2" style="width:13px;height:13px;"></i> Generate Content</button>
+    </div>
+    
+    <div style="display:flex;flex-direction:column;gap:14px;">
+      <div class="card card-p" style="flex:1;min-height:380px;display:flex;flex-direction:column;">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;border-bottom:1px solid var(--b1);padding-bottom:10px;">
+          <p style="font-size:13px;font-weight:700;color:var(--t2);">AI Workbench &amp; Live Copy Draft</p>
+          <div style="display:flex;align-items:center;gap:6px;" id="gen-actions" class="hidden">
+            <button class="btn btn-xs btn-ghost" onclick="copyGenText()"><i data-lucide="copy" style="width:11px;height:11px;"></i> Copy</button>
+            <button class="btn btn-xs btn-ghost" onclick="toast('Refining with alternative hook...')"><i data-lucide="refresh-cw" style="width:11px;height:11px;"></i> Alternate Hook</button>
+            <button class="btn btn-xs btn-gold" onclick="scheduleGenPost()"><i data-lucide="calendar" style="width:11px;height:11px;"></i> Schedule This</button>
+          </div>
+        </div>
+        <div style="flex:1;position:relative;">
+          <div id="gen-placeholder" style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;color:var(--t3);text-align:center;padding:20px;">
+            <i data-lucide="layout" style="width:28px;height:28px;stroke-width:1.5;margin-bottom:8px;"></i>
+            <p style="font-size:13px;font-weight:500;">Select parameters on the left and tap generate.</p>
+            <p style="font-size:11px;max-width:260px;margin-top:2px;">Claude will construct compliant text copy, tag recommendations, and select an optimal frame layer template.</p>
+          </div>
+          <div id="gen-output-box" class="hidden" style="height:100%;display:flex;flex-direction:column;gap:12px;">
+            <textarea id="gen-text-area" style="flex:1;background:var(--s0);border-color:var(--b1);font-family:monospace;font-size:12.5px;line-height:1.6;resize:none;padding:14px;"></textarea>
+            <div class="inset inset-p" style="display:flex;align-items:center;justify-content:between;gap:12px;background:var(--s3);">
+              <div><p style="font-size:12px;font-weight:600;">Suggested Image Layer Matrix</p><p style="font-size:11px;color:var(--t2);" id="gen-img-desc">Modern minimalist card outline overlays tailored for real estate showcases.</p></div>
             </div>
           </div>
         </div>
       </div>
-      <div class="wizard-step" data-step="3">
-        <div class="step-head"><div class="step-icon" style="background:var(--a3);"><i data-lucide="pie-chart" style="width:17px;height:17px;color:var(--a2);"></i></div><div><p style="font-size:15px;font-weight:700;font-family:'Public Sans',sans-serif;">Content Mix</p><p style="font-size:12.5px;color:var(--t2);margin-top:2px;">Balance your content pillars</p></div></div>
-        <div style="display:flex;flex-direction:column;gap:14px;">
-          <div style="display:flex;align-items:center;gap:12px;"><i data-lucide="home" style="width:13px;height:13px;color:var(--t3);flex-shrink:0;"></i><span style="font-size:12.5px;width:76px;flex-shrink:0;color:var(--t2);">Listings</span><input type="range" min="0" max="50" value="30" class="mw-mix" style="flex:1;"><span style="font-size:12px;width:32px;text-align:right;color:var(--a2);font-weight:700;font-family:monospace;" class="mw-mv">30%</span></div>
-          <div style="display:flex;align-items:center;gap:12px;"><i data-lucide="book-open" style="width:13px;height:13px;color:var(--t3);flex-shrink:0;"></i><span style="font-size:12.5px;width:76px;flex-shrink:0;color:var(--t2);">Education</span><input type="range" min="0" max="50" value="20" class="mw-mix" style="flex:1;"><span style="font-size:12px;width:32px;text-align:right;color:var(--a2);font-weight:700;font-family:monospace;" class="mw-mv">20%</span></div>
-          <div style="display:flex;align-items:center;gap:12px;"><i data-lucide="map-pin" style="width:13px;height:13px;color:var(--t3);flex-shrink:0;"></i><span style="font-size:12.5px;width:76px;flex-shrink:0;color:var(--t2);">Local Area</span><input type="range" min="0" max="50" value="20" class="mw-mix" style="flex:1;"><span style="font-size:12px;width:32px;text-align:right;color:var(--a2);font-weight:700;font-family:monospace;" class="mw-mv">20%</span></div>
-          <div style="display:flex;align-items:center;gap:12px;"><i data-lucide="sun" style="width:13px;height:13px;color:var(--t3);flex-shrink:0;"></i><span style="font-size:12.5px;width:76px;flex-shrink:0;color:var(--t2);">Lifestyle</span><input type="range" min="0" max="50" value="15" class="mw-mix" style="flex:1;"><span style="font-size:12px;width:32px;text-align:right;color:var(--a2);font-weight:700;font-family:monospace;" class="mw-mv">15%</span></div>
-          <div style="display:flex;align-items:center;gap:12px;"><i data-lucide="newspaper" style="width:13px;height:13px;color:var(--t3);flex-shrink:0;"></i><span style="font-size:12.5px;width:76px;flex-shrink:0;color:var(--t2);">News</span><input type="range" min="0" max="50" value="15" class="mw-mix" style="flex:1;"><span style="font-size:12px;width:32px;text-align:right;color:var(--a2);font-weight:700;font-family:monospace;" class="mw-mv">15%</span></div>
-        </div>
-      </div>
-      <div class="wizard-step" data-step="4">
-        <div class="step-head"><div class="step-icon" style="background:var(--a3);"><i data-lucide="mic-2" style="width:17px;height:17px;color:var(--a2);"></i></div><div><p style="font-size:15px;font-weight:700;font-family:'Public Sans',sans-serif;">Tone per Platform</p><p style="font-size:12.5px;color:var(--t2);margin-top:2px;">Customise your voice per channel</p></div></div>
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;">
-          <div class="field"><label class="lbl">Instagram</label><select class="mw-tone"><option>Storytelling</option><option>Professional</option><option>Casual</option><option>Luxury</option></select></div>
-          <div class="field"><label class="lbl">Facebook</label><select class="mw-tone"><option>Professional</option><option>Storytelling</option><option>Casual</option></select></div>
-          <div class="field"><label class="lbl">LinkedIn</label><select class="mw-tone"><option>Professional</option><option>Authoritative</option></select></div>
-          <div class="field"><label class="lbl">TikTok</label><select class="mw-tone"><option>Casual</option><option>Trendy</option></select></div>
-        </div>
-      </div>
-      <div class="wizard-step" data-step="5">
-        <div class="step-head"><div class="step-icon" style="background:var(--a3);"><i data-lucide="globe" style="width:17px;height:17px;color:var(--a2);"></i></div><div><p style="font-size:15px;font-weight:700;font-family:'Public Sans',sans-serif;">Languages</p><p style="font-size:12.5px;color:var(--t2);margin-top:2px;">Posts include flag separators per language</p></div></div>
-        <div style="display:flex;flex-wrap:wrap;gap:8px;" id="mw-langs">
-          <span class="chip on" data-lang="English">🇬🇧 English</span>
-          <span class="chip" data-lang="Spanish">🇪🇸 Spanish</span>
-          <span class="chip" data-lang="Dutch">🇳🇱 Dutch</span>
-          <span class="chip" data-lang="German">🇩🇪 German</span>
-          <span class="chip" data-lang="French">🇫🇷 French</span>
-        </div>
-      </div>
-      <div class="wizard-step" data-step="6">
-        <div class="step-head"><div class="step-icon" style="background:var(--g2);"><i data-lucide="sparkles" style="width:17px;height:17px;color:var(--g1);"></i></div><div><p style="font-size:15px;font-weight:700;font-family:'Public Sans',sans-serif;">Generate Your Month</p><p style="font-size:12.5px;color:var(--t2);margin-top:2px;">AI creates posts for all your platforms</p></div></div>
-        <div id="mw-gen" class="hidden" style="text-align:center;padding:32px 0;"><div class="aip-wrap ai-pulse"><i data-lucide="brain" style="width:22px;height:22px;color:var(--a2);"></i></div><p style="font-size:14px;font-weight:600;">Generating your monthly plan...</p><p style="font-size:12.5px;color:var(--t2);margin-top:5px;">Claude is crafting posts for all platforms</p></div>
-        <div id="mw-res" class="hidden fade-in">
-          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;"><div style="display:flex;align-items:center;gap:7px;"><i data-lucide="check-circle" style="width:15px;height:15px;color:var(--green);"></i><p style="font-size:13.5px;font-weight:600;"><span id="mw-count">0</span> posts generated</p></div><button class="btn btn-primary btn-sm" onclick="showToast('All posts scheduled!')"><i data-lucide="calendar-plus" style="width:12px;height:12px;"></i>Schedule All</button></div>
-          <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;max-height:320px;overflow-y:auto;" id="mw-grid"></div>
-        </div>
-        <button id="mw-gen-btn" class="btn btn-gold" style="width:100%;padding:13px;margin-top:4px;font-size:14px;"><i data-lucide="sparkles" style="width:15px;height:15px;"></i>Generate Monthly Plan</button>
-      </div>
-      <div style="display:flex;align-items:center;justify-content:space-between;margin-top:22px;padding-top:18px;border-top:1px solid var(--b1);">
-        <button id="mw-prev" class="btn btn-ghost btn-sm hidden"><i data-lucide="arrow-left" style="width:13px;height:13px;"></i>Back</button>
-        <button id="mw-next" class="btn btn-primary btn-sm" style="margin-left:auto;">Next<i data-lucide="arrow-right" style="width:13px;height:13px;"></i></button>
-      </div>
     </div>
   </div>
-</div></section>
+</div>
+</section>
 
-<!-- ═══ AI GENERATOR ═══ -->
-<section class="view" id="view-ai-generator">
-<div class="page">
-  <div class="ph"><div><h1 class="page-title">AI Generator</h1><p class="page-sub">Generate platform-optimised content in seconds</p></div></div>
-  <div style="display:flex;gap:6px;margin-bottom:24px;flex-wrap:wrap;">
-    <button class="btn btn-primary btn-sm ai-tab on" data-panel="social"><i data-lucide="instagram" style="width:12px;height:12px;"></i>Social Post</button>
-    <button class="btn btn-ghost btn-sm ai-tab" data-panel="blog"><i data-lucide="file-text" style="width:12px;height:12px;"></i>Blog Article</button>
-    <button class="btn btn-ghost btn-sm ai-tab" data-panel="gbp"><i data-lucide="map-pin" style="width:12px;height:12px;"></i>Google Business</button>
-    <button class="btn btn-ghost btn-sm ai-tab" data-panel="custom"><i data-lucide="rocket" style="width:12px;height:12px;"></i>Custom Campaign</button>
-  </div>
-  <div id="ai-panel-social">
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;align-items:start;">
-      <div class="card card-p" style="display:flex;flex-direction:column;gap:18px;">
-        <p style="font-size:14px;font-weight:700;font-family:'Public Sans',sans-serif;">Property Details</p>
-        <div class="field"><label class="lbl">Property URL or Description <span class="tip-icon" data-tipid="prop-url" onclick="showTip(this,&quot;Paste a listing URL (Idealista, Rightmove, etc.) or describe the property in a few sentences. Include price, bedrooms, location and key features for best results.&quot;)">i</span></label><textarea id="prop-url" rows="4" placeholder="Paste a property URL or describe the listing..."></textarea></div>
-        <div class="field"><label class="lbl">Platforms</label>
-          <div style="display:flex;flex-wrap:wrap;gap:7px;margin-top:2px;">
-            <label style="display:flex;align-items:center;gap:6px;padding:8px 12px;border-radius:var(--r-md);border:1px solid var(--b2);background:var(--s3);cursor:pointer;font-size:12.5px;font-weight:500;"><input type="checkbox" checked class="plat-check" value="Instagram" style="width:auto;"><span class="badge b-ig">IG</span>Instagram</label>
-            <label style="display:flex;align-items:center;gap:6px;padding:8px 12px;border-radius:var(--r-md);border:1px solid var(--b2);background:var(--s3);cursor:pointer;font-size:12.5px;font-weight:500;"><input type="checkbox" checked class="plat-check" value="Facebook" style="width:auto;"><span class="badge b-fb">FB</span>Facebook</label>
-            <label style="display:flex;align-items:center;gap:6px;padding:8px 12px;border-radius:var(--r-md);border:1px solid var(--b2);background:var(--s3);cursor:pointer;font-size:12.5px;font-weight:500;"><input type="checkbox" class="plat-check" value="LinkedIn" style="width:auto;"><span class="badge b-li">LI</span>LinkedIn</label>
-            <label style="display:flex;align-items:center;gap:6px;padding:8px 12px;border-radius:var(--r-md);border:1px solid var(--b2);background:var(--s3);cursor:pointer;font-size:12.5px;font-weight:500;"><input type="checkbox" class="plat-check" value="TikTok" style="width:auto;"><span class="badge b-tt">TT</span>TikTok</label>
-          </div>
-        </div>
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
-          <div class="field"><label class="lbl">Tone <span class="tip-icon" data-tipid="str-tone" onclick="showTip(this,&quot;Your brand voice across all content. This is used as the default unless overridden per platform in Settings.&quot;)">i</span></label><select id="ai-tone"><option>Storytelling</option><option>Professional</option><option>Casual</option><option>Luxury</option></select></div>
-          <div class="field"><label class="lbl">Length</label><select id="ai-len"><option>Short & punchy</option><option>Medium</option><option>Long-form</option></select></div>
-        </div>
-        <div class="field"><label class="lbl">Languages</label>
-          <div style="display:flex;flex-wrap:wrap;gap:7px;margin-top:2px;" id="ai-langs">
-            <span class="chip on" data-lang="English">🇬🇧 EN</span>
-            <span class="chip" data-lang="Spanish">🇪🇸 ES</span>
-            <span class="chip" data-lang="Dutch">🇳🇱 NL</span>
-            <span class="chip" data-lang="German">🇩🇪 DE</span>
-            <span class="chip" data-lang="French">🇫🇷 FR</span>
-          </div>
-        </div>
-        <button id="gen-btn" class="btn btn-gold" style="width:100%;padding:13px;font-size:14px;"><i data-lucide="sparkles" style="width:15px;height:15px;"></i>Generate Content</button>
-      </div>
-      <div>
-        <div id="ai-load" class="hidden card card-p" style="text-align:center;padding:48px 24px;"><div class="aip-wrap ai-pulse"><i data-lucide="sparkles" style="width:22px;height:22px;color:var(--a2);"></i></div><p style="font-size:14px;font-weight:600;">Generating content...</p><p style="font-size:12.5px;color:var(--t2);margin-top:5px;">Claude is writing your post</p></div>
-        <div id="ai-out" class="hidden fade-in" style="display:flex;flex-direction:column;gap:12px;">
-          <div class="card card-p">
-            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;"><div style="display:flex;align-items:center;gap:6px;"><i data-lucide="file-text" style="width:13px;height:13px;color:var(--a2);"></i><p style="font-size:10.5px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--t3);">Generated Post</p></div><button id="copy-btn" class="btn btn-ghost btn-xs"><i data-lucide="copy" style="width:10px;height:10px;"></i>Copy</button></div>
-            <div class="inset" style="padding:13px;font-size:13px;line-height:1.7;white-space:pre-wrap;max-height:220px;overflow-y:auto;" id="gen-caption"></div>
-          </div>
-          <div class="card card-p"><div style="display:flex;align-items:center;gap:6px;margin-bottom:10px;"><i data-lucide="hash" style="width:13px;height:13px;color:var(--a2);"></i><p style="font-size:10.5px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--t3);">Hashtags</p></div><div class="inset" style="padding:11px;font-size:12.5px;color:var(--a2);" id="gen-hashtags"></div></div>
-          <div class="card card-p"><div style="display:flex;align-items:center;gap:6px;margin-bottom:10px;"><i data-lucide="mouse-pointer-click" style="width:13px;height:13px;color:var(--g1);"></i><p style="font-size:10.5px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--t3);">CTA Suggestions</p></div><div class="inset" style="padding:11px;font-size:12.5px;" id="gen-ctas"></div></div>
-          <button class="btn btn-primary" style="width:100%;" onclick="showToast('Saved to Control Tower!')"><i data-lucide="calendar-plus" style="width:13px;height:13px;"></i>Save to Control Tower</button>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div id="ai-panel-blog" class="hidden" style="max-width:600px;">
-    <div class="card card-p" style="display:flex;flex-direction:column;gap:18px;">
-      <p style="font-size:14px;font-weight:700;font-family:'Public Sans',sans-serif;">Blog Article Creator</p>
-      <div class="field"><label class="lbl">Target Keywords <span class="tip-icon" data-tipid="blog-kw" onclick="showTip(this,&quot;Keywords you want to rank for in Google. Include your location: &quot;luxury villas Marbella 2026&quot; rather than just &quot;luxury villas&quot;. Use commas to separate multiple keywords.&quot;)">i</span></label><input id="blog-kw" type="text" placeholder="e.g. Marbella luxury villas, Costa del Sol investment"></div>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
-        <div class="field"><label class="lbl">Audience</label><select id="blog-aud"><option>First-time Buyers</option><option>Luxury Investors</option><option>Expats</option></select></div>
-        <div class="field"><label class="lbl">Tone</label><select id="blog-tone"><option>Informative</option><option>Exclusive</option><option>Friendly</option></select></div>
-      </div>
-      <button id="gen-blog" class="btn btn-gold" style="width:100%;padding:13px;font-size:14px;"><i data-lucide="sparkles" style="width:15px;height:15px;"></i>Generate Article</button>
-      <div id="blog-out" class="hidden inset" style="padding:14px;font-size:13px;line-height:1.7;white-space:pre-wrap;max-height:360px;overflow-y:auto;"></div>
-    </div>
-  </div>
-  <div id="ai-panel-gbp" class="hidden" style="max-width:600px;">
-    <div class="card card-p" style="display:flex;flex-direction:column;gap:18px;">
-      <p style="font-size:14px;font-weight:700;font-family:'Public Sans',sans-serif;">Google Business Profile Update</p>
-      <div class="field"><label class="lbl">Update Type <span class="tip-icon" data-tipid="gbp-type" onclick="showTip(this,&quot;What&#39;s New: general updates. Event: open house or viewing days. Offer: price reductions or incentives. Success Story: sold properties and testimonials.&quot;)">i</span></label><select id="gbp-type"><option>What's New</option><option>Event</option><option>Offer</option><option>Success Story</option></select></div>
-      <div class="field"><label class="lbl">Property / Topic</label><input id="gbp-topic" type="text" placeholder="e.g. New listing in Golden Mile"></div>
-      <button id="gen-gbp" class="btn btn-gold" style="width:100%;padding:13px;font-size:14px;"><i data-lucide="sparkles" style="width:15px;height:15px;"></i>Generate GBP Update</button>
-      <div id="gbp-out" class="hidden inset" style="padding:14px;font-size:13px;line-height:1.7;white-space:pre-wrap;"></div>
-    </div>
-  </div>
-  <div id="ai-panel-custom" class="hidden" style="max-width:600px;">
-    <div class="card card-p" style="display:flex;flex-direction:column;gap:18px;">
-      <p style="font-size:14px;font-weight:700;font-family:'Public Sans',sans-serif;">Custom Campaign Engine</p>
-      <div class="field"><label class="lbl">Campaign Topic <span class="tip-icon" data-tipid="cw-topic" onclick="showTip(this,&quot;The theme or event your campaign will be built around. Be specific: &quot;Summer open house series in Puerto Banús June 15-30&quot; gives better results than &quot;summer campaign&quot;.&quot;)">i</span></label><textarea id="custom-topic" rows="3" placeholder="e.g. Neighbourhood guide, market update, open house series..."></textarea></div>
-      <div class="field"><label class="lbl">Number of Posts</label><input id="custom-count" type="number" value="20" min="5" max="60"></div>
-      <button id="gen-custom" class="btn btn-gold" style="width:100%;padding:13px;font-size:14px;"><i data-lucide="sparkles" style="width:15px;height:15px;"></i>Generate Campaign</button>
-      <div id="custom-out" class="hidden inset" style="padding:14px;font-size:13px;line-height:1.7;white-space:pre-wrap;max-height:360px;overflow-y:auto;"></div>
-    </div>
-  </div>
-</div></section>
-
-<!-- ═══ BRAINSTORM ═══ -->
 <section class="view" id="view-brainstorm">
 <div class="page">
-  <div class="ph">
-    <div><h1 class="page-title">Brainstorm Chat</h1><p class="page-sub">Context-aware AI — knows your tone, audience & goals</p></div>
-    <button id="clear-chat" class="btn btn-ghost btn-sm"><i data-lucide="trash-2" style="width:12px;height:12px;"></i>Clear</button>
-  </div>
-  <div class="card" style="display:flex;flex-direction:column;height:calc(100vh - 185px);max-width:840px;">
-    <div style="padding:14px 18px;border-bottom:1px solid var(--b1);display:flex;align-items:center;gap:12px;flex-shrink:0;">
-      <div style="width:32px;height:32px;border-radius:9px;background:linear-gradient(135deg,var(--a1),var(--a2));display:flex;align-items:center;justify-content:center;flex-shrink:0;"><i data-lucide="brain" style="width:16px;height:16px;color:white;"></i></div>
-      <div style="flex:1;"><p style="font-size:13.5px;font-weight:600;">AI Content Partner</p><p style="font-size:11.5px;color:var(--t3);">Marbella · Luxury · Storytelling tone</p></div>
-      <div style="display:flex;align-items:center;gap:5px;font-size:11.5px;font-weight:600;color:var(--green);background:var(--gL);padding:4px 10px;border-radius:99px;border:1px solid rgba(45,213,152,.2);"><span style="width:5px;height:5px;border-radius:50%;background:var(--green);"></span>Online</div>
+  <div class="card" style="height:calc(100vh - var(--th) - 96px);display:flex;flex-direction:column;overflow:hidden;">
+    <div style="padding:14px 20px;border-bottom:1px solid var(--b1);display:flex;align-items:center;justify-content:space-between;background:var(--s1);">
+      <div style="display:flex;align-items:center;gap:10px;">
+        <div style="width:28px;height:28px;border-radius:6px;background:var(--a3);display:flex;align-items:center;justify-content:center;"><i data-lucide="message-square" style="width:14px;height:14px;color:var(--a2);"></i></div>
+        <div><p style="font-size:13px;font-weight:700;">Claude Marketing Advisor</p><p style="font-size:11px;color:var(--green);display:flex;align-items:center;gap:4px;"><span style="width:4px;height:4px;border-radius:50%;background:var(--green);display:inline-block;"></span> Active brainstorm session</p></div>
+      </div>
+      <button class="btn btn-xs btn-ghost" onclick="clearChat()"><i data-lucide="trash-2" style="width:11px;height:11px;"></i> Clear</button>
     </div>
-    <div style="flex:1;overflow-y:auto;padding:16px;display:flex;flex-direction:column;gap:10px;" id="chat-msgs">
-      <div class="amsg">Hi! I'm your AI brainstorm partner. I know your strategy targets luxury investors in Marbella with a storytelling tone. What would you like to work on today?</div>
-    </div>
-    <div style="padding:9px 14px;border-top:1px solid var(--b1);display:flex;gap:6px;flex-wrap:wrap;flex-shrink:0;">
-      <button class="btn btn-ghost btn-xs qp" data-p="Give me 5 creative hook ideas for a new luxury listing in Marbella"><i data-lucide="lightbulb" style="width:10px;height:10px;"></i>Hook ideas</button>
-      <button class="btn btn-ghost btn-xs qp" data-p="Write a neighbourhood guide post for the Golden Mile area"><i data-lucide="map-pin" style="width:10px;height:10px;"></i>Neighbourhood guide</button>
-      <button class="btn btn-ghost btn-xs qp" data-p="Create a TikTok video script for a property walkthrough"><i data-lucide="video" style="width:10px;height:10px;"></i>Video script</button>
-      <button class="btn btn-ghost btn-xs qp" data-p="What are the best trending hashtags for luxury real estate in Marbella?"><i data-lucide="hash" style="width:10px;height:10px;"></i>Hashtags</button>
-    </div>
-    <div style="padding:12px 14px;border-top:1px solid var(--b1);display:flex;gap:8px;flex-shrink:0;">
-      <input id="chat-input" type="text" placeholder="Ask for hooks, scripts, campaign ideas, hashtags..." style="flex:1;">
-      <button id="chat-send" class="btn btn-primary"><i data-lucide="send" style="width:14px;height:14px;"></i>Send</button>
-    </div>
-  </div>
-</div></section>
+    <div id="chat-scroller" style="flex:1;overflow-y:auto;padding:20px;display:flex;flex-direction:column;gap:14px;">
+      <div class="amsg">Hello Sarah! I have loaded your brand metrics, current active listings, and target demographics. 
 
-<!-- ═══ CAMPAIGN WIZARD ═══ -->
-<section class="view" id="view-campaign-wizard">
-<div class="page">
-  <div class="ph"><div><h1 class="page-title">Campaign Wizard</h1><p class="page-sub">Build a targeted multi-day content campaign</p></div></div>
-  <div class="card card-p" style="max-width:640px;display:flex;flex-direction:column;gap:18px;">
-    <div class="field"><label class="lbl">Campaign Topic</label><textarea id="cw-topic" rows="3" placeholder="e.g. Summer open house series, local food guide, investment webinar..."></textarea></div>
-    <div class="three-col" style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;">
-      <div class="field"><label class="lbl">Goal</label><select id="cw-goal"><option>Lead Generation</option><option>Brand Awareness</option><option>Engagement</option><option>Event Promotion</option></select></div>
-      <div class="field"><label class="lbl">Audience</label><select id="cw-aud"><option>Luxury Investors</option><option>Expats</option><option>First-time Buyers</option><option>Local Community</option></select></div>
-      <div class="field"><label class="lbl">Duration</label><select id="cw-dur"><option>1 week</option><option selected>2 weeks</option><option>1 month</option></select></div>
+What are we plotting today? You can ask me to:
+• Script a high-converting Instagram Reel hook for your new listing
+• Draft a newsletter blast to local down-sizers
+• Brainstorm angles to handle common buyer objections in this market</div>
     </div>
-    <div class="field"><label class="lbl">Languages</label>
-      <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:2px;" id="cw-langs">
-        <span class="chip on" data-lang="English">🇬🇧 English</span>
-        <span class="chip" data-lang="Spanish">🇪🇸 Spanish</span>
-        <span class="chip" data-lang="Dutch">🇳🇱 Dutch</span>
-        <span class="chip" data-lang="German">🇩🇪 German</span>
+    <div style="padding:14px 18px;border-top:1px solid var(--b1);background:var(--s1);display:flex;gap:10px;">
+      <input type="text" id="chat-input" placeholder="Ask Claude for hooks, scripts, captions or copy angles..." onkeydown="if(event.key==='Enter')sendChatMsg()" style="flex:1;">
+      <button class="btn btn-primary" onclick="sendChatMsg()"><i data-lucide="send" style="width:13px;height:13px;"></i></button>
+    </div>
+  </div>
+</div>
+</section>
+
+<section class="view" id="view-campaign-wizard">
+<div class="page" style="max-width:840px;margin:0 auto;">
+  <div class="card card-p">
+    <div style="display:flex;align-items:center;gap:8px;margin-bottom:20px;border-bottom:1px solid var(--b1);padding-bottom:12px;">
+      <div class="stat-icon" style="background:var(--a3);width:30px;height:30px;"><i data-lucide="rocket" style="width:15px;height:15px;color:var(--a2);"></i></div>
+      <div><h2 style="font-family:'Public Sans',sans-serif;font-size:15px;font-weight:700;">Multi-Channel Lead Blitz Campaign</h2><p style="font-size:11.5px;color:var(--t3);">Spin up a synced marketing blitz across posts, emails, and landing page copy simultaneously.</p></div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:16px;">
+      <div class="g2"><div class="field"><label class="lbl">Campaign Anchor / Subject Address</label><input type="text" id="c-anchor" placeholder="e.g. 102 Ocean Drive Luxury Penthouse"></div><div class="field"><label class="lbl">Campaign Target Audience</label><select id="c-target"><option>High-Net-Worth Investors</option><option>First-Time Home Buyers</option><option>Local Families / Upsizers</option><option>Out-of-State Relocators</option></select></div></div>
+      <div class="field"><label class="lbl">Campaign Core Hook / Incentive</label><input type="text" id="c-hook" placeholder="e.g. Off-market exclusive before portal listing next Saturday"></div>
+      <div class="field"><label class="lbl">Asset Bundle Components</label>
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:2px;">
+          <div class="inset inset-p" style="display:flex;align-items:center;gap:8px;cursor:pointer;" onclick="this.classList.toggle('ai-tab')"><i data-lucide="instagram" style="width:14px;height:14px;"></i><span style="font-size:12px;font-weight:600;">3x Social Posts</span></div>
+          <div class="inset inset-p" style="display:flex;align-items:center;gap:8px;cursor:pointer;" onclick="this.classList.toggle('ai-tab')"><i data-lucide="mail" style="width:14px;height:14px;"></i><span style="font-size:12px;font-weight:600;">1x Database Email</span></div>
+          <div class="inset inset-p" style="display:flex;align-items:center;gap:8px;cursor:pointer;" onclick="this.classList.toggle('ai-tab')"><i data-lucide="file-text" style="width:14px;height:14px;"></i><span style="font-size:12px;font-weight:600;">Landing Page Copy</span></div>
+        </div>
+      </div>
+      <div style="display:flex;justify-content:flex-end;margin-top:8px;"><button class="btn btn-primary" onclick="runCampaignBlitz()"><i data-lucide="zap" style="width:13px;height:13px;"></i> Deploy AI Blitz Bundle</button></div>
+    </div>
+    
+    <div id="c-result-box" class="hidden" style="margin-top:24px;border-top:1px solid var(--b2);padding-top:20px;">
+      <p style="font-family:'Public Sans',sans-serif;font-size:13.5px;font-weight:700;margin-bottom:12px;color:var(--green);display:flex;align-items:center;gap:6px;"><i data-lucide="check-circle" style="width:14px;height:14px;"></i> Multi-Asset Campaign Bundle Generated</p>
+      <div style="display:flex;flex-direction:column;gap:12px;">
+        <div class="inset card-p"><p class="lbl" style="color:var(--a2);margin-bottom:6px;">Asset 1: Social Media Series (IG/FB)</p><textarea id="c-out-1" rows="4" style="font-size:12px;font-family:monospace;background:var(--s0);"></textarea></div>
+        <div class="inset card-p"><p class="lbl" style="color:var(--g1);margin-bottom:6px;">Asset 2: Database Broadcast eDM Email</p><textarea id="c-out-2" rows="4" style="font-size:12px;font-family:monospace;background:var(--s0);"></textarea></div>
+        <div class="inset card-p"><p class="lbl" style="color:var(--blue);margin-bottom:6px;">Asset 3: High-Converting Opt-In Page Hero Text</p><textarea id="c-out-3" rows="3" style="font-size:12px;font-family:monospace;background:var(--s0);"></textarea></div>
       </div>
     </div>
-    <button id="cw-btn" class="btn btn-gold" style="width:100%;padding:13px;font-size:14px;"><i data-lucide="sparkles" style="width:15px;height:15px;"></i>Generate Campaign</button>
   </div>
-  <div id="cw-out" class="hidden fade-in" style="margin-top:22px;max-width:640px;"><p style="font-size:13.5px;font-weight:600;margin-bottom:12px;">Generated Campaign Posts</p><div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;max-height:420px;overflow-y:auto;" id="cw-grid"></div></div>
-</div></section>
+</div>
+</section>
 
-<!-- ═══ CONTROL TOWER ═══ -->
 <section class="view" id="view-control-tower">
 <div class="page">
   <div class="ph">
-    <div><h1 class="page-title">Control Tower</h1><p class="page-sub">Your content pipeline from draft to published</p></div>
-    <button class="btn btn-primary btn-sm" onclick="switchView('ai-generator')"><i data-lucide="plus" style="width:13px;height:13px;"></i>New Post</button>
+    <div><h1 class="page-title">Control Tower</h1><p class="page-sub">Review, tweak, and pipeline your automated content drafts before deployment</p></div>
+    <div style="display:flex;gap:8px;"><button class="btn btn-ghost btn-sm" onclick="toast('Refreshed data links')"><i data-lucide="rotate-cw" style="width:12px;height:12px;"></i> Sync</button><button class="btn btn-primary btn-sm" onclick="toast('All items in Approved column queued!')"><i data-lucide="check-all" style="width:12px;height:12px;"></i> Approve All Ready</button></div>
   </div>
-  <div class="kb-grid four-col" style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;">
-    <div class="kb-col"><div class="kb-head"><span class="kb-label">To Do</span><span class="kb-count" style="background:var(--s4);color:var(--t2);">2</span></div>
-      <div class="kb-card"><div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px;"><span class="badge b-ig">IG</span><span style="font-size:10.5px;color:var(--t3);">Jun 20</span></div><p style="font-size:12.5px;font-weight:600;line-height:1.4;">Just Listed: Villa Golden Mile</p></div>
-      <div class="kb-card"><div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px;"><span class="badge b-fb">FB</span><span style="font-size:10.5px;color:var(--t3);">Jun 22</span></div><p style="font-size:12.5px;font-weight:600;line-height:1.4;">Open House — Marbella</p></div>
+  <div class="g3 kb-grid" style="grid-template-columns:1fr 1fr 1fr;gap:14px;">
+    <div class="kb-col"><div class="kb-head"><span class="kb-label">AI Drafts / Ideas</span><span class="kb-count" style="background:var(--s4);color:var(--t2);">2</span></div>
+      <div id="kb-col-drafts"></div>
     </div>
-    <div class="kb-col"><div class="kb-head"><span class="kb-label">In Progress</span><span class="kb-count" style="background:var(--aL);color:var(--amber);">1</span></div>
-      <div class="kb-card"><div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px;"><span class="badge b-li">LI</span><span style="font-size:10.5px;color:var(--t3);">Jun 19</span></div><p style="font-size:12.5px;font-weight:600;line-height:1.4;">Market Insights Q2 2026</p></div>
+    <div class="kb-col" style="border-color:rgba(240,165,0,.15);"><div class="kb-head"><span class="kb-label" style="color:var(--amber);">Pending Tweaks</span><span class="kb-count" style="background:var(--aL);color:var(--amber);">1</span></div>
+      <div id="kb-col-review"></div>
     </div>
-    <div class="kb-col"><div class="kb-head"><span class="kb-label">Scheduled</span><span class="kb-count" style="background:var(--a3);color:var(--a2);">2</span></div>
-      <div class="kb-card"><div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px;"><span class="badge b-tt">TT</span><span style="font-size:10.5px;color:var(--t3);">Jun 21</span></div><p style="font-size:12.5px;font-weight:600;line-height:1.4;">POV: House hunting in Marbella</p></div>
-      <div class="kb-card"><div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px;"><span class="badge b-ig">IG</span><span style="font-size:10.5px;color:var(--t3);">Jun 23</span></div><p style="font-size:12.5px;font-weight:600;line-height:1.4;">Neighbourhood Guide: Golden Mile</p></div>
-    </div>
-    <div class="kb-col"><div class="kb-head"><span class="kb-label">Published</span><span class="kb-count" style="background:var(--gL);color:var(--green);">1</span></div>
-      <div class="kb-card" style="opacity:.6;"><div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px;"><span class="badge b-ig">IG</span><span style="font-size:10.5px;color:var(--green);">Published</span></div><p style="font-size:12.5px;font-weight:600;line-height:1.4;">Beachfront Villa Infinity Pool</p><p style="font-size:10.5px;color:var(--t3);margin-top:4px;">Jun 18</p></div>
+    <div class="kb-col" style="border-color:rgba(45,213,152,.15);"><div class="kb-head"><span class="kb-label" style="color:var(--green);">Approved / Scheduled</span><span class="kb-count" style="background:var(--gL);color:var(--green);">3</span></div>
+      <div id="kb-col-approved"></div>
     </div>
   </div>
-</div></section>
+</div>
+</section>
 
-<!-- ═══ CALENDAR ═══ -->
 <section class="view" id="view-calendar">
 <div class="page">
-  <div class="ph">
-    <div><h1 class="page-title">June 2026</h1><p class="page-sub">Your content schedule at a glance</p></div>
-    <button class="btn btn-primary btn-sm" onclick="showToast('Times optimised!')"><i data-lucide="zap" style="width:13px;height:13px;"></i>Auto-Optimise Times</button>
-  </div>
-  <div class="card card-p">
-    <div style="display:grid;grid-template-columns:repeat(7,1fr);gap:5px;text-align:center;margin-bottom:7px;">
-      <span style="font-size:11px;font-weight:600;color:var(--t3);">Mon</span><span style="font-size:11px;font-weight:600;color:var(--t3);">Tue</span><span style="font-size:11px;font-weight:600;color:var(--t3);">Wed</span><span style="font-size:11px;font-weight:600;color:var(--t3);">Thu</span><span style="font-size:11px;font-weight:600;color:var(--t3);">Fri</span><span style="font-size:11px;font-weight:600;color:var(--t3);">Sat</span><span style="font-size:11px;font-weight:600;color:var(--t3);">Sun</span>
+  <div class="g2" style="grid-template-columns:1fr 280px;align-items:flex-start;">
+    <div class="card card-p">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;">
+        <p style="font-family:'Public Sans',sans-serif;font-size:14px;font-weight:700;">June 2026 Schedule</p>
+        <div style="display:flex;gap:4px;"><button class="btn btn-icon btn-ghost btn-xs"><i data-lucide="chevron-left" style="width:12px;height:12px;"></i></button><button class="btn btn-icon btn-ghost btn-xs"><i data-lucide="chevron-right" style="width:12px;height:12px;"></i></button></div>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(7,1fr);gap:6px;text-align:center;font-size:11px;font-weight:700;color:var(--t3);text-transform:uppercase;margin-bottom:8px;">
+        <div>Mon</div><div>Tue</div><div>Wed</div><div>Thu</div><div>Fri</div><div>Sat</div><div>Sun</div>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(7,1fr);gap:6px;" id="cal-days-grid">
+        </div>
     </div>
-    <div style="display:grid;grid-template-columns:repeat(7,1fr);gap:5px;" id="cal-grid"></div>
+    <div class="card card-p" style="display:flex;flex-direction:column;gap:12px;">
+      <p style="font-family:'Public Sans',sans-serif;font-size:13px;font-weight:700;">Day Detail Inspector</p>
+      <div id="cal-inspector-empty" style="padding:20px 0;text-align:center;color:var(--t3);"><i data-lucide="mouse-pointer" style="width:20px;height:20px;margin:0 auto 6px;stroke-width:1.5;"></i><p style="font-size:12px;">Click a calendar block to manage active platform distributions.</p></div>
+      <div id="cal-inspector-content" class="hidden" style="display:flex;flex-direction:column;gap:10px;">
+        <div class="inset inset-p"><span class="badge b-accent" id="cal-insp-date">June 19</span><p id="cal-insp-txt" style="font-size:12.5px;margin-top:6px;color:var(--t1);white-space:pre-wrap;"></p></div>
+        <button class="btn btn-sm btn-ghost" onclick="toast('Opening advanced copy editor...')"><i data-lucide="edit" style="width:12px;height:12px;"></i> Edit Text</button>
+        <button class="btn btn-sm btn-danger" onclick="deleteCalPost()"><i data-lucide="trash" style="width:12px;height:12px;"></i> Delete Queue Slot</button>
+      </div>
+    </div>
   </div>
-</div></section>
+</div>
+</section>
 
-<!-- ═══ SOCIAL INBOX ═══ -->
 <section class="view" id="view-social-inbox">
 <div class="page">
-  <div class="ph"><div><h1 class="page-title">Social Inbox</h1><p class="page-sub">Manage comments and DMs across all platforms</p></div></div>
-  <div style="display:grid;grid-template-columns:280px 1fr;gap:16px;height:calc(100vh - 200px);min-height:420px;">
-    <div class="card" style="padding:12px;display:flex;flex-direction:column;overflow:hidden;">
-      <div style="display:flex;gap:5px;margin-bottom:10px;flex-shrink:0;">
-        <button class="btn btn-primary btn-sm" style="flex:1;">Comments</button>
-        <button class="btn btn-ghost btn-sm" style="flex:1;">DMs</button>
+  <div class="g2" style="grid-template-columns:290px 1fr;align-items:flex-start;gap:14px;">
+    <div class="card card-p" style="display:flex;flex-direction:column;gap:4px;" id="inbox-list-pane">
+      <p style="font-family:'Public Sans',sans-serif;font-size:13px;font-weight:700;margin-bottom:8px;">Unresolved Threads</p>
       </div>
-      <div style="flex:1;overflow-y:auto;">
-        <div class="inbox-row" data-sender="@marc_travels" data-ctx="Instagram Comment" data-msg="Is this property still available for viewings this week?" data-prop="Villa Golden Mile">
-          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;"><span style="font-size:13px;font-weight:600;">@marc_travels</span><span class="badge b-ig">IG</span></div>
-          <p style="font-size:12px;color:var(--t2);line-height:1.45;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;">Is this property still available for viewings this week?</p>
-          <p style="font-size:11px;color:var(--t3);margin-top:5px;">2m ago · Villa Golden Mile</p>
-        </div>
-        <div class="inbox-row" data-sender="Elena Rostova" data-ctx="Facebook Comment" data-msg="What are the community fees for this villa?" data-prop="Penthouse Sotogrande">
-          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;"><span style="font-size:13px;font-weight:600;">Elena Rostova</span><span class="badge b-fb">FB</span></div>
-          <p style="font-size:12px;color:var(--t2);line-height:1.45;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;">What are the community fees for this villa?</p>
-          <p style="font-size:11px;color:var(--t3);margin-top:5px;">1h ago · Penthouse Sotogrande</p>
-        </div>
-        <div class="inbox-row" data-sender="John Doe" data-ctx="Instagram DM" data-msg="I am looking for a villa around Malaga, budget max 500k." data-prop="—">
-          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;"><span style="font-size:13px;font-weight:600;">John Doe</span><span class="badge b-ig">IG</span></div>
-          <p style="font-size:12px;color:var(--t2);line-height:1.45;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;">Looking for a villa around Malaga, budget max 500k</p>
-          <p style="font-size:11px;color:var(--t3);margin-top:5px;">4h ago</p>
-        </div>
+    <div class="card card-p" style="min-height:360px;display:flex;flex-direction:column;" id="inbox-main-pane">
+      <div id="inbox-empty-state" style="margin:auto;text-align:center;color:var(--t3);">
+        <i data-lucide="inbox" style="width:28px;height:28px;margin:0 auto 8px;stroke-width:1.5;"></i>
+        <p style="font-size:13px;font-weight:500;">Select an incoming thread from the panel</p>
       </div>
-    </div>
-    <div class="card" style="padding:18px;display:flex;flex-direction:column;overflow:hidden;">
-      <div id="inbox-empty" style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;color:var(--t3);">
-        <div style="width:48px;height:48px;border-radius:12px;background:var(--s3);border:1px solid var(--b1);display:flex;align-items:center;justify-content:center;margin-bottom:12px;"><i data-lucide="inbox" style="width:22px;height:22px;"></i></div>
-        <p style="font-size:13.5px;font-weight:600;color:var(--t2);">Select a message to reply</p>
-        <p style="font-size:12px;color:var(--t3);margin-top:3px;">AI-powered reply suggestions</p>
-      </div>
-      <div id="inbox-chat" class="hidden" style="display:flex;flex-direction:column;height:100%;overflow:hidden;">
-        <div style="border-bottom:1px solid var(--b1);padding-bottom:12px;margin-bottom:12px;flex-shrink:0;"><p style="font-size:13.5px;font-weight:600;" id="inbox-sender">—</p><p style="font-size:11.5px;color:var(--t3);margin-top:2px;" id="inbox-ctx">—</p></div>
-        <div style="flex:1;overflow-y:auto;display:flex;flex-direction:column;gap:8px;margin-bottom:12px;" id="inbox-msgs"></div>
-        <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:8px;flex-shrink:0;">
-          <button id="ai-reply-btn" class="btn btn-sm" style="background:var(--a3);color:var(--a2);border:1px solid rgba(108,99,255,.25);"><i data-lucide="sparkles" style="width:11px;height:11px;"></i>AI Reply</button>
-          <button class="btn btn-ghost btn-xs iq-btn" data-t="viewing"><i data-lucide="calendar" style="width:10px;height:10px;"></i>Schedule Viewing</button>
-          <button class="btn btn-ghost btn-xs iq-btn" data-t="info"><i data-lucide="info" style="width:10px;height:10px;"></i>Property Info</button>
-        </div>
-        <div id="ai-sug" class="hidden inset" style="padding:10px;font-size:12.5px;margin-bottom:8px;line-height:1.65;white-space:pre-wrap;max-height:90px;overflow-y:auto;border-left:2px solid var(--a1);border-radius:0 var(--r-md) var(--r-md) 0;flex-shrink:0;"></div>
-        <div style="display:flex;gap:8px;flex-shrink:0;"><input id="reply-input" type="text" placeholder="Type a reply..." style="flex:1;"><button id="reply-send" class="btn btn-primary"><i data-lucide="send" style="width:14px;height:14px;"></i></button></div>
-      </div>
-    </div>
-  </div>
-</div></section>
-
-<!-- ═══ ANALYTICS ═══ -->
-<section class="view" id="view-analytics">
-<div class="page">
-  <div class="ph"><div><h1 class="page-title">Analytics</h1><p class="page-sub">Track your performance across all platforms</p></div></div>
-  <div class="stat-grid">
-    <div class="stat-card"><div style="display:flex;align-items:flex-start;justify-content:space-between;"><div class="stat-icon" style="background:var(--a3);"><i data-lucide="eye" style="width:16px;height:16px;color:var(--a2);"></i></div><span class="badge b-green" style="font-size:10px;">↑ 31%</span></div><p class="stat-val">142K</p><p class="stat-lbl">Total Impressions</p></div>
-    <div class="stat-card"><div style="display:flex;align-items:flex-start;justify-content:space-between;"><div class="stat-icon" style="background:var(--gL);"><i data-lucide="heart" style="width:16px;height:16px;color:var(--green);"></i></div><span class="badge b-green" style="font-size:10px;">↑ 0.6%</span></div><p class="stat-val" style="color:var(--green);">4.8%</p><p class="stat-lbl">Engagement Rate</p></div>
-    <div class="stat-card"><div style="display:flex;align-items:flex-start;justify-content:space-between;"><div class="stat-icon" style="background:var(--g2);"><i data-lucide="mouse-pointer-click" style="width:16px;height:16px;color:var(--g1);"></i></div><span class="badge b-amber" style="font-size:10px;">↑ 18%</span></div><p class="stat-val" style="color:var(--g1);">2.1K</p><p class="stat-lbl">Link Clicks</p></div>
-    <div class="stat-card"><div style="display:flex;align-items:flex-start;justify-content:space-between;"><div class="stat-icon" style="background:var(--bL);"><i data-lucide="user-plus" style="width:16px;height:16px;color:var(--blue);"></i></div><span class="badge b-green" style="font-size:10px;">↑ 12%</span></div><p class="stat-val" style="color:var(--blue);">+847</p><p class="stat-lbl">New Followers</p></div>
-  </div>
-  <div class="two-col" style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px;">
-    <div class="card card-p"><p style="font-size:13.5px;font-weight:700;font-family:'Public Sans',sans-serif;margin-bottom:14px;">Engagement Rate</p><svg id="chart-eng" viewBox="0 0 300 100" style="width:100%;"></svg></div>
-    <div class="card card-p"><p style="font-size:13.5px;font-weight:700;font-family:'Public Sans',sans-serif;margin-bottom:14px;">Reach Over Time</p><svg id="chart-reach" viewBox="0 0 300 100" style="width:100%;"></svg></div>
-  </div>
-  <div class="card card-p" style="margin-bottom:14px;">
-    <div style="display:flex;align-items:center;gap:8px;margin-bottom:16px;"><i data-lucide="trophy" style="width:14px;height:14px;color:var(--g1);"></i><p style="font-size:13.5px;font-weight:700;font-family:'Public Sans',sans-serif;">Top Performing Posts</p><span class="tip-icon" onclick="showTip(this,'Posts ranked by engagement rate. Use these as inspiration for future content — Claude can generate similar posts.')">i</span></div>
-    <div style="display:flex;flex-direction:column;gap:8px;">
-      <div class="inset" style="padding:12px;display:flex;align-items:center;gap:12px;"><span style="font-size:18px;flex-shrink:0;">🥇</span><div style="flex:1;min-width:0;"><p style="font-size:13px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Just Listed: Beachfront Villa with Infinity Pool</p><p style="font-size:11.5px;color:var(--t2);margin-top:2px;">Instagram · Jun 3 · 8.2% engagement</p></div><span class="badge b-ig">IG</span></div>
-      <div class="inset" style="padding:12px;display:flex;align-items:center;gap:12px;"><span style="font-size:18px;flex-shrink:0;">🥈</span><div style="flex:1;min-width:0;"><p style="font-size:13px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">5 Reasons to Invest in Costa del Sol in 2026</p><p style="font-size:11.5px;color:var(--t2);margin-top:2px;">LinkedIn · Jun 5 · 6.1% engagement</p></div><span class="badge b-li">LI</span></div>
-      <div class="inset" style="padding:12px;display:flex;align-items:center;gap:12px;"><span style="font-size:18px;flex-shrink:0;">🥉</span><div style="flex:1;min-width:0;"><p style="font-size:13px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">POV: House hunting in Marbella</p><p style="font-size:11.5px;color:var(--t2);margin-top:2px;">TikTok · Jun 7 · 5.8% engagement</p></div><span class="badge b-tt">TT</span></div>
-    </div>
-  </div>
-  <div class="card card-p">
-    <div style="display:flex;align-items:center;gap:8px;margin-bottom:16px;"><i data-lucide="users" style="width:14px;height:14px;color:var(--a2);"></i><p style="font-size:13.5px;font-weight:700;font-family:'Public Sans',sans-serif;">Lead Capture Board</p><span class="tip-icon" onclick="showTip(this,'Leads captured via your Link-in-Bio page and social profiles. Export to your CRM from here.')">i</span></div>
-    <div style="overflow-x:auto;"><table style="width:100%;font-size:12.5px;border-collapse:collapse;min-width:400px;">
-      <thead><tr style="border-bottom:1px solid var(--b1);"><th style="text-align:left;padding-bottom:8px;font-size:10.5px;font-weight:700;color:var(--t3);text-transform:uppercase;letter-spacing:.06em;padding-right:16px;">Name</th><th style="text-align:left;padding-bottom:8px;font-size:10.5px;font-weight:700;color:var(--t3);text-transform:uppercase;letter-spacing:.06em;padding-right:16px;">Property</th><th style="text-align:left;padding-bottom:8px;font-size:10.5px;font-weight:700;color:var(--t3);text-transform:uppercase;letter-spacing:.06em;padding-right:16px;">Source</th><th style="text-align:left;padding-bottom:8px;font-size:10.5px;font-weight:700;color:var(--t3);text-transform:uppercase;letter-spacing:.06em;">Date</th></tr></thead>
-      <tbody>
-        <tr style="border-bottom:1px solid var(--b1);"><td style="padding:10px 16px 10px 0;font-weight:600;">Marcus Aurelius</td><td style="padding:10px 16px 10px 0;color:var(--t2);">Villa Golden Mile</td><td style="padding:10px 16px 10px 0;"><span class="badge b-ig">IG</span></td><td style="padding:10px 0;color:var(--t3);">Just now</td></tr>
-        <tr style="border-bottom:1px solid var(--b1);"><td style="padding:10px 16px 10px 0;font-weight:600;">Clara Oswald</td><td style="padding:10px 16px 10px 0;color:var(--t2);">Penthouse Sotogrande</td><td style="padding:10px 16px 10px 0;"><span class="badge b-fb">FB</span></td><td style="padding:10px 0;color:var(--t3);">2h ago</td></tr>
-        <tr><td style="padding:10px 16px 10px 0;font-weight:600;">David Tennant</td><td style="padding:10px 16px 10px 0;color:var(--t2);">Apartment Málaga</td><td style="padding:10px 16px 10px 0;"><span class="badge b-gb">GBP</span></td><td style="padding:10px 0;color:var(--t3);">Yesterday</td></tr>
-      </tbody>
-    </table></div>
-  </div>
-</div></section>
-
-<!-- ═══ STRATEGY PLANNER ═══ -->
-<section class="view" id="view-strategy-planner">
-<div class="page">
-  <div class="ph">
-    <div><h1 class="page-title">Strategy Planner</h1><p class="page-sub">Build your monthly content strategy</p></div>
-    <div style="display:flex;gap:8px;flex-wrap:wrap;"><button id="gen-strategy" class="btn btn-gold btn-sm"><i data-lucide="sparkles" style="width:12px;height:12px;"></i>Generate Strategy</button><button class="btn btn-ghost btn-sm" onclick="switchView('monthly-wizard')"><i data-lucide="arrow-right" style="width:12px;height:12px;"></i>To Monthly Plan</button></div>
-  </div>
-  <div class="two-col" style="display:grid;grid-template-columns:1fr 1fr;gap:14px;max-width:900px;margin-bottom:14px;">
-    <div class="card card-p">
-      <div style="display:flex;align-items:center;gap:8px;margin-bottom:16px;"><i data-lucide="target" style="width:14px;height:14px;color:var(--a2);"></i><p style="font-size:13.5px;font-weight:700;font-family:'Public Sans',sans-serif;">SMART Goals</p><span class="tip-icon" onclick="showTip(this,'Specific, Measurable, Achievable, Relevant, Time-bound goals. These shape your entire content strategy.')">i</span></div>
-      <div style="display:flex;flex-direction:column;gap:14px;">
-        <div class="field"><label class="lbl">Target Region <span class="tip-icon" data-tipid="str-region" onclick="showTip(this,&quot;The AI researches local property trends, expat communities and investment hotspots for your region.&quot;)">i</span></label><input id="str-region" type="text" value="Golden Mile, Marbella"></div>
-        <div class="field"><label class="lbl">Primary Goal <span class="tip-icon" data-tipid="str-goal" onclick="showTip(this,&quot;Sets the strategic direction for all content pillars, posting times and platform recommendations.&quot;)">i</span></label><select id="str-goal"><option>Get More Listings</option><option>Find Buyers</option><option>Brand Awareness</option></select></div>
-        <div class="field"><label class="lbl">Tone</label><select id="str-tone"><option>Professional</option><option>Storytelling</option><option>Casual</option><option>Luxury</option></select></div>
-        <div class="field"><label class="lbl">Monthly Posts <span class="tip-icon" data-tipid="str-posts" onclick="showTip(this,&quot;60 posts = ~2 per day, ideal for aggressive growth. 30 posts = 1/day, balanced approach. 15 posts = 3-4/week, sustainable for solo agents.&quot;)">i</span></label><input id="str-posts" type="number" value="60"></div>
-      </div>
-    </div>
-    <div class="card card-p">
-      <div style="display:flex;align-items:center;gap:8px;margin-bottom:16px;"><i data-lucide="bar-chart-2" style="width:14px;height:14px;color:var(--green);"></i><p style="font-size:13.5px;font-weight:700;font-family:'Public Sans',sans-serif;">Target KPIs</p><span class="tip-icon" onclick="showTip(this,'Your benchmark targets for the month. Claude's strategy output will include tactics to hit each of these.')">i</span></div>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
-        <div class="inset" style="padding:12px;"><p style="font-size:11px;color:var(--t3);">Engagement Rate</p><p style="font-size:20px;font-weight:800;color:var(--a2);margin-top:3px;">5%+</p></div>
-        <div class="inset" style="padding:12px;"><p style="font-size:11px;color:var(--t3);">Reach Growth</p><p style="font-size:20px;font-weight:800;color:var(--green);margin-top:3px;">+20%/mo</p></div>
-        <div class="inset" style="padding:12px;"><p style="font-size:11px;color:var(--t3);">Leads/Month</p><p style="font-size:20px;font-weight:800;color:var(--g1);margin-top:3px;">15+</p></div>
-        <div class="inset" style="padding:12px;"><p style="font-size:11px;color:var(--t3);">New Followers</p><p style="font-size:20px;font-weight:800;margin-top:3px;">+200/mo</p></div>
-      </div>
-    </div>
-  </div>
-  <div class="card card-p" style="max-width:900px;">
-    <div style="display:flex;align-items:center;gap:8px;margin-bottom:14px;"><i data-lucide="sparkles" style="width:14px;height:14px;color:var(--g1);"></i><p style="font-size:13.5px;font-weight:700;font-family:'Public Sans',sans-serif;">AI Strategy Output</p><span class="tip-icon" onclick="showTip(this,'Claude generates a full written strategy: weekly themes, content pillars, posting schedule and growth tactics.')">i</span></div>
-    <div id="str-out" class="inset" style="padding:16px;font-size:13px;line-height:1.7;white-space:pre-wrap;min-height:80px;max-height:340px;overflow-y:auto;color:var(--t2);">Click "Generate Strategy" to create a personalised content strategy.</div>
-  </div>
-</div></section>
-
-<!-- ═══ LINK-IN-BIO ═══ -->
-<section class="view" id="view-link-in-bio">
-<div class="page">
-  <div class="ph"><div><h1 class="page-title">Link-in-Bio</h1><p class="page-sub">Your real estate hub page</p></div></div>
-  <div class="g2" style="grid-template-columns:1fr 280px;align-items:start;">
-    <div style="display:flex;flex-direction:column;gap:14px;min-width:0;">
-      <div class="card card-p" style="display:flex;flex-direction:column;gap:16px;">
-        <p style="font-size:13.5px;font-weight:700;font-family:'Public Sans',sans-serif;">Link Builder</p><span class="tip-icon" onclick="showTip(this,'Your Link-in-Bio is a mobile page at sociallistings.pro/your-slug with all your listings. One link for your Instagram bio.')">i</span>
-        <div class="field"><label class="lbl">Your URL</label><div style="display:flex;"><span style="font-size:12.5px;padding:10px 12px;border-radius:var(--r-md) 0 0 var(--r-md);background:var(--s4);border:1px solid var(--b2);border-right:0;color:var(--t3);white-space:nowrap;">sociallistings.pro/</span><input id="bio-slug" type="text" value="sunshine-properties" style="border-radius:0 var(--r-md) var(--r-md) 0;"></div></div>
-        <div class="field"><label class="lbl">Headline <span class="tip-icon" data-tipid="bio-hl" onclick="showTip(this,&quot;Your agency or personal brand name. Shown prominently at the top of your Link-in-Bio page.&quot;)">i</span></label><input id="bio-hl" type="text" value="Sunshine Properties S.L."></div>
-        <div class="field"><label class="lbl">Tagline <span class="tip-icon" data-tipid="bio-tl" onclick="showTip(this,&quot;A one-line description of your service. Keep it under 60 characters for best display on mobile.&quot;)">i</span></label><input id="bio-tl" type="text" value="Your Dream Home on the Costa del Sol"></div>
-        <button class="btn btn-gold btn-sm" style="align-self:flex-start;" onclick="showToast('Saved!')"><i data-lucide="save" style="width:12px;height:12px;"></i>Save Link-in-Bio</button>
-      </div>
-      <div class="card card-p" style="display:flex;flex-direction:column;gap:10px;">
-        <p style="font-size:13.5px;font-weight:700;font-family:'Public Sans',sans-serif;">Active Listings</p>
-        <div class="inset" style="padding:11px;display:flex;align-items:center;gap:10px;"><div style="width:34px;height:34px;border-radius:8px;background:linear-gradient(135deg,var(--a1),var(--a2));flex-shrink:0;"></div><div style="flex:1;min-width:0;"><p style="font-size:13px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Villa Golden Mile</p><p style="font-size:11.5px;color:var(--t2);">€485,000 · Marbella</p></div><span class="badge b-green">Live</span></div>
-        <div class="inset" style="padding:11px;display:flex;align-items:center;gap:10px;"><div style="width:34px;height:34px;border-radius:8px;background:linear-gradient(135deg,var(--g1),#f0d895);flex-shrink:0;"></div><div style="flex:1;min-width:0;"><p style="font-size:13px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Penthouse Sotogrande</p><p style="font-size:11.5px;color:var(--t2);">€1.2M · Sotogrande</p></div><span class="badge b-green">Live</span></div>
-      </div>
-    </div>
-    <div style="width:240px;" class="hide-sm">
-      <div style="border-radius:28px;border:1.5px solid var(--b2);background:var(--s1);overflow:hidden;box-shadow:0 24px 60px rgba(0,0,0,.6);">
-        <div style="height:20px;background:var(--s2);border-radius:28px 28px 0 0;display:flex;align-items:center;justify-content:center;"><div style="width:48px;height:4px;border-radius:2px;background:var(--s5);"></div></div>
-        <div style="padding:16px;display:flex;flex-direction:column;align-items:center;text-align:center;">
-          <div style="width:50px;height:50px;border-radius:50%;background:linear-gradient(135deg,var(--a1),var(--a2));display:flex;align-items:center;justify-content:center;font-size:17px;font-weight:700;color:white;margin-bottom:10px;">SP</div>
-          <p style="font-size:12px;font-weight:700;" id="bio-prev-hl">Sunshine Properties S.L.</p>
-          <p style="font-size:10.5px;color:var(--t3);margin-top:3px;line-height:1.4;" id="bio-prev-tl">Your Dream Home on the Costa del Sol</p>
-          <div style="width:100%;margin-top:12px;display:flex;flex-direction:column;gap:7px;">
-            <div style="border-radius:10px;overflow:hidden;text-align:left;background:var(--s2);border:1px solid var(--b1);"><div style="height:44px;background:linear-gradient(135deg,rgba(108,99,255,.3),rgba(108,99,255,.06));"></div><div style="padding:6px 8px;"><p style="font-size:10.5px;font-weight:700;">Villa Golden Mile</p><p style="font-size:9.5px;color:var(--t3);">€485,000</p></div></div>
-            <div style="border-radius:10px;overflow:hidden;text-align:left;background:var(--s2);border:1px solid var(--b1);"><div style="height:44px;background:linear-gradient(135deg,rgba(232,200,122,.3),rgba(232,200,122,.06));"></div><div style="padding:6px 8px;"><p style="font-size:10.5px;font-weight:700;">Penthouse Sotogrande</p><p style="font-size:9.5px;color:var(--t3);">€1,200,000</p></div></div>
+      <div id="inbox-thread-view" class="hidden" style="display:flex;flex-direction:column;height:100%;flex:1;justify-content:space-between;">
+        <div>
+          <div style="display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--b1);padding-bottom:10px;margin-bottom:14px;">
+            <div><p style="font-size:13.5px;font-weight:700;" id="ib-user-name">Marc Davis</p><p style="font-size:11px;color:var(--t2);" id="ib-meta-info">Instagram Comment · Post #742</p></div>
+            <span class="badge b-amber">Needs Reply</span>
+          </div>
+          <div class="inset inset-p" style="background:var(--s0);font-size:13px;line-height:1.55;" id="ib-msg-body">
+            "Is this property still open this Sunday? What are the school catchments like?"
           </div>
         </div>
-      </div>
-    </div>
-  </div>
-</div></section>
-
-<!-- ═══ BRAND KIT ═══ -->
-<section class="view" id="view-brand-kit">
-<div class="page">
-  <div class="ph"><div><h1 class="page-title">Brand Kit</h1><p class="page-sub">Your visual identity and tone of voice</p></div></div>
-  <div class="two-col" style="display:grid;grid-template-columns:1fr 1fr;gap:14px;max-width:780px;">
-    <div class="card card-p">
-      <div style="display:flex;align-items:center;gap:8px;margin-bottom:16px;"><i data-lucide="image" style="width:14px;height:14px;color:var(--a2);"></i><p style="font-size:13.5px;font-weight:700;font-family:'Public Sans',sans-serif;">Logo Upload</p><span class="tip-icon" onclick="showTip(this,'Your logo is used in generated visual templates and your Link-in-Bio page.')">i</span></div>
-      <div style="border:1.5px dashed var(--b2);border-radius:var(--r-lg);padding:32px;text-align:center;cursor:pointer;transition:border-color .15s;">
-        <div style="width:38px;height:38px;border-radius:10px;background:var(--s3);display:flex;align-items:center;justify-content:center;margin:0 auto 10px;"><i data-lucide="upload" style="width:17px;height:17px;color:var(--t3);"></i></div>
-        <p style="font-size:12.5px;font-weight:500;color:var(--t2);">Drop your logo here</p>
-        <p style="font-size:11.5px;color:var(--t3);margin-top:3px;">PNG, SVG or JPG</p>
-      </div>
-    </div>
-    <div class="card card-p">
-      <div style="display:flex;align-items:center;gap:8px;margin-bottom:16px;"><i data-lucide="palette" style="width:14px;height:14px;color:var(--a2);"></i><p style="font-size:13.5px;font-weight:700;font-family:'Public Sans',sans-serif;">Brand Colors</p><span class="tip-icon" onclick="showTip(this,'Brand colours are applied to visual templates and your Link-in-Bio page design.')">i</span></div>
-      <div style="display:flex;flex-direction:column;gap:13px;">
-        <div style="display:flex;align-items:center;gap:12px;"><input type="color" id="bc-pri" value="#6c63ff"><div><p style="font-size:12.5px;font-weight:500;">Primary</p><p style="font-size:11.5px;color:var(--t3);" id="bc-pri-hex">#6C63FF</p></div></div>
-        <div style="display:flex;align-items:center;gap:12px;"><input type="color" id="bc-sec" value="#e8c87a"><div><p style="font-size:12.5px;font-weight:500;">Gold / Secondary</p><p style="font-size:11.5px;color:var(--t3);" id="bc-sec-hex">#E8C87A</p></div></div>
-        <div style="display:flex;align-items:center;gap:12px;"><input type="color" id="bc-acc" value="#2dd598"><div><p style="font-size:12.5px;font-weight:500;">Accent</p><p style="font-size:11.5px;color:var(--t3);" id="bc-acc-hex">#2DD598</p></div></div>
-      </div>
-    </div>
-    <div class="card card-p" style="grid-column:1/-1;">
-      <div style="display:flex;align-items:center;gap:8px;margin-bottom:16px;"><i data-lucide="mic-2" style="width:14px;height:14px;color:var(--a2);"></i><p style="font-size:13.5px;font-weight:700;font-family:'Public Sans',sans-serif;">Tone Presets</p><span class="tip-icon" onclick="showTip(this,'Set a default tone for each platform. The AI Generator and Monthly Wizard use these automatically.')">i</span></div>
-      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:16px;">
-        <div class="field"><label class="lbl">Default</label><select><option>Professional</option><option>Storytelling</option><option>Casual</option><option>Luxury</option></select></div>
-        <div class="field"><label class="lbl">Instagram</label><select><option>Storytelling</option><option>Professional</option><option>Casual</option></select></div>
-        <div class="field"><label class="lbl">LinkedIn</label><select><option>Professional</option><option>Authoritative</option></select></div>
-        <div class="field"><label class="lbl">TikTok</label><select><option>Casual</option><option>Trendy</option></select></div>
-      </div>
-      <button class="btn btn-gold btn-sm" onclick="showToast('Brand Kit saved!')"><i data-lucide="save" style="width:12px;height:12px;"></i>Save Brand Kit</button>
-    </div>
-  </div>
-</div></section>
-
-<!-- ═══ TEMPLATES ═══ -->
-<section class="view" id="view-templates">
-<div class="page">
-  <div class="ph"><div><h1 class="page-title">Templates</h1><p class="page-sub">Ready-to-use post templates with AI auto-fill</p></div></div>
-  <div style="display:flex;gap:7px;margin-bottom:24px;flex-wrap:wrap;">
-    <button class="btn btn-primary btn-sm tpl-f" data-f="all">All</button>
-    <button class="btn btn-ghost btn-sm tpl-f" data-f="post">Posts</button>
-    <button class="btn btn-ghost btn-sm tpl-f" data-f="carousel">Carousel</button>
-    <button class="btn btn-ghost btn-sm tpl-f" data-f="reel">Reels</button>
-    <button class="btn btn-ghost btn-sm tpl-f" data-f="story">Stories</button>
-  </div>
-  <div id="tpl-grid">
-    <div class="tpl-card" data-type="post"><div class="tpl-thumb tpl-c1"><i data-lucide="home" style="width:26px;height:26px;color:#8b85ff;"></i></div><div class="tpl-body"><p class="tpl-name">Just Listed</p><p class="tpl-meta">Instagram · 1080×1080</p><button class="btn btn-primary btn-xs" style="width:100%;" onclick="showToast('Template auto-filled!')">AI Auto-Fill</button></div></div>
-    <div class="tpl-card" data-type="post"><div class="tpl-thumb tpl-c2"><i data-lucide="door-open" style="width:26px;height:26px;color:#60a5fa;"></i></div><div class="tpl-body"><p class="tpl-name">Open House</p><p class="tpl-meta">Facebook · 1200×630</p><button class="btn btn-primary btn-xs" style="width:100%;" onclick="showToast('Template auto-filled!')">AI Auto-Fill</button></div></div>
-    <div class="tpl-card" data-type="carousel"><div class="tpl-thumb tpl-c3"><i data-lucide="layout" style="width:26px;height:26px;color:#ec4899;"></i></div><div class="tpl-body"><p class="tpl-name">Property Carousel</p><p class="tpl-meta">Instagram · 5 slides</p><button class="btn btn-primary btn-xs" style="width:100%;" onclick="showToast('Template auto-filled!')">AI Auto-Fill</button></div></div>
-    <div class="tpl-card" data-type="reel"><div class="tpl-thumb tpl-c4"><i data-lucide="play-circle" style="width:26px;height:26px;color:#2dd598;"></i></div><div class="tpl-body"><p class="tpl-name">Reels Cover</p><p class="tpl-meta">Vertical · 1080×1920</p><button class="btn btn-primary btn-xs" style="width:100%;" onclick="showToast('Template auto-filled!')">AI Auto-Fill</button></div></div>
-    <div class="tpl-card" data-type="story"><div class="tpl-thumb tpl-c5"><i data-lucide="smartphone" style="width:26px;height:26px;color:#f0a500;"></i></div><div class="tpl-body"><p class="tpl-name">Story Template</p><p class="tpl-meta">Instagram Story</p><button class="btn btn-primary btn-xs" style="width:100%;" onclick="showToast('Template auto-filled!')">AI Auto-Fill</button></div></div>
-    <div class="tpl-card" data-type="post"><div class="tpl-thumb tpl-c6"><i data-lucide="check-circle" style="width:26px;height:26px;color:#8b85ff;"></i></div><div class="tpl-body"><p class="tpl-name">Just Sold</p><p class="tpl-meta">Multi-platform</p><button class="btn btn-primary btn-xs" style="width:100%;" onclick="showToast('Template auto-filled!')">AI Auto-Fill</button></div></div>
-  </div>
-</div></section>
-
-<!-- ═══ SETTINGS ═══ -->
-<section class="view" id="view-settings">
-<div class="page">
-  <div class="ph"><div><h1 class="page-title">Settings</h1><p class="page-sub">Account and preferences</p></div></div>
-  <div style="max-width:640px;display:flex;flex-direction:column;gap:14px;">
-    <div class="card card-p" style="display:flex;flex-direction:column;gap:16px;">
-      <div style="display:flex;align-items:center;gap:8px;"><i data-lucide="user" style="width:14px;height:14px;color:var(--a2);"></i><p style="font-size:13.5px;font-weight:700;font-family:'Public Sans',sans-serif;">Profile</p></div>
-      <div class="field"><label class="lbl">Your Name <span class="tip-icon" data-tipid="s-name" onclick="showTip(this,&quot;Used to personalise AI-generated content and sign off messages in the Social Inbox.&quot;)">i</span></label><input id="s-name" type="text" value="Sarah Johnson"></div>
-      <div class="field"><label class="lbl">Agency Name <span class="tip-icon" data-tipid="s-agency" onclick="showTip(this,&quot;Used in GBP updates, blog bylines and brand mentions in generated content.&quot;)">i</span></label><input id="s-agency" type="text" value="Sunshine Properties S.L."></div>
-      <div class="field"><label class="lbl">Target Region <span class="tip-icon" data-tipid="s-region" onclick="showTip(this,&quot;Your primary market. The AI uses this as a default location in all generated content.&quot;)">i</span></label><input id="s-region" type="text" value="Marbella & Costa del Sol"></div>
-      <button class="btn btn-gold btn-sm" id="save-profile" style="align-self:flex-start;"><i data-lucide="save" style="width:12px;height:12px;"></i>Save Profile</button>
-    </div>
-    <div class="card card-p" style="display:flex;flex-direction:column;gap:10px;">
-      <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px;"><i data-lucide="plug" style="width:14px;height:14px;color:var(--a2);"></i><p style="font-size:13.5px;font-weight:700;font-family:'Public Sans',sans-serif;">Integrations</p><span class="tip-icon" onclick="showTip(this,'Connect your social accounts to enable direct publishing, scheduling and inbox management from Social Listings Pro.')">i</span></div>
-      <div class="inset" style="padding:11px 14px;display:flex;align-items:center;justify-content:space-between;"><div style="display:flex;align-items:center;gap:10px;"><div style="width:28px;height:28px;border-radius:7px;background:#1877f2;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;color:white;">f</div><div><p style="font-size:13px;font-weight:600;">Meta Business Suite</p><p style="font-size:11.5px;color:var(--t3);">Instagram & Facebook</p></div></div><span class="badge b-green"><i data-lucide="check" style="width:9px;height:9px;"></i>Connected</span></div>
-      <div class="inset" style="padding:11px 14px;display:flex;align-items:center;justify-content:space-between;"><div style="display:flex;align-items:center;gap:10px;"><div style="width:28px;height:28px;border-radius:7px;background:#0a66c2;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;color:white;">in</div><div><p style="font-size:13px;font-weight:600;">LinkedIn</p><p style="font-size:11.5px;color:var(--t3);">Business page</p></div></div><button class="btn btn-ghost btn-xs"><i data-lucide="link" style="width:10px;height:10px;"></i>Connect</button></div>
-      <div class="inset" style="padding:11px 14px;display:flex;align-items:center;justify-content:space-between;"><div style="display:flex;align-items:center;gap:10px;"><div style="width:28px;height:28px;border-radius:7px;background:#4285f4;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;color:white;">G</div><div><p style="font-size:13px;font-weight:600;">Google Business Profile</p><p style="font-size:11.5px;color:var(--t3);">Local search visibility</p></div></div><span class="badge b-green"><i data-lucide="check" style="width:9px;height:9px;"></i>Connected</span></div>
-    </div>
-    <div class="card card-p">
-      <div style="display:flex;align-items:center;gap:8px;margin-bottom:20px;"><i data-lucide="sliders" style="width:14px;height:14px;color:var(--a2);"></i><p style="font-size:13.5px;font-weight:700;font-family:'Public Sans',sans-serif;">Content Defaults</p></div>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:20px;">
-        <div class="field"><label class="lbl">Default Language <span class="tip-icon" data-tipid="s-lang" onclick="showTip(this,&quot;The primary language for all generated content. You can enable multi-language output in individual generators.&quot;)">i</span></label><select id="s-lang"><option>English</option><option>Spanish</option><option>Dutch</option><option>German</option><option>French</option></select></div>
-        <div class="field"><label class="lbl">Emoji Style <span class="tip-icon" data-tipid="s-emoji" onclick="showTip(this,&quot;Controls how many emojis the AI adds. Moderate = 2-4 per post. Minimal = 0-1. Heavy = 5+. None = pure text.&quot;)">i</span></label><select id="s-emoji"><option>Moderate</option><option>Minimal</option><option>Heavy</option><option>None</option></select></div>
-        <div class="field"><label class="lbl">Brand Personality <span class="tip-icon" data-tipid="s-brand" onclick="showTip(this,&quot;Trustworthy Expert: data-driven, reliable. Friendly Neighbour: warm, local. Luxury Curator: aspirational, exclusive. Market Authority: thought leadership.&quot;)">i</span></label><select id="s-brand"><option>Trustworthy Expert</option><option>Friendly Neighbour</option><option>Luxury Curator</option><option>Market Authority</option><option>Lifestyle Storyteller</option></select></div>
-        <div class="field"><label class="lbl">Post Length Default</label><select id="s-length"><option>Short & punchy</option><option>Medium</option><option>Long-form</option></select></div>
-      </div>
-      <div style="border-top:1px solid var(--b1);padding-top:20px;margin-bottom:20px;">
-        <p style="font-size:13px;font-weight:700;font-family:'Public Sans',sans-serif;margin-bottom:4px;">Tone of Voice per Platform</p>
-        <p style="font-size:12px;color:var(--t2);margin-bottom:16px;">The AI uses these tones when generating content per channel.</p>
-        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;">
-          <div class="field"><label class="lbl">Instagram</label><select id="s-tone-ig"><option>Storytelling</option><option>Professional</option><option>Casual & Friendly</option><option>Luxury & Aspirational</option><option>Inspirational</option><option>Educational</option><option>Trendy & Bold</option><option>Community-focused</option></select></div>
-          <div class="field"><label class="lbl">Facebook</label><select id="s-tone-fb"><option>Professional</option><option>Storytelling</option><option>Casual & Friendly</option><option>Luxury & Aspirational</option><option>Community-focused</option><option>Educational</option><option>News & Market Updates</option></select></div>
-          <div class="field"><label class="lbl">LinkedIn</label><select id="s-tone-li"><option>Authoritative</option><option>Professional</option><option>Thought Leadership</option><option>Market Expert</option><option>Educational</option><option>Luxury & Aspirational</option></select></div>
-          <div class="field"><label class="lbl">TikTok / Reels</label><select id="s-tone-tt"><option>Casual & Friendly</option><option>Trendy & Bold</option><option>Storytelling</option><option>Behind-the-Scenes</option><option>Educational</option></select></div>
-          <div class="field"><label class="lbl">Google Business</label><select id="s-tone-gbp"><option>Professional</option><option>Local & Warm</option><option>Informative</option><option>Promotional</option></select></div>
-          <div class="field"><label class="lbl">Blog / Articles</label><select id="s-tone-blog"><option>Informative</option><option>Authoritative</option><option>Storytelling</option><option>SEO-optimised</option><option>Luxury & Exclusive</option></select></div>
+        
+        <div style="margin-top:20px;display:flex;flex-direction:column;gap:10px;">
+          <div style="display:flex;align-items:center;justify-content:space-between;"><p class="lbl">AI Suggested Copilot Response</p><button class="btn btn-xs btn-ghost" onclick="generateInboxDraft()"><i data-lucide="sparkles" style="width:10px;height:10px;color:var(--a2);"></i> Re-Draft</button></div>
+          <textarea id="ib-reply-box" rows="4" style="font-size:12.5px;line-height:1.5;"></textarea>
+          <div style="display:flex;justify-content:flex-end;gap:8px;"><button class="btn btn-sm btn-ghost" onclick="toast('Thread archived')">Archive</button><button class="btn btn-sm btn-primary" onclick="sendInboxReply()"><i data-lucide="send" style="width:12px;height:12px;"></i> Send Reply</button></div>
         </div>
       </div>
-      <button class="btn btn-gold btn-sm" id="save-settings"><i data-lucide="save" style="width:12px;height:12px;"></i>Save Settings</button>
     </div>
   </div>
-</div></section>
+</div>
+</section>
 
-</div></div>
-<script>
-const API_KEY = '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';
-const MODEL = 'claude-sonnet-4-6';
+<section class="view" id="view-analytics">
+<div class="page">
+  <div class="g2" style="margin-bottom:16px;">
+    <div class="card card-p">
+      <p class="card-title"><i data-lucide="bar-chart-2" style="width:14px;height:14px;color:var(--a2);"></i>Traffic Conversion Funnel</p>
+      <div style="display:flex;flex-direction:column;gap:10px;margin-top:10px;">
+        <div><div style="display:flex;justify-content:space-between;font-size:11.5px;margin-bottom:3px;color:var(--t2);"><span>Impressions (Social Distribution)</span><span style="font-weight:600;color:var(--t1);">18,200</span></div><div style="height:6px;background:var(--s3);border-radius:3px;overflow:hidden;"><div style="width:100%;height:100%;background:var(--a1);"></div></div></div>
+        <div><div style="display:flex;justify-content:space-between;font-size:11.5px;margin-bottom:3px;color:var(--t2);"><span>Link Clicks (Bio Landing Hub)</span><span style="font-weight:600;color:var(--t1);">1,420 (7.8% CTR)</span></div><div style="height:6px;background:var(--s3);border-radius:3px;overflow:hidden;"><div style="width:7.8%;height:100%;background:var(--blue);"></div></div></div>
+        <div><div style="display:flex;justify-content:space-between;font-size:11.5px;margin-bottom:3px;color:var(--t2);"><span>Lead Capture Opt-ins / Enquiries</span><span style="font-weight:600;color:var(--t1);">37 (2.6% Conv)</span></div><div style="height:6px;background:var(--s3);border-radius:3px;overflow:hidden;"><div style="width:2.6%;height:100%;background:var(--green);"></div></div></div>
+      </div>
+    </div>
+    <div class="card card-p">
+      <p class="card-title"><i data-lucide="award" style="width:14px;height:14px;color:var(--g1);"></i>Top Performing Content Pillar</p>
+      <div style="display:flex;gap:12px;align-items:center;margin-top:10px;">
+        <div style="width:48px;height:48px;border-radius:10px;background:var(--g2);display:flex;align-items:center;justify-content:center;flex-shrink:0;"><i data-lucide="home" style="width:22px;height:22px;color:var(--g1);"></i></div>
+        <div><p style="font-size:14px;font-weight:700;">'Video Walkthrough Walk-ins'</p><p style="font-size:12px;color:var(--t2);margin-top:2px;">Reels and short-form video items focusing on interior walkthrough showcases are generating 3.4x higher lead capture rates than standard static images this quarter.</p></div>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
 
-// ── OFFLINE ──────────────────────────────────────────────────────────────────
-function checkOnline(){
-  const bar = document.getElementById('offline-bar');
-  const status = document.getElementById('ai-status');
-  if(!navigator.onLine){
-    bar.style.display='block';
-    status.style.background='rgba(239,68,68,.12)';status.style.color='var(--red)';
-    status.innerHTML='<span style="width:6px;height:6px;border-radius:50%;background:var(--red);display:inline-block;margin-right:4px;"></span>Offline';
-  } else {
-    bar.style.display='none';
-    status.style.background='rgba(16,185,129,.12)';status.style.color='var(--green)';
-    status.innerHTML='<span style="width:6px;height:6px;border-radius:50%;background:var(--green);display:inline-block;margin-right:4px;"></span>AI Ready';
-  }
-}
-window.addEventListener('online',checkOnline);window.addEventListener('offline',checkOnline);checkOnline();
+<section class="view" id="view-strategy-planner">
+<div class="page" style="max-width:900px;margin:0 auto;">
+  <div class="card card-p">
+    <div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:20px;border-bottom:1px solid var(--b1);padding-bottom:14px;">
+      <div><p style="font-family:'Public Sans',sans-serif;font-size:15px;font-weight:700;">SMART Content Strategy Core</p><p style="font-size:12px;color:var(--t3);margin-top:1px;">Configure your quarterly marketing targets. Claude align definitions to tailor wizard output modules.</p></div>
+      <button class="btn btn-xs btn-primary" onclick="toast('Strategy updated successfully')">Save Scheme</button>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:14px;">
+      <div class="g2">
+        <div class="field"><label class="lbl">Primary Demographic Profile</label><select><option>Move-up Suburban Families</option><option>Young Metro First-Buyers</option><option>Empty-Nesters / Down-sizers</option><option>Commercial Portfolio Developers</option></select></div>
+        <div class="field"><label class="lbl">Core Monthly Target Metric</label><select><option>Maximize Local Market Share Brand Noise</option><option>Capture High-Intent Email Opt-ins</option><option>Drive Direct Telephone Inbound Enquiries</option></select></div>
+      </div>
+      <div class="field"><label class="lbl">Pillar Distribution Balance Matrix</label>
+        <div style="display:flex;flex-direction:column;gap:8px;margin-top:4px;">
+          <div><div style="display:flex;justify-content:space-between;font-size:11px;color:var(--t2);margin-bottom:2px;"><span>Active Listing Promos (Just Listed / Open House)</span><span>50%</span></div><input type="range" min="0" max="100" value="50"></div>
+          <div><div style="display:flex;justify-content:space-between;font-size:11px;color:var(--t2);margin-bottom:2px;"><span>Local Authority Updates (Market reports / Stats)</span><span>30%</span></div><input type="range" min="0" max="100" value="30"></div>
+          <div><div style="display:flex;justify-content:space-between;font-size:11px;color:var(--t2);margin-bottom:2px;"><span>Lifestyle &amp; Community Building / Social Proof</span><span>20%</span></div><input type="range" min="0" max="100" value="20"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
 
-// ── TOAST ────────────────────────────────────────────────────────────────────
-function showToast(msg,type='ok'){
-  const t=document.getElementById('toast');t.textContent=msg;
-  t.style.borderColor=type==='err'?'var(--red)':'var(--border)';
-  t.classList.add('show');setTimeout(()=>t.classList.remove('show'),3000);
-}
+<section class="view" id="view-link-in-bio">
+<div class="page" style="max-width:840px;margin:0 auto;">
+  <div class="g2" style="grid-template-columns:1fr 290px;">
+    <div class="card card-p" style="display:flex;flex-direction:column;gap:14px;">
+      <p style="font-family:'Public Sans',sans-serif;font-size:14px;font-weight:700;">Mobile Link Hub Editor</p>
+      <div class="field"><label class="lbl">Hub Header Title</label><input type="text" value="Sarah Johnson Real Estate Group"></div>
+      <div class="field"><label class="lbl">Bio Subtext</label><input type="text" value="Connecting premium buyers with luxury coastal lifestyles. See open times below👇"></div>
+      <div style="display:flex;flex-direction:column;gap:8px;">
+        <label class="lbl">Active Quick Links</label>
+        <div class="inset inset-p" style="display:flex;justify-content:space-between;align-items:center;"><div><p style="font-size:12px;font-weight:600;">✨ Sunday Open Homes Schedule</p><p style="font-size:11px;color:var(--t3);">Redirects to active listings view</p></div><span class="badge b-green">Active</span></div>
+        <div class="inset inset-p" style="display:flex;justify-content:space-between;align-items:center;"><div><p style="font-size:12px;font-weight:600;">📊 Free Property Appraisal Portal</p><p style="font-size:11px;color:var(--t3);">Lead capture routing pipeline</p></div><span class="badge b-green">Active</span></div>
+      </div>
+      <button class="btn btn-sm btn-ghost" onclick="toast('Link node added')"><i data-lucide="plus" style="width:12px;height:12px;"></i> Add Custom Redirect Link</button>
+    </div>
+    <div class="card card-p" style="background:#090b0e;border-color:var(--s4);border-radius:24px;display:flex;flex-direction:column;align-items:center;text-align:center;padding:24px 16px;">
+      <div style="width:48px;height:48px;border-radius:50%;background:linear-gradient(135deg,var(--a1),var(--a2));display:flex;align-items:center;justify-content:center;font-weight:700;font-size:16px;color:white;margin-bottom:12px;">SJ</div>
+      <p style="font-size:13px;font-weight:700;color:var(--t1);">Sarah Johnson</p>
+      <p style="font-size:10px;color:var(--t2);margin-top:2px;line-height:1.4;">Connecting premium buyers with luxury coastal lifestyles.</p>
+      <div style="display:flex;flex-direction:column;gap:8px;width:100%;margin-top:20px;">
+        <div style="background:var(--s2);border:1px solid var(--b1);padding:10px;border-radius:8px;font-size:11.5px;font-weight:600;color:var(--t1);">✨ Sunday Open Homes Schedule</div>
+        <div style="background:var(--s2);border:1px solid var(--b1);padding:10px;border-radius:8px;font-size:11.5px;font-weight:600;color:var(--t1);">📊 Free Property Appraisal Portal</div>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
 
-// ── NAV ──────────────────────────────────────────────────────────────────────
-const PAGE={
-  'dashboard':['Dashboard','Welcome back'],
-  'monthly-wizard':['Monthly Wizard','Plan your full month of content'],
-  'ai-generator':['AI Generator','Generate platform-optimised posts'],
-  'brainstorm':['Brainstorm Chat','Your AI content partner'],
-  'campaign-wizard':['Campaign Wizard','Build a targeted content campaign'],
-  'control-tower':['Control Tower','Manage your content pipeline'],
-  'calendar':['Calendar','Your content schedule'],
-  'social-inbox':['Social Inbox','Manage comments and DMs'],
-  'analytics':['Analytics','Track your performance'],
-  'strategy-planner':['Strategy Planner','Build your content strategy'],
-  'link-in-bio':['Link-in-Bio','Your real estate hub page'],
-  'brand-kit':['Brand Kit','Your brand settings'],
-  'templates':['Templates','Ready-to-use post templates'],
-  'settings':['Settings','Account and preferences'],
-};
-function switchView(id){
-  document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));
-  document.getElementById('view-'+id)?.classList.add('active');
-  document.querySelectorAll('.nav-item').forEach(b=>b.classList.remove('active'));
-  document.querySelector('.nav-item[data-view="'+id+'"]')?.classList.add('active');
-  if(PAGE[id]){document.getElementById('page-title').textContent=PAGE[id][0];document.getElementById('page-sub').textContent=PAGE[id][1];}
-  document.getElementById('sidebar').classList.remove('open');
-  window.scrollTo(0,0);setTimeout(()=>lucide.createIcons(),20);
-}
-document.getElementById('nav').addEventListener('click',e=>{
-  const b=e.target.closest('[data-view]');if(b)switchView(b.dataset.view);
-});
-document.getElementById('menu-btn')?.addEventListener('click',()=>{
-  const sb=document.getElementById('sidebar');
-  const ov=document.getElementById('overlay');
-  sb.classList.toggle('open');
-  ov.classList.toggle('show');
-});
-document.getElementById('overlay')?.addEventListener('click',()=>{
-  document.getElementById('sidebar').classList.remove('open');
-});
+<section class="view" id="view-brand-kit">
+<div class="page" style="max-width:800px;margin:0 auto;">
+  <div class="card card-p" style="display:flex;flex-direction:column;gap:16px;">
+    <div><h2 style="font-family:'Public Sans',sans-serif;font-size:15px;font-weight:700;">Brand Kit Configuration</h2><p style="font-size:12px;color:var(--t3);margin-top:2px;">Claude injects these guidelines automatically into every output template script it builds.</p></div>
+    <div class="g2">
+      <div class="field"><label class="lbl">Primary Brand Color Accent</label><div style="display:flex;gap:10px;align-items:center;"><input type="color" value="#6c63ff"><span style="font-family:monospace;font-size:12px;">#6C63FF</span></div></div>
+      <div class="field"><label class="lbl">Secondary Brand Palette</label><div style="display:flex;gap:10px;align-items:center;"><input type="color" value="#e8c87a"><span style="font-family:monospace;font-size:12px;">#E8C87A</span></div></div>
+    </div>
+    <div class="field"><label class="lbl">Mandatory Disclaimers / Office License Brand Strings</label><input type="text" value="Sarah Johnson Partners · Licensed Corporate Brokerage #409-221A"></div>
+    <div style="display:flex;justify-content:flex-end;margin-top:6px;"><button class="btn btn-primary" onclick="toast('Brand kit parameters bound to active workspace')">Update Core Rules</button></div>
+  </div>
+</div>
+</section>
 
-// ── CLAUDE API ────────────────────────────────────────────────────────────────
-async function claude(system,user){
-  if(!navigator.onLine)throw new Error('offline');
-  const r=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'Content-Type':'application/json'},
-    body:JSON.stringify({model:MODEL,max_tokens:1000,system,messages:[{role:'user',content:user}]})});
-  if(!r.ok)throw new Error('api-'+r.status);
-  const d=await r.json();return d.content.map(b=>b.type==='text'?b.text:'').join('');
-}
+<section class="view" id="view-templates">
+<div class="page">
+  <div class="page-header"><h1 class="page-title">Graphic Framework Envelopes</h1><p class="page-sub">Browse static canvas layers. Use AI Generator to automatically map custom copy fields onto templates.</p></div>
+  <div id="tpl-grid">
+    <div class="tpl-card" onclick="switchView('ai-generator')"><div class="tpl-thumb tpl-c1"><i data-lucide="sparkles" style="color:var(--g1);width:20px;height:20px;"></i></div><div class="tpl-body"><p class="tpl-name">Just Listed Platinum</p><p class="tpl-meta">Aspect: 1:1 Feed Box</p></div></div>
+    <div class="tpl-card" onclick="switchView('ai-generator')"><div class="tpl-thumb tpl-c2"><i data-lucide="home" style="color:var(--blue);width:20px;height:20px;"></i></div><div class="tpl-body"><p class="tpl-name">Open House Alert Bold</p><p class="tpl-meta">Aspect: 1:1 Feed Box</p></div></div>
+    <div class="tpl-card" onclick="switchView('ai-generator')"><div class="tpl-thumb tpl-c3"><i data-lucide="trending-up" style="color:var(--a2);width:20px;height:20px;"></i></div><div class="tpl-body"><p class="tpl-name">Market Report Grid Layer</p><p class="tpl-meta">Aspect: 16:9 Landscape</p></div></div>
+    <div class="tpl-card" onclick="switchView('ai-generator')"><div class="tpl-thumb tpl-c4"><i data-lucide="award" style="color:var(--green);width:20px;height:20px;"></i></div><div class="tpl-body"><p class="tpl-name">Testimonial Signature Framer</p><p class="tpl-meta">Aspect: 9:16 Vertical Reel</p></div></div>
+  </div>
+</div>
+</section>
 
-// Get selected lang chips
-function getLangs(cid){return[...document.querySelectorAll('#'+cid+' .chip.on')].map(c=>c.dataset.lang);}
+<section class="view" id="view-settings">
+<div class="page" style="max-width:760px;margin:0 auto;">
+  <div class="card card-p" style="display:flex;flex-direction:column;gap:14px;">
+    <p style="font-family:'Public Sans',sans-serif;font-size:14px;font-weight:700;">Account &amp; API Integrations</p>
+    <div style="display:flex;flex-direction:column;gap:10px;">
+      <div class="inset inset-p" style="display:flex;align-items:center;justify-content:between;justify-content:space-between;"><div><p style="font-size:12.5px;font-weight:600;">Instagram Business Routing Node</p><p style="font-size:11px;color:var(--t3);">SarahJohnson_RE</p></div><span class="badge b-green">Connected</span></div>
+      <div class="inset inset-p" style="display:flex;align-items:center;justify-content:between;justify-content:space-between;"><div><p style="font-size:12.5px;font-weight:600;">Facebook Marketing Page Link</p><p style="font-size:11px;color:var(--t3);">Sarah Johnson Premium Properties</p></div><span class="badge b-green">Connected</span></div>
+    </div>
+    <div class="field" style="margin-top:6px;"><label class="lbl">Registered Account Email</label><input type="text" value="sarah.johnson@listingspro.ai" disabled></div>
+  </div>
+</div>
+</section>
 
-// Build language instruction
-function langInstr(langs){
-  if(!langs.length||(langs.length===1&&langs[0]==='English'))return'Write in English.';
-  const F={'English':'🇬🇧','Spanish':'🇪🇸','Dutch':'🇳🇱','German':'🇩🇪','French':'🇫🇷'};
-  const flags=langs.map(l=>F[l]||l).join(' ');
-  return`Format as ONE combined post:
-${flags} (other languages below)
+</div></div><script>
+// Mock Memory Stores representing active server states
+let DATA_POSTS = [
+  { id:101, date:'June 19', time:'16:30', status:'approved', tpl:'just-listed', text:'✨ JUST LISTED! ✨\nCheck out 742 Evergreen Terrace. Stunning 4-bedroom home featuring a luxury sunlit kitchen, newly tiled patio, and private pool.\n\nOpen house this Sunday 2-4 PM. DM for brochure details!', tags:'#NewListing #DreamHome' },
+  { id:102, date:'June 21', time:'10:15', status:'approved', tpl:'open-house', text:'🏡 OPEN HOUSE REMINDER 🏡\nJoin us this Sunday at 14 High Street from 1:00 PM to 3:00 PM. High ceilings, panoramic neighborhood views, and pristine styling.\n\nSee you there!', tags:'#OpenHouse #PropertyTour' },
+  { id:103, date:'June 24', time:'09:00', status:'review', tpl:'local-expert', text:'📊 SPRINGFIELD MARKET INSIGHTS 📊\nAverage property values in the eastern hub have expanded by 4.2% over the last quarter. Buyer demand remains strong.\n\nWondering what your home is worth today? Click the link in our bio for a free custom valuation breakdown!', tags:'#MarketReport #LocalExpert' },
+  { id:104, date:'June 26', time:'18:00', status:'draft', tpl:'testimonial', text:'⭐️ CLIENT REVIEW SUCCESS ⭐️\n"Sarah made our sale completely stress-free. We got 10% over our reserve within the first week of listing!" - The Miller Family.\n\nThank you for trusting our group with your journey!', tags:'#ClientReview #Sold' }
+];
 
-[English version here]
+let DATA_INBOX = [
+  { id:1, user:'Marc Davis', platform:'Instagram Comment', msg:'Is this property still open this Sunday? What are the school catchments like?', resolved:false, draft:'"Hi Marc! Yes, 742 Evergreen Terrace is open this Sunday 2-4 PM. It sits inside the highly-rated Springfield Central School catchment. Would you like me to email you the full registration prospectus?"' },
+  { id:2, user:'Elena Rostova', platform:'Facebook DM', msg:'Hi, can you send the price guide for the High Street townhouse? Thanks!', resolved:false, draft:'"Hello Elena! The price guide guide for 14 High Street is currently tracking expectations around $850,000. I can forward the full contract disclosure copy to you directly if you provide an email address!"' }
+];
 
-${langs.filter(l=>l!=='English').map(l=>`${F[l]||''} ${l}:\n[${l} version here]`).join('\n\n')}
-
-Each version should be natural and culturally appropriate for that market.`;
-}
-
-// Lang chip toggle
-document.addEventListener('click',e=>{const ch=e.target.closest('.chip');if(ch&&!e.target.closest('button'))ch.classList.toggle('on');});
-
-// ── MONTHLY WIZARD ────────────────────────────────────────────────────────────
-let mwS=1,mwT=6;
-function mwDots(){const c=document.getElementById('wizard-dots');if(!c)return;c.innerHTML='';for(let i=1;i<=mwT;i++)c.innerHTML+=`<div class="wdot ${i===mwS?'on':i<mwS?'done':''}"></div>`;}
-function mwShow(){document.querySelectorAll('#view-monthly-wizard .wizard-step').forEach(s=>s.classList.remove('active'));document.querySelector('#view-monthly-wizard .wizard-step[data-step="'+mwS+'"]')?.classList.add('active');document.getElementById('mw-prev')?.classList.toggle('hidden',mwS===1);document.getElementById('mw-next')?.classList.toggle('hidden',mwS===mwT);mwDots();}
-mwDots();mwShow();
-document.getElementById('mw-next')?.addEventListener('click',()=>{if(mwS<mwT){mwS++;mwShow();}});
-document.getElementById('mw-prev')?.addEventListener('click',()=>{if(mwS>1){mwS--;mwShow();}});
-document.querySelectorAll('.mw-mix').forEach(s=>s.addEventListener('input',function(){this.nextElementSibling.textContent=this.value+'%';}));
-
-document.getElementById('mw-gen-btn')?.addEventListener('click',async()=>{
-  const genBtn=document.getElementById('mw-gen-btn');
-  genBtn.classList.add('hidden');document.getElementById('mw-gen').classList.remove('hidden');
-  const goal=document.getElementById('mw-goal').value,region=document.getElementById('mw-region').value,aud=document.getElementById('mw-audience').value;
-  const plats=[...document.querySelectorAll('.mw-plat:checked')].map(c=>c.value);
-  const langs=getLangs('mw-langs');
-  try{
-    const res=await claude(
-      'You are an expert real estate social media manager for the European market.',
-      `Generate 8 diverse social media posts for a real estate agent:
-Goal: ${goal} | Region: ${region} | Audience: ${aud} | Platforms: ${plats.join(', ')}
-${langInstr(langs)}
-
-For each post use EXACTLY this format:
----POST---
-PLATFORM: [platform]
-TYPE: [Listing/Education/Local/Lifestyle/News]
-CAPTION: [full caption with emojis]
-HASHTAGS: [10 hashtags]
----END---`
-    );
-    const posts=res.split('---POST---').filter(p=>p.includes('PLATFORM:'));
-    const grid=document.getElementById('mw-grid');grid.innerHTML='';
-    posts.forEach((p,i)=>{
-      const plat=(p.match(/PLATFORM:\s*(.+)/)||[])[1]?.trim()||'Instagram';
-      const type=(p.match(/TYPE:\s*(.+)/)||[])[1]?.trim()||'Post';
-      const cap=(p.match(/CAPTION:\s*([\s\S]+?)HASHTAGS:/)||[])[1]?.trim()||p.slice(0,200);
-      const tags=(p.match(/HASHTAGS:\s*(.+)/)||[])[1]?.trim()||'';
-      const bc=plat.toLowerCase().includes('instagram')?'b-ig':plat.toLowerCase().includes('facebook')?'b-fb':plat.toLowerCase().includes('linkedin')?'b-li':'b-tt';
-      grid.innerHTML+=`<div class="post-card fade-in"><div class="post-card-inner"><span class="badge ${bc}">${plat.slice(0,2).toUpperCase()}</span><span style="font-size:11px;color:var(--t3);">${type}</span></div><p>${cap.slice(0,250)}</p><p class="tags">${tags.slice(0,80)}</p><button class="btn btn-ghost btn-sm" style="width:100%;margin-top:8px;" onclick="showToast('Saved! 📋')">Save</button></div>`;
-    });
-    document.getElementById('mw-count').textContent=posts.length;
-    document.getElementById('mw-gen').classList.add('hidden');document.getElementById('mw-res').classList.remove('hidden');
-  }catch(e){
-    document.getElementById('mw-gen').classList.add('hidden');genBtn.classList.remove('hidden');
-    showToast(e.message==='offline'?'⚠️ Offline — AI unavailable':'❌ Generation failed','err');
-  }
-});
-
-// ── AI GENERATOR ──────────────────────────────────────────────────────────────
-document.querySelectorAll('.ai-tab').forEach(tab=>tab.addEventListener('click',function(){
-  document.querySelectorAll('.ai-tab').forEach(t=>{t.classList.remove('btn-primary','on');t.classList.add('btn-ghost');});
-  this.classList.add('btn-primary','on');this.classList.remove('btn-ghost');
-  ['social','blog','gbp','custom'].forEach(p=>{const el=document.getElementById('ai-panel-'+p);if(el)el.classList.toggle('hidden',p!==this.dataset.panel);});
-}));
-
-document.getElementById('gen-btn')?.addEventListener('click',async()=>{
-  const desc=document.getElementById('prop-url').value.trim();
-  if(!desc){showToast('Enter a property description','err');return;}
-  const plats=[...document.querySelectorAll('.plat-check:checked')].map(c=>c.value);
-  const tone=document.getElementById('ai-tone').value,len=document.getElementById('ai-len').value;
-  const langs=getLangs('ai-langs');
-  document.getElementById('ai-out').classList.add('hidden');document.getElementById('ai-load').classList.remove('hidden');
-  try{
-    const res=await claude(
-      'You are an expert real estate social media manager. Write compelling property posts that convert browsers into buyers.',
-      `Create a ${len} ${tone.toLowerCase()} social media post for:
-${desc}
-Platforms: ${plats.join(', ')}
-${langInstr(langs)}
-
-Reply in EXACTLY this format:
-CAPTION:
-[full post caption with emojis]
-
-HASHTAGS:
-[15 relevant hashtags]
-
-CTA:
-[3 CTA options, one per line]`
-    );
-    const cap=(res.match(/CAPTION:\s*([\s\S]+?)HASHTAGS:/)||[])[1]?.trim()||res;
-    const tags=(res.match(/HASHTAGS:\s*([\s\S]+?)CTA:/)||[])[1]?.trim()||'';
-    const ctas=(res.match(/CTA:\s*([\s\S]+)$/)||[])[1]?.trim()||'';
-    document.getElementById('gen-caption').textContent=cap;
-    document.getElementById('gen-hashtags').textContent=tags;
-    document.getElementById('gen-ctas').textContent=ctas;
-    document.getElementById('ai-load').classList.add('hidden');const _ao=document.getElementById('ai-out');_ao.classList.remove('hidden');_ao.style.display='flex';
-  }catch(e){document.getElementById('ai-load').classList.add('hidden');showToast(e.message==='offline'?'⚠️ Offline':'❌ Failed','err');}
-});
-
-document.getElementById('copy-btn')?.addEventListener('click',()=>{
-  navigator.clipboard.writeText(document.getElementById('gen-caption').textContent).then(()=>showToast('Copied! 📋'));
-});
-
-async function simpleGen(btn,outEl,system,prompt){
-  const b=document.getElementById(btn),o=document.getElementById(outEl);
-  b.textContent='⏳...';b.disabled=true;
-  try{const r=await claude(system,prompt);o.textContent=r;o.classList.remove('hidden');}
-  catch(e){showToast(e.message==='offline'?'⚠️ Offline':'❌ Failed','err');}
-  b.textContent='✨ Generate';b.disabled=false;
-}
-
-document.getElementById('gen-blog')?.addEventListener('click',()=>{
-  const kw=document.getElementById('blog-kw').value||'Marbella real estate';
-  const aud=document.getElementById('blog-aud').value,tone=document.getElementById('blog-tone').value;
-  simpleGen('gen-blog','blog-out','You are an expert real estate content writer.',`Write a 600-word ${tone.toLowerCase()} blog article about: ${kw}\nAudience: ${aud}\nInclude headline, 3 sections with subheadings, CTA.`);
-});
-
-document.getElementById('gen-gbp')?.addEventListener('click',()=>{
-  const type=document.getElementById('gbp-type').value,topic=document.getElementById('gbp-topic').value;
-  simpleGen('gen-gbp','gbp-out','You are a Google Business Profile expert for estate agencies.',`Write a ${type} GBP update about: ${topic}\nUnder 300 characters, include emoji, end with CTA.`);
-});
-
-document.getElementById('gen-custom')?.addEventListener('click',()=>{
-  const topic=document.getElementById('custom-topic').value,count=document.getElementById('custom-count').value;
-  simpleGen('gen-custom','custom-out','You are a real estate social media campaign specialist.',`Create ${count} post ideas for this campaign: ${topic}\nFor each: Platform, Type, Hook (1 sentence). Number them.`);
-});
-
-// ── CAMPAIGN WIZARD ───────────────────────────────────────────────────────────
-document.getElementById('cw-btn')?.addEventListener('click',async()=>{
-  const topic=document.getElementById('cw-topic').value,goal=document.getElementById('cw-goal').value;
-  const aud=document.getElementById('cw-aud').value,dur=document.getElementById('cw-dur').value;
-  const langs=getLangs('cw-langs');
-  const btn=document.getElementById('cw-btn');btn.textContent='⏳...';btn.disabled=true;
-  try{
-    const res=await claude('You are a real estate campaign strategist.',
-      `Create a ${dur} social media campaign:
-Topic: ${topic} | Goal: ${goal} | Audience: ${aud}
-${langInstr(langs)}
-Generate 6 posts using:
----POST---
-PLATFORM: [platform]
-DAY: [Day N]
-CAPTION: [full caption]
----END---`
-    );
-    const posts=res.split('---POST---').filter(p=>p.includes('PLATFORM:'));
-    const grid=document.getElementById('cw-grid');grid.innerHTML='';
-    posts.forEach((p,i)=>{
-      const plat=(p.match(/PLATFORM:\s*(.+)/)||[])[1]?.trim()||'Instagram';
-      const day=(p.match(/DAY:\s*(.+)/)||[])[1]?.trim()||`Day ${i+1}`;
-      const cap=(p.match(/CAPTION:\s*([\s\S]+?)(?:---END---|$)/)||[])[1]?.trim()||p.slice(0,300);
-      const bc=plat.toLowerCase().includes('instagram')?'b-ig':plat.toLowerCase().includes('facebook')?'b-fb':plat.toLowerCase().includes('linkedin')?'b-li':'b-tt';
-      grid.innerHTML+=`<div class="post-card fade-in"><div class="post-card-inner"><span class="badge ${bc}">${plat.slice(0,2).toUpperCase()}</span><span style="font-size:11px;color:var(--t3);">${day}</span></div><p>${cap.slice(0,280)}</p><button class="btn btn-ghost btn-sm" style="width:100%;margin-top:8px;" onclick="showToast('Saved!')">Save</button></div>`;
-    });
-    document.getElementById('cw-out').classList.remove('hidden');
-  }catch(e){showToast(e.message==='offline'?'⚠️ Offline':'❌ Failed','err');}
-  btn.textContent='✨ Generate Campaign';btn.disabled=false;
-});
-
-// ── BRAINSTORM CHAT ───────────────────────────────────────────────────────────
-const chatHist=[{role:'assistant',content:"Hi! I'm your AI brainstorm partner. I know your strategy targets luxury investors in Marbella with a storytelling tone. What would you like to work on?"}];
-function renderChat(){
-  const c=document.getElementById('chat-msgs');c.innerHTML='';
-  chatHist.forEach(m=>{
-    if(m.role==='user')c.innerHTML+=`<div style="display:flex;justify-content:flex-end;"><div class="bubble-user">${m.content}</div></div>`;
-    else c.innerHTML+=`<div class="bubble-ai">${m.content}</div>`;
-  });
-  c.scrollTop=c.scrollHeight;
-}
-async function sendChat(msg){
-  chatHist.push({role:'user',content:msg});renderChat();
-  document.getElementById('chat-input').value='';
-  const tid='t'+Date.now();
-  document.getElementById('chat-msgs').innerHTML+=`<div class="bubble-ai ai-pulse" id="${tid}">Thinking...</div>`;
-  document.getElementById('chat-msgs').scrollTop=9999;
-  try{
-    const msgs=chatHist.map(m=>({role:m.role,content:m.content}));
-    const r=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({model:MODEL,max_tokens:1000,
-        system:'You are an expert real estate social media strategist for Social Listings Pro. The agent targets luxury investors & expats in Marbella, Costa del Sol with a storytelling tone. Be concise, creative, and practical.',
-        messages:msgs})});
-    const d=await r.json();const reply=d.content.map(b=>b.type==='text'?b.text:'').join('');
-    document.getElementById(tid)?.remove();
-    chatHist.push({role:'assistant',content:reply});renderChat();
-  }catch(e){
-    document.getElementById(tid)?.remove();
-    const err=navigator.onLine?'Sorry, something went wrong.':'⚠️ You\'re offline — AI chat unavailable.';
-    chatHist.push({role:'assistant',content:err});renderChat();
-  }
-}
-document.getElementById('chat-send')?.addEventListener('click',()=>{const v=document.getElementById('chat-input').value.trim();if(v)sendChat(v);});
-document.getElementById('chat-input')?.addEventListener('keypress',e=>{if(e.key==='Enter')document.getElementById('chat-send').click();});
-document.getElementById('clear-chat')?.addEventListener('click',()=>{chatHist.splice(1);renderChat();});
-document.querySelectorAll('.qp').forEach(b=>b.addEventListener('click',()=>sendChat(b.dataset.p)));
-
-// ── SOCIAL INBOX ──────────────────────────────────────────────────────────────
-let curMsg=null;
-document.querySelectorAll('.inbox-row').forEach(m=>m.addEventListener('click',function(){
-  curMsg={sender:this.dataset.sender,ctx:this.dataset.ctx,msg:this.dataset.msg,prop:this.dataset.prop};
-  document.getElementById('inbox-empty').classList.add('hidden');
-  const chat=document.getElementById('inbox-chat');chat.classList.remove('hidden');chat.style.display='flex';chat.style.flexDirection='column';chat.style.height='100%';
-  document.getElementById('inbox-sender').textContent=curMsg.sender;
-  document.getElementById('inbox-ctx').textContent=curMsg.ctx+' · '+curMsg.prop;
-  document.getElementById('inbox-msgs').innerHTML=`<div class="bubble-ai">${curMsg.msg}</div>`;
-  document.getElementById('ai-sug').classList.add('hidden');
-}));
-
-async function genReply(prompt){
-  if(!curMsg)return;
-  const btn=document.getElementById('ai-reply-btn');btn.textContent='⏳...';btn.disabled=true;
-  try{
-    const r=await claude('You are a professional real estate agent assistant. Write helpful, warm, concise replies.',prompt);
-    const sug=document.getElementById('ai-sug');sug.textContent=r;sug.classList.remove('hidden');
-    document.getElementById('reply-input').value=r;
-  }catch(e){showToast(e.message==='offline'?'⚠️ Offline':'❌ Failed','err');}
-  btn.textContent='✨ AI Reply';btn.disabled=false;
-}
-
-document.getElementById('ai-reply-btn')?.addEventListener('click',()=>{
-  if(!curMsg)return;
-  genReply(`Reply to ${curMsg.sender}: "${curMsg.msg}" about ${curMsg.prop}. Short, warm, professional. Under 3 sentences with a CTA.`);
-});
-
-document.querySelectorAll('.iq-btn').forEach(b=>b.addEventListener('click',()=>{
-  if(!curMsg)return;
-  const p=b.dataset.t==='viewing'
-    ?`Suggest scheduling a viewing for "${curMsg.msg}" about ${curMsg.prop}. Short professional reply with specific CTA.`
-    :`Provide helpful property info for "${curMsg.msg}" about ${curMsg.prop}. Brief and professional.`;
-  genReply(p);
-}));
-
-document.getElementById('reply-send')?.addEventListener('click',()=>{
-  const v=document.getElementById('reply-input').value.trim();if(!v)return;
-  document.getElementById('inbox-msgs').innerHTML+=`<div style="display:flex;justify-content:flex-end;"><div class="bubble-user">${v}</div></div>`;
-  document.getElementById('reply-input').value='';
-  document.getElementById('ai-sug').classList.add('hidden');
-  document.getElementById('inbox-msgs').scrollTop=9999;
-  showToast('Reply sent! ✅');
-});
-
-// ── STRATEGY ──────────────────────────────────────────────────────────────────
-document.getElementById('gen-strategy')?.addEventListener('click',async()=>{
-  const region=document.getElementById('str-region').value,goal=document.getElementById('str-goal').value;
-  const tone=document.getElementById('str-tone').value,posts=document.getElementById('str-posts').value;
-  const btn=document.getElementById('gen-strategy');btn.textContent='⏳...';btn.disabled=true;
-  try{
-    const r=await claude('You are a real estate social media strategist.',
-      `Create a monthly content strategy:
-Region: ${region} | Goal: ${goal} | Tone: ${tone} | Monthly Posts: ${posts}
-
-Include: 1) Weekly themes (4 weeks) 2) Platform recommendations 3) Top 5 content ideas with hooks 4) Best posting times 5) KPI targets.
-Format clearly with sections.`
-    );
-    document.getElementById('str-out').textContent=r;
-  }catch(e){showToast(e.message==='offline'?'⚠️ Offline':'❌ Failed','err');}
-  btn.textContent='✨ Generate Strategy';btn.disabled=false;
-});
-
-// ── CALENDAR ──────────────────────────────────────────────────────────────────
-(function renderCal(){
-  const g=document.getElementById('cal-grid');if(!g)return;
-  const data=[
-    {},{}
-    ,{},{day:1},{day:2,p:'ig'},{day:3},{day:4,p:'fb'},{day:5,p:'tt'},{day:6},{day:7,p:'ig'},
-    {day:8},{day:9,p:'li'},{day:10},{day:11,p:'ig'},{day:12,p:'fb'},{day:13},{day:14,p:'tt'},
-    {day:15,p:'ig'},{day:16},{day:17,p:'li'},{day:18,p:'fb'},{day:19},{day:20,p:'ig'},
-    {day:21},{day:22,p:'tt'},{day:23},{day:24,p:'ig'},{day:25,p:'li'},{day:26},{day:27,p:'fb'},
-    {day:28},{day:29,p:'ig'},{day:30,p:'tt'},{},{},{},{},{}
-  ];
-  g.innerHTML='';
-  data.forEach(c=>{
-    if(!c.day){g.innerHTML+='<div></div>';return;}
-    const b=c.p?`<span class="badge b-${c.p}" style="font-size:9px;padding:1px 5px;">${c.p.toUpperCase()}</span>`:'';
-    g.innerHTML+=`<div class="cal-day ${c.p?'has-post':''}" onclick="showToast('Jun ${c.day}${c.p?' · post scheduled':''}')"><span style="font-size:12px;color:var(--t3);">${c.day}</span><div style="margin-top:4px;">${b}</div></div>`;
-  });
-})();
-
-// ── CHARTS ────────────────────────────────────────────────────────────────────
-function chart(id,pts,col){
-  const s=document.getElementById(id);if(!s)return;
-  const W=300,H=100,pad=12,max=Math.max(...pts);
-  const xy=pts.map((p,i)=>[pad+(i/(pts.length-1))*(W-pad*2),H-pad-(p/max)*(H-pad*2)]);
-  const poly=xy.map(p=>p.join(',')).join(' ');
-  const area=`M${xy[0].join(',')} ${xy.slice(1).map(p=>'L'+p.join(',')).join(' ')} L${xy[xy.length-1][0]},${H-pad} L${xy[0][0]},${H-pad} Z`;
-  s.innerHTML=`<defs><linearGradient id="g${id}" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="${col}" stop-opacity=".25"/><stop offset="100%" stop-color="${col}" stop-opacity="0"/></linearGradient></defs>
-<path d="${area}" fill="url(#g${id})"/>
-<polyline points="${poly}" fill="none" stroke="${col}" stroke-width="2.5" stroke-linecap="round"/>
-${xy.map(p=>`<circle cx="${p[0]}" cy="${p[1]}" r="3" fill="var(--s2)" stroke="${col}" stroke-width="2"/>`).join('')}`;
-}
-chart('chart-eng',[1.5,2.2,3,2.8,3.9,4.5,4.8],'#10b981');
-chart('chart-reach',[8,12,10,15,18,14,20],'#6366f1');
-
-// ── BRAND COLORS ──────────────────────────────────────────────────────────────
-['bc-pri','bc-sec','bc-acc'].forEach(id=>{document.getElementById(id)?.addEventListener('input',function(){document.getElementById(id+'-hex').textContent=this.value.toUpperCase();});});
-
-// ── TEMPLATES FILTER ──────────────────────────────────────────────────────────
-document.querySelectorAll('.tpl-f').forEach(b=>b.addEventListener('click',function(){
-  document.querySelectorAll('.tpl-f').forEach(x=>{x.classList.remove('btn-primary','active-tpl');x.classList.add('btn-ghost');});
-  this.classList.add('btn-primary');this.classList.remove('btn-ghost');
-  const f=this.dataset.f;
-  document.querySelectorAll('#tpl-grid .tpl-card').forEach(tc=>{tc.style.display=(f==='all'||tc.dataset.type===f)?'':'none';});
-}));
-
-// ── LINK-IN-BIO PREVIEW ───────────────────────────────────────────────────────
-document.getElementById('bio-hl')?.addEventListener('input',function(){document.getElementById('bio-prev-hl').textContent=this.value;});
-document.getElementById('bio-tl')?.addEventListener('input',function(){document.getElementById('bio-prev-tl').textContent=this.value;});
-
-// ── SETTINGS / PROFILE ────────────────────────────────────────────────────────
-function save(k,v){try{localStorage.setItem('spp_'+k,JSON.stringify(v));}catch(e){}}
-function load(k,fb){try{const v=localStorage.getItem('spp_'+k);return v?JSON.parse(v):fb;}catch(e){return fb;}}
-
-document.getElementById('save-profile')?.addEventListener('click',()=>{
-  const n=document.getElementById('s-name').value;
-  save('name',n);save('agency',document.getElementById('s-agency').value);save('region',document.getElementById('s-region').value);
-  document.getElementById('sidebar-name').textContent=n;
-  document.getElementById('avatar-init').textContent=n.split(' ').map(w=>w[0]).join('').slice(0,2).toUpperCase();
-  showToast('Profile saved! ✅');
-});
-
-document.getElementById('save-settings')?.addEventListener('click',()=>{
-  save('lang',document.getElementById('s-lang')?.value);
-  save('emoji',document.getElementById('s-emoji')?.value);
-  save('brand',document.getElementById('s-brand')?.value);
-  save('length',document.getElementById('s-length')?.value);
-  save('tone-ig',document.getElementById('s-tone-ig')?.value);
-  save('tone-fb',document.getElementById('s-tone-fb')?.value);
-  save('tone-li',document.getElementById('s-tone-li')?.value);
-  save('tone-tt',document.getElementById('s-tone-tt')?.value);
-  save('tone-gbp',document.getElementById('s-tone-gbp')?.value);
-  save('tone-blog',document.getElementById('s-tone-blog')?.value);
-  showToast('Settings saved! ✅');
-});
-
-// Load saved settings into selects
-function loadSettings(){
-  const fields=[['s-lang','lang'],['s-emoji','emoji'],['s-brand','brand'],['s-length','length'],
-    ['s-tone-ig','tone-ig'],['s-tone-fb','tone-fb'],['s-tone-li','tone-li'],
-    ['s-tone-tt','tone-tt'],['s-tone-gbp','tone-gbp'],['s-tone-blog','tone-blog']];
-  fields.forEach(([id,key])=>{const el=document.getElementById(id);const val=load(key,null);if(el&&val){for(let o of el.options){if(o.value===val||o.text===val){o.selected=true;break;}}}});
-}
-loadSettings();
-
-// Load saved
-const sn=load('name','Sarah Johnson');
-if(document.getElementById('s-name'))document.getElementById('s-name').value=sn;
-if(document.getElementById('sidebar-name'))document.getElementById('sidebar-name').textContent=sn;
-if(document.getElementById('avatar-init'))document.getElementById('avatar-init').textContent=sn.split(' ').map(w=>w[0]).join('').slice(0,2).toUpperCase();
-
-
-// ── TOOLTIP SYSTEM ────────────────────────────────────────────────────────────
-let _activeTip = null;
-function showTip(icon, text) {
-  if (_activeTip) {
-    _activeTip.remove();
-    document.querySelectorAll('.tip-icon.active').forEach(i=>i.classList.remove('active'));
-    if (_activeTip._src === icon) { _activeTip = null; return; }
-    _activeTip = null;
-  }
-  const box = document.createElement('div');
-  box.className = 'tip-box';
-  box._src = icon;
-  box.innerHTML = '<span class="tip-close" onclick="closeTip()">&#x2715;</span>' + text;
-  document.body.appendChild(box);
-  const r = icon.getBoundingClientRect();
-  const maxW = Math.min(260, window.innerWidth - 24);
-  box.style.maxWidth = maxW + 'px';
-  let left = r.left + window.scrollX + r.width/2 - maxW/2;
-  left = Math.max(12, Math.min(left, window.innerWidth - maxW - 12));
-  let top = r.top + window.scrollY - 12;
-  box.style.left = left + 'px';
-  box.style.top = top + 'px';
-  box.style.transform = 'translateY(-100%)';
-  if (r.top < 120) { box.style.transform = 'none'; box.style.top = (r.bottom + window.scrollY + 8) + 'px'; }
-  setTimeout(() => box.classList.add('show'), 10);
-  _activeTip = box;
-  icon.classList.add('active');
-  setTimeout(() => {
-    function outside(e) {
-      if (!box.contains(e.target) && e.target !== icon) { closeTip(); document.removeEventListener('click', outside); }
-    }
-    document.addEventListener('click', outside);
-  }, 120);
-}
-function closeTip() {
-  if (_activeTip) {
-    _activeTip.classList.remove('show');
-    document.querySelectorAll('.tip-icon.active').forEach(i=>i.classList.remove('active'));
-    const b = _activeTip; _activeTip = null;
-    setTimeout(() => b.remove(), 160);
-  }
-}
-// Nav tooltips
 const NAV_TIPS = {
-  'dashboard':'Overview of your stats, listings, AI recommendations and quick shortcuts to all tools.',
-  'monthly-wizard':'Answer 6 quick questions and Claude generates a complete month of posts for all platforms in one click.',
-  'ai-generator':'Generate individual social posts, blog articles and Google Business updates. Paste a listing URL or describe a property.',
-  'brainstorm':'Chat freely with Claude — ask for hook ideas, video scripts, hashtag strategies, neighbourhood guides and more.',
-  'campaign-wizard':'Build a focused multi-day campaign around one topic: open house, price drop, neighbourhood guide, market update.',
-  'control-tower':'Kanban board to move posts through To Do → In Progress → Scheduled → Published.',
-  'calendar':'Visual content calendar showing all your scheduled posts by day. Click a date to view or add a post.',
+  'dashboard':'Main command center. Monitor critical engagement multipliers, response statuses, and upcoming auto-queue executions.',
+  'monthly-wizard':'Run the 3-step Claude engine to draft an entire month of targeted social campaigns based on a single listing address brief.',
+  'ai-generator':'Isolated creation suite. Prompt custom single items, script structural video hooks, or alternate wording styles.',
+  'brainstorm':'Continuous live sandbox chat. Chat directly with Claude about general real estate marketing advice, copywriting, or strategy tweaks.',
+  'campaign-wizard':'Generate unified marketing bundles—social posts, email blasts, and landing pages—around a single property offer.',
+  'control-tower':'Pipeline visualizer board. Drag, review, and toggle scheduled updates into live release slots.',
+  'calendar':'Review scheduled posts by day. Click a date to view or add a post.',
   'social-inbox':'All incoming comments and DMs from your connected platforms in one inbox. AI drafts replies in seconds.',
   'analytics':'Track impressions, engagement rate, link clicks and new followers. See your top posts and leads captured.',
   'strategy-planner':'Set SMART goals and let Claude build your full monthly content strategy with weekly themes and posting times.',
@@ -1480,7 +898,17 @@ const NAV_TIPS = {
   'templates':'Ready-made post templates for Just Listed, Open House, Reels and more. AI Auto-Fill populates with your listing.',
   'settings':'Profile, integrations, language, emoji style and tone of voice per platform.',
 };
+
+// ── NAV LOGIC ─────────────────────────────────────────────────────────────────
 document.querySelectorAll('.nav-item[data-view]').forEach(btn => {
+  btn.addEventListener('click', () => {
+    switchView(btn.dataset.view);
+    if(window.innerWidth <= 960) {
+      document.getElementById('sidebar').classList.remove('open');
+      document.getElementById('overlay').classList.remove('show');
+    }
+  });
+  
   const tip = NAV_TIPS[btn.dataset.view];
   if (!tip) return;
   const icon = document.createElement('span');
@@ -1492,6 +920,365 @@ document.querySelectorAll('.nav-item[data-view]').forEach(btn => {
   btn.appendChild(icon);
 });
 
+// Mobile menu toggles
+document.getElementById('menu-btn').addEventListener('click', () => {
+  document.getElementById('sidebar').classList.add('open');
+  document.getElementById('overlay').classList.add('show');
+});
+document.getElementById('overlay').addEventListener('click', () => {
+  document.getElementById('sidebar').classList.remove('open');
+  document.getElementById('overlay').classList.remove('show');
+  hideActiveTip();
+});
+
+function switchView(viewId) {
+  document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+  
+  const targetView = document.getElementById('view-' + viewId);
+  if(targetView) targetView.classList.add('active');
+  
+  const targetNav = document.querySelector(`.nav-item[data-view="${viewId}"]`);
+  if(targetNav) targetNav.classList.add('active');
+  
+  // Update Topbar Text
+  const titleMap = {
+    'dashboard': 'Dashboard', 'monthly-wizard': 'Monthly Autopilot Wizard',
+    'ai-generator': 'AI Content Generator', 'brainstorm': 'Brainstorm Workspace Chat',
+    'campaign-wizard': 'Multi-Channel Campaign Blitz', 'control-tower': 'Control Tower Board',
+    'calendar': 'Content Schedule Calendar', 'social-inbox': 'Social Copilot Inbox',
+    'analytics': 'Performance Analytics', 'strategy-planner': 'Strategic Content Planner',
+    'link-in-bio': 'Link-in-Bio Landing Page', 'brand-kit': 'Core Brand Asset Kit',
+    'templates': 'Visual Component Layouts', 'settings': 'Account Settings'
+  };
+  document.getElementById('page-title').textContent = titleMap[viewId] || 'Command Center';
+  document.getElementById('page-sub').textContent = viewId === 'dashboard' ? 'Welcome back, Sarah' : 'Social Listings Pro Active Suite';
+  
+  // Render sub-elements if required
+  if(viewId === 'dashboard') renderDashboardPosts();
+  if(viewId === 'control-tower') renderKanban();
+  if(viewId === 'calendar') renderCalendarGrid();
+  if(viewId === 'social-inbox') renderInboxList();
+  
+  window.scrollTo(0,0);
+}
+
+// ── TOAST CONSOLE ─────────────────────────────────────────────────────────────
+function toast(msg) {
+  const t = document.getElementById('toast');
+  t.innerHTML = `<i data-lucide="info" style="width:14px;height:14px;color:var(--a2);"></i><span>${msg}</span>`;
+  lucide.createIcons();
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2800);
+}
+
+// ── TOOLTIP CONTEXT SYSTEM ────────────────────────────────────────────────────
+let activeTipBox = null;
+let activeTipIcon = null;
+
+function showTip(iconEl, text) {
+  if (activeTipBox) {
+    hideActiveTip();
+    if (activeTipIcon === iconEl) return;
+  }
+  
+  activeTipIcon = iconEl;
+  activeTipIcon.classList.add('active');
+  
+  activeTipBox = document.createElement('div');
+  activeTipBox.className = 'tip-box fade-in';
+  activeTipBox.innerHTML = `<div class="tip-close">&times;</div><div>${text}</div>`;
+  document.body.appendChild(activeTipBox);
+  
+  activeTipBox.querySelector('.tip-close').addEventListener('click', (e) => {
+    e.stopPropagation();
+    hideActiveTip();
+  });
+  
+  setTimeout(() => { if(activeTipBox) activeTipBox.classList.add('show'); }, 10);
+  positionTip();
+  
+  window.addEventListener('resize', positionTip);
+  window.addEventListener('scroll', positionTip, true);
+  
+  setTimeout(() => {
+    document.addEventListener('click', docClickCloseTip);
+  }, 50);
+}
+
+function hideActiveTip() {
+  if (!activeTipBox) return;
+  if (activeTipIcon) activeTipIcon.classList.remove('active');
+  
+  const boxToRemove = activeTipBox;
+  boxToRemove.classList.remove('show');
+  setTimeout(() => { if(boxToRemove.parentNode) boxToRemove.parentNode.removeChild(boxToRemove); }, 150);
+  
+  window.removeEventListener('resize', positionTip);
+  window.removeEventListener('scroll', positionTip, true);
+  document.removeEventListener('click', docClickCloseTip);
+  
+  activeTipBox = null;
+  activeTipIcon = null;
+}
+
+function docClickCloseTip(e) {
+  if (activeTipBox && !activeTipBox.contains(e.target) && e.target !== activeTipIcon) {
+    hideActiveTip();
+  }
+}
+
+function positionTip() {
+  if (!activeTipBox || !activeTipIcon) return;
+  const targetRect = activeTipIcon.getBoundingClientRect();
+  const tipWidth = activeTipBox.offsetWidth;
+  const tipHeight = activeTipBox.offsetHeight;
+  
+  let left = targetRect.left + (targetRect.width / 2) - (tipWidth / 2);
+  let top = targetRect.top - tipHeight - 8;
+  
+  if (window.innerWidth <= 768) {
+    left = (window.innerWidth - tipWidth) / 2;
+    top = (window.innerHeight - tipHeight) / 2;
+    activeTipBox.style.position = 'fixed';
+  } else {
+    activeTipBox.style.position = 'absolute';
+    left = Math.max(10, Math.min(left, window.innerWidth - tipWidth - 10));
+    if (top < 10) top = targetRect.bottom + 8;
+    left += window.scrollX;
+    top += window.scrollY;
+  }
+  
+  activeTipBox.style.left = left + 'px';
+  activeTipBox.style.top = top + 'px';
+}
+
+// ── ARCHITECTURE EXECUTION LOGIC ──────────────────────────────────────────────
+
+// Render Dashboard View Posts Items
+function renderDashboardPosts() {
+  const container = document.getElementById('dash-posts-row');
+  container.innerHTML = '';
+  const scheduled = DATA_POSTS.filter(p => p.status === 'approved').slice(0, 3);
+  
+  scheduled.forEach(p => {
+    const el = document.createElement('div');
+    el.className = 'post-card';
+    el.innerHTML = `
+      <div class="post-card-inner"><span class="badge b-accent">${p.date} · ${p.time}</span><span class="badge b-green">Queued</span></div>
+      <p>${p.text.replace(/\n/g, '<br>')}</p>
+      <div class="tags">${p.tags}</div>
+    `;
+    container.appendChild(el);
+  });
+}
+
+// Monthly Autopilot Scripting Runner
+function nextStep(current) {
+  document.getElementById(`w-step-${current}`).classList.remove('active');
+  document.getElementById(`w-step-${current+1}`).classList.add('active');
+  const dots = document.querySelectorAll('#w-dots .wdot');
+  dots[current].classList.add('on');
+}
+function prevStep(current) {
+  document.getElementById(`w-step-${current}`).classList.remove('active');
+  document.getElementById(`w-step-${current-1}`).classList.add('active');
+  const dots = document.querySelectorAll('#w-dots .wdot');
+  dots[current-1].classList.remove('on');
+}
+
+function runWizard() {
+  document.getElementById('w-step-3').classList.remove('active');
+  document.getElementById('w-step-4').classList.add('active');
+  
+  const tTitles = [
+    "Analyzing listing architecture & highlights...",
+    "Engineering localized tone variants...",
+    "Structuring image layers & matrix anchors...",
+    "Plotting distribution maps across calendar matrix..."
+  ];
+  
+  let currentIdx = 0;
+  const interval = setInterval(() => {
+    currentIdx++;
+    if(currentIdx < tTitles.length) {
+      document.getElementById('w-load-title').textContent = tTitles[currentIdx];
+    } else {
+      clearInterval(interval);
+      // Inject generated nodes into post bank
+      const address = document.getElementById('w-address').value || "Premium Office Listing";
+      const userSpecs = document.getElementById('w-details').value || "Stunning features throughout.";
+      
+      DATA_POSTS.push({
+        id: Date.now(), date: 'June 20', time: '14:00', status: 'draft', tpl: 'just-listed',
+        text: `✨ JUST REVEALED ACCORDING TO PLAN ✨\nStunning opportunity at ${address}!\n\nHighlights: ${userSpecs.slice(0,120)}...\n\nTap the link in our bio to download blueprints or request a live private viewing tour instantly.`,
+        tags: "#AutopilotDraft #ExclusiveListing"
+      });
+      
+      document.getElementById('w-loading').classList.add('hidden');
+      document.getElementById('w-success').classList.remove('hidden');
+      const dots = document.querySelectorAll('#w-dots .wdot');
+      dots.forEach(d => { d.classList.remove('on'); d.classList.add('done'); });
+    }
+  }, 1000);
+}
+
+// Single Component AI Generator Runner
+function runGenerator() {
+  const topic = document.getElementById('gen-topic').value;
+  const context = document.getElementById('gen-context').value;
+  if(!topic) { alert("Please provide an address or core subject topic query line."); return; }
+  
+  document.getElementById('gen-placeholder').classList.add('hidden');
+  document.getElementById('gen-output-box').classList.remove('hidden');
+  document.getElementById('gen-actions').classList.remove('hidden');
+  
+  document.getElementById('gen-text-area').value = `✨ CLAUDE ENGINE LIVE WORKBENCH OUTPUT DRAFT ✨\n\n📍 Location Focus: ${topic}\n\n🏡 Description Brief: ${context || 'Stunning architectural lines matching upscale neighborhood trends.'}\n\n📈 Market Edge: Highly constrained supply across this specific zip code quadrant provides exceptional equity security for incoming buyers.\n\nDM us directly for private access coordinates before off-market distribution files close next Friday!\n\n#PremiumRealEstate #MarketExpert #ListingShowcase`;
+  toast("New tailored copy envelope drafted");
+}
+function copyGenText() {
+  const ta = document.getElementById('gen-text-area');
+  ta.select();
+  document.execCommand('copy');
+  toast("Text written to clipboard buffer");
+}
+function scheduleGenPost() {
+  DATA_POSTS.push({
+    id: Date.now(), date: 'June 22', time: '11:00', status: 'approved', tpl: 'custom',
+    text: document.getElementById('gen-text-area').value, tags: '#CustomAI'
+  });
+  toast("Post successfully assigned to queue matrix");
+  switchView('calendar');
+}
+
+// Multi-Channel Campaign Blitz Deployer
+function runCampaignBlitz() {
+  const anchor = document.getElementById('c-anchor').value;
+  if(!anchor) { alert("Please specify an anchor asset property focus address."); return; }
+  
+  document.getElementById('c-result-box').classList.remove('hidden');
+  document.getElementById('c-out-1').value = `📱 SOCIAL SERIES OVERLAY (IG/FB):\nExclusive intelligence report. ${anchor} is opening up to registered database members prior to portal activation. Drop a comment below or click our bio node to bind a slot.`;
+  document.getElementById('c-out-2').value = `✉️ DATABASE BROADCAST DISPATCH:\nSubject: Private Access Node: ${anchor}\n\nHello VIP Client,\n\nWe are running an invite-only walk-round of this premier signature listing asset before public marketing tracks deploy. Access coordinates and private pricing briefs can be requested via instant reply file return...`;
+  document.getElementById('c-out-3').value = `📄 LEAD CAPTURE PAGE HERO CONTENT:\nHeadline: Unlock Pre-Market Priority Placement for ${anchor}.\nSubheadline: Enter your authorization email token below to inspect certified floor plans and structural survey documents immediately.`;
+  toast("synced multi-channel assets compiled");
+}
+
+// Kanban Management Grid Board Renderer
+function renderKanban() {
+  const colDraft = document.getElementById('kb-col-drafts');
+  const colReview = document.getElementById('kb-col-review');
+  const colApp = document.getElementById('kb-col-approved');
+  
+  colDraft.innerHTML = ''; colReview.innerHTML = ''; colApp.innerHTML = '';
+  
+  DATA_POSTS.forEach(p => {
+    const card = document.createElement('div');
+    card.className = 'kb-card';
+    card.innerHTML = `<p style="font-size:11.5px;font-weight:600;color:var(--t2);margin-bottom:4px;">${p.tpl.toUpperCase()}</p><p style="font-size:12px;color:var(--t1);max-height:44px;overflow:hidden;text-overflow:ellipsis;">${p.text}</p>`;
+    
+    if(p.status === 'draft') colDraft.appendChild(card);
+    if(p.status === 'review') colReview.appendChild(card);
+    if(p.status === 'approved') {
+      card.style.borderLeft = "2px solid var(--green)";
+      colApp.appendChild(card);
+    }
+  });
+}
+
+// Calendar Layout Blocks Engine
+function renderCalendarGrid() {
+  const grid = document.getElementById('cal-days-grid');
+  grid.innerHTML = '';
+  
+  // Render a mock month of 28 block slots for June
+  for(let i=1; i<=28; i++) {
+    const dayNode = document.createElement('div');
+    dayNode.className = 'cal-day';
+    
+    const dayLabelDate = `June ${i}`;
+    const matchingPosts = DATA_POSTS.filter(p => p.date === dayLabelDate);
+    
+    dayNode.innerHTML = `<span style="font-size:10px;font-weight:700;color:var(--t3);">${i}</span>`;
+    if(matchingPosts.length > 0) {
+      dayNode.classList.add('has-post');
+      dayNode.innerHTML += `<div style="width:5px;height:5px;border-radius:50%;background:var(--a1);margin:4px auto 0;"></div>`;
+    }
+    
+    dayNode.addEventListener('click', () => {
+      document.getElementById('cal-inspector-empty').classList.add('hidden');
+      const inspector = document.getElementById('cal-inspector-content');
+      inspector.classList.remove('hidden');
+      
+      document.getElementById('cal-insp-date').textContent = `June ${i}`;
+      if(matchingPosts.length > 0) {
+        document.getElementById('cal-insp-txt').textContent = matchingPosts[0].text;
+        activeInspId = matchingPosts[0].id;
+      } else {
+        document.getElementById('cal-insp-txt').textContent = "No content queued for this date track. Tap 'New Content' above to map an item.";
+        activeInspId = null;
+      }
+    });
+    
+    grid.appendChild(dayNode);
+  }
+}
+let activeInspId = null;
+function deleteCalPost() {
+  if(!activeInspId) return;
+  DATA_POSTS = DATA_POSTS.filter(p => p.id !== activeInspId);
+  toast("Queue slot cleared from engine memory");
+  renderCalendarGrid();
+  document.getElementById('cal-inspector-content').classList.add('hidden');
+  document.getElementById('cal-inspector-empty').classList.remove('hidden');
+}
+
+// Social Copilot Inbox System Engine
+let activeInboxThreadId = null;
+function renderInboxList() {
+  const container = document.getElementById('inbox-list-pane');
+  // clear previous elements except header
+  container.innerHTML = '<p style="font-family:\'Public Sans\',sans-serif;font-size:13px;font-weight:700;margin-bottom:8px;">Unresolved Threads</p>';
+  
+  DATA_INBOX.filter(t => !t.resolved).forEach(t => {
+    const row = document.createElement('div');
+    row.className = 'inbox-row';
+    if(t.id === activeInboxThreadId) row.classList.add('sel');
+    row.innerHTML = `<p style="font-size:12px;font-weight:700;">${t.user}</p><p style="font-size:11px;color:var(--t3);margin-top:1px;">${t.platform}</p>`;
+    
+    row.addEventListener('click', () => {
+      activeInboxThreadId = t.id;
+      document.querySelectorAll('.inbox-row').forEach(r => r.classList.remove('sel'));
+      row.classList.add('sel');
+      
+      document.getElementById('inbox-empty-state').classList.add('hidden');
+      document.getElementById('inbox-thread-view').classList.remove('hidden');
+      
+      document.getElementById('ib-user-name').textContent = t.user;
+      document.getElementById('ib-meta-info').textContent = t.platform;
+      document.getElementById('ib-msg-body').textContent = `"${t.msg}"`;
+      document.getElementById('ib-reply-box').value = t.draft;
+    });
+    
+    container.appendChild(row);
+  });
+}
+function generateInboxDraft() {
+  toast("Claude framework computing response variants...");
+  document.getElementById('ib-reply-box').value = `"Hi! Thanks for reaching out. Yes absolutely, we have compiled the full asset pack for this specific quadrant. Let me know your best mobile contact line or email link so I can push the documentation to your device immediately!"`;
+}
+function sendInboxReply() {
+  if(!activeInboxThreadId) return;
+  DATA_INBOX = DATA_INBOX.filter(t => t.id !== activeInboxThreadId);
+  activeInboxThreadId = null;
+  toast("AI draft approved and dispatched to network channel");
+  document.getElementById('inbox-thread-view').classList.add('hidden');
+  document.getElementById('inbox-empty-state').classList.remove('hidden');
+  renderInboxList();
+}
+
 // ── INIT ──────────────────────────────────────────────────────────────────────
 lucide.createIcons();
-</script></body></html>
+renderDashboardPosts();
+</script>
+</body>
+</html>
