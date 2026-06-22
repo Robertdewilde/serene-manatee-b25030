@@ -193,9 +193,6 @@ input[type=color]{width:38px;height:38px;padding:2px;border-radius:var(--r-md);c
 .inbox-row{padding:12px;border-radius:var(--r-md);border:1px solid var(--b1);cursor:pointer;transition:all .12s;margin-bottom:6px;}
 .inbox-row:hover{background:var(--s3);border-color:var(--b2);}
 .inbox-row.sel{background:var(--s3);border-color:var(--a1);}
-.ai-pulse{opacity:.7;}
-
-
 
 ::-webkit-scrollbar{width:4px;height:4px;}
 ::-webkit-scrollbar-thumb{background:var(--s5);border-radius:2px;}
@@ -259,64 +256,6 @@ input[type=color]{width:38px;height:38px;padding:2px;border-radius:var(--r-md);c
 }
 .ai-pulse{animation:aiPulse 2s ease-in-out infinite;}
 
-/* ── DESKTOP POLISH ─────────────────────────────── */
-.page{max-width:1400px;margin:0 auto;padding:28px 32px;}
-.card,.stat-card,.kb-col,.kb-card,.post-card{min-width:0;}
-.stat-grid{gap:18px;}
-.two-col,.three-col,.four-col{gap:22px!important;align-items:start;}
-.card{overflow:hidden;}
-.section-head{margin-bottom:24px;}
-
-/* ── MOBILE FIX ─────────────────────────────────── */
-@media(max-width:768px){
-  html,body{width:100%;max-width:100%;overflow-x:hidden;background:#0d0f14;}
-  .shell{display:block;width:100%;}
-  .content{width:100%;max-width:100%;overflow:hidden;}
-  .sidebar{width:min(85vw,280px);z-index:100;}
-  .page{padding:12px;}
-  .topbar{height:54px;padding:0 12px;backdrop-filter:none;-webkit-backdrop-filter:none;background:#0d0f14;}
-  #ai-status{display:none!important;}
-  .stat-grid{grid-template-columns:1fr 1fr!important;gap:8px;}
-  .card,.stat-card,.kb-col,.kb-card{overflow:hidden;}
-  .card-p{padding:14px;}
-  .btn{min-height:38px;}
-  input,select,textarea{font-size:16px!important;}
-  .kb-grid{grid-template-columns:1fr!important;overflow:hidden!important;}
-  table{display:block;overflow-x:auto;max-width:100%;}
-  .two-col,.three-col,.four-col{grid-template-columns:1fr!important;}
-  [style*="grid-template-columns:290px"]{grid-template-columns:1fr!important;}
-  [style*="grid-template-columns:1fr auto"]{grid-template-columns:1fr!important;}
-  .hide-sm{display:none!important;}
-  #menu-btn{display:flex!important;}
-}
-@media(min-width:769px) and (max-width:1200px){
-  .page{padding:22px;}
-  .stat-grid{grid-template-columns:repeat(2,1fr);}
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-@media(max-width:768px){
-  #tpl-grid{
-    grid-template-columns:1fr 1fr!important;
-    gap:8px!important;
-  }
-  
-  
-}
-
 /* ── TEMPLATES ───────────────────────────────────── */
 #tpl-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;}
 .tpl-card{background:var(--s2);border:1px solid var(--b1);border-radius:var(--r-lg);overflow:hidden;cursor:pointer;}
@@ -334,6 +273,31 @@ input[type=color]{width:38px;height:38px;padding:2px;border-radius:var(--r-md);c
   #tpl-grid{grid-template-columns:1fr 1fr!important;gap:8px;}
   .tpl-thumb{height:80px;}
 }
+
+/* ── CHAT BUBBLES ────────────────────────────── */
+.bubble-user{background:var(--a1);color:white;border-radius:14px 14px 4px 14px;padding:10px 14px;max-width:80%;font-size:13px;line-height:1.55;}
+.bubble-ai{background:var(--s3);border:1px solid var(--b2);border-radius:14px 14px 14px 4px;padding:10px 14px;max-width:86%;font-size:13px;line-height:1.65;white-space:pre-wrap;}
+/* ── FADE IN ─────────────────────────────────── */
+.fade-in{animation:fi .22s ease;}
+@keyframes fi{from{opacity:0;transform:translateY(4px);}to{opacity:1;transform:none;}}
+/* ── POST CARDS (no tailwind) ────────────────── */
+.post-card-inner{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;}
+.post-card p{font-size:12.5px;line-height:1.55;max-height:80px;overflow:hidden;white-space:pre-wrap;}
+.post-card .tags{font-size:11.5px;color:var(--a2);margin-top:6px;}
+/* ── GRID HELPERS ────────────────────────────── */
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:18px;}
+.g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;}
+.g4{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;}
+@media(max-width:960px){
+  .g2{grid-template-columns:1fr!important;}
+  .g3{grid-template-columns:1fr 1fr!important;}
+  .g4{grid-template-columns:1fr 1fr!important;}
+}
+@media(max-width:600px){
+  .g3,.g4{grid-template-columns:1fr!important;}
+}
+/* ── CP alias ────────────────────────────────── */
+.cp{padding:22px 24px;}
 </style>
 </head>
 <body>
@@ -397,7 +361,7 @@ input[type=color]{width:38px;height:38px;padding:2px;border-radius:var(--r-md);c
 <!-- ═══ DASHBOARD ═══ -->
 <section class="view active" id="view-dashboard">
 <div class="page">
-  <div class="page-header" style="display:flex;align-items:flex-start;justify-content:space-between;gap:12px;flex-wrap:wrap;">
+  <div class="ph" style="display:flex;align-items:flex-start;justify-content:space-between;gap:12px;flex-wrap:wrap;">
     <div><h1 class="page-title">Dashboard</h1><p class="page-sub">Good morning, Sarah · Thursday June 19</p></div>
     <button class="btn btn-primary btn-sm" onclick="switchView('monthly-wizard')"><i data-lucide="plus" style="width:13px;height:13px;"></i>New Content</button>
   </div>
@@ -450,7 +414,7 @@ input[type=color]{width:38px;height:38px;padding:2px;border-radius:var(--r-md);c
 <!-- ═══ MONTHLY WIZARD ═══ -->
 <section class="view" id="view-monthly-wizard">
 <div class="page">
-  <div class="page-header" style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;">
+  <div class="ph">
     <div><h1 class="page-title">Monthly Wizard</h1><p class="page-sub">Plan your full month of content in minutes</p></div>
     <div style="display:flex;gap:8px;" id="wizard-dots"></div>
   </div>
@@ -527,7 +491,7 @@ input[type=color]{width:38px;height:38px;padding:2px;border-radius:var(--r-md);c
 <!-- ═══ AI GENERATOR ═══ -->
 <section class="view" id="view-ai-generator">
 <div class="page">
-  <div class="page-header"><h1 class="page-title">AI Generator</h1><p class="page-sub">Generate platform-optimised content in seconds</p></div>
+  <div class="ph"><div><h1 class="page-title">AI Generator</h1><p class="page-sub">Generate platform-optimised content in seconds</p></div>
   <div style="display:flex;gap:6px;margin-bottom:24px;flex-wrap:wrap;">
     <button class="btn btn-primary btn-sm ai-tab on" data-panel="social"><i data-lucide="instagram" style="width:12px;height:12px;"></i>Social Post</button>
     <button class="btn btn-ghost btn-sm ai-tab" data-panel="blog"><i data-lucide="file-text" style="width:12px;height:12px;"></i>Blog Article</button>
@@ -611,7 +575,7 @@ input[type=color]{width:38px;height:38px;padding:2px;border-radius:var(--r-md);c
 <!-- ═══ BRAINSTORM ═══ -->
 <section class="view" id="view-brainstorm">
 <div class="page">
-  <div class="page-header" style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;">
+  <div class="ph">
     <div><h1 class="page-title">Brainstorm Chat</h1><p class="page-sub">Context-aware AI — knows your tone, audience & goals</p></div>
     <button id="clear-chat" class="btn btn-ghost btn-sm"><i data-lucide="trash-2" style="width:12px;height:12px;"></i>Clear</button>
   </div>
@@ -640,7 +604,7 @@ input[type=color]{width:38px;height:38px;padding:2px;border-radius:var(--r-md);c
 <!-- ═══ CAMPAIGN WIZARD ═══ -->
 <section class="view" id="view-campaign-wizard">
 <div class="page">
-  <div class="page-header"><h1 class="page-title">Campaign Wizard</h1><p class="page-sub">Build a targeted multi-day content campaign</p></div>
+  <div class="ph"><div><h1 class="page-title">Campaign Wizard</h1><p class="page-sub">Build a targeted multi-day content campaign</p></div>
   <div class="card card-p" style="max-width:640px;display:flex;flex-direction:column;gap:18px;">
     <div class="field"><label class="lbl">Campaign Topic</label><textarea id="cw-topic" rows="3" placeholder="e.g. Summer open house series, local food guide, investment webinar..."></textarea></div>
     <div class="three-col" style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;">
@@ -664,7 +628,7 @@ input[type=color]{width:38px;height:38px;padding:2px;border-radius:var(--r-md);c
 <!-- ═══ CONTROL TOWER ═══ -->
 <section class="view" id="view-control-tower">
 <div class="page">
-  <div class="page-header" style="display:flex;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;gap:12px;">
+  <div class="ph">
     <div><h1 class="page-title">Control Tower</h1><p class="page-sub">Your content pipeline from draft to published</p></div>
     <button class="btn btn-primary btn-sm" onclick="switchView('ai-generator')"><i data-lucide="plus" style="width:13px;height:13px;"></i>New Post</button>
   </div>
@@ -689,7 +653,7 @@ input[type=color]{width:38px;height:38px;padding:2px;border-radius:var(--r-md);c
 <!-- ═══ CALENDAR ═══ -->
 <section class="view" id="view-calendar">
 <div class="page">
-  <div class="page-header" style="display:flex;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;gap:12px;">
+  <div class="ph">
     <div><h1 class="page-title">June 2026</h1><p class="page-sub">Your content schedule at a glance</p></div>
     <button class="btn btn-primary btn-sm" onclick="showToast('Times optimised!')"><i data-lucide="zap" style="width:13px;height:13px;"></i>Auto-Optimise Times</button>
   </div>
@@ -704,8 +668,8 @@ input[type=color]{width:38px;height:38px;padding:2px;border-radius:var(--r-md);c
 <!-- ═══ SOCIAL INBOX ═══ -->
 <section class="view" id="view-social-inbox">
 <div class="page">
-  <div class="page-header"><h1 class="page-title">Social Inbox</h1><p class="page-sub">Manage comments and DMs across all platforms</p></div>
-  <div style="display:grid;grid-template-columns:290px 1fr;gap:14px;height:calc(100vh - 200px);min-height:420px;">
+  <div class="ph"><div><h1 class="page-title">Social Inbox</h1><p class="page-sub">Manage comments and DMs across all platforms</p></div>
+  <div style="display:grid;grid-template-columns:280px 1fr;gap:16px;height:calc(100vh - 200px);min-height:420px;">
     <div class="card" style="padding:12px;display:flex;flex-direction:column;overflow:hidden;">
       <div style="display:flex;gap:5px;margin-bottom:10px;flex-shrink:0;">
         <button class="btn btn-primary btn-sm" style="flex:1;">Comments</button>
@@ -753,7 +717,7 @@ input[type=color]{width:38px;height:38px;padding:2px;border-radius:var(--r-md);c
 <!-- ═══ ANALYTICS ═══ -->
 <section class="view" id="view-analytics">
 <div class="page">
-  <div class="page-header"><h1 class="page-title">Analytics</h1><p class="page-sub">Track your performance across all platforms</p></div>
+  <div class="ph"><div><h1 class="page-title">Analytics</h1><p class="page-sub">Track your performance across all platforms</p></div>
   <div class="stat-grid">
     <div class="stat-card"><div style="display:flex;align-items:flex-start;justify-content:space-between;"><div class="stat-icon" style="background:var(--a3);"><i data-lucide="eye" style="width:16px;height:16px;color:var(--a2);"></i></div><span class="badge b-green" style="font-size:10px;">↑ 31%</span></div><p class="stat-val">142K</p><p class="stat-lbl">Total Impressions</p></div>
     <div class="stat-card"><div style="display:flex;align-items:flex-start;justify-content:space-between;"><div class="stat-icon" style="background:var(--gL);"><i data-lucide="heart" style="width:16px;height:16px;color:var(--green);"></i></div><span class="badge b-green" style="font-size:10px;">↑ 0.6%</span></div><p class="stat-val" style="color:var(--green);">4.8%</p><p class="stat-lbl">Engagement Rate</p></div>
@@ -788,7 +752,7 @@ input[type=color]{width:38px;height:38px;padding:2px;border-radius:var(--r-md);c
 <!-- ═══ STRATEGY PLANNER ═══ -->
 <section class="view" id="view-strategy-planner">
 <div class="page">
-  <div class="page-header" style="display:flex;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;gap:12px;">
+  <div class="ph">
     <div><h1 class="page-title">Strategy Planner</h1><p class="page-sub">Build your monthly content strategy</p></div>
     <div style="display:flex;gap:8px;flex-wrap:wrap;"><button id="gen-strategy" class="btn btn-gold btn-sm"><i data-lucide="sparkles" style="width:12px;height:12px;"></i>Generate Strategy</button><button class="btn btn-ghost btn-sm" onclick="switchView('monthly-wizard')"><i data-lucide="arrow-right" style="width:12px;height:12px;"></i>To Monthly Plan</button></div>
   </div>
@@ -821,8 +785,8 @@ input[type=color]{width:38px;height:38px;padding:2px;border-radius:var(--r-md);c
 <!-- ═══ LINK-IN-BIO ═══ -->
 <section class="view" id="view-link-in-bio">
 <div class="page">
-  <div class="page-header"><h1 class="page-title">Link-in-Bio</h1><p class="page-sub">Your real estate hub page</p></div>
-  <div style="display:grid;grid-template-columns:1fr auto;gap:22px;align-items:start;">
+  <div class="ph"><div><h1 class="page-title">Link-in-Bio</h1><p class="page-sub">Your real estate hub page</p></div>
+  <div class="g2" style="grid-template-columns:1fr 280px;align-items:start;">
     <div style="display:flex;flex-direction:column;gap:14px;min-width:0;">
       <div class="card card-p" style="display:flex;flex-direction:column;gap:16px;">
         <p style="font-size:13.5px;font-weight:700;font-family:'Public Sans',sans-serif;">Link Builder</p>
@@ -857,7 +821,7 @@ input[type=color]{width:38px;height:38px;padding:2px;border-radius:var(--r-md);c
 <!-- ═══ BRAND KIT ═══ -->
 <section class="view" id="view-brand-kit">
 <div class="page">
-  <div class="page-header"><h1 class="page-title">Brand Kit</h1><p class="page-sub">Your visual identity and tone of voice</p></div>
+  <div class="ph"><div><h1 class="page-title">Brand Kit</h1><p class="page-sub">Your visual identity and tone of voice</p></div>
   <div class="two-col" style="display:grid;grid-template-columns:1fr 1fr;gap:14px;max-width:780px;">
     <div class="card card-p">
       <div style="display:flex;align-items:center;gap:8px;margin-bottom:16px;"><i data-lucide="image" style="width:14px;height:14px;color:var(--a2);"></i><p style="font-size:13.5px;font-weight:700;font-family:'Public Sans',sans-serif;">Logo Upload</p></div>
@@ -891,7 +855,7 @@ input[type=color]{width:38px;height:38px;padding:2px;border-radius:var(--r-md);c
 <!-- ═══ TEMPLATES ═══ -->
 <section class="view" id="view-templates">
 <div class="page">
-  <div class="page-header"><h1 class="page-title">Templates</h1><p class="page-sub">Ready-to-use post templates with AI auto-fill</p></div>
+  <div class="ph"><div><h1 class="page-title">Templates</h1><p class="page-sub">Ready-to-use post templates with AI auto-fill</p></div>
   <div style="display:flex;gap:6px;margin-bottom:22px;flex-wrap:wrap;">
     <button class="btn btn-primary btn-sm tpl-f" data-f="all">All</button>
     <button class="btn btn-ghost btn-sm tpl-f" data-f="post">Posts</button>
@@ -912,7 +876,7 @@ input[type=color]{width:38px;height:38px;padding:2px;border-radius:var(--r-md);c
 <!-- ═══ SETTINGS ═══ -->
 <section class="view" id="view-settings">
 <div class="page">
-  <div class="page-header"><h1 class="page-title">Settings</h1><p class="page-sub">Account and preferences</p></div>
+  <div class="ph"><div><h1 class="page-title">Settings</h1><p class="page-sub">Account and preferences</p></div>
   <div style="max-width:620px;display:flex;flex-direction:column;gap:14px;">
     <div class="card card-p" style="display:flex;flex-direction:column;gap:16px;">
       <div style="display:flex;align-items:center;gap:8px;"><i data-lucide="user" style="width:14px;height:14px;color:var(--a2);"></i><p style="font-size:13.5px;font-weight:700;font-family:'Public Sans',sans-serif;">Profile</p></div>
@@ -1072,7 +1036,7 @@ HASHTAGS: [10 hashtags]
       const cap=(p.match(/CAPTION:\s*([\s\S]+?)HASHTAGS:/)||[])[1]?.trim()||p.slice(0,200);
       const tags=(p.match(/HASHTAGS:\s*(.+)/)||[])[1]?.trim()||'';
       const bc=plat.toLowerCase().includes('instagram')?'b-ig':plat.toLowerCase().includes('facebook')?'b-fb':plat.toLowerCase().includes('linkedin')?'b-li':'b-tt';
-      grid.innerHTML+=`<div class="post-card fade-in" style="animation-delay:${i*60}ms"><div class="flex items-center justify-between mb-2"><span class="badge ${bc}">${plat.slice(0,2).toUpperCase()}</span><span class="text-xs" style="color:var(--muted);">${type}</span></div><p class="text-xs leading-relaxed mb-2" style="max-height:80px;overflow:hidden;white-space:pre-wrap;">${cap.slice(0,250)}</p><p class="text-xs" style="color:var(--accent);">${tags.slice(0,80)}</p><button class="btn btn-ghost btn-sm w-full mt-2" onclick="showToast('Saved! 📋')">Save</button></div>`;
+      grid.innerHTML+=`<div class="post-card fade-in"><div class="post-card-inner"><span class="badge ${bc}">${plat.slice(0,2).toUpperCase()}</span><span style="font-size:11px;color:var(--t3);">${type}</span></div><p>${cap.slice(0,250)}</p><p class="tags">${tags.slice(0,80)}</p><button class="btn btn-ghost btn-sm" style="width:100%;margin-top:8px;" onclick="showToast('Saved! 📋')">Save</button></div>`;
     });
     document.getElementById('mw-count').textContent=posts.length;
     document.getElementById('mw-gen').classList.add('hidden');document.getElementById('mw-res').classList.remove('hidden');
@@ -1177,7 +1141,7 @@ CAPTION: [full caption]
       const day=(p.match(/DAY:\s*(.+)/)||[])[1]?.trim()||`Day ${i+1}`;
       const cap=(p.match(/CAPTION:\s*([\s\S]+?)(?:---END---|$)/)||[])[1]?.trim()||p.slice(0,300);
       const bc=plat.toLowerCase().includes('instagram')?'b-ig':plat.toLowerCase().includes('facebook')?'b-fb':plat.toLowerCase().includes('linkedin')?'b-li':'b-tt';
-      grid.innerHTML+=`<div class="post-card fade-in"><div class="flex items-center justify-between mb-2"><span class="badge ${bc}">${plat.slice(0,2).toUpperCase()}</span><span class="text-xs" style="color:var(--muted);">${day}</span></div><p class="text-xs leading-relaxed" style="white-space:pre-wrap;max-height:100px;overflow:hidden;">${cap.slice(0,280)}</p><button class="btn btn-ghost btn-sm w-full mt-2" onclick="showToast('Saved!')">Save</button></div>`;
+      grid.innerHTML+=`<div class="post-card fade-in"><div class="post-card-inner"><span class="badge ${bc}">${plat.slice(0,2).toUpperCase()}</span><span style="font-size:11px;color:var(--t3);">${day}</span></div><p>${cap.slice(0,280)}</p><button class="btn btn-ghost btn-sm" style="width:100%;margin-top:8px;" onclick="showToast('Saved!')">Save</button></div>`;
     });
     document.getElementById('cw-out').classList.remove('hidden');
   }catch(e){showToast(e.message==='offline'?'⚠️ Offline':'❌ Failed','err');}
@@ -1343,6 +1307,29 @@ document.getElementById('save-profile')?.addEventListener('click',()=>{
   document.getElementById('avatar-init').textContent=n.split(' ').map(w=>w[0]).join('').slice(0,2).toUpperCase();
   showToast('Profile saved! ✅');
 });
+
+document.getElementById('save-settings')?.addEventListener('click',()=>{
+  save('lang',document.getElementById('s-lang')?.value);
+  save('emoji',document.getElementById('s-emoji')?.value);
+  save('brand',document.getElementById('s-brand')?.value);
+  save('length',document.getElementById('s-length')?.value);
+  save('tone-ig',document.getElementById('s-tone-ig')?.value);
+  save('tone-fb',document.getElementById('s-tone-fb')?.value);
+  save('tone-li',document.getElementById('s-tone-li')?.value);
+  save('tone-tt',document.getElementById('s-tone-tt')?.value);
+  save('tone-gbp',document.getElementById('s-tone-gbp')?.value);
+  save('tone-blog',document.getElementById('s-tone-blog')?.value);
+  showToast('Settings saved! ✅');
+});
+
+// Load saved settings into selects
+function loadSettings(){
+  const fields=[['s-lang','lang'],['s-emoji','emoji'],['s-brand','brand'],['s-length','length'],
+    ['s-tone-ig','tone-ig'],['s-tone-fb','tone-fb'],['s-tone-li','tone-li'],
+    ['s-tone-tt','tone-tt'],['s-tone-gbp','tone-gbp'],['s-tone-blog','tone-blog']];
+  fields.forEach(([id,key])=>{const el=document.getElementById(id);const val=load(key,null);if(el&&val){for(let o of el.options){if(o.value===val||o.text===val){o.selected=true;break;}}}});
+}
+loadSettings();
 
 // Load saved
 const sn=load('name','Sarah Johnson');
