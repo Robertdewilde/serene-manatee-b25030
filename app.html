@@ -236,15 +236,18 @@ input[type=color]{width:38px;height:38px;padding:2px;border-radius:var(--r-md);c
 @media(max-width:768px){
   html,body{overflow-x:hidden;background:var(--s0);}
   /* Fixed topbar: content already has padding-top:var(--th) from base rule */
-  .topbar{left:0;right:0;padding:0 14px;background:var(--s1);border-bottom:1px solid var(--b2);}
-  .topbar-title{font-size:15px;}
+  .topbar{left:0;right:0;padding:0 16px;background:var(--s1);border-bottom:1px solid var(--b2);height:58px;}
+  .content{padding-top:58px;}
+  .topbar-title{font-size:16px;}
   .topbar-sub{font-size:12px;color:var(--t2);}
+  #lang-sw{display:block;padding:6px 24px 6px 8px;font-size:12px;width:auto;}
+  #menu-btn{width:40px;height:40px;padding:0;flex-shrink:0;}
   .sidebar{transform:translateX(-100%);-webkit-transform:translateX(-100%);width:min(80vw,280px);}
   .sidebar.open{transform:translateX(0);-webkit-transform:translateX(0);}
   .content{margin-left:0;width:100%;}
   .shell{display:flex;}
   #ai-status{display:none;}
-  .page{padding:16px 14px;}
+  .page{padding:20px 14px;}
   .page-title{font-size:21px;}
   body{font-size:15px;}
   .page-sub{font-size:14px;}
@@ -396,7 +399,7 @@ input[type=color]{width:38px;height:38px;padding:2px;border-radius:var(--r-md);c
 <div class="content" id="content">
   <div class="topbar">
     <div style="display:flex;align-items:center;gap:12px;">
-      <button id="menu-btn" class="btn btn-ghost btn-icon" style="display:none;"><i data-lucide="menu" style="width:16px;height:16px;"></i></button>
+      <button id="menu-btn" class="btn btn-ghost btn-icon" style="display:none;"><i data-lucide="menu" style="width:20px;height:20px;"></i></button>
       <div><p class="topbar-title" id="page-title">Dashboard</p><p class="topbar-sub" id="page-sub">Welcome back, Sarah</p></div>
     </div>
     <div style="display:flex;align-items:center;gap:8px;">
